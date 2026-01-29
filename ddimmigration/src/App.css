@@ -30,12 +30,12 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
 }
 
 .logo-img {
-  width: 56px;
-  height: 56px;
+  width: 76px;
+  height: 76px;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 8px;
@@ -47,7 +47,7 @@
 
 .company-zh {
   margin: 0;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
   color: #1a1a1a;
   line-height: 1.2;
@@ -55,7 +55,7 @@
 
 .company-en {
   margin: 4px 0 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #555;
 }
 
@@ -113,11 +113,79 @@
   background: var(--nav-active);
 }
 
+.nav-link-disabled {
+  cursor: default;
+}
+
+/* 页面主体：左侧边栏 + 主内容区 */
+.page-with-sidebar {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.left-sidebar {
+  flex-shrink: 0;
+  width: 260px;
+  padding: 24px 0 48px;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sidebar-qrcode {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.sidebar-qrcode-btn {
+  margin-top: 12px;
+  background: var(--text-green);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.sidebar-contact {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #222;
+}
+
+.sidebar-contact-row {
+  margin: 4px 0;
+}
+
+.sidebar-contact-label {
+  color: #111;
+  font-weight: 700;
+}
+
+.main-area {
+  flex: 1;
+  min-width: 0;
+}
+
 /* Hero 区域 */
 .hero {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 580px;
   overflow: hidden;
 }
 
@@ -175,4 +243,293 @@
   font-weight: 700;
   color: #6bb3d8; /* 淡蓝色 */
   text-align: center;
+}
+
+/* 持牌移民顾问 */
+.advisors {
+  margin-top: 64px;
+}
+
+.advisors-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-green);
+}
+
+.advisors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px;
+  justify-items: center;
+  align-items: start;
+}
+
+.advisor-card {
+  text-align: center;
+  max-width: 320px;
+}
+
+.advisor-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f2f2f2;
+}
+
+.advisor-role {
+  margin-top: 18px;
+  color: var(--text-green);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.advisor-name {
+  margin-top: 10px;
+  color: var(--text-green);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.contact-page {
+  text-align: left;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.contact-qrcode-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 22px;
+}
+
+.contact-qrcode-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.contact-qrcode-title {
+  margin-top: 14px;
+  background: var(--text-green);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.contact-mini {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #222;
+}
+
+.contact-mini-row {
+  margin: 6px 0;
+}
+
+.contact-mini-label {
+  color: #111;
+  font-weight: 700;
+}
+
+.contact-right {
+  padding-top: 10px;
+}
+
+.contact-title {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.contact-details {
+  margin-top: 46px;
+  font-size: 28px;
+  line-height: 1.8;
+  color: #222;
+}
+
+.contact-detail-row {
+  margin: 18px 0;
+}
+
+.contact-detail-label {
+  font-weight: 800;
+}
+
+.contact-advisors {
+  margin-top: 52px;
+  font-size: 28px;
+  color: #222;
+}
+
+.contact-advisors-title {
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.contact-advisors-list {
+  margin: 0;
+  padding-left: 28px;
+}
+
+@media (max-width: 960px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .contact-title {
+    font-size: 36px;
+  }
+
+  .contact-details,
+  .contact-advisors {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page-with-sidebar {
+    flex-direction: column;
+  }
+
+  .left-sidebar {
+    width: 100%;
+    position: static;
+    padding: 16px 0;
+  }
+
+  .sidebar-card {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .advisors-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Footer 页脚 */
+.site-footer {
+  background: var(--nav-bg);
+  color: #fff;
+  margin-top: 64px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-contact {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.contact-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.footer-map {
+  height: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.footer-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.footer-qrcodes {
+  align-items: center;
+  gap: 24px;
+}
+
+.qrcode-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.qrcode-img {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  background: #fff;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.qrcode-label {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.footer-copyright {
+  background: var(--nav-bg);
+  padding: 16px 24px;
+  text-align: center;
+}
+
+.footer-copyright p {
+  margin: 0;
+  font-size: 12px;
+  color: #fff;
+}
+
+@media (max-width: 968px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-map {
+    height: 240px;
+  }
 }

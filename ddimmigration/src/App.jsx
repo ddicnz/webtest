@@ -1,16 +1,37 @@
+import { Routes, Route, NavLink, Outlet } from 'react-router-dom'
 import './App.css'
+import Footer from './components/Footer.jsx'
+import LeftSidebar from './components/LeftSidebar.jsx'
+import HomePage from './pages/HomePage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import TeamPage from './pages/TeamPage.jsx'
+import CasesPage from './pages/CasesPage.jsx'
+import JobsPage from './pages/JobsPage.jsx'
+import NewsPage from './pages/NewsPage.jsx'
+import FeedbackPage from './pages/FeedbackPage.jsx'
+import ContactUsPage from './pages/ContactUsPage.jsx'
 
 const navItems = [
-  { label: '首页', active: true },
-  { label: '关于我们' },
-  { label: '专业团队' },
-  { label: '服务收费' },
-  { label: '移民常识' },
-  { label: '移民资讯' },
-  { label: '顾客反馈' },
-  { label: '联络我们' },
-  { label: 'About Us' },
+  { label: '首页', path: '/' },
+  { label: '关于我们', path: '/about' },
+  { label: '专业团队', path: '/team' },
+  { label: '成功案例', path: '/cases' },
+  { label: '招聘信息', path: '/jobs' },
+  { label: '移民资讯', path: '/news' },
+  { label: '顾客反馈', path: '/feedback' },
+  { label: '联络我们', path: '/contactus' },
 ]
+
+function SidebarLayout() {
+  return (
+    <div className="page-with-sidebar">
+      <LeftSidebar />
+      <div className="main-area">
+        <Outlet />
+      </div>
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -31,7 +52,7 @@ function App() {
           </div>
           <div className="contact">
             <span className="phone-icon">📞</span>
-            <a href="tel:+64-9-3033533" className="phone-num">+64-9-3033533</a>
+            <a href="tel:+64-9-3033533" className="phone-num">+64-027-7223339</a>
           </div>
         </div>
       </header>
@@ -40,37 +61,34 @@ function App() {
       <nav className="nav-bar">
         <div className="nav-inner">
           {navItems.map((item) => (
-            <a
+            <NavLink
               key={item.label}
-              href="#"
-              className={`nav-link ${item.active ? 'active' : ''}`}
+              to={item.path}
+              className={({ isActive }) =>
+                `nav-link${isActive ? ' active' : ''}`
+              }
+              end={item.path === '/'}
             >
               {item.label}
-            </a>
+            </NavLink>
           ))}
         </div>
       </nav>
 
-      {/* Hero 大图 / 轮播 */}
-      <section className="hero">
-        <div
-          className="hero-bg"
-          style={{
-            backgroundImage: `url(https://images.unsplash.com/photo-1578645510447-e020b6462953?w=1920)`,
-          }}
-        />
-        <button type="button" className="hero-arrow hero-arrow-left" aria-label="上一张">
-          ‹
-        </button>
-        <button type="button" className="hero-arrow hero-arrow-right" aria-label="下一张">
-          ›
-        </button>
-      </section>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route element={<SidebarLayout />}>
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/cases" element={<CasesPage />} />
+          <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/contactus" element={<ContactUsPage />} />
+        </Route>
+      </Routes>
 
-      {/* 主体内容：核心业务 */}
-      <main className="main-content">
-        <h2 className="section-title">核心业务</h2>
-      </main>
+      <Footer />
     </div>
   )
 }
