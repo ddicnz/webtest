@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import TeamPage from './pages/TeamPage.jsx'
 import CasesPage from './pages/CasesPage.jsx'
+import CaseDetailPage from './pages/CaseDetailPage.jsx'
 import JobsPage from './pages/JobsPage.jsx'
 import NewsPage from './pages/NewsPage.jsx'
 import FeedbackPage from './pages/FeedbackPage.jsx'
@@ -81,6 +82,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/cases" element={<CasesPage />} />
+          <Route path="/cases/:id" element={<CaseDetailPage />} />
           <Route path="/jobs" element={<JobsPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/feedback" element={<FeedbackPage />} />

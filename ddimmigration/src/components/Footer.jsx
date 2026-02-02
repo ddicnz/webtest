@@ -1,3 +1,10 @@
+const footerQrItems = [
+  { src: '/pic/qrcodevx1.jpg', label: '签证咨询', alt: '签证咨询二维码' },
+  { src: '/pic/qrcodevx2.jpg', label: '留学咨询', alt: '留学咨询二维码' },
+  { src: '/pic/qrcodevx3.jpg', label: '综合咨询', alt: '综合咨询二维码' },
+  { src: '/pic/rednote.jpg', label: '小红书', alt: '小红书二维码' },
+]
+
 function Footer() {
   return (
     <footer className="site-footer">
@@ -10,7 +17,7 @@ function Footer() {
           </div>
           <div className="contact-item">
             <span className="contact-icon">💬</span>
-            <span>微信号码: ddtrip700</span>
+            <span>微信号码: ddtrip700、ddtrip800、ddtrip999</span>
           </div>
           <div className="contact-item">
             <span className="contact-icon">✉️</span>
@@ -23,13 +30,6 @@ function Footer() {
         </div>
 
         {/* 中间：Google Maps 地图 */}
-        {/* 
-          如何获取正确的地图 embed URL：
-          1. 打开 https://www.google.com/maps
-          2. 搜索 \"Auckland, Māngere, Andrew Baxter Dr, NZ 2022\"
-          3. 点击"分享" -> 选择"嵌入地图"
-          4. 复制 iframe 的 src 属性值，替换下面的 URL
-        */}
         <div className="footer-section footer-map">
           <iframe
             src="https://www.google.com/maps?q=Auckland,+M%C4%81ngere,+Andrew+Baxter+Dr,+NZ+2022&output=embed"
@@ -43,16 +43,18 @@ function Footer() {
           />
         </div>
 
-        {/* 右侧：二维码（仅保留客服微信） */}
+        {/* 右侧：四个二维码 2×2 */}
         <div className="footer-section footer-qrcodes">
-          <div className="qrcode-item">
-            <img
-              src="/pic/qrcodevx.jpg"
-              alt="客服微信号"
-              className="qrcode-img"
-            />
-            <p className="qrcode-label">客服微信号</p>
-          </div>
+          {footerQrItems.map((item) => (
+            <div key={item.label} className="qrcode-item">
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="qrcode-img"
+              />
+              <p className="qrcode-label">{item.label}</p>
+            </div>
+          ))}
         </div>
       </div>
 

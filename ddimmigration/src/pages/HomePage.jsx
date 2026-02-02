@@ -21,6 +21,36 @@ function HomePage() {
       <main className="main-content">
         <h2 className="section-title">核心业务</h2>
 
+        <section className="home-business-cards" aria-label="核心业务分类">
+          <a href="#invest" className="home-business-card">
+            <div
+              className="home-business-card-bg"
+              style={{ backgroundImage: 'url(/pic/invest.png)' }}
+            />
+            <div className="home-business-card-overlay">
+              <span className="home-business-card-text">投资移民</span>
+            </div>
+          </a>
+          <a href="#skilled" className="home-business-card">
+            <div
+              className="home-business-card-bg"
+              style={{ backgroundImage: 'url(/pic/skilled.png)' }}
+            />
+            <div className="home-business-card-overlay">
+              <span className="home-business-card-text">技术移民</span>
+            </div>
+          </a>
+          <a href="#study" className="home-business-card">
+            <div
+              className="home-business-card-bg"
+              style={{ backgroundImage: 'url(/pic/study.png)' }}
+            />
+            <div className="home-business-card-overlay">
+              <span className="home-business-card-text">留学教育</span>
+            </div>
+          </a>
+        </section>
+
         <section className="advisors" aria-label="持牌移民顾问">
           <h3 className="advisors-title">持牌移民顾问</h3>
           <div className="advisors-grid">

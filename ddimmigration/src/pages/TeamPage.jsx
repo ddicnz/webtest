@@ -1,11 +1,66 @@
+const teamMembers = [
+  {
+    id: 1,
+    name: 'Eric',
+    role: '持牌移民顾问',
+    photo: '/pic/eric2.jpg',
+    licence: '/pic/eric_licience.jpg',
+    licenceNo: '201800151',
+    intro: 'Eric为新西兰持牌移民顾问，多年从事移民与留学咨询，熟悉技术移民、投资移民、家庭团聚及各类签证申请，擅长为申请人量身定制方案并全程跟进，确保流程合规、沟通顺畅。',
+  },
+  {
+    id: 2,
+    name: 'Tsui',
+    nameZh: 'Tsui',
+    role: '持牌移民顾问',
+    photo: '/pic/Tsui.jpg',
+    licence: '/pic/dashu_licience.jpg',
+    licenceNo: '201400700',
+    intro: 'Tsui 为新西兰持牌移民顾问，具备 IAA 全牌资质。长期服务于移民与留学领域，经验丰富，可为客户提供签证申请、政策解读与个案规划等专业服务。',
+  },
+]
+
 function TeamPage() {
   return (
-    <main className="main-content">
+    <main className="main-content team-page">
       <h2 className="section-title">专业团队</h2>
-      <p className="contact-text">这里将来可以放团队成员、资历和照片等内容。</p>
+      <p className="team-intro">我们的持牌移民顾问均具备新西兰移民顾问管理局（IAA）注册资质，为您提供专业、合规的移民与留学服务。</p>
+
+      <div className="team-blocks">
+        {teamMembers.map((member) => (
+          <article key={member.id} className="team-block">
+            <div className="team-block-photo">
+              <img
+                src={member.photo}
+                alt={member.name}
+                className="team-block-photo-img"
+                loading="lazy"
+              />
+            </div>
+            <div className="team-block-licence">
+              <img
+                src={member.licence}
+                alt={`${member.name} 牌照`}
+                className="team-block-licence-img"
+                loading="lazy"
+              />
+            </div>
+            <div className="team-block-intro">
+              <h3 className="team-block-name">{member.name}</h3>
+              {member.nameZh && member.nameZh !== member.name && (
+                <p className="team-block-name-zh">{member.nameZh}</p>
+              )}
+              <p className="team-block-role">{member.role}</p>
+              {member.licenceNo && (
+                <p className="team-block-licence-no">牌照编号：{member.licenceNo}</p>
+              )}
+              <div className="team-block-intro-text">{member.intro}</div>
+            </div>
+          </article>
+        ))}
+      </div>
     </main>
   )
 }
 
 export default TeamPage
-

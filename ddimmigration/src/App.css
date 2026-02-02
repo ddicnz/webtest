@@ -117,10 +117,11 @@
   cursor: default;
 }
 
-/* 页面主体：左侧边栏 + 主内容区 */
+/* 页面主体：左侧边栏 + 主内容区（除首页外各页一致） */
 .page-with-sidebar {
   display: flex;
   align-items: flex-start;
+  gap: 48px;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
@@ -142,6 +143,30 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+.sidebar-cert {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-cert-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+.sidebar-cert-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.sidebar-qr-block {
+  margin-bottom: 16px;
+}
+
 .sidebar-qrcode {
   width: 100%;
   height: auto;
@@ -150,10 +175,10 @@
 }
 
 .sidebar-qrcode-btn {
-  margin-top: 12px;
+  margin-top: 10px;
   background: var(--text-green);
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   text-align: center;
   padding: 8px 12px;
@@ -161,7 +186,9 @@
 }
 
 .sidebar-contact {
-  margin-top: 14px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 12px;
   line-height: 1.75;
   color: #222;
@@ -245,7 +272,439 @@
   text-align: center;
 }
 
+/* 成功案例列表 */
+.cases-page .section-title {
+  margin-bottom: 32px;
+}
+
+/* 专业团队 */
+.team-page .section-title {
+  margin-bottom: 16px;
+}
+
+.team-intro {
+  margin: 0 auto 40px;
+  max-width: 640px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.team-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.team-card-photo-wrap {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.team-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.team-card--doc .team-card-photo-wrap {
+  aspect-ratio: auto;
+  min-height: 280px;
+  background: #fff;
+}
+
+.team-card--doc .team-card-photo {
+  object-fit: contain;
+}
+
+.team-card-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.team-card-name {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+}
+
+.team-card-name-zh {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.team-card-role {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-green);
+}
+
+.team-card-licence {
+  margin: 0;
+  font-size: 13px;
+  color: #888;
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* 专业团队 - 一人一块：照片 | 牌照 | 介绍 */
+.team-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.team-block {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.team-block-photo {
+  flex-shrink: 0;
+  width: 200px;
+  height: 260px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.team-block-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.team-block-licence {
+  flex-shrink: 0;
+  width: 200px;
+  height: 260px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 8px;
+  box-sizing: border-box;
+}
+
+.team-block-licence-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.team-block-intro {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.team-block-name {
+  margin: 0 0 2px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+.team-block-name-zh {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.team-block-role {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-green);
+}
+
+.team-block-licence-no {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #888;
+}
+
+.team-block-intro-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #444;
+}
+
+@media (max-width: 900px) {
+  .team-block {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-block-photo {
+    width: 100%;
+    max-width: 260px;
+    min-height: 320px;
+  }
+
+  .team-block-licence {
+    width: 100%;
+    max-width: 260px;
+    min-height: 240px;
+  }
+
+  .team-block-intro {
+    padding: 14px 18px;
+    text-align: center;
+  }
+}
+
+.cases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.case-card {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.case-card-image-wrap {
+  flex-shrink: 0;
+  width: 320px;
+  min-height: 200px;
+}
+
+.case-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-card-body {
+  flex: 1;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.case-card-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.35;
+}
+
+.case-card-summary {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+  flex: 1;
+}
+
+.case-card-date {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #666;
+}
+
+.case-card-link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-green);
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.case-card-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .case-card {
+    flex-direction: column;
+  }
+
+  .case-card-image-wrap {
+    width: 100%;
+    min-height: 200px;
+  }
+}
+
+/* 成功案例详情 */
+.case-detail-page {
+  padding-top: 24px;
+}
+
+.case-back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-size: 15px;
+  color: var(--text-green);
+  text-decoration: none;
+}
+
+.case-back-link:hover {
+  text-decoration: underline;
+}
+
+.case-detail-title {
+  margin: 0 0 12px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #222;
+  line-height: 1.35;
+}
+
+.case-detail-date {
+  margin: 0 0 24px;
+  font-size: 15px;
+  color: #666;
+}
+
+.case-detail-image-wrap {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 640px;
+}
+
+.case-detail-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.case-detail-content {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #333;
+}
+
+.case-detail-content p {
+  margin: 0 0 16px;
+}
+
+.case-detail-content p:last-child {
+  margin-bottom: 0;
+}
+
 /* 持牌移民顾问 */
+/* 首页核心业务三卡片：投资移民、技术移民、留学教育 */
+.home-business-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.home-business-card {
+  display: block;
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 380px;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-business-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.home-business-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #e0e0e0;
+}
+
+.home-business-card-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 72px;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.4) 70%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-business-card-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.2em;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 900px) {
+  .home-business-cards {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .home-business-card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
 .advisors {
   margin-top: 64px;
 }
@@ -295,6 +754,13 @@
 
 .contact-page {
   text-align: left;
+  padding-left: 88px;
+}
+
+@media (max-width: 900px) {
+  .contact-page {
+    padding-left: 0;
+  }
 }
 
 .contact-layout {
@@ -392,6 +858,200 @@
   padding-left: 28px;
 }
 
+/* 招聘信息 */
+.jobs-page {
+  padding-top: 32px;
+}
+
+.jobs-title {
+  margin: 0 0 12px;
+  font-size: 32px;
+  font-weight: 800;
+  color: #6bb3d8; /* 与成功案例一致：淡蓝色 */
+  text-align: center;
+}
+
+.jobs-intro {
+  margin: 0 0 28px;
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.jobs-category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.jobs-category-link {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #e8f4f8;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.jobs-category-link:hover {
+  background: #d4ebf2;
+  color: #111;
+}
+
+.jobs-category-link.active {
+  background: var(--nav-bg);
+  color: #fff;
+  border-color: var(--nav-bg);
+}
+
+.jobs-category-link.active:hover {
+  background: var(--nav-active);
+  border-color: var(--nav-active);
+}
+
+.jobs-category-link:focus-visible {
+  outline: 2px solid var(--nav-active);
+  outline-offset: 2px;
+}
+
+.jobs-category-section {
+  margin-bottom: 48px;
+  scroll-margin-top: 16px;
+}
+
+.jobs-category-section:last-of-type {
+  margin-bottom: 32px;
+}
+
+.jobs-category-title {
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-green);
+  border-bottom: 3px solid var(--nav-bg);
+}
+
+.jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.job-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.job-card-header {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f0f9fc 0%, #e8f4f8 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.job-card-title {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-green);
+}
+
+.job-card-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.job-meta-tag {
+  font-size: 13px;
+  color: #555;
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.job-card-body {
+  padding: 24px;
+}
+
+.job-section-label {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+
+.job-requirements {
+  margin: 0 0 18px;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.job-requirements li {
+  margin: 4px 0;
+}
+
+.job-benefits {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  background: #f0f9fc;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.job-benefits p {
+  margin: 4px 0;
+}
+
+.job-benefits strong {
+  color: #111;
+  margin-right: 6px;
+}
+
+.job-contact {
+  margin: 0;
+  padding: 14px 16px;
+  background: #f8fafb;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.job-contact strong {
+  color: #222;
+  margin-right: 6px;
+}
+
+.jobs-footer-note {
+  margin: 36px 0 0;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  background: #f8fafb;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
 @media (max-width: 960px) {
   .contact-layout {
     grid-template-columns: 1fr;
@@ -485,29 +1145,30 @@
 }
 
 .footer-qrcodes {
-  align-items: center;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  align-items: start;
+  justify-items: center;
 }
 
 .qrcode-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .qrcode-img {
-  width: 170px;
-  height: 170px;
+  width: 82px;
+  height: 82px;
   object-fit: contain;
-  background: #fff;
-  padding: 8px;
   border-radius: 4px;
 }
 
 .qrcode-label {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   color: #fff;
 }
 
