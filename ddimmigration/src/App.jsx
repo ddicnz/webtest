@@ -9,7 +9,6 @@ import CasesPage from './pages/CasesPage.jsx'
 import CaseDetailPage from './pages/CaseDetailPage.jsx'
 import JobsPage from './pages/JobsPage.jsx'
 import NewsPage from './pages/NewsPage.jsx'
-import FeedbackPage from './pages/FeedbackPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 
 const navItems = [
@@ -19,7 +18,6 @@ const navItems = [
   { label: '成功案例', path: '/cases' },
   { label: '招聘信息', path: '/jobs' },
   { label: '移民资讯', path: '/news' },
-  { label: '顾客反馈', path: '/feedback' },
   { label: '联络我们', path: '/contactus' },
 ]
 
@@ -47,7 +45,7 @@ function App() {
               className="logo-img"
             />
             <div className="company-name">
-              <h1 className="company-zh">嘀嘀移民公司</h1>
+              <h1 className="company-zh">嘀嘀移民咨询公司</h1>
               <p className="company-en">dd immigration consultant ltd</p>
             </div>
           </div>
@@ -85,7 +83,6 @@ function App() {
           <Route path="/cases/:id" element={<CaseDetailPage />} />
           <Route path="/jobs" element={<JobsPage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
         </Route>
       </Routes>

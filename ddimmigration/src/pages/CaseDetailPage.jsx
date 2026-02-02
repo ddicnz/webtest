@@ -21,15 +21,13 @@ function CaseDetailPage() {
       <article className="case-detail">
         <h1 className="case-detail-title">{caseItem.title}</h1>
         <p className="case-detail-date">{caseItem.date}</p>
-        {caseItem.image && (
-          <div className="case-detail-image-wrap">
-            <img
-              src={caseItem.image}
-              alt=""
-              className="case-detail-image"
-            />
-          </div>
-        )}
+        <div className="case-detail-images">
+          {(caseItem.images || (caseItem.image ? [caseItem.image] : [])).map((src, i) => (
+            <div key={i} className="case-detail-image-wrap">
+              <img src={src} alt="" className="case-detail-image" loading="lazy" />
+            </div>
+          ))}
+        </div>
         <div className="case-detail-content">
           {caseItem.fullContent.split('\n\n').map((para, i) => (
             <p key={i}>{para}</p>

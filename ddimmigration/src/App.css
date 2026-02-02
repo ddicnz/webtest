@@ -47,16 +47,19 @@
 
 .company-zh {
   margin: 0;
-  font-size: 26px;
-  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  font-size: 34px;
+  font-weight: 800;
   color: #1a1a1a;
   line-height: 1.2;
+  letter-spacing: 0.02em;
 }
 
 .company-en {
   margin: 4px 0 0;
   font-size: 15px;
-  color: #555;
+  font-weight: 700;
+  color: #333;
 }
 
 .contact {
@@ -70,7 +73,7 @@
 }
 
 .phone-num {
-  color: var(--text-green);
+  color: var(--nav-bg);
   font-weight: 600;
   font-size: 16px;
   text-decoration: none;
@@ -176,7 +179,7 @@
 
 .sidebar-qrcode-btn {
   margin-top: 10px;
-  background: var(--text-green);
+  background: var(--nav-bg);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -275,6 +278,7 @@
 /* 成功案例列表 */
 .cases-page .section-title {
   margin-bottom: 32px;
+  font-size: 34px;
 }
 
 /* 专业团队 */
@@ -549,12 +553,13 @@
 .case-card-link {
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-green);
+  color: var(--nav-bg) !important;
   text-decoration: none;
   align-self: flex-start;
 }
 
 .case-card-link:hover {
+  color: var(--nav-active);
   text-decoration: underline;
 }
 
@@ -578,11 +583,12 @@
   display: inline-block;
   margin-bottom: 24px;
   font-size: 15px;
-  color: var(--text-green);
+  color: var(--nav-bg) !important;
   text-decoration: none;
 }
 
 .case-back-link:hover {
+  color: var(--nav-active);
   text-decoration: underline;
 }
 
@@ -600,16 +606,28 @@
   color: #666;
 }
 
-.case-detail-image-wrap {
+.case-detail-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-bottom: 24px;
+}
+
+.case-detail-image-wrap {
+  flex: 1 1 280px;
+  min-width: 0;
+  max-width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  max-width: 640px;
+  max-height: 70vh;
+  background: #f5f5f5;
 }
 
 .case-detail-image {
   width: 100%;
   height: auto;
+  max-height: 60vh;
+  object-fit: contain;
   display: block;
 }
 
@@ -621,6 +639,7 @@
 
 .case-detail-content p {
   margin: 0 0 16px;
+  white-space: pre-line;
 }
 
 .case-detail-content p:last-child {
