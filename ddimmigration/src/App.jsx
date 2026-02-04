@@ -10,11 +10,14 @@ import CaseDetailPage from './pages/CaseDetailPage.jsx'
 import JobsPage from './pages/JobsPage.jsx'
 import NewsPage from './pages/NewsPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
+import ServicesPage from './pages/ServicesPage.jsx'
+import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 
 const navItems = [
   { label: '首页', path: '/' },
   { label: '关于我们', path: '/about' },
   { label: '专业团队', path: '/team' },
+  { label: '核心业务', path: '/services' },
   { label: '成功案例', path: '/cases' },
   { label: '招聘信息', path: '/jobs' },
   { label: '移民资讯', path: '/news' },
@@ -78,6 +81,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route element={<SidebarLayout />}>
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:type" element={<ServicesDetailPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/cases" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CaseDetailPage />} />

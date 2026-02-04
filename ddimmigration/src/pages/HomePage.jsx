@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function HomePage() {
   return (
     <>
@@ -22,7 +24,7 @@ function HomePage() {
         <h2 className="section-title">核心业务</h2>
 
         <section className="home-business-cards" aria-label="核心业务分类">
-          <a href="#invest" className="home-business-card">
+          <Link to="/services#invest" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/invest.png)' }}
@@ -30,8 +32,8 @@ function HomePage() {
             <div className="home-business-card-overlay">
               <span className="home-business-card-text">投资移民</span>
             </div>
-          </a>
-          <a href="#skilled" className="home-business-card">
+          </Link>
+          <Link to="/services#skilled" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/skilled.png)' }}
@@ -39,8 +41,8 @@ function HomePage() {
             <div className="home-business-card-overlay">
               <span className="home-business-card-text">技术移民</span>
             </div>
-          </a>
-          <a href="#study" className="home-business-card">
+          </Link>
+          <Link to="/services#study" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/study.png)' }}
@@ -48,7 +50,7 @@ function HomePage() {
             <div className="home-business-card-overlay">
               <span className="home-business-card-text">留学教育</span>
             </div>
-          </a>
+          </Link>
         </section>
 
         <section className="advisors" aria-label="持牌移民顾问">
