@@ -23,7 +23,17 @@ function ServicesDetailPage() {
         <div className="case-detail-content services-detail-content">
           {item.fullContent.split('\n\n').map((para, i) => {
             const t = para.trim()
-            const isSectionTitle = t === '认证雇主 AEWV 工签' || t === '我们能为你做什么' || t === 'AEWV 项目优势'
+            const sectionTitles = [
+      '认证雇主 AEWV 工签',
+      '我们能为你做什么',
+      'AEWV 项目优势',
+      '投资移民项目优势',
+      '🎓 热门专业方向',
+      '👨‍👩‍👧 家庭同步方案',
+      '🧭 留学到移民路线图',
+      '📊 英美澳新对比',
+    ]
+            const isSectionTitle = sectionTitles.includes(t)
             return (
               <p key={i} className={isSectionTitle ? 'services-detail-section-title' : ''}>
                 {para}
