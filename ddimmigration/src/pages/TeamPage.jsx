@@ -13,7 +13,7 @@ const teamMembers = [
     name: 'Tsui',
     nameZh: 'Tsui',
     role: '持牌移民顾问',
-    photo: '/pic/Tsui.jpg',
+    photo: '/pic/tsui.jpg',
     licence: '/pic/dashu_licience.jpg',
     licenceNo: '201400700',
     intro: 'Tsui 为新西兰持牌移民顾问，具备 IAA 全牌资质。长期服务于移民与留学领域，经验丰富，可为客户提供签证申请、政策解读与个案规划等专业服务。',
