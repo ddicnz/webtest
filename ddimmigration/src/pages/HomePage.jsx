@@ -24,6 +24,33 @@ function HomePage() {
         <h2 className="section-title">核心业务</h2>
 
         <section className="home-business-cards" aria-label="核心业务分类">
+          <Link to="/services/tourist" className="home-business-card">
+            <div
+              className="home-business-card-bg"
+              style={{ backgroundImage: 'url(/pic/tourist.png)' }}
+            />
+            <div className="home-business-card-overlay">
+              <span className="home-business-card-text">旅游签申请</span>
+            </div>
+          </Link>
+          <Link to="/services/work" className="home-business-card">
+            <div
+              className="home-business-card-bg"
+              style={{ backgroundImage: 'url(/pic/work.png)' }}
+            />
+            <div className="home-business-card-overlay">
+              <span className="home-business-card-text">工作签证申请</span>
+            </div>
+          </Link>
+          <Link to="/services/residence" className="home-business-card">
+            <div
+              className="home-business-card-bg"
+              style={{ backgroundImage: 'url(/pic/residence.png)' }}
+            />
+            <div className="home-business-card-overlay">
+              <span className="home-business-card-text">居留签证申请</span>
+            </div>
+          </Link>
           <Link to="/services#invest" className="home-business-card">
             <div
               className="home-business-card-bg"

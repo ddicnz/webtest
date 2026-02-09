@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom'
 import { servicesList } from '../data/servicesData.js'
 
 const cardImages = {
+  tourist: '/pic/tourist.png',
+  work: '/pic/work.png',
+  residence: '/pic/residence.png',
   invest: '/pic/invest.png',
   skilled: '/pic/skilled.png',
   study: '/pic/study.png',
