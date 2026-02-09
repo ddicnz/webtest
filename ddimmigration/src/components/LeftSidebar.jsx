@@ -1,7 +1,7 @@
 const qrItems = [
   { src: '/pic/qrcodevx1.jpg', label: '签证咨询', alt: '签证咨询二维码' },
   { src: '/pic/qrcodevx2.jpg', label: '留学咨询', alt: '留学咨询二维码' },
-  { src: '/pic/qrcodevx3.jpg', label: '综合咨询', alt: '综合咨询二维码' },
+  { src: '/pic/qrcodevx3.jpg', label: '业务合作', alt: '业务合作二维码' },
 ]
 
 const wechatIds = ['ddtrip700', 'ddtrip800', 'ddtrip999']

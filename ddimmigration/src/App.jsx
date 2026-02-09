@@ -48,7 +48,7 @@ function App() {
               className="logo-img"
             />
             <div className="company-name">
-              <h1 className="company-zh">嘀嘀移民咨询公司</h1>
+              <h1 className="company-zh">新西兰嘀嘀移民咨询公司</h1>
               <p className="company-en">dd immigration consultant ltd</p>
             </div>
           </div>
