@@ -782,28 +782,30 @@
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  text-align: center;
 }
 
 .services-card-title {
   margin: 0 0 12px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #222;
+  font-size: 26px;
+  font-weight: 800;
+  color: #1e5f8a;
   line-height: 1.35;
+  letter-spacing: 0.02em;
 }
 
 .services-card-summary {
   margin: 0 0 14px;
   font-size: 15px;
   line-height: 1.7;
-  color: #444;
+  color: #333;
   flex: 1;
 }
 
 .services-card-link {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--nav-bg) !important;
   align-self: flex-start;
 }
@@ -877,31 +879,19 @@
   background-color: #e0e0e0;
 }
 
-.home-business-card-overlay {
+.home-business-card-label {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 72px;
-  background: linear-gradient(
-    to left,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.4) 70%,
-    transparent 100%
-  );
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.home-business-card-text {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  letter-spacing: 0.2em;
-  font-size: 20px;
+  font-size: 50px;
   font-weight: 700;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow:
+    0 0 6px rgba(0, 0, 0, 0.6),
+    0 2px 10px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
@@ -1068,6 +1058,138 @@
 .contact-advisors-list {
   margin: 0;
   padding-left: 28px;
+}
+
+/* 企业相册 */
+.album-page {
+  padding-top: 32px;
+}
+
+.album-intro {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  text-align: center;
+}
+
+/* 相册首页：封面卡片，正方形、略大 */
+.album-covers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.album-cover-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.album-cover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.album-cover-frame {
+  aspect-ratio: 1/1;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.album-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.album-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 15px;
+}
+
+.album-cover-title {
+  margin: 0;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #6bb3d8;
+  text-align: center;
+  background: #fff;
+}
+
+/* 相册详情页：全部照片，统一竖版 3:4 */
+.album-section-page .section-title {
+  margin: 0 0 24px;
+}
+
+.album-section-header {
+  margin-bottom: 28px;
+}
+
+.album-back-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #6bb3d8;
+  text-decoration: none;
+}
+
+.album-back-link:hover {
+  text-decoration: underline;
+}
+
+.album-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.album-section-item {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f5f5f5;
+  aspect-ratio: 3/4;
+}
+
+.album-section-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.album-placeholder {
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .album-covers {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .album-section-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 
 /* 招聘信息 */

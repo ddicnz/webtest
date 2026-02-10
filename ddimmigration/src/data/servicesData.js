@@ -26,7 +26,7 @@ export const servicesList = [
   {
     id: 'work',
     title: '工作签证申请',
-    summary: '技术移民是新西兰主流移民途径之一，根据年龄、学历、工作经验、薪资等条件计分。',
+    summary: '认证雇主工签（AEWV）及各类工作签证申请。我们协助匹配本地雇主、准备材料并全程跟进，助力您顺利赴新工作。',
     fullContent: `认证雇主 AEWV 工签
 
 AEWV（Accredited Employer Work Visa）是目前新西兰最主流的工作签证通道，通过认证雇主担保，申请人可直接获得合法全职工作机会，并为后续居民身份打下基础。

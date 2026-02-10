@@ -8,6 +8,8 @@ import TeamPage from './pages/TeamPage.jsx'
 import CasesPage from './pages/CasesPage.jsx'
 import CaseDetailPage from './pages/CaseDetailPage.jsx'
 import JobsPage from './pages/JobsPage.jsx'
+import AlbumPage from './pages/AlbumPage.jsx'
+import AlbumSectionPage from './pages/AlbumSectionPage.jsx'
 import NewsPage from './pages/NewsPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
@@ -20,6 +22,7 @@ const navItems = [
   { label: '核心业务', path: '/services' },
   { label: '成功案例', path: '/cases' },
   { label: '招聘信息', path: '/jobs' },
+  { label: '企业相册', path: '/album' },
   { label: '移民资讯', path: '/news' },
   { label: '联络我们', path: '/contactus' },
 ]
@@ -87,6 +90,8 @@ function App() {
           <Route path="/cases" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CaseDetailPage />} />
           <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/album" element={<AlbumPage />} />
+          <Route path="/album/:sectionId" element={<AlbumSectionPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
         </Route>

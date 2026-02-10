@@ -29,54 +29,42 @@ function HomePage() {
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/tourist.png)' }}
             />
-            <div className="home-business-card-overlay">
-              <span className="home-business-card-text">旅游签申请</span>
-            </div>
+            <span className="home-business-card-label">旅游签申请</span>
           </Link>
           <Link to="/services/work" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/work.png)' }}
             />
-            <div className="home-business-card-overlay">
-              <span className="home-business-card-text">工作签证申请</span>
-            </div>
+            <span className="home-business-card-label">工作签证申请</span>
           </Link>
           <Link to="/services/residence" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/residence.png)' }}
             />
-            <div className="home-business-card-overlay">
-              <span className="home-business-card-text">居留签证申请</span>
-            </div>
+            <span className="home-business-card-label">居留签证申请</span>
           </Link>
-          <Link to="/services#invest" className="home-business-card">
+          <Link to="/services/invest" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/invest.png)' }}
             />
-            <div className="home-business-card-overlay">
-              <span className="home-business-card-text">投资移民</span>
-            </div>
+            <span className="home-business-card-label">投资移民</span>
           </Link>
-          <Link to="/services#skilled" className="home-business-card">
+          <Link to="/services/skilled" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/skilled.png)' }}
             />
-            <div className="home-business-card-overlay">
-              <span className="home-business-card-text">技术移民</span>
-            </div>
+            <span className="home-business-card-label">技术移民</span>
           </Link>
-          <Link to="/services#study" className="home-business-card">
+          <Link to="/services/study" className="home-business-card">
             <div
               className="home-business-card-bg"
               style={{ backgroundImage: 'url(/pic/study.png)' }}
             />
-            <div className="home-business-card-overlay">
-              <span className="home-business-card-text">留学教育</span>
-            </div>
+            <span className="home-business-card-label">留学教育</span>
           </Link>
         </section>
 
