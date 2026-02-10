@@ -499,7 +499,7 @@
   margin: 0 0 4px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-green);
+  color: #6bb3d8;
 }
 
 .team-block-licence-no {
@@ -1150,7 +1150,7 @@
   padding-bottom: 10px;
   font-size: 24px;
   font-weight: 800;
-  color: var(--text-green);
+  color: #6bb3d8;
   border-bottom: 3px solid var(--nav-bg);
 }
 
@@ -1178,7 +1178,7 @@
   margin: 0 0 10px;
   font-size: 22px;
   font-weight: 700;
-  color: var(--text-green);
+  color: #6bb3d8;
 }
 
 .job-card-meta {
