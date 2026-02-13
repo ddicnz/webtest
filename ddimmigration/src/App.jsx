@@ -180,7 +180,6 @@ function App() {
                   `nav-link${isActive ? ' active' : ''}`
                 }
                 end={item.path === '/'}
-                onMouseEnter={() => item.path !== '/' && preloadHero(item.path)}
               >
                 {item.label}
               </NavLink>
