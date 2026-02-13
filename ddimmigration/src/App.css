@@ -15,10 +15,12 @@
 }
 
 .homepage {
+  width: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
   background: #ffffff;
+  overflow-x: hidden;
 }
 
 /* 顶部栏：深蓝背景，显示电话 / 邮箱 / 工作时间 */
@@ -123,15 +125,15 @@
 .nav-inner {
   width: 100%;
   height: 100%;           /* 和 nav-bar 一样高 */
-  max-width: none;        /* 不再居中一块，整条从最左开始 */
+  max-width: none;
   margin: 0;
-  padding: 0 16px 0 24px; /* 左侧轻微缩进 24px，整体往右一点 */
-  box-sizing: border-box; /* 包含 padding，不会撑出 nav-bar */
+  padding: 0 12px 0 20px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 32px;
-  flex-wrap: nowrap;      /* nav-brand 和 nav-links 固定在同一行 */
+  gap: 20px;              /* 缩小间距，让整行更紧凑 */
+  flex-wrap: nowrap;      /* 不换行，保持一行 */
 }
 
 .nav-brand {
@@ -139,8 +141,22 @@
   align-items: center;
   flex: 0 0 auto;
   flex-direction: row; /* 明确水平排列：logo 在左，公司名在右 */
-  margin-right: 32px; /* logo+公司名 与 导航链接之间留出间距 */
+  margin-right: 24px;  /* logo+公司名 与 导航链接之间留出间距 */
   height: 100%;       /* 和 nav-inner / nav-bar 保持同高 */
+}
+
+/* 导航栏内 brand 略缩小：logo 和公司名 */
+.nav-bar .logo-img {
+  width: 40px;
+  height: 40px;
+}
+.nav-bar .company-zh {
+  font-size: 22px;
+  letter-spacing: 0.04em;
+}
+.nav-bar .company-en {
+  font-size: 13px;
+  margin-top: 2px;
 }
 
 /* 导航栏内实际包着 logo 和公司名的容器，强制与导航同高、左右并排 */
@@ -162,10 +178,10 @@
 .nav-link {
   color: #fff;
   text-decoration: none;
-  padding: 18px 22px; /* 左右内边距减小，让模块更紧凑 */
-  font-size: 18px;
+  padding: 12px 14px; /* 更紧凑，避免换行 */
+  font-size: 15px;
   font-weight: 500;
-  white-space: nowrap; /* 避免文字竖着排 */
+  white-space: nowrap;
   transition: background 0.2s, color 0.2s, font-weight 0.2s;
 }
 
@@ -183,14 +199,16 @@
   cursor: default;
 }
 
-/* 页面主体：左侧边栏 + 主内容区（除首页外各页一致） */
+/* 页面主体：左侧边栏 + 主内容区（除首页外各页一致）；小屏铺满宽度 */
 .page-with-sidebar {
   display: flex;
   align-items: flex-start;
   gap: 48px;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .left-sidebar {
@@ -313,13 +331,10 @@
 .about-hero--news .about-hero-bg { filter: brightness(0.55); background-position: center 30%; }
 .about-hero--contactus .about-hero-bg { filter: brightness(0.75); }
 
-/* 关于我们页顶部图片：高度约半屏，同样顶到导航栏上沿 */
+/* 关于我们页顶部图片：高度约半屏，同样顶到导航栏上沿；用 100% 避免 100vw 在小屏产生横向滚动/白边 */
 .about-hero {
   position: relative;
-  /* 让图片从浏览器最左到最右铺满，而不受父容器 padding 影响 */
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);  /* 以视口为基准水平居中，占满整屏宽度 */
+  width: 100%;
   min-height: 50vh;
   margin-top: -88px;  /* 与 nav-bar 高度保持一致，顶到导航栏上边缘 */
   padding-top: 88px;
@@ -332,27 +347,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.about-hero-bg-placeholder {
-  background: #e8eaed;
-}
-
-.about-hero-bg-image {
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.about-hero-bg-image.about-hero-bg--loaded {
-  opacity: 1;
-}
-
-.about-hero-preload {
-  position: absolute;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  pointer-events: none;
 }
 
 .hero-arrow {
