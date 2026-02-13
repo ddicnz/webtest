@@ -1,4 +1,5 @@
-import { Routes, Route, NavLink, Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Routes, Route, NavLink, Outlet, useLocation } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer.jsx'
 import LeftSidebar from './components/LeftSidebar.jsx'
@@ -38,51 +39,126 @@ function SidebarLayout() {
   )
 }
 
+// 通用布局：除首页外，其它页面上方都有一块半屏宽的大图，下面是侧边栏 + 正文
+function HeroSidebarLayout() {
+  const location = useLocation()
+
+  // 默认 aboutus 图；企业相册用 xiangce，招聘用 zhaopin，专业团队用 teams，成功案例用 successcases，核心业务用 services，移民资讯用 news，联络我们用 contactus；各页亮度在 App.css 按模块调整
+  let heroImage = '/pic/aboutus.jpg'
+  let heroClassName = 'about-hero'
+  if (location.pathname.startsWith('/album')) {
+    heroImage = '/pic/xiangce.jpg'
+    heroClassName = 'about-hero about-hero--album'
+  } else if (location.pathname === '/jobs') {
+    heroImage = '/pic/zhaopin.jpg'
+    heroClassName = 'about-hero about-hero--jobs'
+  } else if (location.pathname === '/about') {
+    heroClassName = 'about-hero about-hero--about'
+  } else if (location.pathname === '/team') {
+    heroImage = '/pic/teams.jpg'
+    heroClassName = 'about-hero about-hero--team'
+  } else if (location.pathname.startsWith('/cases')) {
+    heroImage = '/pic/successcases.jpg'
+    heroClassName = 'about-hero about-hero--cases'
+  } else if (location.pathname.startsWith('/services')) {
+    heroImage = '/pic/services.jpg'
+    heroClassName = 'about-hero about-hero--services'
+  } else if (location.pathname === '/news') {
+    heroImage = '/pic/news.jpg'
+    heroClassName = 'about-hero about-hero--news'
+  } else if (location.pathname === '/contactus') {
+    heroImage = '/pic/contactus.jpg'
+    heroClassName = 'about-hero about-hero--contactus'
+  }
+
+  return (
+    <>
+      {/* 顶部整屏图片：与首页一样，图片上边缘和导航上边缘对齐 */}
+      <section className={heroClassName}>
+        <div
+          className="about-hero-bg"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+      </section>
+
+      {/* 图片下面是侧边栏 + 各页面正文 */}
+      <div className="page-with-sidebar">
+        <LeftSidebar />
+        <div className="main-area">
+          <Outlet />
+        </div>
+      </div>
+    </>
+  )
+}
+
 function App() {
+  const [navSolid, setNavSolid] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 只要页面有滚动就加深导航背景
+      setNavSolid(window.scrollY > 0)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <div className="homepage">
-      {/* 顶部栏：Logo + 公司名 + 电话 */}
+      {/* 顶部栏：联系方式（电话 / 邮箱 / 工作时间） */}
       <header className="top-bar">
         <div className="top-bar-inner">
-          <div className="brand">
-            <img
-              src="/pic/logo.jpg"
-              alt="嘀嘀移民"
-              className="logo-img"
-            />
-            <div className="company-name">
-              <h1 className="company-zh">新西兰嘀嘀移民咨询公司</h1>
-              <p className="company-en">dd immigration consultant ltd</p>
-            </div>
-          </div>
-          <div className="contact">
-            <span className="phone-icon">📞</span>
-            <a href="tel:+64-9-3033533" className="phone-num">+64-027-7223339</a>
+          <div className="top-bar-contact">
+            <span className="top-bar-contact-item">电话：+64-027-7223339</span>
+            <span className="top-bar-contact-item">邮箱：ddicnz@gmail.com</span>
+            <span className="top-bar-contact-item">工作时间：Mon - Fri 10:00 - 18:00</span>
           </div>
         </div>
       </header>
 
       {/* 导航栏 */}
-      <nav className="nav-bar">
+      <nav className={`nav-bar${navSolid ? ' nav-bar--solid' : ''}`}>
         <div className="nav-inner">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.label}
-              to={item.path}
-              className={({ isActive }) =>
-                `nav-link${isActive ? ' active' : ''}`
-              }
-              end={item.path === '/'}
-            >
-              {item.label}
-            </NavLink>
-          ))}
+          <div className="nav-brand">
+            <div className="brand">
+              <img
+                src="/pic/logo.jpg"
+                alt="嘀嘀移民"
+                className="logo-img"
+              />
+              <div className="company-name">
+                <h1 className="company-zh">新西兰嘀嘀移民咨询公司</h1>
+                <p className="company-en">dd immigration consultant ltd</p>
+              </div>
+            </div>
+          </div>
+          <div className="nav-links">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.path}
+                className={({ isActive }) =>
+                  `nav-link${isActive ? ' active' : ''}`
+                }
+                end={item.path === '/'}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
         </div>
       </nav>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route element={<SidebarLayout />}>
+        {/* 除首页外的其它页面：上面半屏大图，下面 sidebar + 正文 */}
+        <Route element={<HeroSidebarLayout />}>
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:type" element={<ServicesDetailPage />} />

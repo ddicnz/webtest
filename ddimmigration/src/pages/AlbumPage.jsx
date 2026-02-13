@@ -6,7 +6,7 @@ function AlbumPage() {
     <main className="main-content album-page">
       <h2 className="section-title">企业相册</h2>
       <p className="album-intro">
-        展示客户接待、办公环境、团队活动与新西兰本地风貌，欢迎了解我们的日常。
+        展示客户接待、办公环境、高光时刻与新西兰本地风貌，欢迎了解我们的日常。
       </p>
 
       <div className="album-covers">

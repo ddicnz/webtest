@@ -11,12 +11,10 @@ function HomePage() {
             backgroundImage: `url(/pic/auckland.jpg)`,
           }}
         />
-        <button type="button" className="hero-arrow hero-arrow-left" aria-label="上一张">
-          ‹
-        </button>
-        <button type="button" className="hero-arrow hero-arrow-right" aria-label="下一张">
-          ›
-        </button>
+        <Link to="/contactus" className="hero-cta-btn">
+          <span className="hero-cta-text">开启您的新西兰之路</span>
+          <span className="hero-cta-arrow" aria-hidden>→</span>
+        </Link>
       </section>
 
       {/* 主体内容：核心业务 */}

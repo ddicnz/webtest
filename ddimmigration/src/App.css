@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "QingNiaoJianMeiHei";
+  src: url("/fonts/QingNiaoHuaGuangJianMeiHei/QingNiaoHuaGuangJianMeiHei-2.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 主题色：淡蓝（导航条）、深青绿（其他） */
 :root {
   --nav-bg: #5ba3c6;
@@ -10,32 +18,37 @@
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  background: #ffffff;
 }
 
-/* 顶部栏：白底，左侧 Logo+公司名，右侧电话 */
+/* 顶部栏：深蓝背景，显示电话 / 邮箱 / 工作时间 */
 .top-bar {
-  background: #fff;
+  background: #0b263d; /* 再深一档的蓝色 */
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
 }
 
 .top-bar-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 24px;
+  width: 100%;
+  margin: 0;
+  padding: 22px 24px; /* 再加一点垂直 padding，让 head 更高一些 */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;   /* 顶部文字靠左 */
+  font-size: 13px;
+  color: #ffffff;
+  gap: 24px;
+  white-space: nowrap;
 }
 
-.brand {
+.top-bar-contact {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 48px; /* 电话 / 邮箱 / 工作时间 之间稍分散 */
 }
 
 .logo-img {
-  width: 76px;
-  height: 76px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 8px;
@@ -47,19 +60,23 @@
 
 .company-zh {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  /* 使用你提供的青鸟华光简美黑字体 */
+  font-family: "QingNiaoJianMeiHei", "PingFang SC", "Microsoft YaHei",
+    -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   font-size: 34px;
-  font-weight: 800;
-  color: #1e5f8a;
+  font-weight: 900;
+  color: #bde2f7; /* 再浅一点的蓝色 */
   line-height: 1.2;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em; /* 稍微拉开字距，更有设计感 */
 }
 
 .company-en {
   margin: 4px 0 0;
   font-size: 15px;
   font-weight: 700;
-  color: #1e5f8a;
+  color: #bde2f7; /* 英文名同样用更浅的蓝色 */
+  font-family: "QingNiaoJianMeiHei", "PingFang SC", "Microsoft YaHei",
+    -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }
 
 .contact {
@@ -73,8 +90,8 @@
 }
 
 .phone-num {
-  color: var(--nav-bg);
-  font-weight: 600;
+  color: #1e5f8a; /* 与“新西兰嘀嘀移民咨询公司”同色 */
+  font-weight: 700;
   font-size: 16px;
   text-decoration: none;
 }
@@ -83,29 +100,73 @@
   text-decoration: underline;
 }
 
-/* 导航栏：淡蓝背景，白字 */
+/* 导航栏：初始透明悬浮在图片上，滚动后变为更深的半透明背景 */
 .nav-bar {
-  background: var(--nav-bg);
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  height: 88px; /* 导航栏整体高度 */
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25); /* 底部更淡的白线 */
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-bar--solid {
+  /* 稍微加深的半透明背景，仍能看到下方图片 */
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+  width: 100%;
+  height: 100%;           /* 和 nav-bar 一样高 */
+  max-width: none;        /* 不再居中一块，整条从最左开始 */
+  margin: 0;
+  padding: 0 16px 0 24px; /* 左侧轻微缩进 24px，整体往右一点 */
+  box-sizing: border-box; /* 包含 padding，不会撑出 nav-bar */
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 32px;
+  flex-wrap: nowrap;      /* nav-brand 和 nav-links 固定在同一行 */
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  flex-direction: row; /* 明确水平排列：logo 在左，公司名在右 */
+  margin-right: 32px; /* logo+公司名 与 导航链接之间留出间距 */
+  height: 100%;       /* 和 nav-inner / nav-bar 保持同高 */
+}
+
+/* 导航栏内实际包着 logo 和公司名的容器，强制与导航同高、左右并排 */
+.brand {
+  display: flex;
+  align-items: center;
+  height: 100%;     /* = nav-inner = nav-bar */
+  gap: 12px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
   gap: 0;
-  flex-wrap: wrap;
+  flex: 0 0 auto;
+  justify-content: flex-start; /* 导航链接紧跟在 brand 右侧，不再靠右对齐 */
 }
 
 .nav-link {
   color: #fff;
   text-decoration: none;
-  padding: 14px 20px;
-  font-size: 15px;
-  transition: background 0.2s;
+  padding: 18px 22px; /* 左右内边距减小，让模块更紧凑 */
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap; /* 避免文字竖着排 */
+  transition: background 0.2s, color 0.2s, font-weight 0.2s;
 }
 
 .nav-link:hover {
@@ -113,7 +174,9 @@
 }
 
 .nav-link.active {
-  background: var(--nav-active);
+  background: transparent;
+  font-weight: 800;
+  color: #ffffff;
 }
 
 .nav-link-disabled {
@@ -215,11 +278,55 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 580px;
+  min-height: 100vh;
+  /* 让首页大图的上边缘与导航栏上边缘精确对齐：
+     上拉一个导航栏高度，再用同样的 padding 把内容撑回来 */
+  margin-top: -88px;
+  padding-top: 88px;
   overflow: hidden;
 }
 
 .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ========== 各页顶部图亮度（在这里改数值） ========== */
+/* 首页 */
+.hero .hero-bg {
+  filter: brightness(0.8);
+}
+/* 除首页外各页默认亮度 */
+.about-hero .about-hero-bg {
+  filter: brightness(0.8);
+}
+/* 以下可单独改：关于我们 | 招聘信息 | 专业团队 | 核心业务 | 成功案例 | 企业相册 | 移民资讯 | 联络我们 */
+.about-hero--about .about-hero-bg { filter: brightness(0.55); }
+.about-hero--jobs .about-hero-bg { filter: brightness(0.8); }
+.about-hero--team .about-hero-bg { filter: brightness(0.6); }
+.about-hero--services .about-hero-bg { filter: brightness(0.8); }
+.about-hero--cases .about-hero-bg { filter: brightness(0.7) blur(0.1px); background-size: 100%; }
+.about-hero--album .about-hero-bg { filter: brightness(0.8); background-position: center 50%; }
+.about-hero--news .about-hero-bg { filter: brightness(0.55); background-position: center 30%; }
+.about-hero--contactus .about-hero-bg { filter: brightness(0.75); }
+
+/* 关于我们页顶部图片：高度约半屏，同样顶到导航栏上沿 */
+.about-hero {
+  position: relative;
+  /* 让图片从浏览器最左到最右铺满，而不受父容器 padding 影响 */
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);  /* 以视口为基准水平居中，占满整屏宽度 */
+  min-height: 50vh;
+  margin-top: -88px;  /* 与 nav-bar 高度保持一致，顶到导航栏上边缘 */
+  padding-top: 88px;
+  overflow: hidden;
+}
+
+.about-hero-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
@@ -257,6 +364,53 @@
 
 .hero-arrow-right {
   right: 20px;
+}
+
+/* 首页 Hero 左侧 CTA：跳转联络我们（改小：调 padding、font-size） */
+.hero-cta-btn {
+  position: absolute;
+  left: 300px;
+  top: 70%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #9B7BCB 0%, #6fd9ff 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-50%) scale(1.02);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hero-cta-text {
+  white-space: nowrap;
+}
+
+.hero-cta-arrow {
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-cta-btn {
+    left: 20px;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+  .hero-cta-text {
+    white-space: normal;
+  }
 }
 
 /* 主体内容 */
@@ -1060,6 +1214,88 @@
   padding-left: 28px;
 }
 
+/* 联系我们 - 在线表单 */
+.contact-form {
+  margin-top: 48px;
+  max-width: 880px;
+}
+
+.contact-form-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.contact-form-row--three .contact-form-field {
+  flex: 1 1 0;
+}
+
+.contact-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.contact-form-field--full {
+  flex: 1 1 100%;
+}
+
+.contact-form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.contact-form-field input,
+.contact-form-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #d0d7de;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.contact-form-field input:focus,
+.contact-form-field textarea:focus {
+  border-color: var(--nav-bg);
+  box-shadow: 0 0 0 1px rgba(91, 163, 198, 0.3);
+}
+
+.contact-form-actions {
+  margin-top: 12px;
+}
+
+.contact-form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  background: #0b263d;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.contact-form-submit:hover {
+  background: #123a5d;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .contact-form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
 /* 企业相册 */
 .album-page {
   padding-top: 32px;
@@ -1428,7 +1664,7 @@
 
 /* Footer 页脚 */
 .site-footer {
-  background: var(--nav-bg);
+  background: #0b263d;   /* 深蓝，与顶部条一致 */
   color: #fff;
   margin-top: 64px;
 }
@@ -1441,6 +1677,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
   align-items: start;
+  text-align: left;      /* 页脚文字整体靠左 */
 }
 
 .footer-section {
@@ -1483,7 +1720,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px 12px;
   align-items: start;
-  justify-items: center;
+  justify-items: start;
 }
 
 .qrcode-item {
@@ -1507,9 +1744,9 @@
 }
 
 .footer-copyright {
-  background: var(--nav-bg);
+  background: #0b263d;
   padding: 16px 24px;
-  text-align: center;
+  text-align: left;      /* 版权行也靠左 */
 }
 
 .footer-copyright p {
