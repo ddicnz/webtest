@@ -102,12 +102,19 @@
   text-decoration: underline;
 }
 
+
+.header-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 120;
+}
+
 /* 导航栏：初始透明悬浮在图片上，滚动后变为更深的半透明背景 */
 .nav-bar {
   width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: static;
   background: transparent;
   height: 88px; /* 导航栏整体高度 */
   display: flex;
@@ -297,10 +304,6 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  /* 让首页大图的上边缘与导航栏上边缘精确对齐：
-     上拉一个导航栏高度，再用同样的 padding 把内容撑回来 */
-  margin-top: -88px;
-  padding-top: 88px;
   overflow: hidden;
 }
 
@@ -331,13 +334,11 @@
 .about-hero--news .about-hero-bg { filter: brightness(0.55); background-position: center 30%; }
 .about-hero--contactus .about-hero-bg { filter: brightness(0.75); }
 
-/* 关于我们页顶部图片：高度约半屏，同样顶到导航栏上沿；用 100% 避免 100vw 在小屏产生横向滚动/白边 */
+/* 关于我们页顶部图片：高度约半屏，位于导航下方 */
 .about-hero {
   position: relative;
   width: 100%;
   min-height: 50vh;
-  margin-top: -88px;  /* 与 nav-bar 高度保持一致，顶到导航栏上边缘 */
-  padding-top: 88px;
   overflow: hidden;
 }
 
@@ -384,19 +385,19 @@
 /* 首页 Hero 左侧 CTA：跳转联络我们（改小：调 padding、font-size） */
 .hero-cta-btn {
   position: absolute;
-  left: 300px;
+  left: 45%;
   top: 70%;
   transform: translateY(-50%);
   z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
+  padding: 16px 25px;
   border: none;
   border-radius: 8px;
   background: linear-gradient(90deg, #9B7BCB 0%, #6fd9ff 100%);
   color: #fff;
-  font-size: 15px;
+  font-size: 19px;
   font-weight: 600;
   text-decoration: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);

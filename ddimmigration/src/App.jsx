@@ -111,8 +111,9 @@ function App() {
 
   return (
     <div className="homepage">
-      {/* 顶部栏：联系方式（电话 / 邮箱 / 工作时间） */}
-      <header className="top-bar">
+      <div className="header-shell">
+        {/* 顶部栏：联系方式（电话 / 邮箱 / 工作时间） */}
+        <header className="top-bar">
         <div className="top-bar-inner">
           <div className="top-bar-contact">
             <span className="top-bar-contact-item">电话：+64-027-7223339</span>
@@ -154,6 +155,7 @@ function App() {
           </div>
         </div>
       </nav>
+      </div>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
