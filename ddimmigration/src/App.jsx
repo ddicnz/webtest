@@ -39,9 +39,30 @@ function SidebarLayout() {
   )
 }
 
+// 路径 → 顶部大图，用于 hover 预加载
+const pathToHeroImage = {
+  '/about': '/pic/aboutus.jpg',
+  '/team': '/pic/teams.jpg',
+  '/cases': '/pic/successcases.jpg',
+  '/services': '/pic/services.jpg',
+  '/jobs': '/pic/zhaopin.jpg',
+  '/album': '/pic/xiangce.jpg',
+  '/news': '/pic/news.jpg',
+  '/contactus': '/pic/contactus.jpg',
+}
+
+function preloadHero(path) {
+  const url = pathToHeroImage[path] || (path.startsWith('/album') ? '/pic/xiangce.jpg' : pathToHeroImage['/about'])
+  if (url) {
+    const img = new Image()
+    img.src = url
+  }
+}
+
 // 通用布局：除首页外，其它页面上方都有一块半屏宽的大图，下面是侧边栏 + 正文
 function HeroSidebarLayout() {
   const location = useLocation()
+  const [heroLoaded, setHeroLoaded] = useState(false)
 
   // 默认 aboutus 图；企业相册用 xiangce，招聘用 zhaopin，专业团队用 teams，成功案例用 successcases，核心业务用 services，移民资讯用 news，联络我们用 contactus；各页亮度在 App.css 按模块调整
   let heroImage = '/pic/aboutus.jpg'
@@ -71,13 +92,25 @@ function HeroSidebarLayout() {
     heroClassName = 'about-hero about-hero--contactus'
   }
 
+  useEffect(() => {
+    setHeroLoaded(false)
+  }, [heroImage])
+
   return (
     <>
-      {/* 顶部整屏图片：与首页一样，图片上边缘和导航上边缘对齐 */}
+      {/* 顶部整屏图片：加载完成后淡入，减少白屏感 */}
       <section className={heroClassName}>
+        <div className="about-hero-bg about-hero-bg-placeholder" />
         <div
-          className="about-hero-bg"
+          className={`about-hero-bg about-hero-bg-image ${heroLoaded ? 'about-hero-bg--loaded' : ''}`}
           style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <img
+          src={heroImage}
+          alt=""
+          className="about-hero-preload"
+          onLoad={() => setHeroLoaded(true)}
+          aria-hidden
         />
       </section>
 
@@ -147,6 +180,7 @@ function App() {
                   `nav-link${isActive ? ' active' : ''}`
                 }
                 end={item.path === '/'}
+                onMouseEnter={() => item.path !== '/' && preloadHero(item.path)}
               >
                 {item.label}
               </NavLink>

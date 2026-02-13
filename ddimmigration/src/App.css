@@ -334,6 +334,27 @@
   background-repeat: no-repeat;
 }
 
+.about-hero-bg-placeholder {
+  background: #e8eaed;
+}
+
+.about-hero-bg-image {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.about-hero-bg-image.about-hero-bg--loaded {
+  opacity: 1;
+}
+
+.about-hero-preload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .hero-arrow {
   position: absolute;
   top: 50%;
