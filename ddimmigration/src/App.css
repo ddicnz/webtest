@@ -133,7 +133,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 20px;              /* 缩小间距，让整行更紧凑 */
-  flex-wrap: nowrap;      /* 不换行，保持一行 */
+  flex-wrap: wrap;        /* 小屏时导航可换行 */
 }
 
 .nav-brand {
