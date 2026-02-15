@@ -52,11 +52,15 @@ export const albumSections = [
   {
     id: 'team',
     title: '高光时刻',
-    cover: '/pic/album/teamsactivity/IMG_2032.JPG',
+    cover: '/pic/album/teamsactivity/微信图片_20260215172426_135.jpg',
     images: [
-      '/pic/album/teamsactivity/IMG_2032.JPG',
-      '/pic/album/teamsactivity/IMG_3721.JPG',
-      '/pic/album/teamsactivity/IMG_3730.JPG',
+      '/pic/album/teamsactivity/微信图片_20260215172426_135.jpg',
+      '/pic/album/teamsactivity/微信图片_20260215172411_133.jpg',
+      '/pic/album/teamsactivity/微信图片_20260215172422_134.jpg',
+      '/pic/album/teamsactivity/IMGL9035.jpg',
+      '/pic/album/teamsactivity/IMGL9050.jpg',
+      '/pic/album/teamsactivity/IMGL9219.jpg',
+      '/pic/album/teamsactivity/IMGL9289.jpg',
     ],
   },
   {
