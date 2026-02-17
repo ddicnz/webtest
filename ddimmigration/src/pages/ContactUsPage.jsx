@@ -1,5 +1,10 @@
 import { useState } from 'react'
 
+// 联络表单接口：本地开发走 Vite 代理 /api/form-submit 避免 CORS；生产直连
+const FORM_API_URL = import.meta.env.DEV
+  ? '/api/form-submit'
+  : 'https://6gti3uh9lj.execute-api.ap-southeast-2.amazonaws.com/default/form-submit'
+
 function ContactUsPage() {
   const [form, setForm] = useState({
     name: '',
@@ -9,25 +14,44 @@ function ContactUsPage() {
     source: '',
     message: '',
   })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
+    setSubmitError(null)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // 先只在前端收集数据，后端对接留待之后再做
-    console.log('Contact form data:', form)
-    alert('谢谢您的留言，我们会尽快联系您。')
-    setForm({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      source: '',
-      message: '',
-    })
+    setSubmitting(true)
+    setSubmitError(null)
+    try {
+      const res = await fetch(FORM_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          service: form.service,
+          source: form.source,
+          message: form.message,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (data.ok) {
+        alert('谢谢您的留言，我们会尽快联系您。')
+        setForm({ name: '', email: '', phone: '', service: '', source: '', message: '' })
+      } else {
+        setSubmitError(data.error || '提交失败，请稍后重试。')
+      }
+    } catch (err) {
+      setSubmitError('网络错误，请检查网络后重试。')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -133,9 +157,18 @@ function ContactUsPage() {
             </div>
           </div>
 
+          {submitError && (
+            <p className="contact-form-error" role="alert">
+              {submitError}
+            </p>
+          )}
           <div className="contact-form-actions">
-            <button type="submit" className="contact-form-submit">
-              发送 →
+            <button
+              type="submit"
+              className="contact-form-submit"
+              disabled={submitting}
+            >
+              {submitting ? '发送中…' : '发送 →'}
             </button>
           </div>
         </form>
