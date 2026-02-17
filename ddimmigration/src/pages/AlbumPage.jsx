@@ -6,12 +6,12 @@ function AlbumPage() {
     <main className="main-content album-page">
       <h2 className="section-title">企业相册</h2>
       <p className="album-intro">
-        展示客户接待、办公环境、高光时刻与新西兰本地风貌，欢迎了解我们的日常。
+        展示客户接待、办公环境、本地活动与新西兰本地风貌，欢迎了解我们的日常。
       </p>
 
       <div className="album-covers">
         {albumSections.map((section) => {
-          const coverSrc = section.cover ?? (section.images && section.images.length > 0 ? section.images[0] : null)
+          const coverSrc = section.cover ?? (section.items && section.items.length > 0 ? section.items[0].src : null) ?? (section.images && section.images.length > 0 ? section.images[0] : null)
           return (
             <Link
               key={section.id}

@@ -5,13 +5,13 @@ import Footer from './components/Footer.jsx'
 import LeftSidebar from './components/LeftSidebar.jsx'
 import HomePage from './pages/HomePage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
-import TeamPage from './pages/TeamPage.jsx'
 import CasesPage from './pages/CasesPage.jsx'
 import CaseDetailPage from './pages/CaseDetailPage.jsx'
 import JobsPage from './pages/JobsPage.jsx'
 import AlbumPage from './pages/AlbumPage.jsx'
 import AlbumSectionPage from './pages/AlbumSectionPage.jsx'
 import NewsPage from './pages/NewsPage.jsx'
+import NewsDetailPage from './pages/NewsDetailPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
@@ -19,7 +19,6 @@ import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 const navItems = [
   { label: '首页', path: '/' },
   { label: '关于我们', path: '/about' },
-  { label: '专业团队', path: '/team' },
   { label: '核心业务', path: '/services' },
   { label: '成功案例', path: '/cases' },
   { label: '招聘信息', path: '/jobs' },
@@ -54,9 +53,6 @@ function HeroSidebarLayout() {
     heroClassName = 'about-hero about-hero--jobs'
   } else if (location.pathname === '/about') {
     heroClassName = 'about-hero about-hero--about'
-  } else if (location.pathname === '/team') {
-    heroImage = '/pic/teams.jpg'
-    heroClassName = 'about-hero about-hero--team'
   } else if (location.pathname.startsWith('/cases')) {
     heroImage = '/pic/successcases.jpg'
     heroClassName = 'about-hero about-hero--cases'
@@ -164,12 +160,12 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:type" element={<ServicesDetailPage />} />
-          <Route path="/team" element={<TeamPage />} />
           <Route path="/cases" element={<CasesPage />} />
           <Route path="/cases/:id" element={<CaseDetailPage />} />
           <Route path="/jobs" element={<JobsPage />} />
           <Route path="/album" element={<AlbumPage />} />
           <Route path="/album/:sectionId" element={<AlbumSectionPage />} />
+          <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
         </Route>

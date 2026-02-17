@@ -14,7 +14,8 @@ function AlbumSectionPage() {
     )
   }
 
-  const hasImages = section.images && section.images.length > 0
+  const items = section.items ?? (section.images || []).map((src) => ({ src, caption: null }))
+  const hasImages = items.length > 0
 
   return (
     <main className="main-content album-page album-section-page">
@@ -25,14 +26,17 @@ function AlbumSectionPage() {
 
       {hasImages ? (
         <div className="album-section-grid">
-          {section.images.map((src, i) => (
+          {items.map((item, i) => (
             <div key={i} className="album-section-item">
-              <img
-                src={src}
-                alt={`${section.title} ${i + 1}`}
-                className="album-section-img"
-                loading="lazy"
-              />
+              <div className="album-section-img-wrap">
+                <img
+                  src={item.src}
+                  alt={item.caption || `${section.title} ${i + 1}`}
+                  className="album-section-img"
+                  loading="lazy"
+                />
+              </div>
+              {item.caption && <p className="album-section-caption">{item.caption}</p>}
             </div>
           ))}
         </div>

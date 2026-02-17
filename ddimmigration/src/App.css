@@ -487,7 +487,11 @@
   max-width: 900px;
 }
 
-/* 专业团队 */
+/* 专业团队（关于我们页内区块） */
+.about-team-section {
+  margin-top: 72px;
+}
+
 .team-page .section-title {
   margin-bottom: 16px;
 }
@@ -1414,7 +1418,14 @@
   border-radius: 10px;
   overflow: hidden;
   background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+.album-section-img-wrap {
   aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #f0f0f0;
 }
 
 .album-section-img {
@@ -1422,6 +1433,16 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.album-section-caption {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #555;
+  text-align: center;
+  background: #fff;
 }
 
 .album-placeholder {
