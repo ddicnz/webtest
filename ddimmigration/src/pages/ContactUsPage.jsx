@@ -74,7 +74,7 @@ function ContactUsPage() {
           </div>
           <div className="contact-detail-row">
             <span className="contact-detail-label">地址：</span>
-            <span>Auckland, Māngere, Andrew Baxter Dr, NZ 2022</span>
+            <span>8 Andrew Baxter Drive, Māngere, Auckland 2022</span>
           </div>
         </div>
 

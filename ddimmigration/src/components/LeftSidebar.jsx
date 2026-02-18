@@ -45,7 +45,7 @@ function LeftSidebar() {
           </div>
           <div className="sidebar-contact-row">
             <span className="sidebar-contact-label">地址：</span>
-            <span>Auckland, Māngere, Andrew Baxter Dr, NZ 2022</span>
+            <span>8 Andrew Baxter Drive, Māngere, Auckland 2022</span>
           </div>
         </div>
       </div>

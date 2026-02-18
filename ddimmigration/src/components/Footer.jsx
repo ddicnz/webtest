@@ -25,14 +25,14 @@ function Footer() {
           </div>
           <div className="contact-item">
             <span className="contact-icon">📍</span>
-            <span>地址: Auckland, Māngere, Andrew Baxter Dr, NZ 2022</span>
+            <span>地址: 8 Andrew Baxter Drive, Māngere, Auckland 2022</span>
           </div>
         </div>
 
         {/* 中间：Google Maps 地图 */}
         <div className="footer-section footer-map">
           <iframe
-            src="https://www.google.com/maps?q=Auckland,+M%C4%81ngere,+Andrew+Baxter+Dr,+NZ+2022&output=embed"
+            src="https://www.google.com/maps?q=8+Andrew+Baxter+Drive,+M%C4%81ngere,+Auckland+2022&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
