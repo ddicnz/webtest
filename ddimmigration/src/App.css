@@ -49,8 +49,8 @@
 }
 
 .logo-img {
-  width: 48px;
-  height: 48px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 8px;
@@ -65,7 +65,7 @@
   /* 使用你提供的青鸟华光简美黑字体 */
   font-family: "QingNiaoJianMeiHei", "PingFang SC", "Microsoft YaHei",
     -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  font-size: 34px;
+  font-size: 42px;
   font-weight: 900;
   color: #bde2f7; /* 再浅一点的蓝色 */
   line-height: 1.2;
@@ -74,7 +74,7 @@
 
 .company-en {
   margin: 4px 0 0;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   color: #bde2f7; /* 英文名同样用更浅的蓝色 */
   font-family: "QingNiaoJianMeiHei", "PingFang SC", "Microsoft YaHei",
@@ -154,15 +154,15 @@
 
 /* 导航栏内 brand 略缩小：logo 和公司名 */
 .nav-bar .logo-img {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 }
 .nav-bar .company-zh {
-  font-size: 22px;
+  font-size: 26px;
   letter-spacing: 0.04em;
 }
 .nav-bar .company-en {
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 2px;
 }
 

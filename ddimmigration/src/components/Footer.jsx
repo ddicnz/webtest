@@ -60,7 +60,7 @@ function Footer() {
 
       {/* 底部版权信息 */}
       <div className="footer-copyright">
-        <p>Copyright © 2026 DD Immigration Consultant Ltd. All Rights Reserved.</p>
+        <p>Copyright © 2026 DD Immigration Consulting Ltd. All Rights Reserved.</p>
       </div>
     </footer>
   )
