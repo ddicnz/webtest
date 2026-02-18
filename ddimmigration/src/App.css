@@ -206,6 +206,26 @@
   cursor: default;
 }
 
+/* 手机端：导航栏横向滚动，避免被挡住 */
+@media (max-width: 900px) {
+  .nav-bar {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-inner {
+    flex-wrap: nowrap;
+    min-width: min-content;
+    padding: 0 12px;
+  }
+  .nav-links {
+    flex-wrap: nowrap;
+  }
+  .nav-link {
+    flex-shrink: 0;
+  }
+}
+
 /* 页面主体：左侧边栏 + 主内容区（除首页外各页一致）；小屏铺满宽度 */
 .page-with-sidebar {
   display: flex;

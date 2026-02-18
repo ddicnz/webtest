@@ -131,7 +131,7 @@ function App() {
               />
               <div className="company-name">
                 <h1 className="company-zh">新西兰嘀嘀移民咨询公司</h1>
-                <p className="company-en">dd immigration consultant ltd</p>
+                <p className="company-en">DD Immigration Consultant Ltd</p>
               </div>
             </div>
           </div>
