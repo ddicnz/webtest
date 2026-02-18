@@ -122,17 +122,20 @@ function App() {
 
       {/* 导航栏 */}
       <nav className={`nav-bar${navSolid ? ' nav-bar--solid' : ''}${navOpen ? ' nav-bar--menu-open' : ''}`}>
-        <button
-          type="button"
-          className="nav-menu-btn"
-          aria-label="打开菜单"
-          aria-expanded={navOpen}
-          onClick={() => setNavOpen(true)}
-        >
-          <span className="nav-menu-btn-line" />
-          <span className="nav-menu-btn-line" />
-          <span className="nav-menu-btn-line" />
-        </button>
+        <div className="nav-menu-btn-wrap">
+          <button
+            type="button"
+            className="nav-menu-btn"
+            aria-label="打开菜单"
+            aria-expanded={navOpen}
+            onClick={() => setNavOpen(true)}
+          >
+            <span className="nav-menu-btn-line" />
+            <span className="nav-menu-btn-line" />
+            <span className="nav-menu-btn-line" />
+          </button>
+          <span className="nav-menu-btn-label">导航</span>
+        </div>
         <div className="nav-inner">
           <div className="nav-brand">
             <div className="brand">

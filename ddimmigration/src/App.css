@@ -206,13 +206,20 @@
   cursor: default;
 }
 
-/* 小屏：汉堡菜单按钮（仅手机端显示） */
+/* 小屏：汉堡菜单按钮 + 下方「导航」小字（仅手机端显示） */
+.nav-menu-btn-wrap {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
 .nav-menu-btn {
   display: none;
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  margin: 0 12px 0 0;
+  margin: 0;
   padding: 0;
   border: none;
   background: transparent;
@@ -229,6 +236,11 @@
   height: 2px;
   background: currentColor;
   border-radius: 1px;
+}
+.nav-menu-btn-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 2px;
 }
 
 /* 小屏：展开的菜单（遮罩 + 侧边面板） */
@@ -298,6 +310,9 @@
     height: 88px;
     padding: 0 12px 0 20px;
   }
+  .nav-menu-btn-wrap {
+    display: flex;
+  }
   .nav-menu-btn {
     display: flex;
   }
@@ -325,6 +340,7 @@
   .nav-inner-spacer {
     display: none;
   }
+  .nav-menu-btn-wrap,
   .nav-menu-btn {
     display: none !important;
   }

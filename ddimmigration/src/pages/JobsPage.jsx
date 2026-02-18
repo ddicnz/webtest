@@ -24,11 +24,11 @@ function JobsPage() {
         salary: '薪资面议，按能力定',
         visa: '可提供 5 年工签',
         living: '食宿自理',
-        leave: '做满一年 4 周带薪年假',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
       {
         id: 102,
-        title: '汽车喷漆师傅 2名',
+        title: '汽车喷漆师傅',
         requirements: [
           '能独立完成腻子、喷漆',
           '会钣金更佳，有 4S 店经验优先',
@@ -36,7 +36,7 @@ function JobsPage() {
         salary: '29.66 纽币/小时',
         visa: '5 年工签',
         living: '食宿自理',
-        leave: '做满一年 4 周带薪年假',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
       {
         id: 103,
@@ -50,7 +50,7 @@ function JobsPage() {
         salary: '薪资面议，按能力定',
         visa: '5 年工签',
         living: '食宿自理',
-        leave: '做满一年 4 周带薪年假',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
       {
         id: 104,
@@ -62,7 +62,7 @@ function JobsPage() {
         salary: '薪资面议，按能力定',
         visa: '5 年工签',
         living: '食宿自理',
-        leave: '做满一年 4 周带薪年假',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
     ],
     construction: [
@@ -78,7 +78,7 @@ function JobsPage() {
         salary: '27 纽币/小时税前，看能力定薪',
         visa: '可以配合三年签证',
         living: '吃住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 2,
@@ -90,7 +90,7 @@ function JobsPage() {
         salary: '27 纽币/小时税前，看能力定薪',
         visa: '可以配合三年签证',
         living: '吃住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
     ],
     catering: [
@@ -105,7 +105,7 @@ function JobsPage() {
         salary: '工资看技术',
         visa: '可以提供三年签证',
         living: '吃住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 4,
@@ -117,7 +117,7 @@ function JobsPage() {
         salary: '每周税后 900 纽币起',
         visa: '三年签证',
         living: '工作餐、住自理',
-        leave: '满年有带薪休假，做满 1 年有 4 周带薪年假',
+        leave: '满年有带薪休假，做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 5,
@@ -130,7 +130,7 @@ function JobsPage() {
         salary: '每周税后 900–1000 纽币',
         visa: '三年签证',
         living: '工作餐、住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 6,
@@ -157,7 +157,7 @@ function JobsPage() {
         salary: '工资 900–1000 税后',
         visa: '可以提供三年签证',
         living: '工作餐、住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 8,
@@ -197,7 +197,7 @@ function JobsPage() {
         salary: '每周税后 900–1000 纽币起',
         visa: '可以提供三年签证',
         living: '工作餐、住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 12,
@@ -206,7 +206,7 @@ function JobsPage() {
         salary: '每周税后 900–1000 纽币起',
         visa: '可以提供三年签证',
         living: '工作餐、住自理',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
         id: 22,
@@ -218,7 +218,7 @@ function JobsPage() {
         salary: '面议',
         visa: '可提供工签',
         living: '面议',
-        leave: '做满 1 年有 4 周带薪年假',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
     ],
     factory: [
