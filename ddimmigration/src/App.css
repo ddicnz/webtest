@@ -236,21 +236,21 @@
   .nav-link {
     flex-shrink: 0;
   }
-  .nav-scroll-hint {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-    margin-left: 4px;
-    padding: 8px 10px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.9);
-    white-space: nowrap;
-  }
 }
 
-@media (min-width: 901px) {
-  .nav-scroll-hint {
-    display: none;
+/* 首页下方小字提示：滑动查看更多（仅手机端显示） */
+.home-scroll-hint {
+  display: none;
+}
+@media (max-width: 900px) {
+  .home-scroll-hint {
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: #666;
+    background: #f5f5f5;
   }
 }
 

@@ -17,6 +17,8 @@ function HomePage() {
         </Link>
       </section>
 
+      <p className="home-scroll-hint" aria-hidden="true">滑动查看更多</p>
+
       {/* 主体内容：核心业务 */}
       <main className="main-content">
         <h2 className="section-title">核心业务</h2>

@@ -148,7 +148,6 @@ function App() {
                 {item.label}
               </NavLink>
             ))}
-            <span className="nav-scroll-hint" aria-hidden="true">滑动查看更多 →</span>
           </div>
         </div>
       </nav>
