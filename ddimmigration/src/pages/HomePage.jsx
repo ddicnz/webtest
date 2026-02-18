@@ -82,7 +82,7 @@ function HomePage() {
 
             <div className="advisor-card">
               <img
-                className="advisor-avatar"
+                className="advisor-avatar advisor-avatar--tsui"
                 src="/pic/tsui.jpg"
                 alt="Tsui"
                 loading="lazy"

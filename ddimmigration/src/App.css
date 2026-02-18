@@ -638,6 +638,11 @@
   display: block;
 }
 
+/* Tsui 头像往右移一点，让人物居中 */
+.team-block-photo-img--tsui {
+  object-position: 38% top;
+}
+
 .team-block-photo-placeholder {
   width: 100%;
   height: 100%;
@@ -709,6 +714,11 @@
   font-size: 14px;
   line-height: 1.7;
   color: #444;
+}
+
+/* 企业相册：单张图片裁切位置（往右移、多显示左侧） */
+img[src*="album/office"][src*="IMG_2486"] {
+  object-position: 30% center;
 }
 
 @media (max-width: 900px) {
@@ -1136,7 +1146,13 @@
   height: 180px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center;
   background: #f2f2f2;
+}
+
+/* Tsui 头像往右移一点，让人物居中 */
+.advisor-avatar--tsui {
+  object-position: 38% center;
 }
 
 .advisor-role {

@@ -74,11 +74,15 @@ export const albumSections = [
       '/pic/album/office/IMG_2488.jpg',
       '/pic/album/office/IMG_2494.jpg',
       '/pic/album/office/IMG_2505.jpg',
-      '/pic/album/office/IMG_2513.jpg',
+      '/pic/album/office/IMG_2486 2.jpg',
       '/pic/album/office/IMG_2517.jpg',
       '/pic/album/office/beauty_1771378060712.jpg',
       '/pic/album/office/beauty_1771378170748.jpg',
     ],
+    // 单张图片的 object-position 覆盖（往右移、多显示左侧）：key 为 src
+    imagePositionOverrides: {
+      '/pic/album/office/IMG_2486 2.jpg': '30% center',
+    },
   },
   {
     id: 'team',
