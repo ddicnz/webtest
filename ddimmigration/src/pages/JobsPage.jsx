@@ -208,6 +208,18 @@ function JobsPage() {
         living: '工作餐、住自理',
         leave: '做满 1 年有 4 周带薪年假',
       },
+      {
+        id: 22,
+        title: '餐厅前台',
+        requirements: [
+          '负责顾客接待、点餐、收银等前台工作',
+          '沟通顺畅，有餐饮或服务行业经验优先',
+        ],
+        salary: '面议',
+        visa: '可提供工签',
+        living: '面议',
+        leave: '做满 1 年有 4 周带薪年假',
+      },
     ],
     factory: [
       {
