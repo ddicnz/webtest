@@ -209,20 +209,48 @@
 /* 手机端：导航栏横向滚动，避免被挡住 */
 @media (max-width: 900px) {
   .nav-bar {
+    position: relative;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+  }
+  .nav-bar::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4));
+    pointer-events: none;
   }
   .nav-inner {
     flex-wrap: nowrap;
     min-width: min-content;
     padding: 0 12px;
+    padding-right: 16px;
   }
   .nav-links {
     flex-wrap: nowrap;
   }
   .nav-link {
     flex-shrink: 0;
+  }
+  .nav-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 901px) {
+  .nav-scroll-hint {
+    display: none;
   }
 }
 
