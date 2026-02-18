@@ -90,6 +90,7 @@ function HeroSidebarLayout() {
 
 function App() {
   const [navSolid, setNavSolid] = useState(false)
+  const [navOpen, setNavOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,7 +121,18 @@ function App() {
       </header>
 
       {/* 导航栏 */}
-      <nav className={`nav-bar${navSolid ? ' nav-bar--solid' : ''}`}>
+      <nav className={`nav-bar${navSolid ? ' nav-bar--solid' : ''}${navOpen ? ' nav-bar--menu-open' : ''}`}>
+        <button
+          type="button"
+          className="nav-menu-btn"
+          aria-label="打开菜单"
+          aria-expanded={navOpen}
+          onClick={() => setNavOpen(true)}
+        >
+          <span className="nav-menu-btn-line" />
+          <span className="nav-menu-btn-line" />
+          <span className="nav-menu-btn-line" />
+        </button>
         <div className="nav-inner">
           <div className="nav-brand">
             <div className="brand">
@@ -153,6 +165,41 @@ function App() {
         </div>
         <p className="nav-scroll-hint" aria-hidden="true">滑动查看更多</p>
       </nav>
+
+      {navOpen && (
+        <>
+          <div
+            className="nav-mobile-overlay"
+            aria-hidden="true"
+            onClick={() => setNavOpen(false)}
+          />
+          <div className="nav-mobile-menu" role="dialog" aria-label="导航菜单">
+            <button
+              type="button"
+              className="nav-mobile-close"
+              aria-label="关闭菜单"
+              onClick={() => setNavOpen(false)}
+            >
+              ×
+            </button>
+            <div className="nav-mobile-links">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.label}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `nav-mobile-link${isActive ? ' active' : ''}`
+                  }
+                  end={item.path === '/'}
+                  onClick={() => setNavOpen(false)}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
       </div>
 
       <Routes>
