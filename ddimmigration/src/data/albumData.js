@@ -69,8 +69,15 @@ export const albumSections = [
     cover: '/pic/album/office/beauty_1771282172406.JPG',
     images: [
       '/pic/album/office/beauty_1771282172406.JPG',
-      '/pic/album/office/IMG_0553.jpg',
       '/pic/album/office/IMG_0554.jpg',
+      '/pic/album/office/IMG_0656.jpg',
+      '/pic/album/office/IMG_2488.jpg',
+      '/pic/album/office/IMG_2494.jpg',
+      '/pic/album/office/IMG_2505.jpg',
+      '/pic/album/office/IMG_2513.jpg',
+      '/pic/album/office/IMG_2517.jpg',
+      '/pic/album/office/beauty_1771378060712.jpg',
+      '/pic/album/office/beauty_1771378170748.jpg',
     ],
   },
   {
