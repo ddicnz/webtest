@@ -148,8 +148,10 @@ function App() {
                 {item.label}
               </NavLink>
             ))}
+            <span className="nav-inner-spacer" aria-hidden="true" />
           </div>
         </div>
+        <p className="nav-scroll-hint" aria-hidden="true">滑动查看更多</p>
       </nav>
       </div>
 

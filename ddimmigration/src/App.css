@@ -206,35 +206,61 @@
   cursor: default;
 }
 
-/* 手机端：导航栏横向滚动，避免被挡住 */
+/* 手机端：导航栏横向滚动，高度与桌面一致，链接垂直居中 */
 @media (max-width: 900px) {
   .nav-bar {
     position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-  .nav-bar::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4));
-    pointer-events: none;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 88px;
+    height: 88px;
   }
   .nav-inner {
+    flex: 1;
+    min-height: 0;
+    min-width: 0; /* 允许被父级约束宽度，才能出现横向滚动 */
+    display: flex;
+    align-items: center;
     flex-wrap: nowrap;
-    min-width: min-content;
     padding: 0 12px;
-    padding-right: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x;
+  }
+  .nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-inner-spacer {
+    flex-shrink: 0;
+    width: 80px;
+    min-width: 80px;
+    height: 1px;
   }
   .nav-links {
     flex-wrap: nowrap;
   }
   .nav-link {
     flex-shrink: 0;
+  }
+  .nav-scroll-hint {
+    position: absolute;
+    right: 16px;
+    bottom: 8px;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
+    pointer-events: none; /* 不阻挡触摸，可滑到最右侧 */
+  }
+}
+
+@media (min-width: 901px) {
+  .nav-scroll-hint,
+  .nav-inner-spacer {
+    display: none;
   }
 }
 
