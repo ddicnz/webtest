@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { trackFormSubmit } from '../utils/analytics'
 
 // 联络表单接口：本地开发走 Vite 代理 /api/form-submit 避免 CORS；生产直连
 const FORM_API_URL = import.meta.env.DEV
@@ -42,6 +43,7 @@ function ContactUsPage() {
       })
       const data = await res.json().catch(() => ({}))
       if (data.ok) {
+        trackFormSubmit('contact')
         alert('谢谢您的留言，我们会尽快联系您。')
         setForm({ name: '', email: '', phone: '', service: '', source: '', message: '' })
       } else {

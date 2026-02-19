@@ -91,6 +91,18 @@ function HeroSidebarLayout() {
 function App() {
   const [navSolid, setNavSolid] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
+  const location = useLocation()
+
+  // GA4：SPA 路由切换时上报页面浏览
+  useEffect(() => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'page_view', {
+        page_path: location.pathname,
+        page_location: window.location.origin + location.pathname,
+        page_title: document.title || '嘀嘀移民',
+      })
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     const handleScroll = () => {
