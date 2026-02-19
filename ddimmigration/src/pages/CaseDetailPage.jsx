@@ -1,9 +1,30 @@
-import { useParams, Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { casesList } from '../data/casesData.js'
+import { makeCaseSlug, parseCaseIdFromSlug } from '../utils/caseSlug.js'
 
 function CaseDetailPage() {
-  const { id } = useParams()
-  const caseItem = casesList.find((c) => String(c.id) === id)
+  const navigate = useNavigate()
+  const { id: idParam } = useParams()
+  const decodedParam = (() => {
+    try {
+      return decodeURIComponent(idParam || '')
+    } catch {
+      return idParam || ''
+    }
+  })()
+
+  const caseId = parseCaseIdFromSlug(decodedParam)
+  const caseItem = caseId != null
+    ? casesList.find((c) => Number(c.id) === Number(caseId))
+    : null
+
+  // 兼容旧链接：/cases/10 → 自动跳转到 /cases/10-标题
+  useEffect(() => {
+    if (!caseItem) return
+    if (!/^\d+$/.test(String(decodedParam).trim())) return
+    navigate(`/cases/${encodeURIComponent(makeCaseSlug(caseItem))}`, { replace: true })
+  }, [caseItem, decodedParam, navigate])
 
   if (!caseItem) {
     return (

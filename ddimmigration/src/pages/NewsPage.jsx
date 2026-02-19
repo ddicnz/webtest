@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { newsList } from '../data/newsData.js'
+import { makeNewsSlug } from '../utils/newsSlug.js'
 
 const PAGE_SIZE = 5
 
@@ -29,7 +30,7 @@ function NewsPage() {
               <h3 className="case-card-title">{item.title}</h3>
               <p className="case-card-summary">{item.summary}</p>
               <p className="case-card-date">{item.date}</p>
-              <Link to={`/news/${item.id}`} className="case-card-link">
+              <Link to={`/news/${encodeURIComponent(makeNewsSlug(item))}`} className="case-card-link">
                 查看更多 &gt;&gt;
               </Link>
             </div>

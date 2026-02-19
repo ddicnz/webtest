@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { casesList } from '../data/casesData.js'
+import { makeCaseSlug } from '../utils/caseSlug.js'
 
 const PAGE_SIZE = 5
 
@@ -29,7 +30,7 @@ function CasesPage() {
               <h3 className="case-card-title">{item.title}</h3>
               <p className="case-card-summary">{item.summary}</p>
               <p className="case-card-date">{item.date}</p>
-              <Link to={`/cases/${item.id}`} className="case-card-link">
+              <Link to={`/cases/${encodeURIComponent(makeCaseSlug(item))}`} className="case-card-link">
                 查看更多 &gt;&gt;
               </Link>
             </div>
