@@ -1876,6 +1876,15 @@ img[src*="album/office"][src*="IMG_2486"] {
     flex-direction: column;
   }
 
+  /* 小屏时主内容先显示，侧栏（资质认证+二维码）后显示 */
+  .page-with-sidebar .main-area {
+    order: -1;
+  }
+
+  .page-with-sidebar .left-sidebar {
+    order: 0;
+  }
+
   .left-sidebar {
     width: 100%;
     position: static;
