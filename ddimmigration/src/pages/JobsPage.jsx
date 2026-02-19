@@ -64,6 +64,15 @@ function JobsPage() {
         living: '食宿自理',
         leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
+      {
+        id: 105,
+        title: '汽车美容',
+        requirements: ['汽车美容、清洁、护理等相关经验', '工时 40 小时/周起'],
+        salary: '25 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
+      },
     ],
     construction: [
       {
@@ -153,6 +162,15 @@ function JobsPage() {
         salary: '27 纽币/小时税前起，看能力定薪',
         visa: 'AEWV 5年工签',
         living: '吃住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 12,
+        title: '批灰工',
+        requirements: ['墙面批灰、抹灰、打磨', '能独立完成内装批灰施工', '工时 40–60 小时/周'],
+        salary: '28 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
     ],
@@ -373,6 +391,15 @@ function JobsPage() {
         visa: 'AEWV 5年工签',
         living: '面议',
         leave: '面议',
+      },
+      {
+        id: 23,
+        title: '按摩师',
+        requirements: ['有按摩、理疗相关经验', '工时 40 小时/周起', '有提成'],
+        salary: '25 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
     ],
   }

@@ -140,7 +140,7 @@ function ContactUsPage() {
                 type="text"
                 value={form.source}
                 onChange={handleChange}
-                placeholder="例如：朋友推荐、小红书、公众号、官网等"
+                placeholder="例如：朋友推荐、小红书、微信、抖音、官网等"
               />
             </div>
           </div>
