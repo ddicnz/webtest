@@ -173,6 +173,15 @@ function JobsPage() {
         living: '食宿自理',
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
+      {
+        id: 13,
+        title: '框架木工',
+        requirements: ['建筑框架、木结构施工', '能吃苦、有相关经验', '每周 50 小时起'],
+        salary: '28 纽币/小时税前起，看能力定薪',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
     ],
     catering: [
       {
@@ -285,6 +294,19 @@ function JobsPage() {
         title: '烧腊厨师',
         requirements: ['熟悉烧腊制作，有粤式烧腊经验'],
         salary: '每周税后 900–1000 纽币起',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 24,
+        title: '配菜工',
+        requirements: [
+          '刀工好、速度快',
+          '最好年龄 35 岁以下',
+          '厨师、配菜工随时面试',
+        ],
+        salary: '每周税后 900 纽币起，看能力定',
         visa: 'AEWV 5年工签',
         living: '工作餐、住自理',
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
