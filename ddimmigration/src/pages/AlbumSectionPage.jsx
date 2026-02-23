@@ -30,7 +30,7 @@ function AlbumSectionPage() {
             <div key={i} className="album-section-item">
               <div className="album-section-img-wrap">
                 <img
-                  src={item.src}
+                  src={item.src.startsWith('/') ? item.src : `/${item.src}`}
                   alt={item.caption || `${section.title} ${i + 1}`}
                   className="album-section-img"
                   loading="lazy"

@@ -102,6 +102,15 @@ export const albumSections = [
     ],
   },
   {
+    id: 'license',
+    title: '持牌认证',
+    cover: '/pic/album/license/eric_licience.jpg',
+    items: [
+      { src: '/pic/album/license/eric_licience.jpg', caption: '持牌编号：201800151' },
+      { src: '/pic/album/license/dashu_licience.jpg', caption: '持牌编号：201400700' },
+    ],
+  },
+  {
     id: 'local',
     title: '本地风采',
     cover: '/pic/album/local/1.jpg',
