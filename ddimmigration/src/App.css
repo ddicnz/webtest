@@ -1447,8 +1447,10 @@ img[src*="album/office"][src*="IMG_2486"] {
 
 .contact-form-type-option {
   flex: 1;
+  display: flex;
   position: relative;
   cursor: pointer;
+  min-height: 0;
 }
 
 .contact-form-type-option input {
@@ -1460,7 +1462,11 @@ img[src*="album/office"][src*="IMG_2486"] {
 }
 
 .contact-form-type-option span {
-  display: block;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   padding: 12px 20px;
   font-size: 14px;
   color: #555;
@@ -1482,7 +1488,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   background: #d8dadd;
   color: #333;
   font-weight: 600;
-  box-shadow: inset 0 -2px 0 var(--nav-bg);
+  border-bottom: 2px solid var(--nav-bg);
 }
 
 .contact-form {
