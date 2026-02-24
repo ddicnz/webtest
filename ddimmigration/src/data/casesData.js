@@ -1,6 +1,29 @@
 /** 新加的案例放在数组最前 */
 export const casesList = [
   {
+    id: 16,
+    title: 'AEWV 担保配偶开放工签 + 子女学签获批',
+    summary: '客户持 AEWV 工签，配偶获批 Partner of AEWV（开放工签）、子女获批 Dependent of a Worker 学生签，可按本地生入读中小学，全家身份齐备。',
+    date: '2026年2月3日',
+    image: '/pic/case/02231.jpg',
+    images: ['/pic/case/02231.jpg', '/pic/case/02232.jpg'],
+    fullContent: `AEWV 担保配偶开放工签 + 子女学签，全家齐获批 ✅
+
+客户持新西兰认证雇主工签（AEWV），我们为其配偶与子女分别递交申请，双双获批。
+
+✅ 配偶：Work visa - Partner of AEWV (open) 获批
+• 可为任意雇主工作、任意职位，无限制
+• 签证生效：2026 年 2 月 3 日，有效期至 2030 年 10 月 17 日
+• 多次往返，无需资金证明及返程机票
+
+✅ 子女：Student visa - Dependent of a Worker 获批
+• 可按本地学生（domestic student）身份在新西兰中小学就读，享受本地生待遇
+• 签证生效：2026 年 2 月 3 日，有效期至 2030 年 7 月 5 日
+• 多次往返，无需资金证明及返程机票
+
+AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶拿开放工签合法工作，子女按本地生入读公立学校，全家在新西兰工作与学业规划一步到位。`,
+  },
+  {
     id: 15,
     title: '厨师无厨师证也能拿 5 年 AEWV 工签',
     summary: '客户无厨师证，凭真实工作经历与认证雇主 offer，成功获批新西兰 AEWV 厨师工签，奥克兰岗位，5 年多次往返，2026 年 2 月 19 日生效。',
