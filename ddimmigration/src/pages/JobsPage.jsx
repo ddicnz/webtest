@@ -197,6 +197,18 @@ function JobsPage() {
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
+        id: 26,
+        title: '江浙菜厨师',
+        requirements: [
+          '熟悉江浙菜系，有相关厨房经验',
+          '随时面试，随时递交申请',
+        ],
+        salary: '每周税后 1000 纽币起，看能力定',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
         id: 3,
         title: '西点师',
         requirements: [
