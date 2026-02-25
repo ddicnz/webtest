@@ -13,6 +13,7 @@ import AlbumSectionPage from './pages/AlbumSectionPage.jsx'
 import NewsPage from './pages/NewsPage.jsx'
 import NewsDetailPage from './pages/NewsDetailPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
+import FaqPage from './pages/FaqPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 
@@ -25,6 +26,7 @@ const navItems = [
   { label: '企业相册', path: '/album' },
   { label: '移民资讯', path: '/news' },
   { label: '联络我们', path: '/contactus' },
+  { label: '常见问题', path: '/faq' },
 ]
 
 function SidebarLayout() {
@@ -65,6 +67,9 @@ function HeroSidebarLayout() {
   } else if (location.pathname === '/contactus') {
     heroImage = '/pic/contactus.jpg'
     heroClassName = 'about-hero about-hero--contactus'
+  } else if (location.pathname === '/faq') {
+    heroImage = '/pic/contactus.jpg'
+    heroClassName = 'about-hero about-hero--faq'
   }
 
   return (
@@ -232,6 +237,7 @@ function App() {
           <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
+          <Route path="/faq" element={<FaqPage />} />
         </Route>
       </Routes>
 
