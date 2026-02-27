@@ -1,6 +1,25 @@
 /** 新加的案例放在数组最前 */
 export const casesList = [
   {
+    id: 18,
+    title: '上海菜大厨 AEWV 5 年工签获批',
+    summary: '客户 WANG 先生作为上海菜大厨（Chinese Cuisine Cook）成功获批新西兰认证雇主工签（AEWV），职位奥克兰中餐厅，签证 5 年多次往返，2026 年 2 月 27 日生效。',
+    date: '2026年2月27日',
+    image: '/pic/case/022701.jpg',
+    images: ['/pic/case/022701.jpg'],
+    fullContent: `上海菜大厨 5 年 AEWV 工签获批 ✅
+
+客户 WANG 先生在国内长期从事上海菜相关工作，本次由新西兰认证雇主提供中厨岗位，我们协助其走 AEWV 路线。
+
+✅ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 职位：Chinese Cuisine Cook（上海菜大厨），工作地点奥克兰（Auckland）
+✅ 签证生效：2026 年 2 月 27 日
+✅ 有效期：自首次入境起 60 个月（5 年），多次往返
+✅ 须在 2026 年 7 月 27 日前首次入境（以签证条款为准）
+
+签证条件包括：须为认证雇主全职工作（每周至少 30 小时）；无需额外资金证明及返程机票。通过梳理工作经历、岗位职责与薪资标准，使其与 AEWV 要求和职业分类清晰对应，顺利拿下 5 年长期工签。`,
+  },
+  {
     id: 17,
     title: '配偶工签境内转 AEWV 中厨 5 年获批',
     summary: '客户持配偶工签在境内，成功转为认证雇主工签（AEWV），职位奥克兰中厨（Chinese Cuisine Cook），5 年多次往返，2026 年 2 月 24 日生效。',
