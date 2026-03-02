@@ -7,6 +7,7 @@ export const albumSections = [
     images: [
       '/pic/album/customers/beauty_1772144264139 2.JPG',
       '/pic/album/customers/beauty_1772144243681 2.JPG',
+      '/pic/album/customers/IMG_1020.jpg',
       '/pic/album/customers/beauty_1771569787687.JPG',
       '/pic/album/customers/beauty_1771573440165.JPG',
       '/pic/album/customers/45f17aaae55653a1c57011abd507e0be.JPG',
