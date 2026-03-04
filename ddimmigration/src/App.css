@@ -1490,6 +1490,13 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin-bottom: 0;
 }
 
+.study-intro-free {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
 
 .study-secondary-routes-heading {
   margin: 8px 0 6px;

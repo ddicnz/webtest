@@ -21,9 +21,18 @@ function StudyPage() {
       <section id={studyIntro.id} className="study-section">
         <h2 className="study-section-title">{studyIntro.title}</h2>
         <div className="study-section-content">
-          {studyIntro.paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          {studyIntro.paragraphs.map((p, i) => {
+            if (i === studyIntro.paragraphs.length - 1) {
+              const slogan = '新西兰持牌中介免费申请学校！';
+              const baseText = p.replace(slogan, '').trim();
+              return (
+                <p key={i}>
+                  {baseText} <strong>{slogan}</strong>
+                </p>
+              );
+            }
+            return <p key={i}>{p}</p>;
+          })}
         </div>
       </section>
 
