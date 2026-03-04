@@ -14,6 +14,7 @@ import NewsPage from './pages/NewsPage.jsx'
 import NewsDetailPage from './pages/NewsDetailPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 import FaqPage from './pages/FaqPage.jsx'
+import StudyPage from './pages/StudyPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 
@@ -25,6 +26,7 @@ const navItems = [
   { label: '招聘信息', path: '/jobs' },
   { label: '企业相册', path: '/album' },
   { label: '移民资讯', path: '/news' },
+  { label: '留学专栏', path: '/study' },
   { label: '联络我们', path: '/contactus' },
   { label: '常见问题', path: '/faq' },
 ]
@@ -70,6 +72,9 @@ function HeroSidebarLayout() {
   } else if (location.pathname === '/faq') {
     heroImage = '/pic/contactus.jpg'
     heroClassName = 'about-hero about-hero--faq'
+  } else if (location.pathname === '/study') {
+    heroImage = '/pic/pexels-pixabay-267885.jpg'
+    heroClassName = 'about-hero about-hero--study'
   }
 
   return (
@@ -238,6 +243,7 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
+          <Route path="/study" element={<StudyPage />} />
         </Route>
       </Routes>
 
