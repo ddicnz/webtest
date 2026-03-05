@@ -1,6 +1,24 @@
 /** 新加的案例放在数组最前 */
 export const casesList = [
   {
+    id: 23,
+    title: '面点师工签 VOC 获批',
+    summary: '客户申请工签条件变更（VOC），职位奥克兰中式点心师（Chinese Pastry Cook），全职每周至少 30 小时，签证 2026 年 3 月 5 日生效。',
+    date: '2026年3月5日',
+    image: '/pic/case/030501.jpg',
+    images: ['/pic/case/030501.jpg'],
+    fullContent: `面点师工签 VOC 获批 ✅
+
+客户原持工签在新西兰工作，因岗位或雇主调整需办理条件变更（Variation of Conditions）。我们协助其梳理新岗位职责、雇主材料，确保与 Chinese Pastry Cook（中式点心师）职业定义及签证要求一致，VOC 申请顺利获批。
+
+✅ 签证类型：Work visa - Variation of Conditions（工签条件变更）
+✅ 职位：Chinese Pastry Cook（中式点心师），工作地点奥克兰（Auckland）
+✅ 签证生效：2026 年 3 月 5 日
+✅ 工作条件：须全职，每周至少 30 小时；持有人仅可在奥克兰从事中式点心师工作
+
+移民局对 VOC 会核查新岗位真实性、职责与 ANZSCO 匹配度及雇主合规性。材料准备到位、逻辑清晰，条件变更即可顺利通过。如需换雇主或调整职位，可提前规划 VOC 申请。`,
+  },
+  {
     id: 22,
     title: '配偶开放工签获批',
     summary: '客户在新西兰持工签配偶身份申请开放工签，顺利一次性获批，签证有效期与主申请人同步，全家在新西兰的长期规划更加稳定。',
