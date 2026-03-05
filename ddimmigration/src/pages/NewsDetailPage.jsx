@@ -50,9 +50,23 @@ function NewsDetailPage() {
           </div>
         )}
         <div className="case-detail-content">
-          {newsItem.fullContent.split('\n\n').map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
+          {(newsItem.fullContent || '')
+            .split('\n\n')
+            .filter(Boolean)
+            .map((para, i) => (
+              <span key={i}>
+                <p>{para}</p>
+                {newsItem.bodyImages && para.includes('这三个路径都属于 SMC（Skilled Migrant Category）') && (
+                  <div className="case-detail-body-images">
+                    {newsItem.bodyImages.map((src, j) => (
+                      <div key={j} className="case-detail-image-wrap">
+                        <img src={src} alt="" className="case-detail-image" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </span>
+            ))}
         </div>
       </article>
     </main>
