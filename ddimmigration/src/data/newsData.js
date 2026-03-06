@@ -74,7 +74,12 @@ export const newsList = [
 简单总结：
 2026年之后新西兰技术移民会变成三条路线：
 留学生路线、技术工路线、长期工作经验路线。
-对很多已经在新西兰工作的人来说，其实是利好。`,
+对很多已经在新西兰工作的人来说，其实是利好。
+
+
+详情请见移民局官网：
+https://www.immigration.govt.nz/about-us/news-centre/further-changes-to-the-skilled-migrant-category-to-come-into-effect-in-august-2026/
+`,
   },
   {
     id: 9,
