@@ -20,12 +20,30 @@ export const casesList = [
 木工为新西兰建筑行业紧缺技术工种，材料与岗位匹配清晰、雇主资质合规，续签顺利获批。`,
   },
   {
+    id: 18,
+    title: '汽车喷漆工 VOC 获批',
+    summary: '客户 ZHANG 先生申请工签条件变更（VOC），职位奥克兰汽车喷漆工（Vehicle Painter），全职每周至少 30 小时，签证 2026 年 3 月 9 日生效。',
+    date: '2026年3月9日',
+    image: '/pic/case/030902.jpg',
+    images: ['/pic/case/030902.jpg'],
+    fullContent: `汽车喷漆工 VOC 获批 ✅
+
+客户 ZHANG 先生原持工签在新西兰工作，因岗位或雇主调整需办理条件变更（Variation of Conditions）。我们协助其梳理新岗位职责、雇主材料，确保与 Vehicle Painter（汽车喷漆工）职业定义及签证要求一致，VOC 申请顺利获批。
+
+✅ 签证类型：Work visa - Variation of Conditions（工签条件变更）
+✅ 职位：Vehicle Painter（汽车喷漆工），工作地点奥克兰（Auckland）
+✅ 签证生效：2026 年 3 月 9 日
+✅ 工作条件：须全职，每周至少 30 小时；持有人仅可在奥克兰从事汽车喷漆工工作
+
+移民局对 VOC 会核查新岗位真实性、职责与 ANZSCO 匹配度及雇主合规性。材料准备到位、逻辑清晰，条件变更即可顺利通过。`,
+  },
+  {
     id: 19,
     title: '油漆工 AEWV 续签 2 年获批',
     summary: '客户持认证雇主工签（AEWV），续签成功获批 2 年，职位奥克兰油漆工（Painting worker），签证 2026 年 3 月 7 日生效，可停留至 2028 年 6 月 20 日。',
     date: '2026年3月7日',
-    image: '/pic/case/030902.jpg',
-    images: ['/pic/case/030902.jpg'],
+    image: '/pic/case/030901.jpg',
+    images: ['/pic/case/030901.jpg'],
     fullContent: `油漆工 AEWV 续签 2 年获批 ✅
 
 客户原持新西兰认证雇主工签（AEWV），职位为油漆工（Painting worker），工作地点奥克兰。续签申请顺利获批，签证有效期延长 2 年。
@@ -37,24 +55,6 @@ export const casesList = [
 ✅ 工作条件：须全职，每周至少 30 小时；持有人仅可在奥克兰从事油漆工工作
 
 油漆工为新西兰建筑行业紧缺技术工种，材料与岗位匹配清晰、雇主资质合规，续签顺利获批。`,
-  },
-  {
-    id: 18,
-    title: '汽车喷漆工 VOC 获批',
-    summary: '客户 ZHANG 先生申请工签条件变更（VOC），职位奥克兰汽车喷漆工（Vehicle Painter），全职每周至少 30 小时，签证 2026 年 3 月 9 日生效。',
-    date: '2026年3月9日',
-    image: '/pic/case/030901.jpg',
-    images: ['/pic/case/030901.jpg'],
-    fullContent: `汽车喷漆工 VOC 获批 ✅
-
-客户 ZHANG 先生原持工签在新西兰工作，因岗位或雇主调整需办理条件变更（Variation of Conditions）。我们协助其梳理新岗位职责、雇主材料，确保与 Vehicle Painter（汽车喷漆工）职业定义及签证要求一致，VOC 申请顺利获批。
-
-✅ 签证类型：Work visa - Variation of Conditions（工签条件变更）
-✅ 职位：Vehicle Painter（汽车喷漆工），工作地点奥克兰（Auckland）
-✅ 签证生效：2026 年 3 月 9 日
-✅ 工作条件：须全职，每周至少 30 小时；持有人仅可在奥克兰从事汽车喷漆工工作
-
-移民局对 VOC 会核查新岗位真实性、职责与 ANZSCO 匹配度及雇主合规性。材料准备到位、逻辑清晰，条件变更即可顺利通过。`,
   },
   {
     id: 17,
