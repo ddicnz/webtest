@@ -5,8 +5,8 @@ export const casesList = [
     title: '汽车喷漆工 VOC 获批',
     summary: '客户 ZHANG 先生申请工签条件变更（VOC），职位奥克兰汽车喷漆工（Vehicle Painter），全职每周至少 30 小时，签证 2026 年 3 月 9 日生效。',
     date: '2026年3月9日',
-    image: '/pic/case/030901.jpg',
-    images: ['/pic/case/030901.jpg'],
+    image: '/pic/case/030902.jpg',
+    images: ['/pic/case/030902.jpg'],
     fullContent: `汽车喷漆工 VOC 获批 ✅
 
 客户 ZHANG 先生原持工签在新西兰工作，因岗位或雇主调整需办理条件变更（Variation of Conditions）。我们协助其梳理新岗位职责、雇主材料，确保与 Vehicle Painter（汽车喷漆工）职业定义及签证要求一致，VOC 申请顺利获批。
@@ -23,8 +23,8 @@ export const casesList = [
     title: '油漆工 AEWV 续签 2 年获批',
     summary: '客户持认证雇主工签（AEWV），续签成功获批 2 年，职位奥克兰油漆工（Painting worker），签证 2026 年 3 月 7 日生效，可停留至 2028 年 6 月 20 日。',
     date: '2026年3月7日',
-    image: '/pic/case/030902.jpg',
-    images: ['/pic/case/030902.jpg'],
+    image: '/pic/case/030901.jpg',
+    images: ['/pic/case/030901.jpg'],
     fullContent: `这位客户是油漆工，之前已经在新西兰工作一段时间，这次申请的是AEWV续签，最终顺利续签2年工作签证✅。
 
 
@@ -335,7 +335,7 @@ AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶
 签证条件包括：全职工作（每周至少 30 小时）、可多次出入境、无需提供资金证明及返程机票等。我们协助客户完成岗位匹配、Job Check 与签证材料准备，从递交到获批仅用 10 天。`,
   },
   {
-    id: 3,
+    id: 2,
     title: '又一例厨师工签全家获批：配偶开放工签、子女学签同期下签',
     summary:
       '2026年2月3日签证生效。客户持新西兰特色厨师工签，配偶获批开放工签、子女获批学签，一家三口同期获签，顺利赴新。',

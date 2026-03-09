@@ -15,7 +15,7 @@ function CasesPage() {
     <main className="main-content cases-page">
       <h2 className="section-title">成功案例</h2>
 
-      <div className="cases-list">
+      <div className="cases-list" key={page}>
         {currentList.map((item) => (
           <article key={item.id} className="case-card">
             <div className="case-card-image-wrap">
