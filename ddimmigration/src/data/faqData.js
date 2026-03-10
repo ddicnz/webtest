@@ -45,7 +45,7 @@ export const faqList = [
   },
   {
     id: 106,
-    question: '来了之后可以换雇主或者换工作吗？',
+    question: '工作签证可以换雇主或者换工作吗？',
     answer: '可以，但需办理条件变更（VOC）。持 AEWV 若换雇主或换职位，须向移民局申请 Variation of Conditions（工签条件变更）。新雇主须为认证雇主，新职位须通过 Job Check。我们已协助客户完成汽车喷漆工、面点师等 VOC 获批案例。未经批准擅自换雇主可能违反签证条件。',
   },
  
