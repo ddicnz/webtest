@@ -181,14 +181,14 @@ function ContactUsPage() {
                   />
                 </div>
                 <div className="contact-form-field">
-                  <label htmlFor="phone">电话/微信号</label>
+                  <label htmlFor="phone">微信号</label>
                   <input
                     id="phone"
                     name="phone"
                     type="text"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="手机或微信号"
+                    placeholder="微信号"
                   />
                 </div>
               </div>
