@@ -35,7 +35,7 @@ export const faqList = [
   {
     id: 106,
     question: '5 年工签到期后还能续签吗？',
-    answer: 'AEWV 有最长连续停留时间（maximum continuous stay）。大多数 ANZSCO 技能等级 4 和 5 岗位为 5 年。即：您在新西兰累计用 AEWV 工作满 5 年后，必须离境一段时间。5 年到期后不能直接续签同一个 AEWV，通常需要离开新西兰 12 个月（cooling-off period）后，才能重新申请新的 AEWV。具体以移民局当次政策为准。',
+    answer: 'AEWV 有最长连续停留时间（maximum continuous stay）。即：您在新西兰累计用 AEWV 工作满 5 年后，必须离境一段时间。5 年到期后不能直接续签同一个 AEWV，通常需要离开新西兰 12 个月（cooling-off period）后，才能重新申请新的 AEWV。具体以移民局当次政策为准。',
   },
   {
     id: 107,
