@@ -1,6 +1,25 @@
 /** 新加的案例放在数组最前 */
 export const casesList = [
   {
+    id: 22,
+    title: '配偶 open 工签获批',
+    summary: '客户配偶申请 Partner of AEWV（open）工签获批，可为新西兰任意雇主工作、任意职位，签证 2026 年 3 月 11 日生效，可停留至 2028 年 1 月 23 日。',
+    date: '2026年3月11日',
+    image: '/pic/case/031102.jpg',
+    images: ['/pic/case/031102.jpg'],
+    fullContent: `配偶 open 工签获批 ✅
+
+客户主申请人持 AEWV 认证雇主工签，配偶申请 Partner of AEWV（open）工签顺利获批。持此签证可为新西兰任意雇主工作、从事任意职位，无雇主或职位限制。
+
+✅ 签证类型：Work visa - Partner of AEWV（open）
+✅ 签证生效：2026 年 3 月 11 日
+✅ 可停留至：2028 年 1 月 23 日
+✅ 工作条件：可为新西兰任意雇主工作、任意职位
+✅ 无需财务支持证明、无需返程机票
+
+配偶 open 工签是 AEWV 主申请人的重要家庭福利，材料齐全、关系真实，即可顺利获批。`,
+  },
+  {
     id: 20,
     title: '木工 AEWV 续签 2 年获批',
     summary: '客户 XU 先生持认证雇主工签（AEWV），续签成功获批 2 年，职位奥克兰木工（Carpenter），签证 2026 年 3 月 9 日生效，可停留至 2028 年 2 月 28 日。',
