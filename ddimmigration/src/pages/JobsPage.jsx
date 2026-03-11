@@ -429,26 +429,37 @@ function JobsPage() {
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
     ],
-    other: [{
-      id: 21,
-      title: '英文好的女性销售人员',
-      requirements: [
-        '形象谈吐良好，擅长销售社交',
-      ],
-      salary: '25 纽币/小时税前起，看能力定薪',
-      visa: 'AEWV 5年工签',
-      living: '食宿自理',
-      leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
-    },
-    {
-      id: 23,
-      title: '按摩师',
-      requirements: ['有按摩、理疗相关经验', '工时 40 小时/周起', '有提成'],
-      salary: '25 纽币/小时起',
-      visa: 'AEWV 5年工签',
-      living: '食宿自理',
-      leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
-    },],
+    other: [
+      {
+        id: 21,
+        title: '英文好的女性销售人员',
+        requirements: [
+          '形象谈吐良好，擅长销售社交',
+        ],
+        salary: '25 纽币/小时税前起，看能力定薪',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 23,
+        title: '按摩师',
+        requirements: ['有按摩、理疗相关经验', '工时 40 小时/周起', '有提成'],
+        salary: '25 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 24,
+        title: '农业工',
+        requirements: ['有农业、种植或采摘相关经验', '工时 40 小时/周起'],
+        salary: '25 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+    ],
   }
 
   const currentJobs = jobsByCategory[selectedCategory] || []
