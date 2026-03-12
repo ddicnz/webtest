@@ -1,6 +1,42 @@
 /** 新加的案例放在数组最前 */
 export const casesList = [
   {
+    id: 23,
+    title: '低技能洗车工升级汽车修理工 AEWV 获批',
+    summary: '客户原为低技能洗车工，成功升级为汽车修理工（Motor Mechanic），AEWV 获批，工作地点坎特伯雷，签证 2026 年 3 月 12 日生效。',
+    date: '2026年3月12日',
+    image: '/pic/case/031301.jpg',
+    images: ['/pic/case/031301.jpg'],
+    fullContent: `低技能洗车工升级汽车修理工 AEWV 获批 ✅
+
+客户原从事低技能洗车工作，通过技能提升与岗位匹配，成功升级为汽车修理工（Motor Mechanic），AEWV 申请顺利获批。
+
+✅ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 职位：Motor Mechanic（汽车修理工），工作地点坎特伯雷（Canterbury）
+✅ 签证生效：2026 年 3 月 12 日
+✅ 工作条件：持有人仅可在坎特伯雷从事汽车修理工工作
+
+低技能岗位升级为技术岗位，材料与 ANZSCO 匹配到位、雇主资质合规，即可顺利获批。`,
+  },
+  {
+    id: 24,
+    title: '中式厨师低技能帮厨升级 AEWV 获批',
+    summary: '客户原为低技能帮厨，成功升级为中式厨师（Chinese Cuisine Cook），AEWV 获批，工作地点奥克兰，签证 2026 年 3 月 12 日生效。',
+    date: '2026年3月12日',
+    image: '/pic/case/031302.jpg',
+    images: ['/pic/case/031302.jpg'],
+    fullContent: `中式厨师低技能帮厨升级 AEWV 获批 ✅
+
+客户原从事低技能帮厨工作，通过技能提升与岗位匹配，成功升级为中式厨师（Chinese Cuisine Cook），AEWV 申请顺利获批。
+
+✅ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 职位：Chinese Cuisine Cook（中式厨师），工作地点奥克兰（Auckland）
+✅ 签证生效：2026 年 3 月 12 日
+✅ 工作条件：持有人仅可在奥克兰从事中式厨师工作
+
+帮厨升级为厨师岗位，材料与 ANZSCO 匹配到位、雇主资质合规，即可顺利获批。`,
+  },
+  {
     id: 22,
     title: '配偶 open 工签获批',
     summary: '客户配偶申请 Partner of AEWV（open）工签获批，可为新西兰任意雇主工作、任意职位，签证 2026 年 3 月 11 日生效，可停留至 2028 年 1 月 23 日。',
