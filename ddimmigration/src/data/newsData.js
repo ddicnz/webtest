@@ -26,6 +26,7 @@ export const newsList = [
 每人一生仅可获批 1 次 Post Study Work Visa。持 Post Study Work Visa 可担保配偶及子女申请访客签、工签或学签。
 
 
+这次政策调整其实释放了一个信号。新西兰正在进一步优化留学生毕业后的就业路径，也在吸引更多国际学生留下来工作。
 
 
 政策原文：https://www.immigration.govt.nz/about-us/news-centre/new-and-updated-post-study-work-visa-options/`,
