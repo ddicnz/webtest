@@ -1,6 +1,36 @@
 /** 移民资讯列表：一条一条展示，结构同成功案例；新加的放在数组最前（第一页） */
 export const newsList = [
   {
+    id: 11,
+    title: '学后工签新政：新增短期毕业生工签、扩展 Post Study Work Visa 资格',
+    summary: '新西兰移民局公布学后工签新政：2026 年底起新增 Short Term Graduate Work Visa（最长 6 个月开放工签），并将 Post Study Work Visa 资格扩展至 NZQCF 7 级 Graduate Diploma（须持学士学位）。',
+    date: '2026年3月12日',
+    image: '/pic/news/workvisa.jpg',
+    fullContent: `新西兰移民局于 2026 年 3 月 12 日公布学后工签新政，包括新增短期毕业生工签及扩展 Post Study Work Visa 资格。
+1.【新增 Short Term Graduate Work Visa】
+毕业生如果暂时还没有找到工作，可以申请最长6个月的短期毕业生工签。
+这段时间可以在新西兰找工作、面试。然后转 AEWV工签
+对很多刚毕业的留学生来说 缓冲时间会更充足。
+
+基本要求：
+• 至少 5,000 纽币资金证明
+• 未曾获批过 Short Term Graduate Work Visa 或 Post Study Work Visa
+• 持有 NZQCF 5–7 级学历，在新西兰全日制学习至少 24 周，且非英语/预科/衔接课程
+• 不符合 Post Study Work Visa 资格
+• 须在学生签证到期后 3 个月内递交申请
+持此签证须与雇主签订雇佣合同或服务合同，不可自雇；不可担保配偶工签或子女学签。
+
+
+2.【Post Study Work Visa 资格扩展】
+2026 年底起，完成 NZQCF 7 级 Graduate Diploma 的毕业生（须持有学士学位，新西兰或海外均可）可申请 Post Study Work Visa。须在新西兰全日制完成该学历全部课程，签证时长最长 1 年。
+每人一生仅可获批 1 次 Post Study Work Visa。持 Post Study Work Visa 可担保配偶及子女申请访客签、工签或学签。
+
+
+
+
+政策原文：https://www.immigration.govt.nz/about-us/news-centre/new-and-updated-post-study-work-visa-options/`,
+  },
+  {
     id: 10,
     title: '2026年8月SMC新政：技术移民三条路径与AEWV变化',
     summary: '新西兰移民局公布2026年8月将实施的SMC新政，技术移民将新增工作经验路径与技工路径，并公布红/黄名单及AEWV工签延长安排。',
