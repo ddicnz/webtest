@@ -23,6 +23,30 @@ export const studySections = [
     ],
   },
   {
+    id: 'technical',
+    title: '技术学校',
+    paragraphs: [
+      '新西兰技术学校（理工学院、职业培训院校等）提供证书、文凭及学士学位课程，涵盖建筑、汽修、厨艺、护理、信息技术、酒店管理等实用技能领域，学制灵活，就业导向强。',
+      '学费通常较大学更低，入学门槛相对灵活，适合希望快速就业或转行的学生。毕业生可申请 Post-study work visa，部分课程可衔接技术移民路径。',
+      '我们可协助您根据职业目标与预算，筛选合适的技术学校与课程，并协助申请与学签办理。',
+    ],
+    programs: [
+      {
+        id: 'tech-healthcare',
+        type: '护理/健康',
+        titleZh: '医疗健康类课程',
+        titleEn: 'Healthcare Programmes',
+        image: '/pic/study/healthcare.jpg',
+        highlight: '护理、健康管理等实用技能课程',
+        cost: '具体费用以校方为准',
+        languageReq: '雅思 5.5 或相当水平，具体以课程为准',
+        academicReq: '无需相关背景',
+        intakes: '入学时间灵活，详见校方安排',
+        prospects: ['可获得4级证书，可以申请AEWV工签', '护理等专业就业前景好', '可衔接技术移民路径'],
+      },
+    ],
+  },
+  {
     id: 'nz8',
     title: '新西兰八大介绍',
     paragraphs: [

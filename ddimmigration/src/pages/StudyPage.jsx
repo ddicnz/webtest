@@ -88,6 +88,51 @@ function StudyPage() {
                 </div>
               </>
             )}
+            {section.id === 'technical' && section.programs && (
+              <>
+                <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。</p>
+                <div className="study-program-list">
+                  {section.programs.map((prog) => (
+                    <article key={prog.id} className="study-program-card">
+                      <div className="study-program-card-image-wrap">
+                        <img src={prog.image} alt={prog.titleZh} className="study-program-card-image" />
+                        <span className="study-program-card-type">{prog.type}</span>
+                      </div>
+                      <div className="study-program-card-body">
+                        <h3 className="study-program-card-title">{prog.titleZh}</h3>
+                        <p className="study-program-card-title-en">{prog.titleEn}</p>
+                        {prog.highlight && (
+                          <p className="study-program-card-highlight">{prog.highlight}</p>
+                        )}
+                        <p className="study-program-card-cost">{prog.cost}</p>
+                        {prog.costNote && (
+                          <p className="study-program-card-cost-note">{prog.costNote}</p>
+                        )}
+                        {prog.detail && (
+                          <p className="study-program-card-detail">{prog.detail}</p>
+                        )}
+                        <dl className="study-program-card-meta">
+                          <dt>语言要求</dt>
+                          <dd>{prog.languageReq}</dd>
+                          <dt>学术要求</dt>
+                          <dd>{prog.academicReq}</dd>
+                          <dt>入学时间</dt>
+                          <dd>{prog.intakes}</dd>
+                        </dl>
+                        <div className="study-program-card-prospects">
+                          <strong>毕业前景</strong>
+                          <ul>
+                            {prog.prospects.map((item, i) => (
+                              <li key={i}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </>
+            )}
             {section.id === 'secondary' && section.routes && (
               <div className="study-secondary-routes">
                 <h3 className="study-secondary-routes-heading">升学路径规划</h3>
