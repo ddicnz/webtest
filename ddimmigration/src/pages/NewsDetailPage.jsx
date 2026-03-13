@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { newsList } from '../data/newsData.js'
-import { makeNewsSlug, parseNewsIdFromSlug } from '../utils/newsSlug.js'
+import { makeNewsSlug, findNewsBySlugOrId } from '../utils/newsSlug.js'
 
 function NewsDetailPage() {
   const navigate = useNavigate()
@@ -14,10 +14,7 @@ function NewsDetailPage() {
     }
   })()
 
-  const newsId = parseNewsIdFromSlug(decodedParam)
-  const newsItem = newsId != null
-    ? newsList.find((n) => Number(n.id) === Number(newsId))
-    : null
+  const newsItem = findNewsBySlugOrId(decodedParam, newsList)
 
   // 兼容旧链接：/news/10 → 自动跳转到 /news/10-标题
   useEffect(() => {

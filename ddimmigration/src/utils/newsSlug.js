@@ -10,9 +10,20 @@ function slugifyTitle(title) {
 }
 
 export function makeNewsSlug(newsItem) {
+  if (newsItem?.slug) return newsItem.slug
   const id = newsItem?.id
   const title = newsItem?.title
   return `${id}-${slugifyTitle(title)}`
+}
+
+export function findNewsBySlugOrId(param, newsList) {
+  const raw = String(param || '').trim()
+  if (!raw || !newsList?.length) return null
+  const bySlug = newsList.find((n) => n.slug === raw)
+  if (bySlug) return bySlug
+  const id = parseNewsIdFromSlug(raw)
+  if (id != null) return newsList.find((n) => Number(n.id) === Number(id)) || null
+  return null
 }
 
 export function parseNewsIdFromSlug(idOrSlug) {

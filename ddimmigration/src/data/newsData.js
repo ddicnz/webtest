@@ -2,6 +2,7 @@
 export const newsList = [
   {
     id: 11,
+    slug: 'post-study-work-visa-2026',
     title: '学后工签新政：新增短期毕业生工签、扩展 Post Study Work Visa 资格',
     summary: '新西兰移民局公布学后工签新政：2026 年底起新增 Short Term Graduate Work Visa（最长 6 个月开放工签），并将 Post Study Work Visa 资格扩展至 NZQCF 7 级 Graduate Diploma（须持学士学位）。',
     date: '2026年3月12日',
