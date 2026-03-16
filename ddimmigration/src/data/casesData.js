@@ -479,4 +479,86 @@ AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶
 
 我们这位客户从岗位对接、材料准备、签证路径设计，到家属同步递交，全部一次性规划完成，所以整体进度也非常顺。很多人以为出国只能自己先过去打工，现在很多项目已经可以做到个人申请，全家同步安排。`,
   },
+
+  {
+    id: 27,
+    title: '有犯罪记录、道德豁免、拒签后二次申请获部长特批访客签',
+    summary: '客户 LI 先生曾有犯罪记录，申请道德豁免后首次被拒，二次申请获部长特批，Visitor Visa - General 获批，2026 年 1 月 23 日批准，可远程为境外雇主工作。',
+    date: '2026年1月23日',
+    image: '/pic/case/012301.jpg',
+    images: ['/pic/case/012301.jpg'],
+    fullContent: `有犯罪记录、道德豁免、拒签后二次申请获部长特批访客签 ✅
+
+客户 LI 先生曾有犯罪记录，申请道德豁免（character waiver）后首次申请被拒。我们协助其二次申请，最终获部长特批，Visitor Visa - General 获批。
+
+✅ 签证类型：Visitor visa - General（访客签证）
+✅ 申请接收：2025 年 10 月 10 日
+✅ 签证批准：2026 年 1 月 23 日
+✅ 最晚入境日：2027 年 1 月 23 日
+✅ 有效期：首次入境后 3 个月
+✅ 特殊条件：可为海外雇主或客户远程工作（remote work）
+✅ 无需财务支持证明、无需返程机票
+
+有犯罪记录并非绝对障碍，道德豁免与二次申请策略得当，仍有获批可能。`,
+  },
+  {
+    id: 28,
+    title: '大龄青年工签转学签获批',
+    summary: '客户 LI 先生（1978 年生）持工签成功转为学生签证，入读奥克兰初级英语课程（微证书），签证 2026 年 1 月 23 日生效，可停留至 2026 年 9 月 28 日，学期中每周可工作 25 小时。',
+    date: '2026年1月23日',
+    image: '/pic/case/012302.jpg',
+    images: ['/pic/case/012302.jpg'],
+    fullContent: `大龄青年工签转学签获批 ✅
+
+客户 LI 先生（1978 年生）原持工作签证，成功转为学生签证，入读奥克兰英语课程。
+
+✅ 签证类型：New Zealand Student Visa - English Language（英语语言学习）
+✅ 课程：English for Elementary Learners（Micro-credential），奥克兰
+✅ 签证生效：2026 年 1 月 23 日
+✅ 可停留至：2026 年 9 月 28 日
+✅ 工作权限：学期中每周最多 25 小时
+✅ 多次入境，无需财务支持证明、无需返程机票
+
+大龄申请人从工签转学签，材料准备到位、学习计划合理，顺利获批。`,
+  },
+  {
+    id: 25,
+    title: 'AEWV 担保子女学签获批',
+    summary: '客户持 AEWV 工签，子女获批 Dependent of a Worker 学生签，可按本地生入读新西兰公立中小学，签证 2026 年 1 月 22 日生效，可停留至 2028 年 1 月 28 日。',
+    date: '2026年1月22日',
+    image: '/pic/case/012201.jpg',
+    images: ['/pic/case/012201.jpg'],
+    fullContent: `AEWV 担保子女学签获批 ✅
+
+客户持新西兰认证雇主工签（AEWV），子女申请 Dependent of a Worker 学生签顺利获批。持此签证可按本地学生（domestic student）身份在新西兰公立中小学就读，享受本地生待遇。
+
+✅ 签证类型：Student visa - Dependent of a Worker（担保子女学签）
+✅ 签证生效：2026 年 1 月 22 日
+✅ 可停留至：2028 年 1 月 28 日
+✅ 学习条件：可作为本地学生在新西兰任何中小学就读
+✅ 无需财务支持证明、无需返程机票
+
+AEWV 主申请人获批后，符合条件的子女可申请 Dependent of a Worker 学签，按本地生入读公立学校，学费大幅节省。`,
+  },
+  {
+    id: 26,
+    title: '建筑吊装工 AEWV 升级+续签获批',
+    summary: '客户 ZHANG 先生建筑吊装工（Construction Rigger）AEWV 升级续签获批，雇主奥克兰 ALLSTAR.ROOFING LIMITED，时薪 30 纽币，签证 2026 年 1 月 22 日生效，可停留至 2028 年 1 月 23 日。',
+    date: '2026年1月22日',
+    image: '/pic/case/012202.jpg',
+    images: ['/pic/case/012202.jpg'],
+    fullContent: `建筑吊装工 AEWV 升级+续签获批 ✅
+
+客户 ZHANG 先生成功获批新西兰认证雇主工签（AEWV）升级续签，职位为建筑吊装工（Construction Rigger），工作地点奥克兰。
+
+✅ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 职位：Construction Rigger（建筑吊装工）
+✅ 雇主：ALLSTAR.ROOFING LIMITED，奥克兰（Auckland）
+✅ 签证生效：2026 年 1 月 22 日
+✅ 可停留至：2028 年 1 月 23 日
+✅ 薪资：至少 30 纽币/小时，须全职每周至少 30 小时
+
+建筑吊装工为新西兰建筑行业技术工种，材料与岗位匹配清晰、雇主资质合规，升级续签顺利获批。`,
+  },
+
 ]
