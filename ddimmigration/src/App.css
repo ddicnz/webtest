@@ -1447,7 +1447,7 @@ img[src*="album/office"][src*="IMG_2486"] {
 }
 
 .faq-item--open .faq-answer-wrap {
-  max-height: 500px;
+  max-height: 1200px;
 }
 
 .faq-answer {
@@ -1459,9 +1459,65 @@ img[src*="album/office"][src*="IMG_2486"] {
   border-top: 1px solid #eaecef;
 }
 
+.faq-answer-title {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+
+.faq-fee-table-wrap {
+  overflow-x: auto;
+  margin: 12px 0;
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+}
+
+.faq-fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.faq-fee-table th,
+.faq-fee-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eaecef;
+}
+
+.faq-fee-table th {
+  background: #f0f9fc;
+  font-weight: 700;
+  color: #333;
+}
+
+.faq-fee-table tbody tr:hover {
+  background: #f8fafb;
+}
+
+.faq-fee-category {
+  font-weight: 600;
+  color: var(--nav-bg);
+  background: #f0f9fc !important;
+  vertical-align: top;
+}
+
+.faq-answer-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #666;
+}
+
 @media (max-width: 900px) {
   .faq-page {
     padding-left: 0;
+  }
+
+  .faq-fee-table th,
+  .faq-fee-table td {
+    padding: 8px 10px;
+    font-size: 13px;
   }
 }
 

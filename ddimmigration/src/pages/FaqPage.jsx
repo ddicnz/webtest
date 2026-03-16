@@ -24,7 +24,40 @@ function FaqPage() {
               <span className="faq-question-icon" aria-hidden>+</span>
             </button>
             <div className="faq-answer-wrap">
-              <div className="faq-answer">{item.answer}</div>
+              <div className="faq-answer">
+                {item.tableData ? (
+                  <>
+                    <p className="faq-answer-title">新西兰常见签证费用一览（2026 参考）</p>
+                    <div className="faq-fee-table-wrap">
+                      <table className="faq-fee-table">
+                        <thead>
+                          <tr>
+                            <th>分类</th>
+                            <th>签证/项目</th>
+                            <th>费用</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.tableData.map((group, i) =>
+                            group.rows.map((row, j) => (
+                              <tr key={`${i}-${j}`}>
+                                {j === 0 ? (
+                                  <td rowSpan={group.rows.length} className="faq-fee-category">{group.category}</td>
+                                ) : null}
+                                <td>{row.name}</td>
+                                <td>{row.fee}</td>
+                              </tr>
+                            ))
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="faq-answer-note">{item.answer}</p>
+                  </>
+                ) : (
+                  item.answer
+                )}
+              </div>
             </div>
           </div>
         ))}
