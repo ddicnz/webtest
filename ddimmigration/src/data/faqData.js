@@ -126,6 +126,7 @@ export const faqList = [
         { name: 'AEWV 认证雇主工签', fee: '1540 纽币' },
         { name: '配偶开放工签 / 配偶学生工签', fee: '1630 纽币' },
         { name: '工作假期签证', fee: '800 纽币' },
+        { name: '换雇主换职位VOC', fee: '325 纽币' },
       ]},
       { category: '访问类', rows: [
         { name: '访问签证', fee: '441 纽币' },
