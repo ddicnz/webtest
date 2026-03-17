@@ -155,7 +155,7 @@ export const faqList = [
       ]},
       { category: '学历（2026 年 8 月起新规，NZ 学历多 1 分）', rows: [
         { name: '博士（Level 10）', fee: '6 分' },
-        { name: 'NZ 硕士（Level 9，须在 NZ 全日制 30 周+学士学位）', fee: '6 分' },
+        { name: '新西兰硕士（Level 9，须在新西兰全日制 30 周+学士学位）', fee: '6 分' },
         { name: '海外硕士（Level 9）', fee: '5 分' },
         { name: '荣誉学士/研究生文凭（Level 8，须有学士学位）', fee: '4 分' },
         { name: '研究生证书（Level 8）/学士（Level 7）', fee: '3 分' },
