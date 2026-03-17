@@ -1,15 +1,44 @@
 import { useState } from 'react'
 import { faqList } from '../data/faqData.js'
 
+const faqCategories = [
+  { id: 'work', label: '工签相关' },
+  { id: 'study', label: '留学相关' },
+  { id: 'visitor', label: '旅游签' },
+  { id: 'skilled', label: '技术移民' },
+  { id: 'invest', label: '投资移民' },
+  { id: 'other', label: '其他' },
+]
+
 function FaqPage() {
   const [openId, setOpenId] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('work')
+
+  const filteredList = faqList.filter((item) => (item.category || 'other') === selectedCategory)
 
   return (
     <main className="main-content faq-page">
       <h1 className="faq-title">常见问题</h1>
       <p className="faq-intro">以下是大家常问的工签、留学与家庭规划问题，供您参考。如需一对一咨询，欢迎通过「联络我们」与我们联系。</p>
+
+      <nav className="faq-category-nav" aria-label="问题分类">
+        {faqCategories.map((cat) => (
+          <button
+            key={cat.id}
+            type="button"
+            className={`faq-category-link ${selectedCategory === cat.id ? 'active' : ''}`}
+            onClick={() => {
+              setSelectedCategory(cat.id)
+              setOpenId(null)
+            }}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </nav>
+
       <div className="faq-list">
-        {faqList.map((item) => (
+        {filteredList.map((item) => (
           <div
             key={item.id}
             className={`faq-item${openId === item.id ? ' faq-item--open' : ''}`}

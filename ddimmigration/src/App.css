@@ -1380,6 +1380,44 @@ img[src*="album/office"][src*="IMG_2486"] {
   line-height: 1.6;
 }
 
+.faq-category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.faq-category-link {
+  padding: 10px 24px;
+  background: #e8f4f8;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.faq-category-link:hover {
+  background: #d4ebf2;
+  color: #111;
+}
+
+.faq-category-link.active {
+  background: var(--nav-bg);
+  color: #fff;
+  border-color: var(--nav-bg);
+}
+
+.faq-category-link.active:hover {
+  background: var(--nav-active);
+  border-color: var(--nav-active);
+}
+
 .faq-list {
   display: flex;
   flex-direction: column;
