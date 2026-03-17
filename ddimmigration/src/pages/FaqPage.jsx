@@ -56,14 +56,14 @@ function FaqPage() {
               <div className="faq-answer">
                 {item.tableData ? (
                   <>
-                    <p className="faq-answer-title">新西兰常见签证费用一览（2026 参考）</p>
+                    <p className="faq-answer-title">{item.tableTitle || '新西兰常见签证费用一览（2026 参考）'}</p>
                     <div className="faq-fee-table-wrap">
                       <table className="faq-fee-table">
                         <thead>
                           <tr>
-                            <th>分类</th>
-                            <th>签证/项目</th>
-                            <th>费用</th>
+                            <th>{(item.tableColumns && item.tableColumns[0]) || '分类'}</th>
+                            <th>{(item.tableColumns && item.tableColumns[1]) || '签证/项目'}</th>
+                            <th>{(item.tableColumns && item.tableColumns[2]) || '费用'}</th>
                           </tr>
                         </thead>
                         <tbody>
