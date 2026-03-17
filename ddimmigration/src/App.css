@@ -1543,8 +1543,9 @@ img[src*="album/office"][src*="IMG_2486"] {
 
 .faq-answer-note {
   margin: 14px 0 0;
-  font-size: 13px;
-  color: #666;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
 }
 
 @media (max-width: 900px) {
