@@ -118,25 +118,23 @@ export const faqList = [
     answer: '以上为参考区间，具体以移民局官网为准。',
     tableData: [
       { category: '学习类', rows: [
-        { name: '学生签证', fee: '375–430 纽币' },
-        { name: 'Pathway 学签', fee: '430 纽币' },
-        { name: '学后工签', fee: '700–900 纽币' },
+        { name: '学生签证', fee: '850 纽币' },
+        { name: 'Pathway 学签', fee: '750 纽币' },
+        { name: '学后工签', fee: '1670 纽币' },
       ]},
       { category: '工作类', rows: [
         { name: 'AEWV 认证雇主工签', fee: '1540 纽币' },
         { name: '配偶开放工签 / 配偶学生工签', fee: '1630 纽币' },
-        { name: '工作假期签证', fee: '455 纽币' },
+        { name: '工作假期签证', fee: '800 纽币' },
       ]},
       { category: '访问类', rows: [
-        { name: '访问签证', fee: '4411 纽币' },
-        { name: 'NZeTA', fee: '17–23 纽币' },
-        { name: 'IVL 旅游税', fee: '100 纽币' },
+        { name: '访问签证', fee: '441 纽币' },
       ]},
       { category: '居民签证', rows: [
         { name: '技术移民 / SMC', fee: '6450 纽币' },
         { name: '绿名单移民', fee: '6450 纽币' },
-        { name: '配偶/父母团聚', fee: '5360 纽币' },
-        { name: '投资移民', fee: '27,470 纽币' },
+        { name: '配偶/父母团聚', fee: '5810 纽币' },
+        { name: '投资移民', fee: '12380 纽币' },
       ]},
       { category: '永居', rows: [
         { name: 'Permanent Resident Visa', fee: '315 纽币' },
