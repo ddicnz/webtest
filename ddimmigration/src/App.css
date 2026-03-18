@@ -1543,9 +1543,8 @@ img[src*="album/office"][src*="IMG_2486"] {
 
 .faq-answer-note {
   margin: 14px 0 0;
-  font-size: 15px;
-  color: #444;
-  line-height: 1.7;
+  font-size: 13px;
+  color: #666;
 }
 
 @media (max-width: 900px) {
@@ -1568,30 +1567,70 @@ img[src*="album/office"][src*="IMG_2486"] {
 }
 
 .study-page-title {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   font-size: 28px;
   font-weight: 800;
   color: #222;
 }
 
-.study-anchor-nav {
+.study-intro-block {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #444;
+  margin-bottom: 24px;
+}
+
+.study-intro-block p {
+  margin: 0 0 12px;
+}
+
+.study-intro-block p:last-child {
+  margin-bottom: 0;
+}
+
+.study-category-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 20px;
-  margin-bottom: 28px;
-  padding: 14px 0;
-  border-bottom: 1px solid #eaecef;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.study-anchor-link {
-  font-size: 14px;
-  color: var(--nav-bg);
-  text-decoration: none;
+.study-category-link {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #e8f4f8;
+  color: #333;
+  font-size: 15px;
   font-weight: 600;
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.study-anchor-link:hover {
-  text-decoration: underline;
+.study-category-link:hover {
+  background: #d4ebf2;
+  color: #111;
+}
+
+.study-category-link.active {
+  background: var(--nav-bg);
+  color: #fff;
+  border-color: var(--nav-bg);
+}
+
+.study-category-link.active:hover {
+  background: var(--nav-active);
+  border-color: var(--nav-active);
+}
+
+.study-category-link:focus-visible {
+  outline: 2px solid var(--nav-active);
+  outline-offset: 2px;
 }
 
 .study-section {
@@ -1636,11 +1675,22 @@ img[src*="album/office"][src*="IMG_2486"] {
   border-left: 4px solid var(--nav-bg);
 }
 
-.study-university-name {
-  display: block;
-  font-size: 16px;
-  color: #222;
+.study-university-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 4px;
+}
+
+.study-university-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.study-university-qs {
+  font-size: 12px;
+  color: #666;
 }
 
 .study-university-en {
@@ -1655,6 +1705,18 @@ img[src*="album/office"][src*="IMG_2486"] {
   font-size: 14px;
   line-height: 1.6;
   color: #444;
+}
+
+.study-university-points {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.study-university-points li {
+  margin-bottom: 4px;
 }
 
 /* ICL 合作项目卡片（大学留学内嵌） */
@@ -1690,6 +1752,20 @@ img[src*="album/office"][src*="IMG_2486"] {
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
+}
+
+.study-program-card-image-wrap--dual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 0 0 380px;
+}
+
+.study-program-card-image-wrap--dual .study-program-card-image {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  object-fit: cover;
 }
 
 .study-program-card-image {
@@ -1744,6 +1820,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin: 0 0 0;
   font-size: 14px;
   font-weight: 600;
+  white-space: pre-line;
   color: #333;
   line-height: 1.4;
 }
