@@ -1727,6 +1727,11 @@ img[src*="album/office"][src*="IMG_2486"] {
   color: #555;
 }
 
+.study-section-intro strong,
+.study-section-content p strong {
+  font-weight: 900;
+}
+
 .study-program-list {
   display: flex;
   flex-direction: column;
@@ -1766,6 +1771,22 @@ img[src*="album/office"][src*="IMG_2486"] {
   flex: 1;
   min-height: 0;
   object-fit: cover;
+}
+
+/* 语言班课程：图片放大便于阅读文字 */
+.study-program-list--language .study-program-card-image-wrap {
+  flex: 0 0 520px;
+  width: 520px;
+}
+
+.study-program-list--language .study-program-card-image-wrap--dual {
+  flex: 0 0 520px;
+  width: 520px;
+}
+
+.study-program-list--language .study-program-card-image {
+  object-fit: contain;
+  max-height: 520px;
 }
 
 .study-program-card-image {
@@ -1886,6 +1907,12 @@ img[src*="album/office"][src*="IMG_2486"] {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
+  }
+  .study-program-list--language .study-program-card-image-wrap,
+  .study-program-list--language .study-program-card-image-wrap--dual {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
   }
 }
 

@@ -5,6 +5,7 @@ import { studyIntro, studySections, iclPrograms } from '../data/studyData.js'
 const iclProgramsNonLanguage = iclPrograms.filter((p) => p.type !== '语言班')
 
 const studyCategories = studySections.map((s) => ({ id: s.id, label: s.title }))
+const studySlogan = '新西兰嘀嘀移民是持牌校代免费申请！！！'
 
 function StudySectionContent({ section }) {
   const sec = studySections.find((s) => s.id === section.id)
@@ -12,12 +13,21 @@ function StudySectionContent({ section }) {
 
   return (
     <div className="study-section-content">
-      {sec.paragraphs.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
+      {sec.paragraphs.map((p, i) => {
+        const isLast = i === sec.paragraphs.length - 1
+        if (isLast && p.includes(studySlogan)) {
+          const baseText = p.replace(studySlogan, '').trim()
+          return (
+            <p key={i}>
+              {baseText} <strong>{studySlogan}</strong>
+            </p>
+          )
+        }
+        return <p key={i}>{p}</p>
+      })}
       {sec.id === 'tertiary' && (
         <>
-          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。</p>
+          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="study-program-list">
             {iclProgramsNonLanguage.map((prog) => (
               <article key={prog.id} className="study-program-card">
@@ -86,7 +96,7 @@ function StudySectionContent({ section }) {
       )}
       {sec.id === 'technical' && sec.programs && (
         <>
-          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。</p>
+          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="study-program-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="study-program-card">
@@ -131,8 +141,8 @@ function StudySectionContent({ section }) {
       )}
       {sec.id === 'language' && sec.programs && (
         <>
-          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。</p>
-          <div className="study-program-list">
+          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
+          <div className="study-program-list study-program-list--language">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="study-program-card">
                 <div className={`study-program-card-image-wrap${prog.image2 ? ' study-program-card-image-wrap--dual' : ''}`}>
