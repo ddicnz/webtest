@@ -1,6 +1,47 @@
 /** 新加的案例放在数组最前 */
 export const casesList = [
   {
+    id: 36,
+    title: '厨师海外配额获批',
+    summary: '雇主 Job Check 获批，职位中国厨师（Chinese Cuisine Cook），ANZSCO 351411，奥克兰，可招募 4 名移民工人，Job Check 有效期 6 个月至 2026 年 9 月 19 日。',
+    date: '2026年3月19日',
+    image: '/pic/case/032002.jpg',
+    images: ['/pic/case/032002.jpg'],
+    fullContent: `厨师海外配额获批 ✅
+
+雇主 Job Check（职位检查）申请顺利获批，职位为中国厨师（Chinese Cuisine Cook），ANZSCO 351411 Cook（Skill Level 3），工作地点奥克兰。
+
+✅ 签证类型：Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 职位：Chinese Cuisine Cook（中国厨师）
+✅ 获批日期：2026 年 3 月 19 日
+✅ 配额：可招募 4 名移民工人
+✅ Job Check 有效期：6 个月，至 2026 年 9 月 19 日
+
+中国厨师为新西兰餐饮行业紧缺岗位，雇主资质与岗位匹配清晰，Job Check 顺利获批，为后续工签申请奠定基础。`,
+  },
+  {
+    id: 35,
+    title: '旅游签 8 天获批',
+    summary: '客户递交普通旅游签（Visitor Visa - General），3 月 11 日递交，3 月 19 日获批，仅 8 个工作日，多次往返，每次入境可停留最多 3 个月。',
+    date: '2026年3月19日',
+    image: '/pic/case/032001.jpg',
+    images: ['/pic/case/032001.jpg'],
+    fullContent: `旅游签 8 天获批 ✅
+
+客户递交新西兰普通旅游签（Visitor Visa - General），材料准备充分，审批速度较快。
+
+✅ 签证类型：Visitor Visa - General（普通旅游签）
+✅ 递交日期：2026 年 3 月 11 日
+✅ 获批日期：2026 年 3 月 19 日
+✅ 审批时长：8 个工作日
+✅ 签证生效：2026 年 3 月 19 日
+✅ 最晚入境日期：2026 年 11 月 19 日
+✅ 入境次数：多次往返
+✅ 每次停留：最多 3 个月
+
+旅游签材料清晰、目的明确，审批顺利，适合计划短期探亲、旅游或商务考察的申请人。`,
+  },
+  {
     id: 34,
     title: '中国厨师换雇主 VOC 获批',
     summary: '客户走中国厨师 200 个特殊名额通道，因餐厅经营变化需换雇主，申请 VOC（Variation of Conditions）换雇主获批，职位奥克兰中国厨师（Chinese Cuisine Chef），签证 2026 年 3 月 18 日生效。',
