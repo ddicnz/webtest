@@ -102,7 +102,7 @@ export const studySections = [
         image: '/pic/study/图片_20260304105935_213.jpg',
         image2: '/pic/study/图片_20260304105938_214.jpg',
         highlight: '37 年坚持卓越教育（1988–2025），NZQA Category 1，English New Zealand 成员',
-        cost: '注册费 $260 一次；材料费 $15/周\n学签：13–21 周 $360/周（送 1 周），22–31 周 $330/周（送 2 周），32 周及以上 $300/周（送 3 周）\n旅游签/工签/打工度假签：10 周 $380/周（送 2 周）\n2026 年 12 月 31 日前开课有效',
+        cost: '注册费 $260 一次；材料费 $15/周\n 学签：13–21 周 $360/周（送 1 周），22–31 周 $330/周（送 2 周），32 周及以上 $300/周（送 3 周）\n旅游签/工签/打工度假签：10 周 $380/周（送 2 周）\n2026 年 12 月 31 日前开课有效',
         detail: '普通英文、雅思、PTE 三课程费用与签证要求一致；每周一开学，入学灵活；第一天入学分班测试，根据水平进入合适班级；透明升班机制，每六周分班测试；提供所有英语水平课程。16 岁及以上。',
         schedule: '周一到周四。雅思早班 08:00–13:00；PTE 早班 08:00–13:00；PTE 下午班 13:00–18:00',
         languageReq: '雅思 5(5) 或 PTE 36(36) 或 入学分班测试达 Pre-Inter 以上',
@@ -276,3 +276,19 @@ export const iclPrograms = [
   },
 ]
 
+
+/** 汇总所有可跳转详情的留学项目（ICL 非语言班 + 技术学校 + 语言班），含 sectionId 便于返回时恢复分类 */
+export function getAllStudyPrograms() {
+  const list = []
+  iclPrograms.filter((p) => p.type !== '语言班').forEach((p) => list.push({ ...p, sectionId: 'tertiary' }))
+  studySections.forEach((sec) => {
+    if (sec.programs) sec.programs.forEach((p) => list.push({ ...p, sectionId: sec.id }))
+  })
+  return list
+}
+
+/** 按 id 查找留学项目 */
+export function getStudyProgramById(id) {
+  const all = getAllStudyPrograms()
+  return all.find((p) => String(p.id) === String(id)) ?? null
+}

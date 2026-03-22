@@ -1,11 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { studyIntro, studySections, iclPrograms } from '../data/studyData.js'
+import { makeStudyProgramSlug } from '../utils/studySlug.js'
 
 // 大学留学用 ICL 课程（排除语言班，语言班单独成类）
 const iclProgramsNonLanguage = iclPrograms.filter((p) => p.type !== '语言班')
 
 const studyCategories = studySections.map((s) => ({ id: s.id, label: s.title }))
 const studySlogan = '新西兰嘀嘀移民是持牌校代免费申请！！！'
+
+function StudyProgramLink({ prog, sectionId, className, children }) {
+  const navigate = useNavigate()
+  const to = `/study/program/${encodeURIComponent(makeStudyProgramSlug(prog))}`
+  const go = () => navigate(to, { state: { fromSection: sectionId, scrollY: window.scrollY } })
+  return (
+    <a href={to} className={className} onClick={(e) => { e.preventDefault(); go() }}>
+      {children}
+    </a>
+  )
+}
 
 function StudySectionContent({ section }) {
   const sec = studySections.find((s) => s.id === section.id)
@@ -28,42 +41,32 @@ function StudySectionContent({ section }) {
       {sec.id === 'tertiary' && (
         <>
           <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
-          <div className="study-program-list">
+          <div className="cases-list">
             {iclProgramsNonLanguage.map((prog) => (
-              <article key={prog.id} className="study-program-card">
-                <div className="study-program-card-image-wrap">
-                  <img src={prog.image} alt={prog.titleZh} className="study-program-card-image" />
-                  <span className="study-program-card-type">{prog.type}</span>
+              <article key={prog.id} className="case-card case-card--study">
+                <div className="case-card-image-wrap">
+                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
-                <div className="study-program-card-body">
-                  <h3 className="study-program-card-title">{prog.titleZh}</h3>
-                  <p className="study-program-card-title-en">{prog.titleEn}</p>
-                  {prog.highlight && (
-                    <p className="study-program-card-highlight">{prog.highlight}</p>
-                  )}
-                  <p className="study-program-card-cost">{prog.cost}</p>
-                  {prog.costNote && (
-                    <p className="study-program-card-cost-note">{prog.costNote}</p>
-                  )}
-                  {prog.detail && (
-                    <p className="study-program-card-detail">{prog.detail}</p>
-                  )}
-                  <dl className="study-program-card-meta">
-                    <dt>语言要求</dt>
-                    <dd>{prog.languageReq}</dd>
-                    <dt>学术要求</dt>
-                    <dd>{prog.academicReq}</dd>
-                    <dt>入学时间</dt>
-                    <dd>{prog.intakes}</dd>
-                  </dl>
-                  <div className="study-program-card-prospects">
-                    <strong>毕业前景</strong>
+                <div className="case-card-body">
+                  <h3 className="case-card-title">{prog.titleZh}</h3>
+                  <div className="case-card-cost">
+                    <strong>学费：</strong>
+                    {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
+                      <p key={i} className="case-card-cost-line">{line}</p>
+                    ))}
+                  </div>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  <div className="case-card-highlights">
+                    <strong>优势重点：</strong>
                     <ul>
-                      {prog.prospects.map((item, i) => (
+                      {prog.prospects.slice(0, 4).map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
                   </div>
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
+                  </StudyProgramLink>
                 </div>
               </article>
             ))}
@@ -97,42 +100,24 @@ function StudySectionContent({ section }) {
       {sec.id === 'technical' && sec.programs && (
         <>
           <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
-          <div className="study-program-list">
+          <div className="cases-list">
             {sec.programs.map((prog) => (
-              <article key={prog.id} className="study-program-card">
-                <div className="study-program-card-image-wrap">
-                  <img src={prog.image} alt={prog.titleZh} className="study-program-card-image" />
-                  <span className="study-program-card-type">{prog.type}</span>
+              <article key={prog.id} className="case-card case-card--study">
+                <div className="case-card-image-wrap">
+                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
-                <div className="study-program-card-body">
-                  <h3 className="study-program-card-title">{prog.titleZh}</h3>
-                  <p className="study-program-card-title-en">{prog.titleEn}</p>
-                  {prog.highlight && (
-                    <p className="study-program-card-highlight">{prog.highlight}</p>
-                  )}
-                  <p className="study-program-card-cost">{prog.cost}</p>
-                  {prog.costNote && (
-                    <p className="study-program-card-cost-note">{prog.costNote}</p>
-                  )}
-                  {prog.detail && (
-                    <p className="study-program-card-detail">{prog.detail}</p>
-                  )}
-                  <dl className="study-program-card-meta">
-                    <dt>语言要求</dt>
-                    <dd>{prog.languageReq}</dd>
-                    <dt>学术要求</dt>
-                    <dd>{prog.academicReq}</dd>
-                    <dt>入学时间</dt>
-                    <dd>{prog.intakes}</dd>
-                  </dl>
-                  <div className="study-program-card-prospects">
-                    <strong>毕业前景</strong>
-                    <ul>
-                      {prog.prospects.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
+                <div className="case-card-body">
+                  <h3 className="case-card-title">{prog.titleZh}</h3>
+                  <div className="case-card-cost">
+                    <strong>学费：</strong>
+                    {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
+                      <p key={i} className="case-card-cost-line">{line}</p>
+                    ))}
                   </div>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
+                  </StudyProgramLink>
                 </div>
               </article>
             ))}
@@ -142,51 +127,24 @@ function StudySectionContent({ section }) {
       {sec.id === 'language' && sec.programs && (
         <>
           <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
-          <div className="study-program-list study-program-list--language">
+          <div className="cases-list">
             {sec.programs.map((prog) => (
-              <article key={prog.id} className="study-program-card">
-                <div className={`study-program-card-image-wrap${prog.image2 ? ' study-program-card-image-wrap--dual' : ''}`}>
-                  <img src={prog.image} alt={prog.titleZh} className="study-program-card-image" />
-                  {prog.image2 && (
-                    <img src={prog.image2} alt={`${prog.titleZh} 费用`} className="study-program-card-image" />
-                  )}
-                  <span className="study-program-card-type">{prog.type}</span>
+              <article key={prog.id} className="case-card case-card--study">
+                <div className="case-card-image-wrap">
+                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
-                <div className="study-program-card-body">
-                  <h3 className="study-program-card-title">{prog.titleZh}</h3>
-                  <p className="study-program-card-title-en">{prog.titleEn}</p>
-                  {prog.highlight && (
-                    <p className="study-program-card-highlight">{prog.highlight}</p>
-                  )}
-                  <p className="study-program-card-cost">{prog.cost}</p>
-                  {prog.costNote && (
-                    <p className="study-program-card-cost-note">{prog.costNote}</p>
-                  )}
-                  {prog.detail && (
-                    <p className="study-program-card-detail">{prog.detail}</p>
-                  )}
-                  <dl className="study-program-card-meta">
-                    {prog.schedule && (
-                      <>
-                        <dt>上课时间</dt>
-                        <dd>{prog.schedule}</dd>
-                      </>
-                    )}
-                    <dt>语言要求</dt>
-                    <dd>{prog.languageReq}</dd>
-                    <dt>学术要求</dt>
-                    <dd>{prog.academicReq}</dd>
-                    <dt>入学时间</dt>
-                    <dd>{prog.intakes}</dd>
-                  </dl>
-                  <div className="study-program-card-prospects">
-                    <strong>毕业前景</strong>
-                    <ul>
-                      {prog.prospects.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
+                <div className="case-card-body">
+                  <h3 className="case-card-title">{prog.titleZh}</h3>
+                  <div className="case-card-cost">
+                    <strong>学费：</strong>
+                    {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
+                      <p key={i} className="case-card-cost-line">{line}</p>
+                    ))}
                   </div>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
+                  </StudyProgramLink>
                 </div>
               </article>
             ))}
@@ -218,7 +176,21 @@ function StudySectionContent({ section }) {
 }
 
 function StudyPage() {
+  const location = useLocation()
   const [selectedCategory, setSelectedCategory] = useState(studySections[0].id)
+
+  useEffect(() => {
+    const fromSection = location.state?.fromSection
+    const scrollY = location.state?.scrollY
+    if (fromSection && studySections.some((s) => s.id === fromSection)) {
+      setSelectedCategory(fromSection)
+    }
+    if (typeof scrollY === 'number' && scrollY >= 0) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => window.scrollTo(0, scrollY))
+      })
+    }
+  }, [location.state?.fromSection, location.state?.scrollY])
 
   const currentSection = studySections.find((s) => s.id === selectedCategory)
 

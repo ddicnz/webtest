@@ -1,11 +1,16 @@
 import { useEffect } from 'react'
-import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useNavigate, useParams, Link, useLocation } from 'react-router-dom'
 import { newsList } from '../data/newsData.js'
 import { makeNewsSlug, findNewsBySlugOrId } from '../utils/newsSlug.js'
 
 function NewsDetailPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { id: idParam } = useParams()
+  const fromPage = location.state?.fromPage ?? 1
+  const scrollY = location.state?.scrollY ?? 0
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+
   const decodedParam = (() => {
     try {
       return decodeURIComponent(idParam || '')
@@ -27,14 +32,14 @@ function NewsDetailPage() {
     return (
       <main className="main-content news-detail-page">
         <p>未找到该资讯。</p>
-        <Link to="/news" className="case-back-link">返回移民资讯列表</Link>
+        <Link to="/news" state={{ fromPage: 1, scrollY: 0 }} className="case-back-link">返回移民资讯列表</Link>
       </main>
     )
   }
 
   return (
     <main className="main-content news-detail-page case-detail-page">
-      <Link to="/news" className="case-back-link">&lt; 返回移民资讯</Link>
+      <Link to="/news" state={{ fromPage, scrollY }} className="case-back-link">&lt; 返回移民资讯</Link>
 
       <article className="case-detail">
         <h1 className="case-detail-title">{newsItem.title}</h1>

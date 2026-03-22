@@ -15,6 +15,7 @@ import NewsDetailPage from './pages/NewsDetailPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 import FaqPage from './pages/FaqPage.jsx'
 import StudyPage from './pages/StudyPage.jsx'
+import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 
@@ -72,7 +73,7 @@ function HeroSidebarLayout() {
   } else if (location.pathname === '/faq') {
     heroImage = '/pic/contactus.jpg'
     heroClassName = 'about-hero about-hero--faq'
-  } else if (location.pathname === '/study') {
+  } else if (location.pathname.startsWith('/study')) {
     heroImage = '/pic/pexels-pixabay-267885.jpg'
     heroClassName = 'about-hero about-hero--study'
   }
@@ -244,6 +245,7 @@ function App() {
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/study" element={<StudyPage />} />
+          <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
         </Route>
       </Routes>
 

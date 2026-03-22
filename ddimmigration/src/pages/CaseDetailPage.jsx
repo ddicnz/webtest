@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
-import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useNavigate, useParams, Link, useLocation } from 'react-router-dom'
 import { casesList } from '../data/casesData.js'
 import { makeCaseSlug, parseCaseIdFromSlug } from '../utils/caseSlug.js'
 
 function CaseDetailPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { id: idParam } = useParams()
+  const fromPage = location.state?.fromPage ?? 1
+  const scrollY = location.state?.scrollY ?? 0
   const decodedParam = (() => {
     try {
       return decodeURIComponent(idParam || '')
@@ -13,6 +16,8 @@ function CaseDetailPage() {
       return idParam || ''
     }
   })()
+
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   const caseId = parseCaseIdFromSlug(decodedParam)
   const caseItem = caseId != null
@@ -30,14 +35,14 @@ function CaseDetailPage() {
     return (
       <main className="main-content case-detail-page">
         <p>未找到该案例。</p>
-        <Link to="/cases" className="case-back-link">返回成功案例列表</Link>
+        <Link to="/cases" state={{ fromPage: 1, scrollY: 0 }} className="case-back-link">返回成功案例列表</Link>
       </main>
     )
   }
 
   return (
     <main className="main-content case-detail-page">
-      <Link to="/cases" className="case-back-link">&lt; 返回成功案例</Link>
+      <Link to="/cases" state={{ fromPage, scrollY }} className="case-back-link">&lt; 返回成功案例</Link>
 
       <article className="case-detail">
         <h1 className="case-detail-title">{caseItem.title}</h1>
