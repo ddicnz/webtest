@@ -45,7 +45,7 @@ function StudySectionContent({ section }) {
             {iclProgramsNonLanguage.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
                 <div className="case-card-image-wrap">
-                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                  <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
@@ -105,7 +105,7 @@ function StudySectionContent({ section }) {
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
                 <div className="case-card-image-wrap">
-                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                  <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
@@ -142,7 +142,7 @@ function StudySectionContent({ section }) {
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
                 <div className="case-card-image-wrap">
-                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                  <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
@@ -190,7 +190,7 @@ function StudySectionContent({ section }) {
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
                 <div className="case-card-image-wrap">
-                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                  <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
                 </div>
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>

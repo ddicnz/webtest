@@ -38,7 +38,9 @@ function StudyProgramDetailPage() {
     )
   }
 
-  const images = prog.image2 ? [prog.image, prog.image2] : [prog.image]
+  const detailImages = Array.isArray(prog.detailImages)
+    ? prog.detailImages.filter(Boolean)
+    : [prog.image, prog.image2, prog.image3].filter(Boolean)
 
   return (
     <main className="main-content case-detail-page">
@@ -48,7 +50,7 @@ function StudyProgramDetailPage() {
         <h1 className="case-detail-title">{prog.titleZh}</h1>
         <p className="case-detail-date">{prog.titleEn}</p>
         <div className="case-detail-images">
-          {images.map((src, i) => (
+          {detailImages.map((src, i) => (
             <div key={i} className="case-detail-image-wrap">
               <img src={src} alt={i === 0 ? prog.titleZh : `${prog.titleZh} 费用`} className="case-detail-image" loading="lazy" />
             </div>
