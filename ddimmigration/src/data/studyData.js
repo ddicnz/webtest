@@ -155,6 +155,7 @@ export const studySections = [
         highlight: '免雅思升学路径；L4 衔接 diploma/本科，L5 衔接硕士；校区奥克兰 Mt Albert',
         cost: '2026 课程费 $6,440；资源费 $172；合计 $6,612 新西兰元\n另加学生服务费 $300/年（或 $30/月）',
         detail: 'Auckland Institute of Studies（AIS，Yoobee 旗下）；NZCEL 学术英语 Level 4 为本科/文凭课程做准备；Level 5 为 14 周全日制，衔接硕士课程。',
+        schedule: '周一到周五 9am-2:10pm',
         languageReq: 'L4: 雅思 5.5(5.0) 或相当；L5: 雅思 6.0(5.5) 或相当，具体以校方为准',
         academicReq: '计划升学或提升学术英语能力',
         intakes: '每年多学期开学，详见校方及官网',

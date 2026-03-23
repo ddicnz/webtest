@@ -153,6 +153,7 @@ function StudySectionContent({ section }) {
                     ))}
                   </div>
                   <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  {prog.schedule && <p className="case-card-schedule"><strong>上课时间：</strong>{prog.schedule}</p>}
                   <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
                     查看更多 &gt;&gt;
                   </StudyProgramLink>
