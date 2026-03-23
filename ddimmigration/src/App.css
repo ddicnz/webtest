@@ -960,7 +960,26 @@ img[src*="album/office"][src*="IMG_2486"] {
   transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
-/* 留学专栏项目卡片：鼠标悬停效果 */
+/* 成功案例、移民资讯卡片：鼠标悬停放大效果 */
+.case-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(91, 163, 198, 0.35);
+}
+
+.case-card:hover .case-card-image {
+  transform: scale(1.05);
+}
+
+.case-card .case-card-image {
+  transition: transform 0.4s ease;
+}
+
+.case-card:hover .case-card-link {
+  color: var(--nav-active) !important;
+}
+
+/* 留学专栏项目卡片：鼠标悬停效果（继承上述并可有额外定制） */
 .case-card--study:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   transform: translateY(-4px) scale(1.02);
