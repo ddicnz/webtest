@@ -111,7 +111,7 @@ export const albumSections = [
   },
   {
     id: 'license',
-    title: '持牌认证',
+    title: '持牌顾问',
     cover: '/pic/album/license/eric_licience.jpg',
     items: [
       { src: '/pic/album/license/eric_licience.jpg', caption: '持牌编号：201800151' },
