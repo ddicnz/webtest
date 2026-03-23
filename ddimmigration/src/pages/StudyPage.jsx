@@ -56,6 +56,7 @@ function StudySectionContent({ section }) {
                     ))}
                   </div>
                   <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  {prog.schedule && <p className="case-card-schedule"><strong>上课时间：</strong>{prog.schedule}</p>}
                   <div className="case-card-highlights">
                     <strong>优势重点：</strong>
                     <ul>
@@ -115,6 +116,16 @@ function StudySectionContent({ section }) {
                     ))}
                   </div>
                   <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  {prog.prospects && prog.prospects.length > 0 && (
+                    <div className="case-card-highlights">
+                      <strong>毕业前景：</strong>
+                      <ul>
+                        {prog.prospects.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
                     查看更多 &gt;&gt;
                   </StudyProgramLink>
