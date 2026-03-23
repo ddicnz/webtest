@@ -253,6 +253,26 @@ export const studySections = [
         ],
       },
     ],
+    programs: [
+      {
+        id: 'uoa-foundation',
+        type: '预科',
+        titleZh: '奥克兰大学预科',
+        titleEn: 'University of Auckland Certificate in Foundation Studies',
+        image: '/pic/study/foundation.png',
+        highlight: '6–12 个月，UP Education 运营，直通奥克兰大学本科',
+        cost: '2026 国际生：加速班（6 个月）$27,623；标准/快班（8–12 个月）$36,830\n另报名费 $550；医疗保险 12 个月约 $925',
+        detail: '奥克兰大学预科（Level 3）；核心科目 EAP 学术英语 + 4 门选修（会计、生物、化学、经济学、地理、物理、数学、统计等）；衔接奥大商科、工程、法律、医学、理学、艺术等本科。',
+        languageReq: '加速班雅思 6.0（单项不低于 5.5）；快班 5.5（5.0）；标准班 5.0（4.5）。也可提供 UPELT 或 GCE/IGCSE/NCEA 等替代成绩',
+        academicReq: '完成高二或相当学历；综合考量成绩单、相关科目、评语及出勤率；7 月入学可凭高二上半学期成绩申请',
+        intakes: '2026 年：加速班 2 月、9 月；快班 4 月、10 月；标准班 2 月、7 月',
+        prospects: [
+          '直通奥克兰大学本科',
+          '课程与奥大体系衔接紧密',
+          '可选加速/快班/标准多种学制',
+        ],
+      },
+    ],
   },
   {
     id: 'primary',

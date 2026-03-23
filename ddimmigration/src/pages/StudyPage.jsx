@@ -182,6 +182,43 @@ function StudySectionContent({ section }) {
           ))}
         </div>
       )}
+      {sec.id === 'secondary' && sec.programs && (
+        <>
+          <p className="study-section-intro" style={{ marginTop: '24px' }}>合作预科项目，具体费用与入学要求以校方及官网为准。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
+          <div className="cases-list">
+            {sec.programs.map((prog) => (
+              <article key={prog.id} className="case-card case-card--study">
+                <div className="case-card-image-wrap">
+                  <img src={prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                </div>
+                <div className="case-card-body">
+                  <h3 className="case-card-title">{prog.titleZh}</h3>
+                  <div className="case-card-cost">
+                    <strong>学费：</strong>
+                    {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
+                      <p key={i} className="case-card-cost-line">{line}</p>
+                    ))}
+                  </div>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  {prog.prospects && prog.prospects.length > 0 && (
+                    <div className="case-card-highlights">
+                      <strong>优势重点：</strong>
+                      <ul>
+                        {prog.prospects.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
+                  </StudyProgramLink>
+                </div>
+              </article>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }
