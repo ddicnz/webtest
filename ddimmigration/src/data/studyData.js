@@ -290,7 +290,7 @@ export const studySections = [
         titleZh: 'AUT 奥克兰理工大学预科',
         titleEn: 'AUT Certificate in Foundation Studies',
         image: '/pic/study/aut.jpg',
-        highlight: '6–12 个月，UP Education 运营，直通 AUT 本科；可申请 Pathway 学生签覆盖预科+本科',
+        highlight: '6–12 个月，直通 AUT 本科；可申请 Pathway 学生签覆盖预科+本科',
         cost: '2026 国际生：加速班（4-5 个月）学费 $21,525 + 资源费 $1,100；快班（8–9 个月）$26,775 + $1,100；标准班（12 个月）$34,440 + $1,100\n另报名费 $550；医疗保险 12 个月约 $925',
         detail: 'AUT 预科（UP Education 代表 AUT 颁发）；核心科目为学术英语、大学学习技能、文化与社会；另选 4 门选修（数学、生物、物理、经济学、市场营销、艺术设计等）；衔接 AUT 本科各专业。',
         languageReq: '加速班雅思 6.0（单项不低于 5.0）；快班 5.5（5.0）；标准班 5.0（4.5）。不符合者可衔接 Foundation Connect 或 Pathways Link',
