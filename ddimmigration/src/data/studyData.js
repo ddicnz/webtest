@@ -137,7 +137,7 @@ export const studySections = [
         titleZh: 'NZCEL 新西兰英语语言证书课程',
         titleEn: 'NZCEL New Zealand English Language Certificate Course',
         image: '/pic/study/图片_20260304105928_211.jpg',
-        schedule: '周一到周五 9am-2pm',
+        schedule: '周一到周五 1pm-5pm',
         highlight: '为学术之路打下坚实英语基础',
         cost: '$7,110（16 周线下）/ $6,110（16 周线上）',
         detail: 'NZCEL Level 4 / Level 5；入学方式：语言成绩直入（雅思/PTE）或校内/线上英语测试；周一至周五上课',
