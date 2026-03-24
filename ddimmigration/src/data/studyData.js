@@ -388,8 +388,6 @@ export const iclPrograms = [
     titleZh: '商业信息学硕士 - 商业分析方向',
     titleEn: 'Master of Business Informatics – Business Analytics Strand',
     image: '/pic/study/mbi-ba_flyer_2026_-_cn-web_1.jpg',
-    image2: '/pic/study/mbi-ba_flyer_2026_-_cn-web_2.jpg',
-    image3: '/pic/study/mbi-ba_flyer_2026_-_cn-web_3.jpg',
     highlight: '申请就送 1.3 万奖学金；一年制硕士，NZQF 9 级',
     cost: '$37,000 新西兰元/年\n材料费 $2,000；注册费 $400\n最高 $13,000 奖学金',
     detail: '商业分析方向，涵盖数据可视化、战略信息系统、项目管理等；校区奥克兰、基督城。',
