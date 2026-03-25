@@ -63,7 +63,7 @@ export const studySections = [
         highlight: '20 周全职 / 40 周兼职，100% 在线授课，可衔接注册护理文凭',
         cost: '学费 $4,018；学生服务费 $88，或符合条件者可申请免费学习',
         languageReq: '雅思 5.5（单项不低于 5.0）或同等成绩',
-        academicReq: '相关健康类 Level 3 或 NCEA 2 级或同等学历；20 岁以上可申请特招',
+        academicReq: '相关健康类 Level 3 或 NCEA 2 级或同等学历（高中毕业）；20 岁以上可申请特招',
         intakes: '入学时间灵活，详见校方安排',
         prospects: ['可衔接注册护理文凭（5级），可以申请AEWV工签', '可申请其他 5 级健康课程', '适合医疗保健入门或转行'],
       },
