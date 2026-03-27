@@ -9,6 +9,8 @@
 /* 主题色：导航条初始透明、公司名淡蓝、链接蓝 */
 :root {
   --nav-bar-bg: transparent;
+  /* 滚动后顶栏与留学下拉共用，保证亮度一致 */
+  --nav-bar-solid-bg: rgba(0, 0, 0, 0.35);
   --nav-bg: #5ba3c6;
   --nav-active: #87CEEB;
   --brand-green: #1b6b5c;
@@ -126,7 +128,7 @@
 
 .nav-bar--solid {
   /* 稍微加深的半透明背景，仍能看到下方图片 */
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--nav-bar-solid-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -208,6 +210,176 @@
 
 .nav-link-disabled {
   cursor: default;
+}
+
+
+/* 留学专栏：桌面端悬停下拉 */
+.nav-item--dropdown {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+}
+
+.nav-link--dropdown-trigger {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-dropdown-caret {
+  font-size: 10px;
+  opacity: 0.85;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* 与顶栏同色同亮度：不用 backdrop-filter（会显更黑）；solid 与 .nav-bar--solid 共用变量 */
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  /* 顶栏未 solid 时较透，下拉略浅，避免整块比 nav 更「闷」 */
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.48s cubic-bezier(0.33, 1, 0.68, 1),
+    visibility 0.48s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.48s cubic-bezier(0.33, 1, 0.68, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  z-index: 300;
+  pointer-events: none;
+}
+
+.nav-bar--solid .nav-dropdown {
+  background: var(--nav-bar-solid-bg);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-item--dropdown:hover .nav-dropdown,
+.nav-item--dropdown:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 10px 18px;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-dropdown-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #87ceeb;
+}
+
+.nav-dropdown-link.active {
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+  color: #fff;
+}
+
+/* 移动端：留学专栏 — 主导航一行，子项在右侧滑出面板 */
+.nav-mobile-study-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+}
+.nav-mobile-study-trigger-chevron {
+  opacity: 0.75;
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.nav-mobile-subpanel {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(300px, 88vw);
+  max-width: 100%;
+  background: #0b263d;
+  z-index: 202;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.35);
+  padding: 20px 0 24px;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  transition: transform 0.28s ease;
+  pointer-events: none;
+  visibility: hidden;
+}
+.nav-mobile-subpanel.nav-mobile-subpanel--open {
+  transform: translateX(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+.nav-mobile-subpanel-header {
+  padding: 8px 16px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 8px;
+}
+.nav-mobile-subpanel-back {
+  display: block;
+  padding: 8px 0 12px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.nav-mobile-subpanel-back:hover {
+  color: #fff;
+}
+.nav-mobile-subpanel-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+}
+.nav-mobile-subpanel-links {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-mobile-subpanel-link {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 /* 小屏：汉堡菜单按钮 + 下方「导航」小字（仅手机端显示） */
@@ -351,6 +523,9 @@
   .nav-mobile-menu {
     display: block;
   }
+  .nav-mobile-subpanel {
+    display: block;
+  }
 }
 
 @media (min-width: 901px) {
@@ -365,6 +540,9 @@
   }
   .nav-mobile-overlay,
   .nav-mobile-menu {
+    display: none !important;
+  }
+  .nav-mobile-subpanel {
     display: none !important;
   }
 }

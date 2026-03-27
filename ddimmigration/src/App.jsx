@@ -18,6 +18,8 @@ import StudyPage from './pages/StudyPage.jsx'
 import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
+import { studySections } from './data/studyData.js'
+import { studyListPathForSectionId } from './utils/studySectionPath.js'
 
 const navItems = [
   { label: '首页', path: '/' },
@@ -102,6 +104,7 @@ function HeroSidebarLayout() {
 function App() {
   const [navSolid, setNavSolid] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
+  const [mobileStudyPanelOpen, setMobileStudyPanelOpen] = useState(false)
   const location = useLocation()
 
   // GA4：SPA 路由切换时上报页面浏览
@@ -114,6 +117,25 @@ function App() {
       })
     }
   }, [location.pathname])
+
+  useEffect(() => {
+    setNavOpen(false)
+    setMobileStudyPanelOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!navOpen) setMobileStudyPanelOpen(false)
+  }, [navOpen])
+
+  const closeMobileNav = () => {
+    setNavOpen(false)
+    setMobileStudyPanelOpen(false)
+  }
+
+  const onMobileOverlayClick = () => {
+    if (mobileStudyPanelOpen) setMobileStudyPanelOpen(false)
+    else closeMobileNav()
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -174,22 +196,64 @@ function App() {
             </div>
           </div>
           <div className="nav-links">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.label}
-                to={item.path}
-                className={({ isActive }) => {
-                  const studyActive =
-                    location.pathname.startsWith('/study') &&
-                    !location.pathname.startsWith('/study/program')
-                  const active = item.label === '留学专栏' ? studyActive : isActive
-                  return `nav-link${active ? ' active' : ''}`
-                }}
-                end={item.path === '/'}
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {navItems.map((item) =>
+              item.label === '留学专栏' ? (
+                <div
+                  key={item.label}
+                  className="nav-item nav-item--dropdown"
+                  onMouseLeave={(e) => {
+                    const root = e.currentTarget
+                    const to = e.relatedTarget
+                    if (to && root.contains(to)) return
+                    const active = document.activeElement
+                    if (active && root.contains(active)) active.blur()
+                  }}
+                >
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) => {
+                      const studyActive =
+                        location.pathname.startsWith('/study') &&
+                        !location.pathname.startsWith('/study/program')
+                      const active = studyActive
+                      return `nav-link nav-link--dropdown-trigger${active ? ' active' : ''}`
+                    }}
+                    end={item.path === '/'}
+                  >
+                    {item.label}
+                    <span className="nav-dropdown-caret" aria-hidden>▾</span>
+                  </NavLink>
+                  <ul className="nav-dropdown" role="menu" aria-label="留学专栏子菜单">
+                    {studySections.map((sec) => (
+                      <li key={sec.id} role="none">
+                        <NavLink
+                          role="menuitem"
+                          to={studyListPathForSectionId(sec.id)}
+                          className={({ isActive }) => `nav-dropdown-link${isActive ? ' active' : ''}`}
+                          onClick={(e) => {
+                            const el = e.currentTarget
+                            requestAnimationFrame(() => el.blur())
+                          }}
+                        >
+                          {sec.title}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <NavLink
+                  key={item.label}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `nav-link${isActive ? ' active' : ''}`
+                  }
+                  end={item.path === '/'}
+                >
+                  {item.label}
+                </NavLink>
+              ),
+            )}
             <span className="nav-inner-spacer" aria-hidden="true" />
           </div>
         </div>
@@ -201,33 +265,77 @@ function App() {
           <div
             className="nav-mobile-overlay"
             aria-hidden="true"
-            onClick={() => setNavOpen(false)}
+            onClick={onMobileOverlayClick}
           />
           <div className="nav-mobile-menu" role="dialog" aria-label="导航菜单">
             <button
               type="button"
               className="nav-mobile-close"
               aria-label="关闭菜单"
-              onClick={() => setNavOpen(false)}
+              onClick={closeMobileNav}
             >
               ×
             </button>
             <div className="nav-mobile-links">
-              {navItems.map((item) => (
+              {navItems.map((item) =>
+                item.label === '留学专栏' ? (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className={`nav-mobile-link nav-mobile-study-trigger${
+                      location.pathname.startsWith('/study') ? ' active' : ''
+                    }`}
+                    aria-expanded={mobileStudyPanelOpen}
+                    onClick={() => setMobileStudyPanelOpen(true)}
+                  >
+                    <span>{item.label}</span>
+                    <span className="nav-mobile-study-trigger-chevron" aria-hidden="true">
+                      ›
+                    </span>
+                  </button>
+                ) : (
+                  <NavLink
+                    key={item.label}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `nav-mobile-link${isActive ? ' active' : ''}`
+                    }
+                    end={item.path === '/'}
+                    onClick={closeMobileNav}
+                  >
+                    {item.label}
+                  </NavLink>
+                ),
+              )}
+            </div>
+          </div>
+          <div
+            className={`nav-mobile-subpanel${mobileStudyPanelOpen ? ' nav-mobile-subpanel--open' : ''}`}
+            role="dialog"
+            aria-label="留学专栏子菜单"
+            aria-hidden={!mobileStudyPanelOpen}
+          >
+            <div className="nav-mobile-subpanel-header">
+              <button
+                type="button"
+                className="nav-mobile-subpanel-back"
+                onClick={() => setMobileStudyPanelOpen(false)}
+              >
+                ‹ 返回
+              </button>
+              <span className="nav-mobile-subpanel-title">留学专栏</span>
+            </div>
+            <div className="nav-mobile-subpanel-links">
+              {studySections.map((sec) => (
                 <NavLink
-                  key={item.label}
-                  to={item.path}
-                  className={({ isActive }) => {
-                    const studyActive =
-                      location.pathname.startsWith('/study') &&
-                      !location.pathname.startsWith('/study/program')
-                    const active = item.label === '留学专栏' ? studyActive : isActive
-                    return `nav-mobile-link${active ? ' active' : ''}`
-                  }}
-                  end={item.path === '/'}
-                  onClick={() => setNavOpen(false)}
+                  key={sec.id}
+                  to={studyListPathForSectionId(sec.id)}
+                  className={({ isActive }) =>
+                    `nav-mobile-link nav-mobile-subpanel-link${isActive ? ' active' : ''}`
+                  }
+                  onClick={closeMobileNav}
                 >
-                  {item.label}
+                  {sec.title}
                 </NavLink>
               ))}
             </div>
