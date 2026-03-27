@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { NavLink, useLocation, useNavigate, useParams, Navigate } from 'react-router-dom'
 import { studyIntro, studySections, iclPrograms } from '../data/studyData.js'
 import { makeStudyProgramSlug } from '../utils/studySlug.js'
+import { studyListPathForSectionId, studyPathSegmentToSectionId } from '../utils/studySectionPath.js'
 
 // 大学留学用 ICL 课程（排除语言班，语言班单独成类）
 const iclProgramsNonLanguage = iclPrograms.filter((p) => p.type !== '语言班')
@@ -226,20 +227,22 @@ function StudySectionContent({ section }) {
 
 function StudyPage() {
   const location = useLocation()
-  const [selectedCategory, setSelectedCategory] = useState(studySections[0].id)
+  const { studyPath } = useParams()
+  const sectionIdFromUrl = studyPathSegmentToSectionId(studyPath)
+  const selectedCategory = sectionIdFromUrl ?? studySections[0].id
 
   useEffect(() => {
-    const fromSection = location.state?.fromSection
     const scrollY = location.state?.scrollY
-    if (fromSection && studySections.some((s) => s.id === fromSection)) {
-      setSelectedCategory(fromSection)
-    }
     if (typeof scrollY === 'number' && scrollY >= 0) {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => window.scrollTo(0, scrollY))
       })
     }
-  }, [location.state?.fromSection, location.state?.scrollY])
+  }, [location.state?.scrollY, studyPath])
+
+  if (!sectionIdFromUrl) {
+    return <Navigate to="/study/University" replace />
+  }
 
   const currentSection = studySections.find((s) => s.id === selectedCategory)
 
@@ -264,14 +267,13 @@ function StudyPage() {
 
       <nav className="study-category-nav" aria-label="留学分类">
         {studyCategories.map((cat) => (
-          <button
+          <NavLink
             key={cat.id}
-            type="button"
-            className={`study-category-link ${selectedCategory === cat.id ? 'active' : ''}`}
-            onClick={() => setSelectedCategory(cat.id)}
+            to={studyListPathForSectionId(cat.id)}
+            className={({ isActive }) => `study-category-link${isActive ? ' active' : ''}`}
           >
             {cat.label}
-          </button>
+          </NavLink>
         ))}
       </nav>
 

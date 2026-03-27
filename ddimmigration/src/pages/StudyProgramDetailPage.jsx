@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import { getStudyProgramById } from '../data/studyData.js'
 import { parseStudyProgramIdFromSlug } from '../utils/studySlug.js'
+import { studyListPathForSectionId } from '../utils/studySectionPath.js'
 
 function StudyProgramDetailPage() {
   const { id: idParam } = useParams()
@@ -18,6 +19,7 @@ function StudyProgramDetailPage() {
   const prog = programId ? getStudyProgramById(programId) : null
   const fromSection = location.state?.fromSection || prog?.sectionId || 'tertiary'
   const scrollY = location.state?.scrollY
+  const backStudyListPath = studyListPathForSectionId(fromSection)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -33,7 +35,7 @@ function StudyProgramDetailPage() {
     return (
       <main className="main-content case-detail-page">
         <p>未找到该项目。</p>
-        <Link to="/study" state={{ fromSection: 'tertiary', scrollY: 0 }} className="case-back-link">返回留学专栏</Link>
+        <Link to="/study/University" state={{ fromSection: 'tertiary', scrollY: 0 }} className="case-back-link">返回留学专栏</Link>
       </main>
     )
   }
@@ -44,7 +46,7 @@ function StudyProgramDetailPage() {
 
   return (
     <main className="main-content case-detail-page">
-      <Link to="/study" state={{ fromSection, scrollY }} className="case-back-link">&lt; 返回留学专栏</Link>
+      <Link to={backStudyListPath} state={{ fromSection, scrollY }} className="case-back-link">&lt; 返回留学专栏</Link>
 
       <article className="case-detail">
         <h1 className="case-detail-title">{prog.titleZh}</h1>

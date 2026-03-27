@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { Routes, Route, NavLink, Outlet, useLocation, Navigate } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer.jsx'
 import LeftSidebar from './components/LeftSidebar.jsx'
@@ -27,7 +27,7 @@ const navItems = [
   { label: '招聘信息', path: '/jobs' },
   { label: '企业相册', path: '/album' },
   { label: '移民资讯', path: '/news' },
-  { label: '留学专栏', path: '/study' },
+  { label: '留学专栏', path: '/study/University' },
   { label: '联络我们', path: '/contactus' },
   { label: '常见问题', path: '/faq' },
 ]
@@ -178,9 +178,13 @@ function App() {
               <NavLink
                 key={item.label}
                 to={item.path}
-                className={({ isActive }) =>
-                  `nav-link${isActive ? ' active' : ''}`
-                }
+                className={({ isActive }) => {
+                  const studyActive =
+                    location.pathname.startsWith('/study') &&
+                    !location.pathname.startsWith('/study/program')
+                  const active = item.label === '留学专栏' ? studyActive : isActive
+                  return `nav-link${active ? ' active' : ''}`
+                }}
                 end={item.path === '/'}
               >
                 {item.label}
@@ -213,9 +217,13 @@ function App() {
                 <NavLink
                   key={item.label}
                   to={item.path}
-                  className={({ isActive }) =>
-                    `nav-mobile-link${isActive ? ' active' : ''}`
-                  }
+                  className={({ isActive }) => {
+                    const studyActive =
+                      location.pathname.startsWith('/study') &&
+                      !location.pathname.startsWith('/study/program')
+                    const active = item.label === '留学专栏' ? studyActive : isActive
+                    return `nav-mobile-link${active ? ' active' : ''}`
+                  }}
                   end={item.path === '/'}
                   onClick={() => setNavOpen(false)}
                 >
@@ -244,8 +252,9 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
-          <Route path="/study" element={<StudyPage />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
+          <Route path="/study" element={<Navigate to="/study/University" replace />} />
+          <Route path="/study/:studyPath" element={<StudyPage />} />
         </Route>
       </Routes>
 
