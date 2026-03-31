@@ -1,5 +1,97 @@
-/** 新加的案例放在数组最前 */
+/** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
+  {
+    id: 42,
+    title: 'AEWV工签成功担保子女学签',
+    summary: '客户持新西兰认证雇主工签（AEWV），我们为其两个子女分别递交申请，双双获批。',
+    date: '2026年4月1日',
+    image: '/pic/case/040102.jpg',
+    images: ['/pic/case/040102.jpg', '/pic/case/040103.jpg'],
+    fullContent: `AEWV 担保配偶开放工签 + 子女学签，全家齐获批 ✅
+
+客户持新西兰认证雇主工签（AEWV），我们为其两个子女分别递交申请，双双获批。
+
+✅ 子女：Student visa - Dependent of a Worker 获批
+• 可按本地学生（domestic student）身份在新西兰中小学就读，享受本地生待遇
+• 多次往返，无需资金证明及返程机票
+
+AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶拿开放工签合法工作，子女按本地生入读公立学校，全家在新西兰工作与学业规划一步到位。`,
+  },
+  {
+    id: 41,
+    title: '夫妻技术移民 SMC 居民签证获批',
+    summary: '申请人夫妇获新西兰移民局批准 Resident Visa - SMC Skilled Residence（技术移民类别居民签证）。批签函日期 2026 年 3 月 31 日；顾问机构 DD IMMIGRATION CONSULTING LIMITED。',
+    date: '2026年3月31日',
+    image: '/pic/case/040101.jpg',
+    images: ['/pic/case/040101.jpg'],
+    fullContent: `夫妻技术移民 SMC 居民签证获批 ✅
+
+申请人夫妇的新西兰技术移民（Skilled Migrant Category）居民签证申请获移民局批准，签证类别为 Resident Visa - SMC Skilled Residence。
+
+✅ 结果：居民签证申请获批（以移民局签发的批准函为准）
+✅ 类别：SMC Skilled Residence（技术移民居民签证）
+✅ 批签函日期：2026 年 3 月 31 日
+
+夫妻作为主副申或共同规划的技术移民路径，材料与评分、工作及合规要求均需与当时移民政策一致。具体签证条件、入境与旅行要求以移民局正式批信为准；庆祝获批同时建议妥善保管电子签证与批签文件。如需了解后续入籍、家庭成员签证或其他规划，欢迎联络持牌移民顾问。`,
+  },
+  {
+    id: 40,
+    title: 'Worldwide 通用英语课程 OFFER 获批',
+    summary: '客户 XU（中国籍）获奥克兰 Worldwide School of English（Worldwide School Ltd）国际生入学通知：全日制 General English 课程，约 30 教学周，2026 年 4 月 6 日开学至 10 月 30 日结课，每周约 20 课时。录取通知书日期 2026 年 3 月 26 日。',
+    date: '2026年3月26日',
+    image: '/pic/case/033101.jpg',
+    images: ['/pic/case/033101.jpg'],
+    fullContent: `Worldwide 语言班 / 通用英语 OFFER 获批 ✅
+
+申请人获新西兰奥克兰 Worldwide School of English（Worldwide School Ltd）签发的 Offer of Place，攻读 General English（全日制通用英语） 课程，适合提升英语、衔接后续学历或满足签证类语言规划。
+
+✅ 院校：Worldwide School of English，奥克兰中央商务区 Anzac Avenue 80 号
+✅ 课程：Full-Time General English（约 30 教学周）
+✅ 开学 / 结课：2026 年 4 月 6 日 — 2026 年 10 月 30 日（以录取信为准）
+✅ 学习负荷：约每周 20 小时
+✅ 录取信日期：2026 年 3 月 26 日
+
+语言班 OFFER 是学签申请的重要材料之一；具体入学与签证要求以校方及新西兰移民局最新规定为准，如需个案规划欢迎联络持牌顾问协助。`,
+  },
+  {
+    id: 39,
+    title: 'ICL 管理学硕士一年制条件 OFFER 获批',
+    summary: '客户 TAN（中国籍）获 ICL Graduate Business School 签发的硕士有条件录取：Master of Management（Level 9）全日制，180 学分，拟定 2026 年 5 月 4 日开学、2027 年 4 月 25 日结课；条件包括补交合格语言成绩。录取信日期 2026 年 3 月 24 日，代理列为 DD IMMIGRATION CONSULTING。',
+    date: '2026年3月24日',
+    image: '/pic/case/033002.jpg',
+    images: ['/pic/case/033002.jpg'],
+    fullContent: `ICL 管理学硕士条件 OFFER 获批 ✅
+
+申请人获 ICL Graduate Business School（ICL 教育集团）签发的 Conditional Offer of Place，为管理类一年制硕士路径，目前需按信函要求补交英语能力证明 后方可转为无条件录取并衔接学签，若此前需先读语言班，可与顾问一并规划时间线。
+
+✅ 项目：Master of Management（Level 9），全日制
+✅ 学分：180 credits
+✅ 拟定开学 / 结课：2026 年 5 月 4 日 — 2027 年 4 月 25 日（以录取信为准）
+✅ 主要条件：语言成绩（以及其他校方列明条件，以原件为准）
+✅ 录取信日期：2026 年 3 月 24 日
+
+硕士条件 OFFER 说明学校已原则接受申请，后续需满足语言等条件；材料与陈述以校方正式信函为准。持牌留学与移民顾问可协助语言班 / 直录衔接及学签准备。`,
+  },
+  {
+    id: 38,
+    title: '低技能升级木工 AEWV 续签获批',
+    summary: '客户 JIA（中国籍）成功获批新西兰认证雇主工签（AEWV）续签，职位为木工（Carpenter），丰盛湾（Bay of Plenty）地区全职岗位。获批日期 2026 年 3 月 20 日，签证至 2028 年 4 月 3 日前有效（含最后入境要求以批签函为准），须每周至少全职工作 30 小时。',
+    date: '2026年3月20日',
+    image: '/pic/case/032003.jpg',
+    images: ['/pic/case/032003.jpg'],
+    fullContent: `低技能升级木工 AEWV 续签获批 ✅
+
+申请人 JIA，中国籍，由低技能路径成功升级并获批木工（Carpenter）岗位的新西兰认证雇主工签（Accredited Employer Work Visa，AEWV）。职位注明为丰盛湾（Bay of Plenty）地区木工岗位，体现岗位真实匹配与雇主认证路径下的续签/升级规划。
+
+✅ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 获批日期：2026 年 3 月 20 日
+✅ 职位：Carpenter（木工），丰盛湾（Bay of Plenty）
+✅ 签证起始：2026 年 3 月 20 日
+✅ 签证有效期至：2028 年 4 月 3 日（最晚入境/旅行日期以移民局批签函为准）
+✅ 工作条件：须为全职工作，每周至少 30 小时
+
+从低技能岗位过渡到木工等技术岗位，并顺利完成 AEWV 续签，为在新西兰长期工作与后续移民规划打下基础。具体条款以移民局签发的批准函为准；如需评估自身是否可走类似路径，欢迎联络持牌顾问个案分析。`,
+  },
   {
     id: 37,
     title: '合同管理员 5 年 AEWV 工签获批',
@@ -770,3 +862,16 @@ AEWV 主申请人获批后，符合条件的子女可申请 Dependent of a Worke
 建筑吊装工为新西兰建筑行业技术工种，材料与岗位匹配清晰、雇主资质合规，升级续签顺利获批。`,
   },
 ]
+
+/** 解析案例 date 字段（中文「YYYY年M月D日」）为可排序时间戳；无法解析时为 0 */
+export function caseDateToTime(dateStr) {
+  const m = String(dateStr || '').match(/(\d{4})年(\d{1,2})月(\d{1,2})日/)
+  if (!m) return 0
+  return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime()
+}
+
+/** 列表页展示顺序：按案例日期新 → 旧（与 casesList 数组书写顺序无关） */
+export const casesListByDateDesc = [...casesList].sort(
+  (a, b) =>
+    caseDateToTime(b.date) - caseDateToTime(a.date) || Number(b.id) - Number(a.id),
+)
