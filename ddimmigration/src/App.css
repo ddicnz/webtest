@@ -3233,40 +3233,6 @@ img[src*="album/office"][src*="IMG_2486"] {
   border: none;
 }
 
-.footer-map--wechat {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.footer-map-fallback {
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 14px;
-  line-height: 1.55;
-  text-align: center;
-  max-width: 320px;
-}
-
-.footer-map-fallback-title {
-  margin: 0 0 10px;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.footer-map-fallback-addr {
-  margin: 0 0 12px;
-}
-
-.footer-map-fallback-note {
-  margin: 0;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
-}
-
 .footer-qrcodes {
   display: grid;
   grid-template-columns: 1fr 1fr;

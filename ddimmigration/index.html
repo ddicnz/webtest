@@ -2,22 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- GA4：微信内不请求 Google，避免国内打不开或长时间白屏 -->
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6CLHE46347"></script>
     <script>
-      (function () {
-        if (typeof navigator !== 'undefined' && /MicroMessenger/i.test(navigator.userAgent || '')) {
-          return;
-        }
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', 'G-6CLHE46347');
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6CLHE46347';
-        document.head.appendChild(s);
-      })();
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6CLHE46347');
     </script>
     <link rel="icon" type="image/jpeg" href="/pic/logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
