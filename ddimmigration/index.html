@@ -2,18 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6CLHE46347"></script>
+    <!-- GA4：微信内不请求 Google，避免国内打不开或长时间白屏 -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-6CLHE46347');
+      (function () {
+        if (typeof navigator !== 'undefined' && /MicroMessenger/i.test(navigator.userAgent || '')) {
+          return;
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-6CLHE46347');
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6CLHE46347';
+        document.head.appendChild(s);
+      })();
     </script>
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" /> <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> <link rel="shortcut icon" href="/favicon.ico" /> <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" /> <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/jpeg" href="/pic/logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b263d" />
-    <title>新西兰嘀嘀移民公司| 移民 | 签证 |留学</title>
+    <title>ddimmigration</title>
   </head>
   <body>
     <div id="root"></div>
