@@ -1,20 +1,18 @@
 const teamMembers = [
   {
     id: 1,
-    name: 'Eric',
-    role: '持牌移民顾问',
+    name: 'Eric Jia',
+    role: '持牌移民顾问 （IAA 牌照编号：201800151）',
     photo: '/pic/eric2.jpg',
     licence: '/pic/eric_licience.jpg',
-    licenceNo: '201800151',
     intro: 'Eric 从业多年，累计成功获批案例超过1000份。专注留学、技术移民、商业移民及各类工作签证申请，实操经验丰富。擅长处理复杂及高难度案件，包括身份转换、历史签证瑕疵、拒签翻案等问题，成功协助大量客户顺利获批。',
   },
   {
     id: 2,
-    name: 'Tsui',
-    role: '持牌移民顾问',
+    name: 'Tat Ming Tsui',
+    role: '持牌移民顾问 （IAA 牌照编号：201400700）',
     photo: '/pic/tsui.jpg',
     licence: '/pic/dashu_licience.jpg',
-    licenceNo: '201400700',
     intro: 'Tsui 资深移民顾问，10年以上从业经验，累计数千份成功获批案例，涵盖留学签证、工作签证及各类移民类别。拥有New Zealand Ministry of Justice（新西兰司法部）工作背景，熟悉新西兰法律体系及政策逻辑。以严谨逻辑为基础，制定稳健、合规的新西兰工作 留学 移民路径。',
   },
   {
