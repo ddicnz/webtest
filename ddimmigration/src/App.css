@@ -2914,6 +2914,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   line-height: 1.4;
   color: #555;
   text-align: center;
+  white-space: pre-line;
   background: #fff;
 }
 
