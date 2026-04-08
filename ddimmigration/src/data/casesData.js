@@ -779,7 +779,7 @@ AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶
     id: 7,
     title: 'AEWV工签原来还有这些家庭福利？',
     summary: '持 AEWV 工签的子女可作为 Dependent 申请学生签，按本地生入读公立中小学，学费大幅节省；本案客户为建筑类 AEWV，孩子获批 Dependent of a Worker 学生签至 2030 年。',
-    date: '2026年2月',
+    date: '2026年2月13日',
     image: '/pic/case/0213.jpg',
     images: ['/pic/case/0213.jpg'],
     fullContent: `很多拿着工签的人可能不知道，孩子是可以作为 Dependent 申请学生签的。
@@ -796,7 +796,7 @@ AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶
     id: 5,
     title: '签证快到期了？别慌，这样操作再拿 5 年工签',
     summary: '客户工签即将到期，我们调整策略：配偶由开放工签转为主申请人拿下 AEWV，客户再申配偶开放工签，直接续上 5 年，身份无缝衔接。',
-    date: '2026年2月',
+    date: '2026年2月28日',
     image: '/pic/case/配偶工签1.jpg',
     images: ['/pic/case/原始工签1.jpg', '/pic/case/配偶工签1.jpg'],
     fullContent: `很多人工签快到期已经开始准备打包回国——别慌！还可这样操作，再拿 5 年工签。
@@ -813,7 +813,7 @@ AEWV 主申请人获批后，配偶与符合条件的子女均可随行：配偶
     id: 3,
     title: '亚洲菜厨师 AEWV 认证雇主工签 10 天光速下签',
     summary: '客户申请亚洲菜厨师（Asian Cuisine Cook）认证雇主工签，奥克兰岗位，10 天获批，5 年多次往返。',
-    date: '2026年2月',
+    date: '2026年2月3日',
     image: '/pic/case/0211.jpg',
     images: ['/pic/case/0211.jpg'],
     fullContent: `客户成功获批新西兰认证雇主工签（AEWV），职位为亚洲菜厨师（Asian Cuisine Cook），工作地点奥克兰，10 天光速下签。
