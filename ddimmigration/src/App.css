@@ -1097,35 +1097,57 @@ img[src*="album/office"][src*="IMG_2486"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 40px;
   padding: 16px 0;
 }
 
-.cases-pagination-btn {
-  padding: 10px 20px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #fff;
-  background: var(--nav-bg);
+.cases-pagination-nav,
+.cases-pagination-page {
+  min-width: auto;
+  height: auto;
+  padding: 6px 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
+  background: transparent;
+  color: #1976b3;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
   cursor: pointer;
-  transition: background 0.2s;
+  font-family: inherit;
 }
 
-.cases-pagination-btn:hover:not(:disabled) {
-  background: var(--nav-active);
+.cases-pagination-nav:hover:not(:disabled),
+.cases-pagination-page:hover:not(.active) {
+  color: #0b5f8f;
+  text-decoration: underline;
 }
 
-.cases-pagination-btn:disabled {
-  opacity: 0.5;
+.cases-pagination-page.active {
+  color: #111;
+  background: transparent;
+  cursor: default;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cases-pagination-nav:disabled {
+  opacity: 0.45;
   cursor: not-allowed;
+  color: #8aa0af;
+  text-decoration: none;
 }
 
-.cases-pagination-info {
-  font-size: 15px;
-  color: #555;
+.cases-pagination-ellipsis {
+  min-width: 20px;
+  text-align: center;
+  color: #788997;
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 6px 4px;
+  user-select: none;
 }
 
 .case-card {

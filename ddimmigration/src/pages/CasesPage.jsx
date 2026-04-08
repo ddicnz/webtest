@@ -3,7 +3,25 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { casesListByDateDesc } from '../data/casesData.js'
 import { makeCaseSlug } from '../utils/caseSlug.js'
 
+
 const PAGE_SIZE = 5
+
+function buildPageItems(current, total) {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1)
+  }
+
+  const items = [1]
+  const start = Math.max(2, current - 1)
+  const end = Math.min(total - 1, current + 1)
+
+  if (start > 2) items.push('ellipsis-left')
+  for (let i = start; i <= end; i += 1) items.push(i)
+  if (end < total - 1) items.push('ellipsis-right')
+
+  items.push(total)
+  return items
+}
 
 function CasesPage() {
   const location = useLocation()
@@ -62,18 +80,34 @@ function CasesPage() {
         <nav className="cases-pagination" aria-label="成功案例分页">
           <button
             type="button"
-            className="cases-pagination-btn"
+            className="cases-pagination-nav"
             disabled={page <= 1}
             onClick={() => setPage((p) => p - 1)}
           >
             上一页
           </button>
-          <span className="cases-pagination-info">
-            第 {page} / {totalPages} 页
-          </span>
+
+          {buildPageItems(page, totalPages).map((item) =>
+            typeof item === 'number' ? (
+              <button
+                key={item}
+                type="button"
+                className={`cases-pagination-page${item === page ? ' active' : ''}`}
+                onClick={() => setPage(item)}
+                aria-current={item === page ? 'page' : undefined}
+              >
+                {item}
+              </button>
+            ) : (
+              <span key={item} className="cases-pagination-ellipsis" aria-hidden="true">
+                ...
+              </span>
+            ),
+          )}
+
           <button
             type="button"
-            className="cases-pagination-btn"
+            className="cases-pagination-nav"
             disabled={page >= totalPages}
             onClick={() => setPage((p) => p + 1)}
           >

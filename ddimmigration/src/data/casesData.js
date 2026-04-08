@@ -1,6 +1,110 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 50,
+    title: '中国特色厨师（高级厨师证）工签获批',
+    summary: '申请人凭高级厨师资质路径获批新西兰中国特色厨师类别工签（Work visa – China Special Work），职位 Chinese Cuisine Chef（中式厨师），绑定奥克兰雇主；签证 2026 年 1 月 12 日起生效，须在 2026 年 7 月 12 日前首次入境，自首入境起可停留 36 个月（3 年），多次往返。',
+    date: '2026年1月12日',
+    image: '/pic/case/040808.jpg',
+    images: ['/pic/case/040808.jpg'],
+    fullContent: `中国特色厨师（高级厨师证）工签获批 ✅
+
+申请人成功获批新西兰「中国特色工作」类别工作签证（Work visa – China Special Work），以中国厨师特殊通道递交，职位为中式厨师（Chinese Cuisine Chef），工作地点奥克兰，须为批签函所列认证雇主工作。
+
+✅ 签证类型：Work visa – China Special Work（中国特色厨师/中国特殊工作通道，以批准信为准）
+✅ 结果：Work visa application approved（以移民局批准函为准）
+✅ 递交记录：2025 年 12 月 1 日（以申请记录与信函为准）
+✅ 签证起始：2026 年 1 月 12 日
+✅ 首次入境截止：2026 年 7 月 12 日前须入境
+✅ 停留时长：自首入境起 36 个月（约 3 年，以电子签证及信函为准）
+✅ 工作条件：仅供职 Chinese Cuisine Chef（中式厨师），奥克兰；绑定指定雇主
+✅ 入境：多次往返等条件以批准信为准
+
+高级厨师证与中国厨师通道对岗位、资质与材料匹配要求较高，具体条款与旅行许可以新西兰移民局签发的批准函及电子签证为准。`,
+  },
+  {
+    id: 49,
+    title: '中式糕点师 AEWV 工签续签获批',
+    summary: '客户 GUO（女）获批新西兰认证雇主工签（AEWV）续签，职位 Chinese Pastry Cook（中式糕点师），绑定奥克兰雇主岗位；签证 2026 年 4 月 7 日起生效，可停留至 2028 年 2 月 3 日，须全职每周至少 30 小时。',
+    date: '2026年4月7日',
+    image: '/pic/case/040807.jpg',
+    images: ['/pic/case/040807.jpg'],
+    fullContent: `中式糕点师 AEWV 工签续签获批 ✅
+
+申请人成功获批新西兰认证雇主工作签证（Accredited Employer Work Visa，AEWV）续签，职位为中式糕点师（Chinese Pastry Cook），工作地点奥克兰，须为指定雇主全职工作。
+
+✅ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✅ 结果：Work visa application approved（以移民局批准函为准）
+✅ 签证起始：2026 年 4 月 7 日
+✅ 可停留至：2028 年 2 月 3 日（以批签函为准）
+✅ 工作条件：仅供职中式糕点师岗位，奥克兰；须全职，每周至少 30 小时
+✅ 入境：多次往返等条件以批准信为准
+
+餐饮技术岗位续签需岗位、雇主认证与材料一致。具体签证条款与旅行授权以新西兰移民局签发的电子签证及信函为准。`,
+  },
+  {
+    id: 48,
+    title: '一个AEWV工签，直接带全家落地新西兰',
+    summary: '主申请人持新西兰认证雇主工签（AEWV）后，配偶获批 Partner of AEWV（open）开放工签，子女获批 Student visa - Dependent of a Worker，可按本地生入读新西兰中小学。附图共三张，批签日期均为 2026 年 4 月 8 日。',
+    date: '2026年4月8日',
+    image: '/pic/case/040806.jpg',
+    images: ['/pic/case/040806.jpg', '/pic/case/040804.jpg', '/pic/case/040805.jpg'],
+    fullContent: `很多人只把AEWV当成一张工作签证,其实它真正的价值在于：一个人拿签证，全家一起受益
+
+
+
+今天这个客户就是典型案例：
+主申请人的AEWV工签获批
+配偶开放工签获批
+子女学生签获批
+
+AEWV的核心优势在于：
+1. 配偶可以拿开放工签不限制雇主，不限制行业，家庭多一个收入来源
+2. 子女可以按本地生上公立学校，学费压力大幅降低
+3. 签证时间长（最长5年） 有足够时间规划后续居民路径
+4. 配偶积累本地经验，5年后可以继续申请AEWV，原来的主工签换成配偶工签，整个家庭可以再规划5年
+
+很多AEWV持有者只办一个人的签证，但真正聪明的做法是： 一开始就做“全家规划”，把工作、收入、孩子教育、移民一次性安排好，移民从来不是一张签证的事，而是一个家庭的整体布局.`,
+  },
+  {
+    id: 47,
+    title: '新护照工签 Label-less Replace 转签获批',
+    summary: '申请人因换新护照办理工签 Label-less Replace（无贴纸换签）顺利获批：批签及签证起始 2026 年 4 月 7 日，可停留至 2028 年 3 月 28 日；材料含奥克兰木工（Carpenter）岗位条件与开放工作等条款，以移民局批签函为准。',
+    date: '2026年4月7日',
+    image: '/pic/case/40802.jpg',
+    images: ['/pic/case/40802.jpg', '/pic/case/40803.jpg'],
+    fullContent: `新护照工签 Label-less Replace 转签获批 ✅
+
+本案例为同一申请人换发新护照后的工作签证转签（Label-less Replace），成功案例附图共两张：封面页为换签批准要点，另一页为签证条件与岗位/地区等信息（具体以原件为准）。
+
+✅ 结果：Work visa application approved（以移民局批准函为准）
+✅ 签证类别：work visa - Label-less Replace（新护照无贴纸替换）
+✅ 批签 / 签证起始：2026 年 4 月 7 日
+✅ 可停留至：2028 年 3 月 28 日
+✅ 申请人背景：中国籍（其他个人信息以批签函为准）
+✅ 工作条件示例：批签材料中可记载为奥克兰地区木工（Carpenter）等绑定或开放条款，请以签字信函为准
+
+换签类申请需确保护照信息、签证转移逻辑与移民局系统记录一致。具体入境、多次往返及附加条件以电子签证与批准信为准。`,
+  },
+  {
+    id: 46,
+    title: 'AEWV 配偶 Open 工签获批',
+    summary: '客户 WANG 获批 Work visa - Partner of AEWV (open)。签证 2026 年 4 月 7 日生效，可在新西兰为任意雇主从事任意职业合法工作（以批签函为准）。',
+    date: '2026年4月7日',
+    image: '/pic/case/040801.jpg',
+    images: ['/pic/case/040801.jpg'],
+    fullContent: `AEWV 配偶 Open 工签获批 ✅
+
+申请人 WANG 成功获批新西兰配偶开放工签（Work visa - Partner of AEWV (open)）。该类别获批后，持有人可在新西兰为任意雇主、从事任意职业合法工作（以签证条件为准）。
+
+✅ 签证类别：Work visa - Partner of AEWV (open)
+✅ 签证生效：2026 年 4 月 7 日
+✅ 入境次数：多次往返（以批签函为准）
+✅ 工作条件：可为任意雇主在任意职业工作
+
+配偶 Open 工签是 AEWV 家庭同步规划中的关键路径之一。个案具体停留时长、旅行与附加条款以移民局签发的电子签证和批准信为准。`,
+  },
+  {
     id: 45,
     title: '汽车修理工 5 年 AEWV 工签获批',
     summary: '客户 DING 获批新西兰认证雇主工签（AEWV），职位 Motor Mechanic（汽车修理工），工作地点坎特伯雷。批签日期 2026 年 4 月 7 日，签证有效期 60 个月（5 年），多次往返。',
