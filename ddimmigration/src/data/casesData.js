@@ -1,6 +1,29 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 51,
+    title: 'ICL 语言班 OFFER + 管理学硕士条件录取',
+    summary: '张同学同时获 Auckland English Academy 语言班录取（ESOL Level 3 / PTE 备考全日制，约 26 周）与 ICL Graduate Business School 管理学硕士（Master of Management，Level 9，一年制）条件录取，可先修语言再衔接硕士开课（2026 年 11 月）。',
+    date: '2026年4月9日',
+    image: '/pic/case/040902.jpg',
+    images: ['/pic/case/040901.jpg', '/pic/case/040902.jpg'],
+    fullContent: `ICL 语言班 OFFER + 管理学硕士条件录取（同一人）✅
+
+同一申请人先后获得 ICL 教育集团旗下 Auckland English Academy 英语课程录取，以及 ICL Graduate Business School 管理学硕士课程条件录取，形成「语言衔接 + 硕士主课」路径。
+
+【语言班 — Auckland English Academy】
+✅ 课程：English for Speakers of Other Languages（Level 3），含 PTE Preparation Course Strand 2 全日制
+✅ 学制：约 26 周；开课约 2026 年 4 月 20 日，结课约 2026 年 10 月 16 日（以 OFFER 为准）
+✅ 地点：奥克兰；学费等费用以学校录取信与合同为准
+
+【硕士 — ICL Graduate Business School（条件录取）】
+✅ 课程：Master of Management（Level 9），全日制，180 学分，一年制主课
+✅ 开课约 2026 年 11 月 23 日，结课约 2027 年 11 月 21 日（以 OFFER 为准）
+✅ 条件：须满足英语要求（如 IELTS 6.5 且单项不低于 6.0 等，以 OFFER 列明为准）；学历与背景要求以学校录取信为准
+
+语言暂不达标可先锁定语言班与硕士名额，按学校要求补交语言或完成衔接课程。具体入学条件、缴费与签证材料以各校正式文件为准。`,
+  },
+  {
     id: 50,
     title: '中国特色厨师（高级厨师证）工签获批',
     summary: '申请人凭高级厨师资质路径获批新西兰中国特色厨师类别工签（Work visa – China Special Work），职位 Chinese Cuisine Chef（中式厨师），绑定奥克兰雇主；签证 2026 年 1 月 12 日起生效，须在 2026 年 7 月 12 日前首次入境，自首入境起可停留 36 个月（3 年），多次往返。',
