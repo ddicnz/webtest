@@ -1,6 +1,28 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 52,
+    title: '新西兰工签持有者成功申请澳洲旅游签，多次往返',
+    summary:
+      '中国籍申请人获批澳大利亚 Visitor visa (subclass 600) 商务访客（Business Visitor）类别：多次入境，每次入境可停留 3 个月；须在 2029 年 4 月 9 日前首次入境（以移民局批签函为准）。',
+    date: '2026年4月10日',
+    image: '/pic/case/041001.jpg',
+    images: ['/pic/case/041001.jpg'],
+    fullContent: `澳洲 600 子类商务访客签证获批 ✅
+
+申请人成功获批澳大利亚内政部（Department of Home Affairs）签发的访客签证 Visitor (subclass 600)，所属类别为商务访客（Business Visitor）流。
+
+【批签要点（以正式批签函为准）】
+✅ 签证状态：Granted（已批准）
+✅ 入境次数：Multiple entries（多次往返）
+✅ 停留长度：每次入境后可停留 3 个月（从每次入境日起算）
+✅ 旅行有效期：须在批函所列「Must Not Arrive After」日期前入境（本案例为 2029 年 4 月 9 日前）
+
+商务访客签适用于赴澳进行短期商务活动、会议洽谈等合规行程。材料真实、行程与访问目的清晰、能够说明回国约束力，是顺利获批的重要基础。
+
+具体条款、条件与旅行要求以澳大利亚政府签发的正式签证通知及 VEVO 记录为准。`,
+  },
+  {
     id: 51,
     title: 'ICL 语言班 OFFER + 管理学硕士条件录取',
     summary: '张同学同时获 Auckland English Academy 语言班录取（ESOL Level 3 / PTE 备考全日制，约 26 周）与 ICL Graduate Business School 管理学硕士（Master of Management，Level 9，一年制）条件录取，可先修语言再衔接硕士开课（2026 年 11 月）。',
