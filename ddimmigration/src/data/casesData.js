@@ -1,6 +1,69 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 58,
+    title: '国内汽车钣金大专学历认证新西兰 5 级 Diploma',
+    summary:
+      '申请人持国内相关专业毕业证明（Automobile Body Shaping Technology / 汽车钣金造型等，学制约 3 年），经 NZQA 出具 International Qualifications Recognition Statement，评估结果为新西兰资历框架 Diploma at Level 5（5 级）。',
+    date: '2026年4月14日',
+    image: '/pic/case/041403.jpg',
+    images: ['/pic/case/041403.jpg'],
+    fullContent: `新西兰 NZQA 国际学历认可：5 级 Diploma 获批 ✅
+
+不少技工、汽修、钣金类背景的客户在申请 AEWV 或规划长期居留时，需要先把国内学历放到新西兰官方框架下「对齐等级」。本案例为 NZQA 国际学历评估的典型路径。
+
+【评估要点（以 NZQA 正式声明为准）】
+✔ 文件类型：International Qualifications Recognition Statement
+✔ 原学历：相关专业 Graduation Certificate（如汽车钣金造型技术等，以证书英文全称为准）
+✔ 学制：约 3 年
+✔ 评估结论：Diploma at Level 5（新西兰 5 级文凭）
+✔ 出具日期与申请人信息以 NZQA 原件及官网核验为准
+
+完成 NZQA 认可后，是否满足特定工签岗位、薪资或移民打分中的学历要求，仍需结合岗位描述与当时移民政策个案判断。`,
+  },
+  {
+    id: 57,
+    title: '海外申请焊工5年工签，4个工作日光速获批',
+    summary:
+      '申请人在境外递交，成功获批新西兰 Accredited Employer Work Visa（AEWV），职位 Welder（焊工），工作地点奥克兰；签证为期约 5 年（自首入境起算等条款以批签函为准），审理节奏极快（约 4 个工作日，以移民局实际处理为准）。',
+    date: '2026年4月13日',
+    image: '/pic/case/041401.jpg',
+    images: ['/pic/case/041401.jpg'],
+    fullContent: `这次真有点出乎意外的快，这位焊工客户海外递交AEWV工签，复活节假期提交，居然4个工作日就获批了！ 连我们自己都觉得有点不可思议！
+
+客户是在国内申请的，焊接经验丰富，准备的材料有：
+✔ 焊工相关技能证书
+✔ 24个月工作经验
+✔ 匹配的真实岗位
+
+很多人一直觉得： 海外申请很慢、很难。但这个客户的情况说明一个点：当你的材料足够清晰、岗位匹配度高、雇主合规，移民局审理是可以非常快的。
+
+我们重点做的是把24个月工作经验逐段拆解、对应岗位职责去匹配，不是简单写“做过焊工”，而是把你具体会什么，做过什么，讲清楚，最终5年工签直接获批，同时：
+ 配偶可以拿开放工签不限制雇主，不限制行业，家庭多一个收入来源
+ 子女可以按本地生上公立学校，学费压力大幅降低`,
+  },
+  {
+    id: 56,
+    title: '木工AEWV续签2年工签获批',
+    summary:
+      '申请人职位 Carpenter（木工），绑定奥克兰雇主；AEWV 续签获批，新签证期限至批函所列到期日（约两年多，须每周至少 30 小时全职为指定雇主工作，以批准函为准）。',
+    date: '2026年4月13日',
+    image: '/pic/case/041402.jpg',
+    images: ['/pic/case/041402.jpg'],
+    fullContent: `木工 AEWV 续签：建筑技工岗位再拿工签 ✅
+
+木工属于新西兰建筑行业常见技能岗位，续签时移民局会重点审核雇主认证、岗位真实性、工时与薪资是否仍符合当时 AEWV 要求。
+
+【本案例要点（以正式批准函为准）】
+✔ 签证类别：Accredited Employer Work Visa（AEWV）
+✔ 职位：Carpenter（木工）
+✔ 地区：Auckland（奥克兰）
+✔ 签证条件：须为批签函所列雇主从事获批岗位，通常要求每周不少于 30 小时全职工作
+✔ 有效期：自生效日起至批函到期日止（可为多次入境，具体以英文签证条件为准）
+
+建议在现有工签到期前预留充足时间准备雇佣协议、工资单与岗位说明，避免影响连续合法工作身份。`,
+  },
+  {
     id: 55,
     title: '奥克兰屋顶工（Roof Applicator）AEWV 续签获批 2 年',
     summary:
