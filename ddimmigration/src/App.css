@@ -1228,6 +1228,11 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 55%;
 }
 
+/* 041701.jpg 封面：构图上移约 20%（相对默认 center 25%） */
+.case-card-image-wrap:has(img[src*="041701"]) .case-card-image {
+  object-position: center 50%;
+}
+
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;
