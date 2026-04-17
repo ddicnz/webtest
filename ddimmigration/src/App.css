@@ -2535,6 +2535,38 @@ img[src*="album/office"][src*="IMG_2486"] {
   border: 1px solid rgba(91, 163, 198, 0.25);
 }
 
+.page-back-to-top-btn {
+  position: fixed;
+  right: 22px;
+  bottom: 96px;
+  z-index: 180;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--nav-bg);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.page-back-to-top-btn:hover {
+  background: #4a92b5;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .page-back-to-top-btn {
+    right: 14px;
+    bottom: 82px;
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 900px) {
   .study-page {
     padding-left: 0;

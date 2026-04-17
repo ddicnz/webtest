@@ -105,7 +105,15 @@ function App() {
   const [navSolid, setNavSolid] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
   const [mobileStudyPanelOpen, setMobileStudyPanelOpen] = useState(false)
+  const [showPageBackToTop, setShowPageBackToTop] = useState(false)
   const location = useLocation()
+  const showBackToTopRoute =
+    location.pathname.startsWith('/study') ||
+    location.pathname.startsWith('/album') ||
+    location.pathname.startsWith('/jobs') ||
+    location.pathname.startsWith('/cases') ||
+    location.pathname.startsWith('/about') ||
+    location.pathname.startsWith('/faq')
 
   // GA4：SPA 路由切换时上报页面浏览
   useEffect(() => {
@@ -141,6 +149,7 @@ function App() {
     const handleScroll = () => {
       // 只要页面有滚动就加深导航背景
       setNavSolid(window.scrollY > 0)
+      setShowPageBackToTop(showBackToTopRoute && window.scrollY > 260)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -149,7 +158,7 @@ function App() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [showBackToTopRoute])
 
   return (
     <div className="homepage">
@@ -365,6 +374,17 @@ function App() {
           <Route path="/study/:studyPath" element={<StudyPage />} />
         </Route>
       </Routes>
+
+      {showBackToTopRoute && showPageBackToTop && (
+        <button
+          type="button"
+          className="page-back-to-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="回到顶部"
+        >
+          回到顶部
+        </button>
+      )}
 
       <Footer />
     </div>
