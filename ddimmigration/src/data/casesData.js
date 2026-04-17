@@ -1,6 +1,50 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 61,
+    title: 'Auckland English Academy 语言课程 OFFER 获批',
+    summary:
+      '申请人获 Auckland English Academy（Auckland English Academy 1988 Limited）国际学生录取通知：English for Speakers of Other Languages（Level 3），PTE Preparation Course Strand 1 全日制课程，学习周期与费用以学校正式文件为准。',
+    date: '2026年4月17日',
+    image: '/pic/case/041701.jpg',
+    images: ['/pic/case/041701.jpg'],
+    fullContent: `语言班 OFFER 获批 ✅
+
+申请人成功获得 Auckland English Academy 签发的国际学生录取通知（Offer of Place）。
+
+【本案例要点（以学校正式文件为准）】
+✅ 课程：English for Speakers of Other Languages（Level 3）
+✅ 组件：PTE Preparation Course Strand 1（Full Time）
+✅ 学习周期、费用与开课安排：以录取信及学校后续确认文件为准
+✅ 院校主体：Auckland English Academy（Auckland English Academy 1988 Limited）
+
+语言课程 OFFER 是学签准备中的关键材料之一。后续签证、缴费与入学安排请以学校及移民局最新要求为准。`,
+  },
+  {
+    id: 60,
+    title: '中式厨师 AEWV 工签续签 2 年获批',
+    summary:
+      '申请人职位 Chinese Cuisine Cook（奥克兰），获批新西兰 Accredited Employer Work Visa（AEWV）续签；签证 2026 年 4 月 16 日生效，可停留至 2028 年 3 月 30 日（以批签函为准）。',
+    date: '2026年4月16日',
+    image: '/pic/case/041702.jpg',
+    images: ['/pic/case/041702.jpg'],
+    fullContent: `中式厨师工签续签 2 年获批 ✅
+
+刚收到一个好消息：这位中国厨师客户AEWV工签顺利续签成功再拿2年 👍
+
+客户一直在新西兰从事中餐相关工作岗位稳定，属于比较典型的厨师路径，但很多人都会担心：换雇主、工作内容不规范、材料不好准备，是不是就很难续签了？
+
+其实移民局看厨师续签 核心就是这几件事👇
+✔ 工作是否真实存在
+✔ 岗位是否符合厨师要求
+✔ 工资是否达到标准
+✔ 雇主是否合规
+
+只要这几个点稳住，大多数情况都是可以续下来的
+
+这次我们重点做了两件事：一是把岗位内容重新梳理清楚 细化到具体菜系、出品内容、工作职责，二是把雇主用工情况整理完整，确保整个用工逻辑真实、清晰、合规。最终顺利续签2年，继续在新西兰稳定工作✅`,
+  },
+  {
     id: 59,
     title: '工签担保子女学签获批（Student visa - Dependent of a Worker）',
     summary:
