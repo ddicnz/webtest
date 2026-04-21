@@ -11,10 +11,12 @@ function HomePage() {
             backgroundImage: `url(/pic/auckland.jpg)`,
           }}
         />
-        <Link to="/contactus" className="hero-cta-btn">
-          <span className="hero-cta-text">开启您的新西兰之路</span>
-          <span className="hero-cta-arrow" aria-hidden>→</span>
-        </Link>
+        <div className="hero-cta-stack">
+          <Link to="/contactus" className="hero-cta-btn">
+            <span className="hero-cta-text">开启您的新西兰之路</span>
+            <span className="hero-cta-arrow" aria-hidden>→</span>
+          </Link>
+        </div>
       </section>
 
       <p className="home-scroll-hint" aria-hidden="true">滑动查看更多</p>

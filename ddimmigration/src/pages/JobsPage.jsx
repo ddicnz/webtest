@@ -91,6 +91,15 @@ function JobsPage() {
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
       },
       {
+        id: 30,
+        title: '钢筋工',
+        requirements: ['钢筋下料、绑扎、安装等施工经验', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起，看能力定薪',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
         id: 2,
         title: '瓷砖工',
         requirements: [

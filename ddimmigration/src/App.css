@@ -741,15 +741,24 @@
   right: 20px;
 }
 
-/* 首页 Hero 左侧 CTA：跳转联络我们（改小：调 padding、font-size） */
-.hero-cta-btn {
+/* 首页 Hero：主 CTA + 免费评估纵向排列（同宽：inline-grid 列宽 = 最宽子项） */
+.hero-cta-stack {
   position: absolute;
   left: 45%;
   top: 70%;
   transform: translateY(-50%);
   z-index: 2;
+  display: inline-grid;
+  grid-template-columns: auto;
+  gap: 14px;
+  max-width: min(92vw, 520px);
+}
+
+/* 首页 Hero 左侧 CTA：跳转联络我们（改小：调 padding、font-size） */
+.hero-cta-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 16px 25px;
   border: none;
@@ -764,8 +773,20 @@
 }
 
 .hero-cta-btn:hover {
-  transform: translateY(-50%) scale(1.02);
+  transform: scale(1.02);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* 与主 CTA 同宽、同色系；字号与内边距略小一点 */
+.hero-cta-btn--compact {
+  padding: 14px 25px;
+  font-size: 17px;
+  gap: 7px;
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.22);
+}
+
+.hero-cta-btn--compact .hero-cta-arrow {
+  font-size: 16px;
 }
 
 .hero-cta-text {
@@ -778,11 +799,25 @@
 }
 
 @media (max-width: 768px) {
-  .hero-cta-btn {
+  .hero-cta-stack {
     left: 20px;
+  }
+
+  .hero-cta-btn {
     padding: 12px 20px;
     font-size: 15px;
   }
+
+  .hero-cta-btn--compact {
+    padding: 11px 20px;
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .hero-cta-btn--compact .hero-cta-arrow {
+    font-size: 14px;
+  }
+
   .hero-cta-text {
     white-space: normal;
   }
@@ -2533,6 +2568,231 @@ img[src*="album/office"][src*="IMG_2486"] {
   background: #f0f7fa;
   border-radius: 8px;
   border: 1px solid rgba(91, 163, 198, 0.25);
+}
+
+/* 工签评估：引导式聊天问卷 /assesment */
+.assessment-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-top: 8px;
+}
+
+.assessment-page-title {
+  margin: 0 0 12px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #6bb3d8;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.assessment-page-intro {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #555;
+  text-align: center;
+}
+
+.assessment-chat {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f6f8fa;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+.assessment-messages {
+  min-height: 220px;
+  overflow: visible;
+  padding: 16px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.assessment-row {
+  display: flex;
+  width: 100%;
+}
+
+.assessment-row--bot {
+  justify-content: flex-start;
+}
+
+.assessment-row--user {
+  justify-content: flex-end;
+}
+
+.assessment-bubble {
+  max-width: 88%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.assessment-bubble--bot {
+  background: #fff;
+  color: #222;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom-left-radius: 4px;
+}
+
+.assessment-bubble--user {
+  background: var(--nav-bg);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.assessment-composer {
+  padding: 12px 14px 14px;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.assessment-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.assessment-chip {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--nav-bg);
+  background: #e8f4f8;
+  border: 1px solid rgba(91, 163, 198, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.assessment-chip:hover:not(:disabled) {
+  background: #d4ebf2;
+}
+
+.assessment-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.assessment-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.assessment-input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  font-size: 15px;
+  border: 1px solid #d0d7de;
+  border-radius: 10px;
+  outline: none;
+  font-family: inherit;
+}
+
+.assessment-input:focus {
+  border-color: var(--nav-bg);
+  box-shadow: 0 0 0 2px rgba(91, 163, 198, 0.2);
+}
+
+.assessment-input:disabled {
+  background: #f3f4f6;
+  color: #888;
+}
+
+.assessment-send {
+  flex-shrink: 0;
+  padding: 11px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--nav-bg);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.assessment-send:hover:not(:disabled) {
+  background: #4a92b5;
+}
+
+.assessment-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.assessment-bubble--muted {
+  font-size: 14px;
+  color: #666;
+  background: #eef1f4;
+  border-style: dashed;
+}
+
+.assessment-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #7a1e1e;
+  background: #fff0f0;
+  border: 1px solid #f0c4c4;
+  border-radius: 8px;
+}
+
+.assessment-retry {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: #c62828;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.assessment-retry:hover {
+  background: #a61f1f;
+}
+
+.assessment-code {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: #eee;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.assessment-page-note {
+  margin: 18px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #777;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .assessment-messages {
+    min-height: 180px;
+  }
+
+  .assessment-page-title {
+    font-size: 22px;
+  }
 }
 
 .page-back-to-top-btn {

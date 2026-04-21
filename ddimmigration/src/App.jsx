@@ -18,6 +18,7 @@ import StudyPage from './pages/StudyPage.jsx'
 import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
+import AssessmentPage from './pages/AssessmentPage.jsx'
 import { studySections } from './data/studyData.js'
 import { studyListPathForSectionId } from './utils/studySectionPath.js'
 
@@ -78,6 +79,9 @@ function HeroSidebarLayout() {
   } else if (location.pathname.startsWith('/study')) {
     heroImage = '/pic/pexels-pixabay-267885.jpg'
     heroClassName = 'about-hero about-hero--study'
+  } else if (location.pathname.startsWith('/assesment')) {
+    heroImage = '/pic/services.jpg'
+    heroClassName = 'about-hero about-hero--services'
   }
 
   return (
@@ -113,7 +117,8 @@ function App() {
     location.pathname.startsWith('/jobs') ||
     location.pathname.startsWith('/cases') ||
     location.pathname.startsWith('/about') ||
-    location.pathname.startsWith('/faq')
+    location.pathname.startsWith('/faq') ||
+    location.pathname.startsWith('/assesment')
 
   // GA4：SPA 路由切换时上报页面浏览
   useEffect(() => {
@@ -369,6 +374,7 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
+          <Route path="/assesment" element={<AssessmentPage />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
           <Route path="/study" element={<Navigate to="/study/University" replace />} />
           <Route path="/study/:studyPath" element={<StudyPage />} />
