@@ -19,6 +19,7 @@ import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 import AssessmentPage from './pages/AssessmentPage.jsx'
+import AdminPage from './pages/AdminPage.jsx'
 import { studySections } from './data/studyData.js'
 import { studyListPathForSectionId } from './utils/studySectionPath.js'
 
@@ -376,6 +377,7 @@ function App() {
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/assessment" element={<AssessmentPage />} />
           <Route path="/assesment" element={<Navigate to="/assessment" replace />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
           <Route path="/study" element={<Navigate to="/study/University" replace />} />
           <Route path="/study/:studyPath" element={<StudyPage />} />
