@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 
 const SHOW_ALL_ANSWER_URL =
   'https://y6imnkbld5.execute-api.ap-southeast-2.amazonaws.com/default/showAllanswer'
+const ADMIN_PASSWORD = 'Ddtrip800'
+const ADMIN_UNLOCK_KEY = 'ddimmigration_admin_unlocked'
 
 const TAB_OPTIONS = [
   { id: 'work_visa', label: '工签' },
@@ -50,30 +52,50 @@ function formatWorkSubType(value) {
   return map[raw] || raw
 }
 
+function getRiskToneClass(value) {
+  const raw = String(value || '').trim()
+  if (raw === '高') return 'admin-level admin-level--risk-high'
+  if (raw === '中') return 'admin-level admin-level--risk-mid'
+  if (raw === '低') return 'admin-level admin-level--risk-low'
+  return 'admin-level'
+}
+
+function getFeasibilityToneClass(value) {
+  const raw = String(value || '').trim()
+  if (raw === '高') return 'admin-level admin-level--feas-high'
+  if (raw === '中') return 'admin-level admin-level--feas-mid'
+  if (raw === '低') return 'admin-level admin-level--feas-low'
+  return 'admin-level'
+}
+
 function WorkVisaCard({ item }) {
   const answers = item.answers || {}
   const summary = item.summary || {}
+  const feasibility = displayValue(item.feasibility || summary.feasibility)
+  const riskLevel = displayValue(item.riskLevel || summary.riskLevel)
+  const refusalReason = displayValue(summary.refusalReason || answers.refusal_reason)
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
-        <h3 className="admin-lead-title">{displayValue(item.job)}</h3>
+        <h3 className="admin-lead-title">工签评估</h3>
         <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
       <div className="admin-lead-grid">
         <p><strong>微信：</strong>{displayValue(item.wechat)}</p>
         <p><strong>地区：</strong>{displayValue(item.location)}</p>
         <p><strong>年龄：</strong>{displayValue(item.age)}</p>
-        <p><strong>学历：</strong>{displayValue(item.education)}</p>
+        <p><strong>学历：</strong>{displayValue(item.education || summary.education || answers.education)}</p>
+        <p><strong>职业：</strong>{displayValue(item.job || summary.job || answers.job)}</p>
         <p><strong>路径：</strong>{displayValue(summary.subTypeLabel) !== '-' ? displayValue(summary.subTypeLabel) : formatWorkSubType(item.subType || summary.subType)}</p>
-        <p><strong>可行性：</strong>{displayValue(item.feasibility || summary.feasibility)}</p>
-        <p><strong>风险：</strong>{displayValue(item.riskLevel || summary.riskLevel)}</p>
-        <p><strong>评分：</strong>{displayValue(item.score || summary.score)}</p>
-        <p><strong>职业：</strong>{displayValue(answers.job)}</p>
         <p><strong>24个月材料：</strong>{displayValue(answers.materials_24m)}</p>
         <p><strong>材料明细：</strong>{displayValue(answers.materials_detail)}</p>
         <p><strong>证书：</strong>{displayValue(answers.certificate)}</p>
         <p><strong>拒签史：</strong>{displayValue(answers.refusal_history)}</p>
+        <p><strong>拒签原因：</strong>{refusalReason}</p>
         <p><strong>犯罪记录：</strong>{displayValue(answers.criminal_history)}</p>
+        <p><strong>评分：</strong>{displayValue(item.score || summary.score)}</p>
+        <p><strong>风险：</strong><span className={getRiskToneClass(riskLevel)}>{riskLevel}</span></p>
+        <p><strong>可行性：</strong><span className={getFeasibilityToneClass(feasibility)}>{feasibility}</span></p>
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
@@ -89,25 +111,21 @@ function StudentVisaCard({ item }) {
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
-        <h3 className="admin-lead-title">{displayValue(item.major || summary.major)}</h3>
+        <h3 className="admin-lead-title">学签评估</h3>
         <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
       <div className="admin-lead-grid">
         <p><strong>微信：</strong>{displayValue(item.wechat)}</p>
-        <p><strong>地区：</strong>{displayValue(item.location)}</p>
-        <p><strong>年龄：</strong>{displayValue(item.age)}</p>
-        <p><strong>学校层级：</strong>{displayValue(item.schoolLevel || summary.schoolLevel)}</p>
-        <p><strong>最高学历：</strong>{displayValue(item.highestEducation || summary.highestEducation)}</p>
-        <p><strong>推荐路径：</strong>{displayValue(summary.recommendedPathLabel) !== '-' ? displayValue(summary.recommendedPathLabel) : formatRecommendedPath(item.recommendedPath || summary.recommendedPath)}</p>
-        <p><strong>资产证明：</strong>{displayValue(item.fundsProof || summary.fundsProof || answers.student_funds_proof)}</p>
-        <p><strong>年龄：</strong>{displayValue(answers.student_age)}</p>
-        <p><strong>最高学历：</strong>{displayValue(answers.student_highest_education)}</p>
+        <p><strong>当前所在地：</strong>{displayValue(item.location || summary.location || answers.student_location)}</p>
+        <p><strong>年龄：</strong>{displayValue(item.age || answers.student_age)}</p>
+        <p><strong>最高学历：</strong>{displayValue(item.highestEducation || summary.highestEducation || answers.student_highest_education)}</p>
+        <p><strong>目标学历：</strong>{displayValue(item.schoolLevel || summary.schoolLevel || answers.student_school_level)}</p>
+        <p><strong>申请专业：</strong>{displayValue(item.major || summary.major || answers.student_major)}</p>
         <p><strong>英语成绩：</strong>{displayValue(answers.student_english)}</p>
+        <p><strong>资产证明：</strong>{displayValue(item.fundsProof || summary.fundsProof || answers.student_funds_proof)}</p>
         <p><strong>拒签史：</strong>{displayValue(answers.student_refusal_history)}</p>
-        <p><strong>专业方向：</strong>{displayValue(answers.student_major)}</p>
-        <p><strong>当前所在地：</strong>{displayValue(answers.student_location)}</p>
         <p><strong>犯罪记录：</strong>{displayValue(answers.student_criminal_history)}</p>
-        <p><strong>目标学历：</strong>{displayValue(answers.student_school_level)}</p>
+        <p><strong>推荐路径：</strong>{displayValue(summary.recommendedPathLabel) !== '-' ? displayValue(summary.recommendedPathLabel) : formatRecommendedPath(item.recommendedPath || summary.recommendedPath)}</p>
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
@@ -120,10 +138,14 @@ function StudentVisaCard({ item }) {
 function VisitorVisaCard({ item }) {
   const answers = item.answers || {}
   const summary = item.summary || {}
+  const feasibility = displayValue(summary.feasibility || item.feasibility)
+  const riskLevel = displayValue(summary.riskLevel || item.riskLevel)
+  const criminalHistory = displayValue(answers.visitor_criminal_history)
+  const criminalReason = displayValue(summary.criminalReason)
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
-        <h3 className="admin-lead-title">{displayValue(summary.type || item.intent)}</h3>
+        <h3 className="admin-lead-title">旅游签评估</h3>
         <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
       <div className="admin-lead-grid">
@@ -133,14 +155,12 @@ function VisitorVisaCard({ item }) {
         <p><strong>资产识别：</strong>{displayValue(summary.assetsProofDetected)}</p>
         <p><strong>拒签史：</strong>{displayValue(summary.refusal)}</p>
         <p><strong>拒签原因：</strong>{displayValue(summary.refusalReason)}</p>
-        <p><strong>犯罪原因：</strong>{displayValue(summary.criminalReason)}</p>
-        <p><strong>可行性：</strong>{displayValue(summary.feasibility || item.feasibility)}</p>
-        <p><strong>风险：</strong>{displayValue(summary.riskLevel || item.riskLevel)}</p>
-        <p><strong>评分：</strong>{displayValue(summary.score || item.score)}</p>
-        <p><strong>资产证明：</strong>{displayValue(answers.visitor_assets_proof)}</p>
-        <p><strong>犯罪记录：</strong>{displayValue(answers.visitor_criminal_history)}</p>
-        <p><strong>拒签史：</strong>{displayValue(answers.visitor_refusal_history)}</p>
+        <p><strong>犯罪记录：</strong>{criminalHistory}</p>
+        <p><strong>犯罪原因：</strong>{criminalReason}</p>
         <p><strong>当前所在地：</strong>{displayValue(answers.visitor_location)}</p>
+        <p><strong>评分：</strong>{displayValue(summary.score || item.score)}</p>
+        <p><strong>风险：</strong><span className={getRiskToneClass(riskLevel)}>{riskLevel}</span></p>
+        <p><strong>可行性：</strong><span className={getFeasibilityToneClass(feasibility)}>{feasibility}</span></p>
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
@@ -157,6 +177,15 @@ function renderCard(intent, item) {
 }
 
 function AdminPage() {
+  const [passwordInput, setPasswordInput] = useState('')
+  const [authError, setAuthError] = useState('')
+  const [authorized, setAuthorized] = useState(() => {
+    try {
+      return sessionStorage.getItem(ADMIN_UNLOCK_KEY) === 'true'
+    } catch {
+      return false
+    }
+  })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('work_visa')
@@ -172,6 +201,7 @@ function AdminPage() {
   })
 
   useEffect(() => {
+    if (!authorized) return
     const run = async () => {
       setLoading(true)
       setError('')
@@ -198,9 +228,46 @@ function AdminPage() {
       }
     }
     void run()
-  }, [])
+  }, [authorized])
 
   const currentItems = useMemo(() => grouped[activeTab] || [], [grouped, activeTab])
+
+  const handleAuth = (e) => {
+    e.preventDefault()
+    if (passwordInput === ADMIN_PASSWORD) {
+      setAuthorized(true)
+      setAuthError('')
+      try {
+        sessionStorage.setItem(ADMIN_UNLOCK_KEY, 'true')
+      } catch {
+        // ignore
+      }
+      return
+    }
+    setAuthError('密码错误，请重试。')
+  }
+
+  if (!authorized) {
+    return (
+      <main className="main-content admin-page">
+        <h1 className="admin-title">后台回答管理</h1>
+        <form className="admin-auth-form" onSubmit={handleAuth}>
+          <label htmlFor="admin-password" className="admin-auth-label">请输入管理密码</label>
+          <input
+            id="admin-password"
+            type="password"
+            className="admin-auth-input"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            autoComplete="off"
+            placeholder="请输入密码"
+          />
+          <button type="submit" className="admin-auth-btn">进入后台</button>
+          {authError ? <p className="admin-error">{authError}</p> : null}
+        </form>
+      </main>
+    )
+  }
 
   return (
     <main className="main-content admin-page">

@@ -3470,6 +3470,43 @@ img[src*="album/office"][src*="IMG_2486"] {
   color: #6bb3d8;
 }
 
+.admin-auth-form {
+  max-width: 380px;
+  margin: 24px auto 0;
+  padding: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-auth-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.admin-auth-input {
+  padding: 10px 12px;
+  border: 1px solid #cfd8df;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.admin-auth-btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--nav-bg);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .admin-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3566,6 +3603,45 @@ img[src*="album/office"][src*="IMG_2486"] {
 .admin-lead-grid p {
   margin: 0;
   line-height: 1.6;
+}
+
+.admin-level {
+  display: inline-block;
+  min-width: 24px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.admin-level--risk-high {
+  color: #b42318;
+  background: #fdeceb;
+}
+
+.admin-level--risk-mid {
+  color: #9a6700;
+  background: #fff8e1;
+}
+
+.admin-level--risk-low {
+  color: #027a48;
+  background: #e8f5e9;
+}
+
+.admin-level--feas-high {
+  color: #027a48;
+  background: #e8f5e9;
+}
+
+.admin-level--feas-mid {
+  color: #9a6700;
+  background: #fff8e1;
+}
+
+.admin-level--feas-low {
+  color: #b42318;
+  background: #fdeceb;
 }
 
 .admin-lead-details {
