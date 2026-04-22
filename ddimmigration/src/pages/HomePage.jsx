@@ -16,6 +16,10 @@ function HomePage() {
             <span className="hero-cta-text">开启您的新西兰之路</span>
             <span className="hero-cta-arrow" aria-hidden>→</span>
           </Link>
+          <Link to="/assessment/" className="hero-cta-btn hero-cta-btn--compact">
+            <span className="hero-cta-text">免费评估</span>
+            <span className="hero-cta-arrow" aria-hidden>→</span>
+          </Link>
         </div>
       </section>
 

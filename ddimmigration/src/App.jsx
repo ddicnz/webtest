@@ -79,7 +79,7 @@ function HeroSidebarLayout() {
   } else if (location.pathname.startsWith('/study')) {
     heroImage = '/pic/pexels-pixabay-267885.jpg'
     heroClassName = 'about-hero about-hero--study'
-  } else if (location.pathname.startsWith('/assesment')) {
+  } else if (location.pathname.startsWith('/assessment')) {
     heroImage = '/pic/services.jpg'
     heroClassName = 'about-hero about-hero--services'
   }
@@ -118,7 +118,7 @@ function App() {
     location.pathname.startsWith('/cases') ||
     location.pathname.startsWith('/about') ||
     location.pathname.startsWith('/faq') ||
-    location.pathname.startsWith('/assesment')
+    location.pathname.startsWith('/assessment')
 
   // GA4：SPA 路由切换时上报页面浏览
   useEffect(() => {
@@ -374,7 +374,8 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
-          <Route path="/assesment" element={<AssessmentPage />} />
+          <Route path="/assessment" element={<AssessmentPage />} />
+          <Route path="/assesment" element={<Navigate to="/assessment" replace />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
           <Route path="/study" element={<Navigate to="/study/University" replace />} />
           <Route path="/study/:studyPath" element={<StudyPage />} />

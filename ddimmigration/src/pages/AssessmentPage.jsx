@@ -2,6 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 const CHATBOT_URL =
   'https://fp8pbtb4t9.execute-api.ap-southeast-2.amazonaws.com/default/chatbot'
+const STORE_CHAT_URL =
+  'https://0cl4deawsa.execute-api.ap-southeast-2.amazonaws.com/default/storeChat'
+
+/** 第二步增强分析（可选）：在 .env 设置 VITE_ASSESSMENT_ENHANCE_URL */
+const ASSESSMENT_ENHANCE_URL = String(
+  import.meta.env.VITE_ASSESSMENT_ENHANCE_URL || '',
+).trim()
 
 const STORAGE_KEY = 'ddimmigration_assessment_submissions'
 
@@ -36,6 +43,69 @@ async function postChatbot(body) {
   return data
 }
 
+async function postEnhancement(body) {
+  const res = await fetch(ASSESSMENT_ENHANCE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  const text = await res.text()
+  let data
+  try {
+    data = text ? JSON.parse(text) : {}
+  } catch {
+    throw new Error(`增强接口返回非 JSON（HTTP ${res.status}）`)
+  }
+  if (!res.ok) {
+    const msg = data?.message || data?.error || text || `请求失败 ${res.status}`
+    throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
+  }
+  return data
+}
+
+async function postStoreChat(body) {
+  const sanitizeForStore = (value) => {
+    if (value == null) return value
+    if (Array.isArray(value)) return value.map(sanitizeForStore)
+    if (typeof value === 'object') {
+      return Object.fromEntries(
+        Object.entries(value).map(([k, v]) => [k, sanitizeForStore(v)]),
+      )
+    }
+    // DynamoDB（boto3）不接受 Python float，先把小数转字符串
+    if (typeof value === 'number' && !Number.isInteger(value)) {
+      return String(value)
+    }
+    return value
+  }
+
+  const res = await fetch(STORE_CHAT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(sanitizeForStore(body)),
+  })
+  const text = await res.text()
+  let data = {}
+  try {
+    data = text ? JSON.parse(text) : {}
+  } catch {
+    // store 接口即使不是 json 也不影响主流程
+  }
+  if (!res.ok) {
+    if (import.meta.env.DEV) {
+      console.error('storeChat response body:', data)
+    }
+    const msg =
+      data?.detail ||
+      data?.message ||
+      data?.error ||
+      text ||
+      `请求失败 ${res.status}`
+    throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
+  }
+  return data
+}
+
 function AssessmentPage() {
   const sessionIdRef = useRef(
     `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
@@ -50,8 +120,8 @@ function AssessmentPage() {
   const [completed, setCompleted] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-
   const composerRef = useRef(null)
+  const inputRef = useRef(null)
 
   const appendMessage = useCallback((sender, text) => {
     const key = ++messageKeyRef.current
@@ -75,6 +145,14 @@ function AssessmentPage() {
   useEffect(() => {
     keepComposerInView()
   }, [messages, loading, keepComposerInView])
+
+  // 每次下一题出来后自动聚焦输入框，用户可直接继续输入
+  useEffect(() => {
+    if (loading || completed) return
+    requestAnimationFrame(() => {
+      inputRef.current?.focus()
+    })
+  }, [messages, loading, completed])
 
   const applyBotResponse = useCallback(
     (data) => {
@@ -100,15 +178,114 @@ function AssessmentPage() {
 
       if (data?.done === true) {
         setCompleted(true)
-        appendMessage('bot', '👉 添加微信：NZDDVisa（获取完整方案）')
+
+        const mergedAnswers =
+          data.answers != null && typeof data.answers === 'object' ? data.answers : {}
+        const wechatVal = String(mergedAnswers.wechat ?? '').trim()
+
+        if (wechatVal) {
+          appendMessage('bot', '感谢留下联系方式，我们会尽快与您联系，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
+        } else {
+          appendMessage('bot', '若想进一步沟通，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
+        }
+
         saveSessionLocally({
           sessionId: data.sessionId || sessionIdRef.current,
           createdAt: new Date().toISOString(),
-          answers: data.answers || {},
-          intent: data.intent,
+          answers: mergedAnswers,
+          summary: data.summary,
           subType: data.subType,
+          intent: data.intent,
           intentMeta: data.intentMeta,
         })
+
+        const sessionId = data.sessionId || sessionIdRef.current
+        const intent = data.intent || 'unknown'
+        const subType = data.subType || null
+        const summary =
+          data.summary != null && typeof data.summary === 'object' ? data.summary : {}
+        if (import.meta.env.DEV) {
+          console.log('final chatbot result:', data)
+          console.log('summary to save:', summary)
+        }
+
+        // 第一阶段：按标准格式立刻入库（ai 字段先为 null）
+        const storePayload = {
+          sessionId,
+          intent,
+          done: true,
+          answers: mergedAnswers,
+          summary,
+          subType,
+          leadStatus: 'new',
+          aiSummary: null,
+          aiAssessment: null,
+        }
+        void (async () => {
+          try {
+            await postStoreChat(storePayload)
+          } catch (e) {
+            const msg = e instanceof Error ? e.message : String(e)
+            if (import.meta.env.DEV) console.warn('storeChat failed', e)
+            appendMessage('bot', `评估记录保存失败：${msg}`)
+          }
+        })()
+
+        if (ASSESSMENT_ENHANCE_URL) {
+          void (async () => {
+            try {
+              appendMessage('bot', '正在生成补充分析，请稍候…')
+              const enhanced = await postEnhancement({
+                sessionId: sessionIdRef.current,
+                answers: mergedAnswers,
+                summary: data.summary,
+                subType: data.subType,
+                intent: data.intent,
+              })
+              const extra =
+                enhanced?.reply ??
+                enhanced?.assessment ??
+                enhanced?.text ??
+                enhanced?.enhancedReply
+              if (extra != null && String(extra).trim()) {
+                appendMessage('bot', String(extra).trim())
+              }
+
+              // 第二阶段（可选）：若有增强分析，回写 ai 字段
+              const aiSummary =
+                enhanced?.aiSummary ??
+                enhanced?.summary ??
+                enhanced?.shortSummary ??
+                null
+              const aiAssessment =
+                enhanced?.aiAssessment ??
+                enhanced?.assessment ??
+                enhanced?.text ??
+                enhanced?.reply ??
+                enhanced?.enhancedReply ??
+                null
+
+              if (aiSummary != null || aiAssessment != null) {
+                void postStoreChat({
+                  sessionId,
+                  intent,
+                  done: true,
+                  answers: mergedAnswers,
+                  summary,
+                  subType,
+                  leadStatus: 'new',
+                  aiSummary,
+                  aiAssessment,
+                }).catch((e) => {
+                  if (import.meta.env.DEV) console.warn('storeChat ai update failed', e)
+                })
+              }
+            } catch (e) {
+              if (import.meta.env.DEV) console.warn('assessment enhance failed', e)
+              appendMessage('bot', '补充分析暂不可用，请以当前评估结论为准。')
+            }
+          })()
+        }
       }
     },
     [appendMessage],
@@ -199,9 +376,9 @@ function AssessmentPage() {
 
   return (
     <main className="main-content assessment-page">
-      <h1 className="assessment-page-title">工签条件快速评估</h1>
+      <h1 className="assessment-page-title">签证条件快速评估</h1>
       <p className="assessment-page-intro">
-        通过对话快速了解你的背景与可能路径。本工具为状态机问卷，回答仅供参考，不构成法律意见；个案请以持牌顾问与移民局为准。
+        通过对话快速了解你的背景与可能路径。回答仅供参考，不构成法律意见；个案请以持牌顾问与移民局为准。
       </p>
 
       <div className="assessment-chat">
@@ -255,6 +432,7 @@ function AssessmentPage() {
             }}
           >
             <input
+              ref={inputRef}
               type="text"
               className="assessment-input"
               placeholder={
@@ -281,12 +459,6 @@ function AssessmentPage() {
         </div>
       </div>
 
-      <p className="assessment-page-note">
-        对话由云端状态机处理：每次请求会携带 sessionId、currentNode、message、answers；请使用接口返回的
-        nextNode 与 answers 继续下一步，直到 done 为 true。流程结束后会在本机保存一条摘要（localStorage 键名{' '}
-        <code className="assessment-code">{STORAGE_KEY}</code>
-        ），便于后续对接 CRM。
-      </p>
     </main>
   )
 }

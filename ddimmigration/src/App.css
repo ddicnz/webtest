@@ -2630,6 +2630,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   border-radius: 14px;
   font-size: 15px;
   line-height: 1.55;
+  white-space: pre-wrap;
   word-break: break-word;
 }
 
