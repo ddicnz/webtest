@@ -443,7 +443,8 @@ function AssessmentPage() {
                     : '输入你的回答…'
               }
               value={input}
-              disabled={completed || loading}
+              disabled={completed}
+              readOnly={loading}
               onChange={(e) => setInput(e.target.value)}
               autoComplete="off"
               maxLength={500}
