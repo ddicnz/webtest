@@ -5,9 +5,11 @@ const CHATBOT_URL =
 const STORE_CHAT_URL =
   'https://0cl4deawsa.execute-api.ap-southeast-2.amazonaws.com/default/storeChat'
 
-/** 第二步增强分析（可选）：在 .env 设置 VITE_ASSESSMENT_ENHANCE_URL */
-const ASSESSMENT_ENHANCE_URL = String(
-  import.meta.env.VITE_ASSESSMENT_ENHANCE_URL || '',
+/** 第二步 AI 优化建议（可选）：在 .env 设置 VITE_ASSESSMENT_AI_URL */
+const ASSESSMENT_AI_URL = String(
+  import.meta.env.VITE_ASSESSMENT_AI_URL ||
+    import.meta.env.VITE_ASSESSMENT_ENHANCE_URL ||
+    '',
 ).trim()
 
 const STORAGE_KEY = 'ddimmigration_assessment_submissions'
@@ -43,8 +45,11 @@ async function postChatbot(body) {
   return data
 }
 
-async function postEnhancement(body) {
-  const res = await fetch(ASSESSMENT_ENHANCE_URL, {
+async function postAiReply(body) {
+  if (!ASSESSMENT_AI_URL) {
+    return { aiReply: null }
+  }
+  const res = await fetch(ASSESSMENT_AI_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -54,7 +59,7 @@ async function postEnhancement(body) {
   try {
     data = text ? JSON.parse(text) : {}
   } catch {
-    throw new Error(`增强接口返回非 JSON（HTTP ${res.status}）`)
+    throw new Error(`AI 接口返回非 JSON（HTTP ${res.status}）`)
   }
   if (!res.ok) {
     const msg = data?.message || data?.error || text || `请求失败 ${res.status}`
@@ -182,6 +187,8 @@ function AssessmentPage() {
         const mergedAnswers =
           data.answers != null && typeof data.answers === 'object' ? data.answers : {}
         const wechatVal = String(mergedAnswers.wechat ?? '').trim()
+        // 优先使用 chatbot.reply；若后端把最终文案放在 nextQuestion，也作为兜底
+        const baseReply = reply || nextQuestion || null
 
         if (wechatVal) {
           appendMessage('bot', '感谢留下联系方式，我们会尽快与您联系，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
@@ -197,6 +204,7 @@ function AssessmentPage() {
           subType: data.subType,
           intent: data.intent,
           intentMeta: data.intentMeta,
+          reply: baseReply,
         })
 
         const sessionId = data.sessionId || sessionIdRef.current
@@ -209,20 +217,43 @@ function AssessmentPage() {
           console.log('summary to save:', summary)
         }
 
-        // 第一阶段：按标准格式立刻入库（ai 字段先为 null）
-        const storePayload = {
-          sessionId,
-          intent,
-          done: true,
-          answers: mergedAnswers,
-          summary,
-          subType,
-          leadStatus: 'new',
-          aiSummary: null,
-          aiAssessment: null,
-        }
         void (async () => {
+          let aiReply = null
           try {
+            const aiResult = await postAiReply({
+              sessionId,
+              intent,
+              answers: mergedAnswers,
+              summary,
+              reply: baseReply,
+            })
+            const candidate =
+              aiResult?.aiReply ?? aiResult?.reply ?? aiResult?.text ?? null
+            if (candidate != null && String(candidate).trim()) {
+              aiReply = String(candidate).trim()
+              appendMessage('bot', aiReply)
+            }
+          } catch (e) {
+            aiReply = null
+            if (import.meta.env.DEV) console.warn('ai reply failed', e)
+          }
+
+          try {
+            const storePayload = {
+              sessionId,
+              intent,
+              done: true,
+              answers: mergedAnswers,
+              summary,
+              subType,
+              reply: baseReply,
+              aiReply,
+              leadStatus: 'new',
+            }
+            console.log('storeChat payload =', storePayload)
+            if (!storePayload.reply) {
+              console.warn('storeChat payload reply is empty:', storePayload)
+            }
             await postStoreChat(storePayload)
           } catch (e) {
             const msg = e instanceof Error ? e.message : String(e)
@@ -230,62 +261,6 @@ function AssessmentPage() {
             appendMessage('bot', `评估记录保存失败：${msg}`)
           }
         })()
-
-        if (ASSESSMENT_ENHANCE_URL) {
-          void (async () => {
-            try {
-              appendMessage('bot', '正在生成补充分析，请稍候…')
-              const enhanced = await postEnhancement({
-                sessionId: sessionIdRef.current,
-                answers: mergedAnswers,
-                summary: data.summary,
-                subType: data.subType,
-                intent: data.intent,
-              })
-              const extra =
-                enhanced?.reply ??
-                enhanced?.assessment ??
-                enhanced?.text ??
-                enhanced?.enhancedReply
-              if (extra != null && String(extra).trim()) {
-                appendMessage('bot', String(extra).trim())
-              }
-
-              // 第二阶段（可选）：若有增强分析，回写 ai 字段
-              const aiSummary =
-                enhanced?.aiSummary ??
-                enhanced?.summary ??
-                enhanced?.shortSummary ??
-                null
-              const aiAssessment =
-                enhanced?.aiAssessment ??
-                enhanced?.assessment ??
-                enhanced?.text ??
-                enhanced?.reply ??
-                enhanced?.enhancedReply ??
-                null
-
-              if (aiSummary != null || aiAssessment != null) {
-                void postStoreChat({
-                  sessionId,
-                  intent,
-                  done: true,
-                  answers: mergedAnswers,
-                  summary,
-                  subType,
-                  leadStatus: 'new',
-                  aiSummary,
-                  aiAssessment,
-                }).catch((e) => {
-                  if (import.meta.env.DEV) console.warn('storeChat ai update failed', e)
-                })
-              }
-            } catch (e) {
-              if (import.meta.env.DEV) console.warn('assessment enhance failed', e)
-              appendMessage('bot', '补充分析暂不可用，请以当前评估结论为准。')
-            }
-          })()
-        }
       }
     },
     [appendMessage],

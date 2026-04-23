@@ -3605,6 +3605,14 @@ img[src*="album/office"][src*="IMG_2486"] {
   line-height: 1.6;
 }
 
+.admin-advice--base {
+  grid-column: 1;
+}
+
+.admin-advice--ai {
+  grid-column: 2;
+}
+
 .admin-level {
   display: inline-block;
   min-width: 24px;
@@ -3682,6 +3690,11 @@ img[src*="album/office"][src*="IMG_2486"] {
 
   .admin-lead-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-advice--base,
+  .admin-advice--ai {
+    grid-column: 1;
   }
 }
 

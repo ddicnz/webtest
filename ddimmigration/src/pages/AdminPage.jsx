@@ -77,7 +77,7 @@ function WorkVisaCard({ item }) {
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
-        <h3 className="admin-lead-title">工签评估</h3>
+        <h3 className="admin-lead-title">微信号：{displayValue(item.wechat)}</h3>
         <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
       <div className="admin-lead-grid">
@@ -96,6 +96,8 @@ function WorkVisaCard({ item }) {
         <p><strong>评分：</strong>{displayValue(item.score || summary.score)}</p>
         <p><strong>风险：</strong><span className={getRiskToneClass(riskLevel)}>{riskLevel}</span></p>
         <p><strong>可行性：</strong><span className={getFeasibilityToneClass(feasibility)}>{feasibility}</span></p>
+        <p className="admin-advice admin-advice--base"><strong>基础建议：</strong>{displayValue(item.reply)}</p>
+        <p className="admin-advice admin-advice--ai"><strong>AI优化建议：</strong>{displayValue(item.aiReply)}</p>
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
@@ -111,7 +113,7 @@ function StudentVisaCard({ item }) {
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
-        <h3 className="admin-lead-title">学签评估</h3>
+        <h3 className="admin-lead-title">微信号：{displayValue(item.wechat)}</h3>
         <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
       <div className="admin-lead-grid">
@@ -126,6 +128,8 @@ function StudentVisaCard({ item }) {
         <p><strong>拒签史：</strong>{displayValue(answers.student_refusal_history)}</p>
         <p><strong>犯罪记录：</strong>{displayValue(answers.student_criminal_history)}</p>
         <p><strong>推荐路径：</strong>{displayValue(summary.recommendedPathLabel) !== '-' ? displayValue(summary.recommendedPathLabel) : formatRecommendedPath(item.recommendedPath || summary.recommendedPath)}</p>
+        <p className="admin-advice admin-advice--base"><strong>基础建议：</strong>{displayValue(item.reply)}</p>
+        <p className="admin-advice admin-advice--ai"><strong>AI优化建议：</strong>{displayValue(item.aiReply)}</p>
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
@@ -135,6 +139,13 @@ function StudentVisaCard({ item }) {
   )
 }
 
+function yesNoDetected(value) {
+  if (value === true || value === 'true' || value === 1) return '有'
+  if (value === false || value === 'false' || value === 0) return '无'
+  if (value == null || value === '') return '-'
+  return String(value)
+}
+
 function VisitorVisaCard({ item }) {
   const answers = item.answers || {}
   const summary = item.summary || {}
@@ -142,17 +153,37 @@ function VisitorVisaCard({ item }) {
   const riskLevel = displayValue(summary.riskLevel || item.riskLevel)
   const criminalHistory = displayValue(answers.visitor_criminal_history)
   const criminalReason = displayValue(summary.criminalReason)
+
+  const bankProof = displayValue(item.bankProof || answers.visitor_bank_proof)
+  const depositProof = displayValue(item.depositProof || answers.visitor_deposit_proof)
+  const assetsProof = displayValue(
+    item.assetsProof || answers.visitor_assets_proof || summary.assetsProof,
+  )
+  const bankDetected = yesNoDetected(
+    item.bankProofDetected ?? summary.bankProofDetected,
+  )
+  const depositDetected = yesNoDetected(
+    item.depositProofDetected ?? summary.depositProofDetected,
+  )
+  const assetsDetected = yesNoDetected(
+    item.assetsProofDetected ?? summary.assetsProofDetected,
+  )
+
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
-        <h3 className="admin-lead-title">旅游签评估</h3>
+        <h3 className="admin-lead-title">微信号：{displayValue(item.wechat)}</h3>
         <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
       <div className="admin-lead-grid">
         <p><strong>微信：</strong>{displayValue(item.wechat)}</p>
         <p><strong>地区：</strong>{displayValue(item.location || summary.location)}</p>
-        <p><strong>资产证明：</strong>{displayValue(summary.assetsProof)}</p>
-        <p><strong>资产识别：</strong>{displayValue(summary.assetsProofDetected)}</p>
+        <p><strong>银行流水/工资：</strong>{bankProof}</p>
+        <p><strong>流水是否有：</strong>{bankDetected}</p>
+        <p><strong>存款证明：</strong>{depositProof}</p>
+        <p><strong>存款是否有：</strong>{depositDetected}</p>
+        <p><strong>资产（房车）：</strong>{assetsProof}</p>
+        <p><strong>资产是否有：</strong>{assetsDetected}</p>
         <p><strong>拒签史：</strong>{displayValue(summary.refusal)}</p>
         <p><strong>拒签原因：</strong>{displayValue(summary.refusalReason)}</p>
         <p><strong>犯罪记录：</strong>{criminalHistory}</p>
@@ -161,6 +192,8 @@ function VisitorVisaCard({ item }) {
         <p><strong>评分：</strong>{displayValue(summary.score || item.score)}</p>
         <p><strong>风险：</strong><span className={getRiskToneClass(riskLevel)}>{riskLevel}</span></p>
         <p><strong>可行性：</strong><span className={getFeasibilityToneClass(feasibility)}>{feasibility}</span></p>
+        <p className="admin-advice admin-advice--base"><strong>基础建议：</strong>{displayValue(item.reply)}</p>
+        <p className="admin-advice admin-advice--ai"><strong>AI优化建议：</strong>{displayValue(item.aiReply)}</p>
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
