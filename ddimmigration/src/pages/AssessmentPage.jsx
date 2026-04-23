@@ -213,9 +213,10 @@ function AssessmentPage() {
         }
 
         void (async () => {
-          let aiReply = null
-          let aiSummary = null
-          let aiAssessment = null
+          // AI 失败时：aiReply 用基础建议兜底，aiSummary 为空串，aiAssessment 为空对象
+          let aiReply = baseReply || ''
+          let aiSummary = ''
+          let aiAssessment = {}
           let displayedReply = false
           try {
             const aiResult = await postAiReply({
@@ -233,9 +234,13 @@ function AssessmentPage() {
                 appendMessage('bot', aiReply)
                 displayedReply = true
               }
-              aiSummary = aiResult?.aiSummary ?? null
-              aiAssessment = aiResult?.aiAssessment ?? null
-              if (aiSummary != null) {
+              aiSummary =
+                aiResult?.aiSummary != null ? String(aiResult.aiSummary) : ''
+              aiAssessment =
+                aiResult?.aiAssessment != null && typeof aiResult.aiAssessment === 'object'
+                  ? aiResult.aiAssessment
+                  : {}
+              if (aiSummary) {
                 const summaryText =
                   typeof aiSummary === 'string'
                     ? aiSummary.trim()
@@ -246,9 +251,6 @@ function AssessmentPage() {
               }
             }
           } catch (e) {
-            aiReply = null
-            aiSummary = null
-            aiAssessment = null
             if (import.meta.env.DEV) console.warn('ai reply failed', e)
           }
 

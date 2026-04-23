@@ -68,6 +68,18 @@ function getFeasibilityToneClass(value) {
   return 'admin-level'
 }
 
+function buildChatbotResult(item) {
+  return {
+    sessionId: item.sessionId ?? null,
+    intent: item.intent ?? null,
+    done: true,
+    reply: item.reply ?? null,
+    answers: item.answers || {},
+    summary: item.summary || {},
+    subType: item.subType ?? null,
+  }
+}
+
 function WorkVisaCard({ item }) {
   const answers = item.answers || {}
   const summary = item.summary || {}
@@ -101,7 +113,17 @@ function WorkVisaCard({ item }) {
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
-        <pre>{JSON.stringify({ answers: item.answers || {}, summary }, null, 2)}</pre>
+        <pre>
+          {JSON.stringify(
+            {
+              chatbotResult: buildChatbotResult(item),
+              answers: item.answers || {},
+              summary,
+            },
+            null,
+            2,
+          )}
+        </pre>
       </details>
     </article>
   )
@@ -133,7 +155,17 @@ function StudentVisaCard({ item }) {
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
-        <pre>{JSON.stringify({ answers: item.answers || {}, summary }, null, 2)}</pre>
+        <pre>
+          {JSON.stringify(
+            {
+              chatbotResult: buildChatbotResult(item),
+              answers: item.answers || {},
+              summary,
+            },
+            null,
+            2,
+          )}
+        </pre>
       </details>
     </article>
   )
@@ -197,7 +229,17 @@ function VisitorVisaCard({ item }) {
       </div>
       <details className="admin-lead-details">
         <summary>查看原始 answers / summary</summary>
-        <pre>{JSON.stringify({ answers: item.answers || {}, summary }, null, 2)}</pre>
+        <pre>
+          {JSON.stringify(
+            {
+              chatbotResult: buildChatbotResult(item),
+              answers: item.answers || {},
+              summary,
+            },
+            null,
+            2,
+          )}
+        </pre>
       </details>
     </article>
   )
