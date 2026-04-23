@@ -8,8 +8,7 @@ const STORE_CHAT_URL =
 /** 第二步 AI 优化建议（可选）：在 .env 设置 VITE_ASSESSMENT_AI_URL */
 const ASSESSMENT_AI_URL = String(
   import.meta.env.VITE_ASSESSMENT_AI_URL ||
-    import.meta.env.VITE_ASSESSMENT_ENHANCE_URL ||
-    '',
+    'https://kgg8jzu048.execute-api.ap-southeast-2.amazonaws.com/default/aiagent',
 ).trim()
 
 const STORAGE_KEY = 'ddimmigration_assessment_submissions'
@@ -124,6 +123,7 @@ function AssessmentPage() {
   const [input, setInput] = useState('')
   const [completed, setCompleted] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [aiLoading, setAiLoading] = useState(false)
   const [error, setError] = useState(null)
   const composerRef = useRef(null)
   const inputRef = useRef(null)
@@ -149,7 +149,7 @@ function AssessmentPage() {
 
   useEffect(() => {
     keepComposerInView()
-  }, [messages, loading, keepComposerInView])
+  }, [messages, loading, aiLoading, keepComposerInView])
 
   // 每次下一题出来后自动聚焦输入框，用户可直接继续输入
   useEffect(() => {
@@ -170,7 +170,7 @@ function AssessmentPage() {
       const reply = data?.reply != null ? String(data.reply).trim() : ''
       const nextQuestion =
         data?.nextQuestion != null ? String(data.nextQuestion).trim() : ''
-      if (reply) appendMessage('bot', reply)
+      if (reply && data?.done !== true) appendMessage('bot', reply)
       // start → work_job 等节点可能把承接语放在 reply、具体问题放在 nextQuestion，需两条都展示
       if (nextQuestion && nextQuestion !== reply) {
         appendMessage('bot', nextQuestion)
@@ -183,18 +183,13 @@ function AssessmentPage() {
 
       if (data?.done === true) {
         setCompleted(true)
+        setAiLoading(true)
 
         const mergedAnswers =
           data.answers != null && typeof data.answers === 'object' ? data.answers : {}
         const wechatVal = String(mergedAnswers.wechat ?? '').trim()
         // 优先使用 chatbot.reply；若后端把最终文案放在 nextQuestion，也作为兜底
         const baseReply = reply || nextQuestion || null
-
-        if (wechatVal) {
-          appendMessage('bot', '感谢留下联系方式，我们会尽快与您联系，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
-        } else {
-          appendMessage('bot', '若想进一步沟通，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
-        }
 
         saveSessionLocally({
           sessionId: data.sessionId || sessionIdRef.current,
@@ -219,6 +214,9 @@ function AssessmentPage() {
 
         void (async () => {
           let aiReply = null
+          let aiSummary = null
+          let aiAssessment = null
+          let displayedReply = false
           try {
             const aiResult = await postAiReply({
               sessionId,
@@ -227,15 +225,35 @@ function AssessmentPage() {
               summary,
               reply: baseReply,
             })
-            const candidate =
-              aiResult?.aiReply ?? aiResult?.reply ?? aiResult?.text ?? null
-            if (candidate != null && String(candidate).trim()) {
-              aiReply = String(candidate).trim()
-              appendMessage('bot', aiReply)
+            if (aiResult?.ok === true) {
+              const candidate =
+                aiResult?.aiReply ?? aiResult?.reply ?? aiResult?.text ?? null
+              if (candidate != null && String(candidate).trim()) {
+                aiReply = String(candidate).trim()
+                appendMessage('bot', aiReply)
+                displayedReply = true
+              }
+              aiSummary = aiResult?.aiSummary ?? null
+              aiAssessment = aiResult?.aiAssessment ?? null
+              if (aiSummary != null) {
+                const summaryText =
+                  typeof aiSummary === 'string'
+                    ? aiSummary.trim()
+                    : JSON.stringify(aiSummary, null, 2)
+                if (summaryText) {
+                  appendMessage('bot', summaryText)
+                }
+              }
             }
           } catch (e) {
             aiReply = null
+            aiSummary = null
+            aiAssessment = null
             if (import.meta.env.DEV) console.warn('ai reply failed', e)
+          }
+
+          if (!displayedReply && baseReply) {
+            appendMessage('bot', baseReply)
           }
 
           try {
@@ -248,6 +266,8 @@ function AssessmentPage() {
               subType,
               reply: baseReply,
               aiReply,
+              aiSummary,
+              aiAssessment,
               leadStatus: 'new',
             }
             console.log('storeChat payload =', storePayload)
@@ -255,10 +275,17 @@ function AssessmentPage() {
               console.warn('storeChat payload reply is empty:', storePayload)
             }
             await postStoreChat(storePayload)
+            if (wechatVal) {
+              appendMessage('bot', '感谢留下联系方式，我们会尽快与您联系，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
+            } else {
+              appendMessage('bot', '若想进一步沟通，也可添加微信：ddtrip999 或 ddtrip700（获取完整方案）')
+            }
           } catch (e) {
             const msg = e instanceof Error ? e.message : String(e)
             if (import.meta.env.DEV) console.warn('storeChat failed', e)
             appendMessage('bot', `评估记录保存失败：${msg}`)
+          } finally {
+            setAiLoading(false)
           }
         })()
       }
@@ -331,6 +358,7 @@ function AssessmentPage() {
     setMessages([])
     setError(null)
     setCompleted(false)
+    setAiLoading(false)
     setCurrentNode('start')
     setAnswers({})
     messageKeyRef.current = 0
@@ -384,6 +412,13 @@ function AssessmentPage() {
             <div className="assessment-row assessment-row--bot">
               <div className="assessment-bubble assessment-bubble--bot assessment-bubble--muted">
                 …
+              </div>
+            </div>
+          )}
+          {aiLoading && (
+            <div className="assessment-row assessment-row--bot">
+              <div className="assessment-bubble assessment-bubble--bot assessment-bubble--muted">
+                评估中，请稍候…
               </div>
             </div>
           )}
