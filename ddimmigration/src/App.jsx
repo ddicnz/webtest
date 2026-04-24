@@ -175,7 +175,7 @@ function App() {
           <div className="top-bar-contact">
             <span className="top-bar-contact-item">电话：+64-027-7223339</span>
             <span className="top-bar-contact-item">邮箱：ddicnz@gmail.com</span>
-            <span className="top-bar-contact-item">工作时间：Mon - Fri 10:00 - 18:00</span>
+            <span className="top-bar-contact-item">工作时间：Mon - Fri 9:00 - 17:00</span>
           </div>
         </div>
       </header>
