@@ -5,6 +5,7 @@ export const albumSections = [
     title: '客户接待',
     cover: '/pic/album/customers/beauty_1776229221831.JPG',
     images: [
+      '/pic/album/customers/图片_20260428092143_150_41.jpg',
       '/pic/album/customers/beauty_1776229221831.JPG',
       '/pic/album/customers/beauty_1775536491455.JPG',
       '/pic/album/customers/beauty_1773645289185.JPG',
