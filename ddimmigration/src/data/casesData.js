@@ -1,6 +1,84 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 70,
+    title: '中式厨师 Job Check 海外配额获批',
+    summary:
+      '雇主中式厨师岗位 Job Check 申请获批，可用于后续 AEWV 招聘流程；批文显示岗位 Chinese Cuisine Cook、地点 Auckland、可招人数等关键信息（以移民局文件为准）。',
+    date: '2026年4月25日',
+    image: '/pic/case/042801.jpg',
+    images: ['/pic/case/042801.jpg'],
+    fullContent: `中式厨师海外配额（Job Check）获批 ✅
+
+最近客户的中式厨师岗位顺利通过Job Check审批，技能等级3级🎉
+	
+中餐厨师在新西兰其实一直是真实紧缺岗位之一，尤其是有经验、能独立出餐、会做传统中餐的厨师。
+这类岗位属于技能等级3级（ANZSCO），只要条件匹配，是完全可以走正规工签路径的。
+	
+拿到工签之后：
+✔ 配偶可以申请开放工签
+✔ 子女可以按本地生身份入读公立学校
+✔ 全家可以一起规划长期发展
+现在餐饮行业需求一直在，很多雇主也在持续申请配额。`,
+  },
+  {
+    id: 69,
+    title: '按摩师海外申请 AEWV 5 年工签获批',
+    summary:
+      '申请人以 Massage Therapist 岗位在境外递交 AEWV，获批多次往返工作签证，签证有效期按批函显示为最长约 60 个月（以首入境时间和批注为准）。',
+    date: '2026年4月28日',
+    image: '/pic/case/042804.jpg',
+    images: ['/pic/case/042804.jpg'],
+    fullContent: `按摩师海外申请五年工签获批 ✅
+
+本案例为境外递交 AEWV（Accredited Employer Work Visa）成功获批，岗位为 Massage Therapist。
+
+【案例亮点】
+✔ 海外递交获批，多次往返条款清晰
+✔ 批注含每周工时与岗位限制等关键条件
+✔ 有效期按批函及首入境规则计算（通常可达约 60 个月）
+
+海外申请的关键在于岗位匹配、工作经历证明与雇主材料的一致性，建议递交前做完整逻辑校对。`,
+  },
+  {
+    id: 68,
+    title: '管理学硕士条件 OFFER 获批（奖学金 1 万纽币）',
+    summary:
+      '申请人获 Master of Management 条件录取（Conditional Offer），并获得 NZD 10,000 奖学金；学费清单以学校正式文件与后续缴费通知为准。',
+    date: '2026年4月28日',
+    image: '/pic/case/042802.jpg',
+    images: ['/pic/case/042802.jpg', '/pic/case/042803.jpg'],
+    fullContent: `管理学硕士条件 OFFER + 奖学金获批 ✅
+
+本案例为学校端录取结果：Master of Management 条件录取，同时获得 NZD 10,000 奖学金。
+
+【案例要点】
+✔ 课程录取与奖学金同步确认
+✔ 总费用与奖学金抵扣金额在学校文件中明确
+✔ 后续需按条件补齐语言/材料并完成签证申请衔接
+
+条件录取阶段建议尽快制定时间表：补件、缴费、签证递交并行推进，避免错过开学节点。`,
+  },
+  {
+    id: 67,
+    title: '工签到期转旅游签获批',
+    summary:
+      '申请人工签到期前递交 visitor visa（General）并获批，批注显示停留期限与签证条件（以移民局批准函原文为准）。',
+    date: '2026年4月28日',
+    image: '/pic/case/042805.jpg',
+    images: ['/pic/case/042805.jpg'],
+    fullContent: `工签到期转旅游签获批 ✅
+
+本案例为工作签证到期前的身份衔接：由工签过渡至 visitor visa（General）并顺利获批。
+
+【实务价值】
+✔ 合法衔接在新停留身份，避免身份断档
+✔ 批注明确停留截止日期与签证条件
+✔ 为后续回国、再次申请或家庭安排预留缓冲窗口
+
+此类转换对时间节点要求很高，建议在原签证到期前尽早规划并完成递交。`,
+  },
+  {
     id: 66,
     title: '换雇主+换岗位 VOC 工签变更获批',
     summary:

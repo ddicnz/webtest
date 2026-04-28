@@ -1268,6 +1268,11 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 50%;
 }
 
+/* 042804.jpg（管理学硕士）封面：上移约 20% */
+.case-card-image-wrap:has(img[src*="042802"]) .case-card-image {
+  object-position: center 45%;
+}
+
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;
