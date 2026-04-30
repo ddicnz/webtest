@@ -1,6 +1,44 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 73,
+    title: '一家三口签证同步获批（子女学签 + 配偶开放工签）',
+    summary:
+      '同一家三位申请人签证结果同步落地：两位子女获批 Student visa - Dependent of a Worker，配偶获批 Partner of AEWV（open）工签，形成完整家庭签证组合（以批签函为准）。',
+    date: '2026年4月30日',
+    image: '/pic/case/043002.jpg',
+    images: ['/pic/case/043002.jpg', '/pic/case/043003.jpg', '/pic/case/043004.jpg'],
+    fullContent: `一家三口签证同步获批 ✅
+
+本案例为家庭组合签证的典型结果：两位子女获批 Student visa - Dependent of a Worker，配偶获批 Partner of AEWV（open）工作签证。
+
+【案例亮点】
+✔ 子女可按签证条件在新西兰就读中小学
+✔ 配偶持开放工签，可在新西兰合法灵活就业
+✔ 家庭可同步规划学习、就业与长期发展路径
+
+家庭签证办理重点在于主申请与附属申请材料逻辑一致，关系证明、资金与在新安排需完整闭环。`,
+  },
+  {
+    id: 72,
+    title: '新西兰 NZQA 5级 Diploma 学历认证获批',
+    summary:
+      '申请人学历经 NZQA International Qualifications Recognition Statement 评估，获认定为 Diploma at Level 5（5级文凭），可用于后续签证或职业路径规划（以官方文件为准）。',
+    date: '2026年4月30日',
+    image: '/pic/case/043005.jpg',
+    images: ['/pic/case/043005.jpg'],
+    fullContent: `NZQA 学历认证 5级 Diploma 获批 ✅
+
+本案例为 NZQA 国际学历认证结果：申请人学历被评估为 Diploma at Level 5。
+
+【案例价值】
+✔ 为工签岗位匹配和后续路径评估提供官方学历依据
+✔ 可与工作经验、岗位要求一并用于综合方案设计
+✔ 文件信息以 NZQA 出具的正式声明为准
+
+学历认证只是路径中的一环，后续仍需结合岗位、薪资、雇主合规和当期政策综合判断。`,
+  },
+  {
     id: 71,
     title: '中式厨师工签 VOC 获批',
     summary:
