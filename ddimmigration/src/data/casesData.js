@@ -1,6 +1,25 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 71,
+    title: '中式厨师工签 VOC 获批',
+    summary:
+      '申请人办理 AEWV 工签条件变更（Variation of Conditions）并顺利获批，批注显示岗位为 Chinese Cuisine Chef（Auckland）及签证生效日期等关键信息（以批签函为准）。',
+    date: '2026年4月30日',
+    image: '/pic/case/043001.jpg',
+    images: ['/pic/case/043001.jpg'],
+    fullContent: `中式厨师工签 VOC 获批 ✅
+
+本案例为已持工签申请人递交 VOC（Variation of Conditions）后获批。批签结果明确了新岗位与雇佣条件，申请人可按更新后的签证条件继续在新西兰合法工作。
+
+【案例要点】
+✔ VOC 适用于工签在有效期内的雇主/岗位条件调整
+✔ 批注包含岗位、地点、工时与薪资门槛等关键条件
+✔ 材料需确保“岗位真实 + 雇主合规 + 薪资工时达标”三者一致
+
+涉及换雇主或换岗位时，建议先做个案评估再递交，避免因条件不一致造成延误。`,
+  },
+  {
     id: 70,
     title: '中式厨师 Job Check 海外配额获批',
     summary:
