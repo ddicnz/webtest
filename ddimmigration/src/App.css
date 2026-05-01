@@ -3569,6 +3569,15 @@ img[src*="album/office"][src*="IMG_2486"] {
   font-weight: 700;
 }
 
+.admin-survey-actions {
+  margin-top: 14px;
+}
+
+.admin-auth-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .admin-list {
   display: flex;
   flex-direction: column;

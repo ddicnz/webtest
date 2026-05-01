@@ -2,14 +2,31 @@ import { useEffect, useMemo, useState } from 'react'
 
 const SHOW_ALL_ANSWER_URL =
   'https://y6imnkbld5.execute-api.ap-southeast-2.amazonaws.com/default/showAllanswer'
+const SHOW_SURVEY_URL =
+  'https://m0swbhpph9.execute-api.ap-southeast-2.amazonaws.com/default/showSurvey'
 const ADMIN_PASSWORD = 'Ddtrip800'
 const ADMIN_UNLOCK_KEY = 'ddimmigration_admin_unlocked'
+const SURVEY_PAGE_SIZE = 20
 
 const TAB_OPTIONS = [
   { id: 'work_visa', label: '工签' },
   { id: 'student_visa', label: '学签' },
   { id: 'visitor_visa', label: '旅游签' },
 ]
+
+function buildPageItems(current, total) {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1)
+  }
+  const items = [1]
+  const start = Math.max(2, current - 1)
+  const end = Math.min(total - 1, current + 1)
+  if (start > 2) items.push('ellipsis-left')
+  for (let i = start; i <= end; i += 1) items.push(i)
+  if (end < total - 1) items.push('ellipsis-right')
+  items.push(total)
+  return items
+}
 
 function displayValue(value) {
   if (value == null || value === '') return '-'
@@ -251,6 +268,26 @@ function renderCard(intent, item) {
   return <VisitorVisaCard key={item.sessionId} item={item} />
 }
 
+function SurveyCard({ item }) {
+  return (
+    <article className="admin-lead-card">
+      <header className="admin-lead-header">
+        <h3 className="admin-lead-title">姓名：{displayValue(item.name)}</h3>
+        <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
+      </header>
+      <div className="admin-lead-grid">
+        <p><strong>姓名：</strong>{displayValue(item.name)}</p>
+        <p><strong>邮箱：</strong>{displayValue(item.email)}</p>
+        <p><strong>微信号：</strong>{displayValue(item.phone)}</p>
+        <p><strong>业务：</strong>{displayValue(item.service)}</p>
+        <p><strong>来源：</strong>{displayValue(item.source)}</p>
+        <p><strong>时间：</strong>{formatTime(item.createdAt)}</p>
+        <p className="admin-advice admin-advice--base"><strong>留言：</strong>{displayValue(item.message)}</p>
+      </div>
+    </article>
+  )
+}
+
 function AdminPage() {
   const [passwordInput, setPasswordInput] = useState('')
   const [authError, setAuthError] = useState('')
@@ -261,6 +298,7 @@ function AdminPage() {
       return false
     }
   })
+  const [activeView, setActiveView] = useState('answers')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('work_visa')
@@ -274,6 +312,12 @@ function AdminPage() {
     student_visa: 0,
     visitor_visa: 0,
   })
+  const [surveyItems, setSurveyItems] = useState([])
+  const [surveyLastKey, setSurveyLastKey] = useState(null)
+  const [surveyLoading, setSurveyLoading] = useState(false)
+  const [surveyError, setSurveyError] = useState('')
+  const [surveyLoaded, setSurveyLoaded] = useState(false)
+  const [surveyPage, setSurveyPage] = useState(1)
 
   useEffect(() => {
     if (!authorized) return
@@ -305,7 +349,62 @@ function AdminPage() {
     void run()
   }, [authorized])
 
+  const loadSurvey = async (lastKey = null, append = false) => {
+    setSurveyLoading(true)
+    setSurveyError('')
+    try {
+      const url = new URL(SHOW_SURVEY_URL)
+      if (lastKey && typeof lastKey === 'object') {
+        url.searchParams.set('lastKey', JSON.stringify(lastKey))
+      }
+      const res = await fetch(url.toString())
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data?.detail || data?.error || `HTTP ${res.status}`)
+      }
+      const nextItems = Array.isArray(data) ? data : Array.isArray(data?.items) ? data.items : []
+      const nextKey =
+        !Array.isArray(data) &&
+        data?.lastKey &&
+        typeof data.lastKey === 'object' &&
+        Object.keys(data.lastKey).length > 0
+          ? data.lastKey
+          : null
+      setSurveyItems((prev) => (append ? [...prev, ...nextItems] : nextItems))
+      setSurveyLastKey(nextKey)
+      setSurveyLoaded(true)
+      if (!append) setSurveyPage(1)
+    } catch (e) {
+      setSurveyError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setSurveyLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!authorized || activeView !== 'survey' || surveyLoaded) return
+    void loadSurvey(null, false)
+  }, [authorized, activeView, surveyLoaded])
+
   const currentItems = useMemo(() => grouped[activeTab] || [], [grouped, activeTab])
+  const visibleSurveyItems = useMemo(
+    () => surveyItems.slice((surveyPage - 1) * SURVEY_PAGE_SIZE, surveyPage * SURVEY_PAGE_SIZE),
+    [surveyItems, surveyPage],
+  )
+  const totalSurveyPages = Math.max(1, Math.ceil(surveyItems.length / SURVEY_PAGE_SIZE))
+  const hasLocalNextPage = surveyPage < totalSurveyPages
+
+  const goSurveyPage = async (targetPage) => {
+    if (targetPage < 1) return
+    if (targetPage <= totalSurveyPages) {
+      setSurveyPage(targetPage)
+      return
+    }
+    if (targetPage === totalSurveyPages + 1 && surveyLastKey && !surveyLoading) {
+      await loadSurvey(surveyLastKey, true)
+      setSurveyPage(targetPage)
+    }
+  }
 
   const handleAuth = (e) => {
     e.preventDefault()
@@ -347,46 +446,122 @@ function AdminPage() {
   return (
     <main className="main-content admin-page">
       <h1 className="admin-title">后台回答管理</h1>
-
-      <section className="admin-stats">
-        <article className="admin-stat-card">
-          <h2>工签</h2>
-          <p>{counts.work_visa}</p>
-        </article>
-        <article className="admin-stat-card">
-          <h2>学签</h2>
-          <p>{counts.student_visa}</p>
-        </article>
-        <article className="admin-stat-card">
-          <h2>旅游签</h2>
-          <p>{counts.visitor_visa}</p>
-        </article>
-      </section>
-
-      <nav className="admin-tabs" aria-label="回答分类">
-        {TAB_OPTIONS.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            className={`admin-tab-btn${activeTab === tab.id ? ' active' : ''}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <nav className="admin-tabs" aria-label="后台模块">
+        <button
+          type="button"
+          className={`admin-tab-btn${activeView === 'answers' ? ' active' : ''}`}
+          onClick={() => setActiveView('answers')}
+        >
+          后台回答管理
+        </button>
+        <button
+          type="button"
+          className={`admin-tab-btn${activeView === 'survey' ? ' active' : ''}`}
+          onClick={() => setActiveView('survey')}
+        >
+          Survey 数据
+        </button>
       </nav>
 
-      {loading && <p className="admin-loading">加载中...</p>}
-      {!loading && error && <p className="admin-error">加载失败：{error}</p>}
+      {activeView === 'answers' ? (
+        <>
+          <section className="admin-stats">
+            <article className="admin-stat-card">
+              <h2>工签</h2>
+              <p>{counts.work_visa}</p>
+            </article>
+            <article className="admin-stat-card">
+              <h2>学签</h2>
+              <p>{counts.student_visa}</p>
+            </article>
+            <article className="admin-stat-card">
+              <h2>旅游签</h2>
+              <p>{counts.visitor_visa}</p>
+            </article>
+          </section>
 
-      {!loading && !error && (
-        <section className="admin-list">
-          {currentItems.length === 0 ? (
-            <p className="admin-empty">当前分类暂无数据。</p>
-          ) : (
-            currentItems.map((item) => renderCard(activeTab, item))
+          <nav className="admin-tabs" aria-label="回答分类">
+            {TAB_OPTIONS.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                className={`admin-tab-btn${activeTab === tab.id ? ' active' : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+
+          {loading && <p className="admin-loading">加载中...</p>}
+          {!loading && error && <p className="admin-error">加载失败：{error}</p>}
+
+          {!loading && !error && (
+            <section className="admin-list">
+              {currentItems.length === 0 ? (
+                <p className="admin-empty">当前分类暂无数据。</p>
+              ) : (
+                currentItems.map((item) => renderCard(activeTab, item))
+              )}
+            </section>
           )}
-        </section>
+        </>
+      ) : (
+        <>
+          {surveyLoading && surveyItems.length === 0 && <p className="admin-loading">加载中...</p>}
+          {!surveyLoading && surveyError && <p className="admin-error">加载失败：{surveyError}</p>}
+          {!surveyLoading && !surveyError && (
+            <section className="admin-list">
+              {visibleSurveyItems.length === 0 ? (
+                <p className="admin-empty">当前暂无 Survey 数据。</p>
+              ) : (
+                visibleSurveyItems.map((item, idx) => (
+                  <SurveyCard key={`${item.createdAt || 'survey'}-${idx}`} item={item} />
+                ))
+              )}
+            </section>
+          )}
+          <div className="admin-survey-actions">
+            <nav className="cases-pagination" aria-label="Survey 分页">
+              <button
+                type="button"
+                className="cases-pagination-nav"
+                disabled={surveyLoading || surveyPage <= 1}
+                onClick={() => void goSurveyPage(surveyPage - 1)}
+              >
+                上一页
+              </button>
+
+              {buildPageItems(surveyPage, totalSurveyPages).map((item) =>
+                typeof item === 'number' ? (
+                  <button
+                    key={item}
+                    type="button"
+                    className={`cases-pagination-page${item === surveyPage ? ' active' : ''}`}
+                    onClick={() => void goSurveyPage(item)}
+                    aria-current={item === surveyPage ? 'page' : undefined}
+                    disabled={surveyLoading}
+                  >
+                    {item}
+                  </button>
+                ) : (
+                  <span key={item} className="cases-pagination-ellipsis" aria-hidden="true">
+                    ...
+                  </span>
+                ),
+              )}
+
+              <button
+                type="button"
+                className="cases-pagination-nav"
+                disabled={surveyLoading || (!hasLocalNextPage && !surveyLastKey)}
+                onClick={() => void goSurveyPage(surveyPage + 1)}
+              >
+                下一页
+              </button>
+            </nav>
+          </div>
+        </>
       )}
     </main>
   )
