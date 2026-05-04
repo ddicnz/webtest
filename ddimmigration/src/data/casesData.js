@@ -1,6 +1,68 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 76,
+    title: '汽车喷漆工 AEWV 五年工签获批（大专学历）',
+    summary:
+      '申请人以大专学历背景，获批新西兰 Accredited Employer Work Visa（AEWV）；批注岗位为 Vehicle detailing and refinishing technician（奥克兰），薪资不低于 NZD 28/小时，签证最长约 60 个月（以首入境及批签函为准）。',
+    date: '2026年5月4日',
+    image: '/pic/case/050402.jpg',
+    images: ['/pic/case/050402.jpg'],
+    fullContent: `汽车喷漆工 AEWV 五年工签获批 ✅
+
+祝贺客户用“学历 + 工作经验”的组合，成功拿下新西兰AEWV 5年工签！很多人会觉得：申请工签只能靠多年经验或者必须是对口专业，但实际操作中，很多case是通过“学历 + 经验”一起去做匹配的。
+	
+这个客户本身情况是：
+✔ 国内大专学历（汽车相关）
+✔ 有相关工作经历（汽车喷漆相关）
+	
+我们做的第一步：学历认证，先帮客户做NZQA学历认证，把国内本科对标为新西兰Level 5 学历。这一步很关键，是整个申请逻辑的基础。
+	
+第二步：岗位匹配，根据客户的工作经验方向，最终匹配到： 汽车喷漆工（vehicle detailing / refinishing technician），这里的重点不是简单找岗位，而是梳理客户过往的工作内容，对齐岗位职责，同时结合学历背景做整体支撑，让“学历 + 工作经验 + 岗位”形成一个完整逻辑。
+	
+第三步：材料整理与递交，我们重点做的是把客户的工作经历拆解清楚，对应岗位职责，把学历作为辅助支撑写进去，整理雇主材料，确保整体合规。
+	
+核心是让移民局看明白一件事： 这个人是有能力胜任这个岗位的！最终顺利获批 AEWV工签5年。这个案例其实说明一个很现实的问题：很多人不是条件不够，而是不知道怎么把自己的条件组合起来用，有的人偏学历，有的人偏经验，但很多情况下，是需要两者一起去做匹配。`,
+  },
+  {
+    id: 75,
+    title: '合同管理员 Job Check 海外配额获批',
+    summary:
+      '雇主岗位 Contract Administrator（ANZSCO 511111，Skill Level 2）Job Check 获批，地点 Auckland，可用于后续 AEWV 招聘流程（批文有效期等以移民局文件为准）。',
+    date: '2026年4月30日',
+    image: '/pic/case/050401.jpg',
+    images: ['/pic/case/050401.jpg'],
+    fullContent: `合同管理员 Job Check 获批 ✅
+
+本案例为雇主端 Job Check 通过：岗位 Contract Administrator，ANZSCO 511111（Skill Level 2），地点 Auckland，为后续海外招聘与 AEWV 递交打下基础。
+
+【对企业端意义】
+✔ Job Check 是合规招聘与工签链条的前置环节
+✔ 批文明确岗位编码、人数、地区与有效期
+✔ 后续仍需结合雇主认证状态与候选人个案推进
+
+建议在配额获批后尽快整理岗位说明、薪资与合同口径，减少后续签证补件概率。`,
+  },
+  {
+    id: 74,
+    title: '配偶 AEWV 开放工签续签获批',
+    summary:
+      '申请人作为 AEWV 主申请人的伴侣，获批 work visa - Partner of AEWV (open)；批注允许在新西兰任意地区、任意职业为任意雇主工作（多次往返及有效期以批签函为准）。',
+    date: '2026年5月1日',
+    image: '/pic/case/050403.jpg',
+    images: ['/pic/case/050403.jpg'],
+    fullContent: `配偶开放工签续签获批 ✅
+
+本案例为 Partner of AEWV（open）路径下的配偶工签续签通过：持证人可按批注在新西兰灵活就业，不绑定单一雇主。
+
+【实务价值】
+✔ 家庭可形成双收入结构，提升在新稳定性
+✔ 与主申请人签证长度、关系证明材料需保持一致
+✔ 续签节点建议提前核对主签状态与家庭整体路径
+
+具体工作范围、旅行次数与到期日，以新西兰移民局批准函原文为准。`,
+  },
+  {
     id: 73,
     title: '一家三口签证同步获批（子女学签 + 配偶开放工签）',
     summary:
