@@ -6,8 +6,8 @@ export const casesList = [
     summary:
       '申请人以大专学历背景，获批新西兰 Accredited Employer Work Visa（AEWV）；批注岗位为 Vehicle detailing and refinishing technician（奥克兰），薪资不低于 NZD 28/小时，签证最长约 60 个月（以首入境及批签函为准）。',
     date: '2026年5月4日',
-    image: '/pic/case/050402.jpg',
-    images: ['/pic/case/050402.jpg'],
+    image: '/pic/case/0504021.jpg',
+    images: ['/pic/case/0504021.jpg'],
     fullContent: `汽车喷漆工 AEWV 五年工签获批 ✅
 
 祝贺客户用“学历 + 工作经验”的组合，成功拿下新西兰AEWV 5年工签！很多人会觉得：申请工签只能靠多年经验或者必须是对口专业，但实际操作中，很多case是通过“学历 + 经验”一起去做匹配的。
