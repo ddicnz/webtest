@@ -3,8 +3,10 @@ export const albumSections = [
   {
     id: 'reception',
     title: '客户接待',
-    cover: '/pic/album/customers/beauty_1776229221831.JPG',
+    cover: '/pic/album/customers/a6ed917722466f748666ff11841caab9.jpg',
     images: [
+      '/pic/album/customers/a6ed917722466f748666ff11841caab9.jpg',
+      '/pic/album/customers/IMG_2545.JPG',
       '/pic/album/customers/图片_20260428092143_150_41.jpg',
       '/pic/album/customers/beauty_1776229221831.JPG',
       '/pic/album/customers/beauty_1775536491455.JPG',
