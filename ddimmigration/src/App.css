@@ -1278,6 +1278,15 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 45%;
 }
 
+/* 051301.jpg（语言班 OFFER）封面：构图上移约 20%（与同系列 041701 / 043005 一致） */
+.case-card-image-wrap:has(img[src*="051301"]) .case-card-image {
+  object-position: center 45%;
+}
+
+.case-detail-image-wrap:has(img[src*="051301"]) .case-detail-image {
+  object-position: center 35%;
+}
+
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;

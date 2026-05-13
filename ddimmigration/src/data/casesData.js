@@ -1,6 +1,51 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 86,
+    title: '中式厨师换雇主 VOC 获批',
+    summary:
+      '已持工签申请人递交工签条件变更（Variation of Conditions），换雇主后顺利获批；批注岗位 Chinese Cuisine Cook（奥克兰），全职每周至少 30 小时，签证有效期以批签函为准。',
+    date: '2026年5月13日',
+    image: '/pic/case/051302.jpg',
+    images: ['/pic/case/051302.jpg'],
+    fullContent: `中式厨师换雇主 VOC 获批 ✅
+
+本案例为已在新西兰持工签的申请人因更换雇主，递交 VOC（Variation of Conditions）后顺利获批。批签函更新雇佣条件后，申请人可按新雇主与岗位要求继续合法全职工作。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Variation of conditions application approved
+✔ 岗位：Chinese Cuisine Cook（中式厨师）
+✔ 地点：Auckland（奥克兰）
+✔ 签证生效：2026 年 5 月 13 日
+✔ 可停留至：2028 年 2 月 22 日
+✔ 工作条件：须全职，通常每周不少于 30 小时
+
+AEWV 等绑定雇主的工签，换雇主前须先获批 VOC，不可在未获批前直接为新雇主工作。新雇主资质、岗位真实性、薪资与工时达标、材料与 ANZSCO 职责一致，是 VOC 顺利获批的关键。`,
+  },
+  {
+    id: 85,
+    title: 'Auckland English Academy 语言班 OFFER 获批',
+    summary:
+      '申请人获 Auckland English Academy 国际学生录取通知：English for Speakers of Other Languages（Level 3），含 PTE Preparation Course Strand 2 全日制，学制约 8 周；拟定 2026 年 5 月 18 日开学、7 月 10 日结课，费用以学校正式文件为准。',
+    date: '2026年5月13日',
+    image: '/pic/case/051301.jpg',
+    images: ['/pic/case/051301.jpg'],
+    fullContent: `语言班 OFFER 获批 ✅
+
+申请人成功获得 Auckland English Academy（ICL 教育集团）签发的国际学生录取通知（Offer of Place）。
+
+【本案例要点（以学校正式文件为准）】
+✅ 课程：English for Speakers of Other Languages（Level 3）
+✅ 组件：PTE Preparation Course Strand 2（Full Time）
+✅ 拟定开学 / 结课：2026 年 5 月 18 日 — 2026 年 7 月 10 日
+✅ 学制：约 8 周
+✅ 地点：奥克兰
+✅ 录取信日期：2026 年 4 月 14 日
+✅ 费用示例：注册费、材料费与学费合计以录取信所列为准（本函合计约 NZD 3,020）
+
+语言课程 OFFER 是学签或工签附加学习（如 VOC）衔接中的常用材料。后续缴费、开课确认与签证材料请以学校及新西兰移民局最新要求为准。`,
+  },
+  {
     id: 84,
     title: '烘焙师工签续签获批',
     summary:
