@@ -1,6 +1,95 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 90,
+    title: '中餐厨师换雇主 3+2 续签获批',
+    summary:
+      '申请人岗位 Chinese Cuisine Cook（奥克兰），换雇主后 AEWV 工签 3+2 续签顺利获批；签证 2026 年 5 月 15 日生效，可停留至 2028 年 5 月 20 日，全职每周至少 30 小时（以批签函为准）。',
+    date: '2026年5月15日',
+    image: '/pic/case/051505.jpg',
+    images: ['/pic/case/051505.jpg'],
+    fullContent: `中餐厨师换雇主 3+2 续签获批 ✅
+
+恭喜客户中餐厨师工签续签顺利获批！本案例为已在新西兰持 AEWV 的申请人因更换雇主，按 3+2 续签路径递交后获批，可继续在新雇主处合法全职工作。
+
+【案例要点（以移民局批准函为准）】
+✔ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Chinese Cuisine Cook（中式厨师）
+✔ 地点：Auckland（奥克兰）
+✔ 签证生效：2026 年 5 月 15 日
+✔ 可停留至：2028 年 5 月 20 日
+✔ 可多次往返
+✔ 工作条件：须全职，通常每周不少于 30 小时；仅供职批签函所列雇主与岗位
+
+换雇主或续签时，移民局仍会核查岗位真实性、职责与职业匹配、薪资工时及雇主合规性。材料逻辑清楚、用工链条完整，中餐厨师岗位同样可以顺利走完 3+2 续签并稳定留新发展。`,
+  },
+  {
+    id: 89,
+    title: 'AIS 英语 Level 5 语言班 OFFER 获批',
+    summary:
+      '申请人获 Auckland Institute of Studies（AIS）国际学生录取通知：New Zealand Certificate in English Language（Level 5），St Helens Campus，学制约 14 周；拟定 2026 年 9 月 14 日开学、12 月 18 日结课，费用以学校正式文件为准。',
+    date: '2026年5月15日',
+    image: '/pic/case/051504.jpg',
+    images: ['/pic/case/051504.jpg'],
+    fullContent: `AIS 语言班 OFFER 获批 ✅
+
+申请人成功获得 Auckland Institute of Studies（AIS New Zealand）签发的国际学生录取通知（Offer of Place）。
+
+【本案例要点（以学校正式文件为准）】
+✅ 院校：Auckland Institute of Studies（AIS）
+✅ 课程：New Zealand Certificate in English Language（Level 5）
+✅ 校区：St Helens Campus
+✅ 拟定开学 / 结课：2026 年 9 月 14 日 — 2026 年 12 月 18 日
+✅ 学制：约 14 周（60 credits）
+✅ 代理：DD IMMIGRATION CONSULTING LIMITED
+
+语言课程 OFFER 是学签申请或后续学历衔接的重要材料之一。后续缴费、开课确认与签证递交请以学校录取信及新西兰移民局最新要求为准。`,
+  },
+  {
+    id: 88,
+    title: 'AEWV 工签担保两名子女学签获批',
+    summary:
+      '主申请人持新西兰 AEWV 工签，两名子女分别递交 Student visa - Dependent of a Worker 并双双获批；可按本地生身份入读新西兰中小学（具体条款以批签函为准）。',
+    date: '2026年5月15日',
+    image: '/pic/case/051502.jpg',
+    images: ['/pic/case/051502.jpg', '/pic/case/051503.jpg'],
+    fullContent: `AEWV 工签担保两名子女学签获批 ✅
+
+恭喜客户两名孩子顺利拿到新西兰 Student visa - Dependent of a Worker 学签！同一主申请人持认证雇主工签（AEWV）后，我们为两名子女分别准备材料、递交申请，最终双双获批。
+
+【案例要点（以移民局批准函为准）】
+✔ 签证类型：Student visa - Dependent of a Worker
+✔ 签证生效：2026 年 5 月 15 日
+✔ 可停留至：2028 年 4 月 14 日
+✔ 可多次往返
+✔ 可在新西兰学校以 domestic student（本地生）身份入读中小学
+✔ 批注通常不得在纽从事本地雇佣工作（以批准函英文条件为准）
+
+两个孩子同步获批，意味着家庭可以一起规划在新西兰的教育与生活：主申请人合法工作，子女按本地生入读公立学校，学费压力明显降低，也能更早适应英语与本地学习环境。AEWV 家庭路径里，子女学签往往是让「一个人先落地」变成「全家一起发展」的关键一步。`,
+  },
+  {
+    id: 87,
+    title: 'AEWV 工签子女学签获批',
+    summary:
+      '主申请人持新西兰 AEWV 工签，子女顺利获批 Student visa - Dependent of a Worker；可按本地生身份在新西兰中小学就读（不得在纽受雇，以批签函为准）。',
+    date: '2026年5月11日',
+    image: '/pic/case/051501.jpg',
+    images: ['/pic/case/051501.jpg'],
+    fullContent: `AEWV 工签子女学签获批 ✅
+
+恭喜客户孩子顺利拿到新西兰 Student visa - Dependent of a Worker 学签！主申请人持认证雇主工签（AEWV）后，符合条件的子女可同步申请该类别学签，这是很多家庭规划里非常关键的一步。
+
+【案例要点（以移民局批准函为准）】
+✔ 签证类型：Student visa - Dependent of a Worker
+✔ 签证生效：2026 年 5 月 11 日
+✔ 可停留至：2031 年 2 月 1 日
+✔ 可多次往返
+✔ 可在新西兰学校以 domestic student（本地生）身份入读中小学
+✔ 批注通常不得在纽从事本地雇佣工作（以批准函英文条件为准）
+
+很多家庭看重 AEWV，不只是主申请人能合法工作，更是孩子可以按本地生入读公立学校，教育成本明显降低，也能更早融入英语与本地学习环境。配偶可规划 open 工签，子女持 Dependent 学签，全家在新西兰的工作与教育可以同步落地。`,
+  },
+  {
     id: 86,
     title: '中式厨师换雇主 VOC 获批',
     summary:
