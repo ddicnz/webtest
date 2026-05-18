@@ -164,6 +164,43 @@ function StudySectionContent({ section }) {
           </div>
         </>
       )}
+      {sec.id === 'primary' && sec.programs && (
+        <>
+          <p className="study-section-intro">具体费用与安排以项目说明及当年开课计划为准，如需咨询可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
+          <div className="cases-list">
+            {sec.programs.map((prog) => (
+              <article key={prog.id} className="case-card case-card--study">
+                <div className="case-card-image-wrap">
+                  <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                </div>
+                <div className="case-card-body">
+                  <h3 className="case-card-title">{prog.titleZh}</h3>
+                  <div className="case-card-cost">
+                    <strong>费用：</strong>
+                    {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
+                      <p key={i} className="case-card-cost-line">{line}</p>
+                    ))}
+                  </div>
+                  {prog.highlight && <p className="case-card-requirements"><strong>项目亮点：</strong>{prog.highlight}</p>}
+                  {prog.prospects && prog.prospects.length > 0 && (
+                    <div className="case-card-highlights">
+                      <strong>优势重点：</strong>
+                      <ul>
+                        {prog.prospects.slice(0, 4).map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
+                  </StudyProgramLink>
+                </div>
+              </article>
+            ))}
+          </div>
+        </>
+      )}
       {sec.id === 'secondary' && sec.routes && (
         <div className="study-secondary-routes">
           <h3 className="study-secondary-routes-heading">升学路径规划</h3>
