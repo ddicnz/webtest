@@ -139,7 +139,7 @@ export const studySections = [
         image: '/pic/study/图片_20260304105928_211.jpg',
         schedule: '周一到周五 1pm-5pm',
         highlight: '为学术之路打下坚实英语基础',
-        cost: '$7,110（16 周线下）/ $6,110（16 周线上）',
+        cost: '$7,110（16 周线下）/ $6,110（16 周线上 可境外学习）',
         detail: 'NZCEL Level 4 / Level 5；入学方式：语言成绩直入（雅思/PTE）或校内/线上英语测试；周一至周五上课',
         languageReq: 'L4: 雅思 5.5(5.0) 或 PTE 42(36)；L5: 雅思 6.0(5.5) 或 PTE 50(42)',
         academicReq: '计划升学或提升学术英语能力',
