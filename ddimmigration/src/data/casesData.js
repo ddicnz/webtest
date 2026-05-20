@@ -1,6 +1,51 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 93,
+    title: '合同管理员 Job Check 海外配额获批',
+    summary:
+      '雇主岗位 Contract Administrator（ANZSCO 511111，Skill Level 2）Job Check 获批，地点 Auckland，可招募 1 名移民工人，为后续 AEWV 招聘打下基础（批文有效期等以移民局文件为准）。',
+    date: '2026年5月20日',
+    image: '/pic/case/052101.jpg',
+    images: ['/pic/case/052101.jpg'],
+    fullContent: `合同管理员 Job Check 海外配额获批 ✅
+
+本案例为雇主端 Job Check 顺利通过：岗位 Contract Administrator，ANZSCO 511111（Skill Level 2），工作地点 Auckland，获批可招募 1 名移民工人。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Job check application approved
+✔ 签证类别：Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Contract Administrator
+✔ 地点：Auckland（奥克兰）
+✔ 批签日期：2026 年 5 月 20 日
+✔ 批文有效期与雇主认证状态以批准函原文为准
+
+Job Check 是合规招聘海外员工的前置环节。配额获批后，建议尽快整理岗位说明、薪资与合同口径，并同步核对雇主认证，减少后续工签递交时的补件与延误。`,
+  },
+  {
+    id: 92,
+    title: '中式厨师海外申请 5 年 AEWV 工签获批',
+    summary:
+      '申请人在境外递交新西兰 Accredited Employer Work Visa（AEWV），岗位 Chinese Cuisine Chef（奥克兰）顺利获批；签证 2026 年 5 月 20 日生效，最长约 60 个月，多次往返（以首入境时间及批签函为准）。',
+    date: '2026年5月20日',
+    image: '/pic/case/052001.jpg',
+    images: ['/pic/case/052001.jpg'],
+    fullContent: `中式厨师海外申请 5 年工签获批 ✅
+
+恭喜客户在中式厨师岗位海外申请 AEWV 工签顺利获批！本案例说明：人在国内、材料准备充分、岗位与经历匹配清晰时，同样可以一次性拿到长期工签。
+
+【案例要点（以移民局批准函为准）】
+✔ 签证类型：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Chinese Cuisine Chef（中式厨师）
+✔ 地点：Auckland（奥克兰）
+✔ 签证生效：2026 年 5 月 20 日
+✔ 可多次往返
+✔ 有效期：自首入境起最长约 60 个月（5 年，以批签函为准）
+✔ 工作条件：须全职，通常每周不少于 30 小时；仅供职批签函所列雇主与岗位
+
+海外申请的关键在于岗位真实、工作经历与职责对应、雇主合规材料完整。厨师类岗位只要逻辑清楚，同样有机会顺利获批长期 AEWV，并为后续家庭规划打下基础。`,
+  },
+  {
     id: 91,
     title: '陪读妈妈陪读签 + 工作获批',
     summary:
