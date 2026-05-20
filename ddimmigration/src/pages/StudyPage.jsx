@@ -223,7 +223,7 @@ function StudySectionContent({ section }) {
       )}
       {sec.id === 'secondary' && sec.programs && (
         <>
-          <p className="study-section-intro" style={{ marginTop: '24px' }}>合作预科项目，具体费用与入学要求以校方及官网为准。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
+          <p className="study-section-intro" style={{ marginTop: '24px' }}>以下含初中留学方案及合作预科项目，具体费用与入学要求以校方及官网为准。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">

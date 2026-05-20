@@ -12,6 +12,9 @@ export const studyIntro = {
   ],
 }
 
+/** 初高中留学宣传海报 */
+export const STUDY_JUNIOR_HIGH_POSTER = `/pic/study/${encodeURIComponent('初中留学.png')}`
+
 export const studySections = [
   {
     id: 'tertiary',
@@ -266,6 +269,28 @@ export const studySections = [
       },
     ],
     programs: [
+      {
+        id: 'nz-junior-high',
+        type: '初中留学',
+        titleZh: '新西兰初中留学',
+        titleEn: 'New Zealand Junior High School Study Abroad',
+        image: STUDY_JUNIOR_HIGH_POSTER,
+        coverImage: STUDY_JUNIOR_HIGH_POSTER,
+        detailImages: [STUDY_JUNIOR_HIGH_POSTER],
+        highlight: '优质中学 · 安全环境 · 全面成长',
+        cost: '一年学费 ¥68,000/年\n约 NZ$17,000/年',
+        detail:
+          '适合 12–13 岁孩子入读奥克兰优质本地中学（含 9 分制学校等）。沉浸式英语环境提升语言与综合能力；课程与课外活动丰富，重视全面发展。可提供寄宿/监护人安排与全程支持。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+        languageReq: '适合年龄：12–13 周岁（具体以学校录取要求为准）',
+        academicReq: '国内小学或初中在读/毕业，具体以目标学校评估为准',
+        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
+        prospects: [
+          '匹配奥克兰优质本地中学',
+          '沉浸式英语学习环境',
+          '课程与课外活动促进全面成长',
+          '免费协助学校 OFFER 申请 · 免费签证申请指导',
+        ],
+      },
       {
         id: 'uoa-foundation',
         type: '预科',
