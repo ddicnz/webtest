@@ -60,6 +60,12 @@ function StudyProgramDetailPage() {
         </div>
         <div className="case-detail-content">
           {prog.highlight && <p><strong>{prog.highlight}</strong></p>}
+          {prog.address && (
+            <p>
+              <strong>校址：</strong>
+              {prog.address}
+            </p>
+          )}
           <div className="case-detail-cost">
           <strong>学费：</strong>
           {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (

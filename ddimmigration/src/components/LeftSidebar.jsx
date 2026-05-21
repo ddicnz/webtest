@@ -1,3 +1,5 @@
+import { OFFICE_ADDRESS } from '../data/siteContact.js'
+
 const qrItems = [
   { src: '/pic/qrcodevx1.jpg', label: '签证咨询', alt: '签证咨询二维码' },
   { src: '/pic/qrcodevx2.jpg', label: '留学咨询', alt: '留学咨询二维码' },
@@ -45,7 +47,7 @@ function LeftSidebar() {
           </div>
           <div className="sidebar-contact-row">
             <span className="sidebar-contact-label">地址：</span>
-            <span>8 Andrew Baxter Drive, Māngere, Auckland 2022</span>
+            <span>{OFFICE_ADDRESS}</span>
           </div>
         </div>
       </div>

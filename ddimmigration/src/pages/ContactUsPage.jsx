@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { OFFICE_ADDRESS } from '../data/siteContact.js'
 import { trackFormSubmit } from '../utils/analytics'
 
 const FORM_TYPE_GENERAL = 'general'
@@ -122,7 +123,7 @@ function ContactUsPage() {
           </div>
           <div className="contact-detail-row">
             <span className="contact-detail-label">地址：</span>
-            <span>8 Andrew Baxter Drive, Māngere, Auckland 2022</span>
+            <span>{OFFICE_ADDRESS}</span>
           </div>
         </div>
 

@@ -168,7 +168,7 @@ function JobsPage() {
       {
         id: 10,
         title: '挖掘机司机',
-        requirements: ['持证或熟练操作挖掘机', '土方、平整、配合建筑施工', '每周约 50 小时'],
+        requirements: ['持证或熟练操作挖掘机', '土方、平整、配合建筑施工', '每周约 55 小时'],
         salary: '28 纽币/小时税前起，看能力定薪',
         visa: 'AEWV 5年工签',
         living: '吃住自理',

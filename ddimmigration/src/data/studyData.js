@@ -16,6 +16,10 @@ export const studyIntro = {
 export const STUDY_ANI_POSTER = `/pic/study/${encodeURIComponent('Auckland normal intermediate.png')}`
 export const STUDY_REMUERA_POSTER = `/pic/study/${encodeURIComponent('remuera intermediate.png')}`
 
+/** 小学留学 · Willowbank School 宣传海报 */
+export const STUDY_WILLOWBANK_POSTER = `/pic/study/${encodeURIComponent('willow bank.png')}`
+export const STUDY_SUNNYHILLS_POSTER = '/pic/study/sunnyhills.png'
+
 export const studySections = [
   {
     id: 'tertiary',
@@ -384,6 +388,51 @@ export const studySections = [
           '沉浸式语言环境',
           '体验多元文化',
           '持牌移民顾问团队 · 丰富学校资源 · 本地接送机 · 定制化方案',
+        ],
+      },
+      {
+        id: 'willowbank-primary',
+        type: '小学留学',
+        titleZh: 'Willowbank School 小学留学',
+        titleEn: 'Willowbank School Primary Study Abroad',
+        image: STUDY_WILLOWBANK_POSTER,
+        coverImage: STUDY_WILLOWBANK_POSTER,
+        detailImages: [STUDY_WILLOWBANK_POSTER],
+        highlight: '奥克兰东区优质小学 · 快乐学习 · 安全友善',
+        cost: '一年学费 ¥51,280/年\n约 NZ$12,849/年',
+        detail:
+          'Willowbank School，位于奥克兰东区华人社区，环境安全便利。适合 5–11 岁孩子入读；快乐学习、全面发展（学术·体育·艺术·品格），多元包容、欢迎国际生，小班关怀与优质教学并重。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+        languageReq: '适合年龄：5–11 周岁（具体以学校录取要求为准）',
+        academicReq: '国内幼儿园或小学在读/毕业，具体以学校评估为准',
+        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
+        prospects: [
+          '奥克兰东区优质社区 · 生活便利',
+          '卓越学术 · 小班关怀',
+          '体育·艺术·科技等丰富课外活动',
+          '免费申请 Offer · 免费签证申请指导',
+        ],
+      },
+      {
+        id: 'sunnyhills-primary',
+        type: '小学留学',
+        titleZh: 'Sunnyhills School 小学留学',
+        titleEn: 'Sunnyhills School Primary Study Abroad',
+        image: STUDY_SUNNYHILLS_POSTER,
+        coverImage: STUDY_SUNNYHILLS_POSTER,
+        detailImages: [STUDY_SUNNYHILLS_POSTER],
+        highlight: '奥克兰东区优质小学 · Inspiring lifelong learners（1970）',
+        cost: '一年学费 ¥64,000/年\n约 NZ$16,000/年',
+        address: '17 The Crest, Sunnyhills, Auckland 2010',
+        detail:
+          'Sunnyhills School（Sunnyhills 小学）。位于奥克兰东区优质地段，社区安全、环境优美。适合 5–11 岁孩子入读；启发式优质教学、全面发展（学术·体育·艺术·品格），多元包容、欢迎国际生，小班关怀、因材施教。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+        languageReq: '适合年龄：5–11 周岁（具体以学校录取要求为准）',
+        academicReq: '国内幼儿园或小学在读/毕业，具体以学校评估为准',
+        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
+        prospects: [
+          '奥克兰东区富人区优质小学',
+          '优越地理位置 · 卓越学术表现',
+          '体育·艺术·科技等丰富课程活动',
+          '免费申请 Offer · 免费签证申请指导',
         ],
       },
     ],

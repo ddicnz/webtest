@@ -1,3 +1,5 @@
+import { OFFICE_ADDRESS, OFFICE_MAP_EMBED_URL } from '../data/siteContact.js'
+
 const footerQrItems = [
   { src: '/pic/qrcodevx1.jpg', label: '签证咨询', alt: '签证咨询二维码' },
   { src: '/pic/qrcodevx2.jpg', label: '留学咨询', alt: '留学咨询二维码' },
@@ -25,14 +27,14 @@ function Footer() {
           </div>
           <div className="contact-item">
             <span className="contact-icon">📍</span>
-            <span>地址: 8 Andrew Baxter Drive, Māngere, Auckland 2022</span>
+            <span>地址: {OFFICE_ADDRESS}</span>
           </div>
         </div>
 
-        {/* 中间：Google Maps 地图 */}
+        {/* 中间：Google Maps 地图（公司地址） */}
         <div className="footer-section footer-map">
           <iframe
-            src="https://www.google.com/maps?q=8+Andrew+Baxter+Drive,+M%C4%81ngere,+Auckland+2022&output=embed"
+            src={OFFICE_MAP_EMBED_URL}
             width="100%"
             height="100%"
             style={{ border: 0 }}
