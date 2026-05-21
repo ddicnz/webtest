@@ -12,8 +12,9 @@ export const studyIntro = {
   ],
 }
 
-/** 初高中留学宣传海报 */
-export const STUDY_JUNIOR_HIGH_POSTER = `/pic/study/${encodeURIComponent('初中留学.png')}`
+/** 初高中留学 · 初中项目宣传海报 */
+export const STUDY_ANI_POSTER = `/pic/study/${encodeURIComponent('Auckland normal intermediate.png')}`
+export const STUDY_REMUERA_POSTER = `/pic/study/${encodeURIComponent('remuera intermediate.png')}`
 
 export const studySections = [
   {
@@ -270,25 +271,47 @@ export const studySections = [
     ],
     programs: [
       {
-        id: 'nz-junior-high',
+        id: 'ani-intermediate',
         type: '初中留学',
-        titleZh: '新西兰初中留学',
-        titleEn: 'New Zealand Junior High School Study Abroad',
-        image: STUDY_JUNIOR_HIGH_POSTER,
-        coverImage: STUDY_JUNIOR_HIGH_POSTER,
-        detailImages: [STUDY_JUNIOR_HIGH_POSTER],
-        highlight: '优质中学 · 安全环境 · 全面成长',
+        titleZh: '奥克兰 Normal Intermediate（ANI）初中留学',
+        titleEn: 'Auckland Normal Intermediate School',
+        image: STUDY_ANI_POSTER,
+        coverImage: STUDY_ANI_POSTER,
+        detailImages: [STUDY_ANI_POSTER],
+        highlight: '奥克兰 9 分优质初中 · 中区黄金地段名校',
         cost: '一年学费 ¥68,000/年\n约 NZ$17,000/年',
         detail:
-          '适合 12–13 岁孩子入读奥克兰优质本地中学（含 9 分制学校等）。沉浸式英语环境提升语言与综合能力；课程与课外活动丰富，重视全面发展。可提供寄宿/监护人安排与全程支持。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+          'Auckland Normal Intermediate（ANI，ani.school.nz）。奥克兰中区优质地段，适合 12–13 岁孩子入读。学术卓越、全面发展（体育·艺术·领导力）、多元国际环境、安全安心社区。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
         languageReq: '适合年龄：12–13 周岁（具体以学校录取要求为准）',
-        academicReq: '国内小学或初中在读/毕业，具体以目标学校评估为准',
+        academicReq: '国内小学或初中在读/毕业，具体以 ANI 评估为准',
         intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
         prospects: [
-          '匹配奥克兰优质本地中学',
-          '沉浸式英语学习环境',
-          '课程与课外活动促进全面成长',
-          '免费协助学校 OFFER 申请 · 免费签证申请指导',
+          '奥克兰 9 分优质初中',
+          '中区黄金地段 · 学术与课外活动并重',
+          '欢迎国际生 · 安全社区环境',
+          '免费申请 Offer · 免费签证申请',
+        ],
+      },
+      {
+        id: 'remuera-intermediate',
+        type: '初中留学',
+        titleZh: 'Remuera Intermediate 初中留学',
+        titleEn: 'Remuera Intermediate School',
+        image: STUDY_REMUERA_POSTER,
+        coverImage: STUDY_REMUERA_POSTER,
+        detailImages: [STUDY_REMUERA_POSTER],
+        highlight: '奥克兰前五优质初中 · Reliability · Integrity · Service',
+        cost: '一年学费 ¥60,000/年\n约 NZ$15,000/年',
+        detail:
+          'Remuera Intermediate School（1953 年建校）。奥克兰中区富人区名校，奥克兰 TOP 5 优质初中之一。适合 12–13 岁孩子；学术表现突出，体育、艺术、科技等课程与活动丰富。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+        languageReq: '适合年龄：12–13 周岁（具体以学校录取要求为准）',
+        academicReq: '国内小学或初中在读/毕业，具体以学校评估为准',
+        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
+        prospects: [
+          '奥克兰前五优质初中',
+          '优越地理位置 · 卓越学术表现',
+          '丰富课程与体育活动',
+          '免费申请 Offer · 免费签证申请',
         ],
       },
       {
