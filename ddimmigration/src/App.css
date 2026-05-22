@@ -1287,6 +1287,15 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 35%;
 }
 
+/* 052102.jpg（旅游签翻案）封面：构图上移约 20% */
+.case-card-image-wrap:has(img[src*="052102"]) .case-card-image {
+  object-position: center 45%;
+}
+
+.case-detail-image-wrap:has(img[src*="052102"]) .case-detail-image {
+  object-position: center 35%;
+}
+
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;

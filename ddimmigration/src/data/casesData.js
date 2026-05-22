@@ -1,6 +1,94 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 95,
+    title: '厨师升职 VOC 获批',
+    summary:
+      '已持工签申请人递交工签条件变更（VOC），岗位由厨师晋升为 Head Chef（Canterbury）并顺利获批；签证 2026 年 5 月 25 日生效，可停留至 2029 年 4 月 4 日（以批签函为准）。',
+    date: '2026年5月22日',
+    image: '/pic/case/052202.jpg',
+    images: ['/pic/case/052202.jpg'],
+    fullContent: `厨师升职 VOC 获批 ✅
+
+恭喜客户工签条件变更（Variation of Conditions）顺利获批，岗位升级为 Head Chef，工作地点 Canterbury，可继续在新西兰合法全职工作。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Variation of conditions application approved
+✔ 岗位：Head Chef
+✔ 地点：Canterbury（坎特伯雷）
+✔ 批签日期：2026 年 5 月 22 日
+✔ 签证生效：2026 年 5 月 25 日
+✔ 可停留至：2029 年 4 月 4 日
+✔ 可多次往返
+
+厨师在本地积累工作经验后，若岗位与职责发生晋升，可通过 VOC 在不换签证类别的前提下更新雇佣条件。材料需把新岗位职责、薪资工时与雇主合规性说明清楚，审理才会顺利。`,
+  },
+  {
+    id: 96,
+    title: '批灰工海外配额获批',
+    summary:
+      '雇主岗位 Plasterer（ANZSCO 333211，Fibrous Plasterer，Skill Level 3）Job Check 获批，地点 Auckland，可招募 3 名移民工人，为后续 AEWV 招聘打下基础（以移民局文件为准）。',
+    date: '2026年5月22日',
+    image: '/pic/case/052201.jpg',
+    images: ['/pic/case/052201.jpg'],
+    fullContent: `批灰工海外配额（Job Check）获批 ✅
+
+本案例为雇主端 Job Check 顺利通过：岗位 Plasterer，ANZSCO 333211 - Fibrous Plasterer（Skill Level 3），工作地点 Auckland，获批可招募 3 名移民工人。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Job check application approved
+✔ 签证类别：Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Plasterer（批灰工）
+✔ 地点：Auckland（奥克兰）
+✔ 批签日期：2026 年 5 月 22 日
+✔ 可招募人数：3 人
+✔ Job Check 有效期以批准函原文为准
+
+建筑类技术岗位在海外配额获批后，雇主即可按合规流程为海外申请人办理 AEWV。岗位说明、薪资与用工真实性是后续工签环节的关键。`,
+  },
+  {
+    id: 97,
+    title: '暑期微留学 6 周 Offer 获批',
+    summary:
+      '客户子女获 Willowbank School 短期入学通知（Offer of Place），学习时段 2026 年 7 月 20 日至 8 月 28 日（约 6 周）；学制不足 3 个月，可按访客签短期就读（以学校及移民局要求为准）。',
+    date: '2026年5月21日',
+    image: '/pic/case/052103.jpg',
+    images: ['/pic/case/052103.jpg'],
+    fullContent: `暑期微留学 6 周 Offer 获批 ✅
+
+恭喜客户顺利拿到 Willowbank School 签发的 Offer of Place，短期微留学方案落地。
+
+【本案例要点（以学校正式文件为准）】
+✔ 学校：Willowbank School
+✔ 学习时段：2026 年 7 月 20 日 — 2026 年 8 月 28 日（约 6 周）
+✔ 录取信日期：2026 年 5 月 21 日
+✔ 学制不足 3 个月，通常可按访客签证短期就读（具体以当时移民政策及批签条件为准）
+
+暑期微留学适合希望在假期体验新西兰学校环境、提升英语与适应能力的家庭。我们可协助选校、申请 Offer 并衔接签证规划。`,
+  },
+  {
+    id: 94,
+    title: '旅游签拒签后再次申请翻案获批',
+    summary:
+      '申请人此前旅游签遭拒，重新整理材料后再次递交 Visitor visa - General 并顺利获批；须在 2028 年 10 月 12 日前入境，每次入境可停留约 3 个月（以批签函为准）。',
+    date: '2026年5月21日',
+    image: '/pic/case/052102.jpg',
+    images: ['/pic/case/052102.jpg'],
+    fullContent: `很多人以为：旅游签被拒一次，第二次基本就很难了。尤其是海外申请，很多人第一次被拒之后，材料没变、解释没变，重新递交还是很容易再被拒❌。
+	
+这位客户就是典型案例。
+第一次申请新西兰旅游签时，移民局并没有完整综合考虑申请人的背景、出境记录以及真实情况，导致签证被拒。客户当时其实非常无奈，因为他的条件并不差，但拒签理由里有很多地方明显存在问题。
+	
+后来我们重新帮客户梳理整个案子时，重点做了一件事：反复研究移民局的批覆文件和整个审理逻辑。结果发现这个案子的审理过程中，其实存在几个非常关键的疑点。包括：
+✔ 对申请人背景理解不完整
+✔ 部分材料没有被正确结合审理
+✔ 资金与出行逻辑没有被综合考虑
+✔ 移民倾向判断存在明显争议点
+	
+后面我们重新整理材料，重新建立申请逻辑，并针对移民局关注点逐条解释。很多人以为重新申请就是“再递一次”。其实真正关键的是：
+你要知道第一次为什么被拒，移民官到底是怎么判断的。我们针对核心问题，重新和移民局据理力争。最终，第二次旅游签成功获批 ✅`,
+  },
+  {
     id: 93,
     title: '合同管理员 Job Check 海外配额获批',
     summary:
