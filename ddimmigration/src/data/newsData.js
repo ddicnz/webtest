@@ -7,7 +7,7 @@ export const newsList = [
     summary:
       '新西兰移民局公布：自 2026 年 6 月 1 日起，AEWV 工签的最低英语语言要求扩展至 ANZSCO / NOL 技能等级 3 的岗位；同时为现有持签人设置过渡期与豁免安排。',
     date: '2026年5月25日',
-    image: '/pic/news/workvisa.jpg',
+    image: '/pic/news/0525aewv.jpg',
     fullContent: `新西兰移民局于 2026 年 5 月 25 日公布：自 2026 年 6 月 1 日起，认证雇主工签（Accredited Employer Work Visa, AEWV）最低英语语言要求将扩展至 ANZSCO 和 NOL 技能等级 3 的岗位。
 
 
