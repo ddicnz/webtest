@@ -1,6 +1,117 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 101,
+    title: '认证雇主资格 Renew 获批',
+    summary:
+      '雇主 Standard Employer Accreditation 续期申请顺利获批，认证从 2026 年 5 月 23 日起重新生效，可继续支持 Job Check 及 AEWV 工签申请（以移民局批准函为准）。',
+    date: '2026年5月23日',
+    image: '/pic/case/052504.jpg',
+    images: ['/pic/case/052504.jpg'],
+    fullContent: `认证雇主资格 Renew 获批 ✅
+
+恭喜雇主 Employer Accreditation（雇主认证）续期申请顺利获批，可继续支持 Job Check 及 AEWV 工签的招聘流程。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Application for employer accreditation approved
+✔ 认证类型：Standard employer accreditation（标准雇主认证）
+✔ 递交日期：2026 年 5 月 21 日
+✔ 批签日期：2026 年 5 月 23 日
+✔ 认证生效：2026 年 5 月 23 日
+✔ 认证有效期与到期时间以批文为准
+
+提示：
+✔ 续期获批后，雇主可继续在 Immigration Online 中递交 Job Check 与支持 AEWV 申请
+✔ 通过 immigration.govt.nz/aewv-employers 可查询认证信息
+✔ 续期阶段移民局会重点审查：用工合规、薪资记录、培训与移民工人支持义务等
+
+雇主认证的 Renew 不是"自动续"，移民局每次都会重新核查公司合规与用工情况。我们会提前帮雇主整理薪资单、培训记录、岗位说明、移民工人支持证据等材料，避免补件，提升通过率。`,
+  },
+  {
+    id: 98,
+    title: '分居 3 年高难度配偶旅游签获批',
+    summary:
+      '申请人作为长期工签/学签持有人的配偶（Dependents of long term worker/student），在与配偶分居约 3 年的高难度背景下成功获批 Visitor Visa；签证 2026 年 5 月 25 日生效，可多次入境，有效期至 2028 年 3 月 17 日（以批签函为准）。',
+    date: '2026年5月25日',
+    image: '/pic/case/052501.jpg',
+    images: ['/pic/case/052501.jpg'],
+    fullContent: `分居 3 年高难度配偶旅游签获批 ✅
+
+这是一例典型的"高难度配偶签"案例。申请人与配偶因工作、学业等原因分居约 3 年，常年两地往返，关系真实性、共同生活证据、资金来源等都被移民官重点审查。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Visitor visa application approved
+✔ 签证类别：Visitor visa - Dependents of long term worker/student
+✔ 收件日期：2026 年 4 月 3 日
+✔ 批签日期：2026 年 5 月 25 日
+✔ 签证生效：2026 年 5 月 25 日
+✔ 可多次入境（Multiple）
+✔ 可停留至：2028 年 3 月 17 日
+
+签证条件（以批文为准）：
+✔ 持签人不得在新西兰从事工作
+✔ 12 个月内学习不超过 3 个月
+✔ 可为海外雇主/客户远程工作
+✔ 不强制提供资金证明与回程机票
+
+分居时间长 + 配偶签其实最容易被怀疑"关系真实性"。我们针对客户的具体情况，重新梳理双方关系发展时间线、长期沟通记录、资金往来与共同生活证据，并对分居期间的合理解释做了完整说明，最终顺利获批。`,
+  },
+  {
+    id: 99,
+    title: '中式厨师续签 2 年获批',
+    summary:
+      '客户在 Wellington 担任 Asian Cuisine Cook，AEWV 工签顺利续签：2026 年 5 月 25 日生效，可在新西兰停留至 2028 年 8 月 9 日，可多次往返（以批签函为准）。',
+    date: '2026年5月25日',
+    image: '/pic/case/052502.jpg',
+    images: ['/pic/case/052502.jpg'],
+    fullContent: `中式厨师续签 2 年获批 ✅
+
+恭喜客户 AEWV 工签续签顺利获批，可继续在 Wellington 担任 Asian Cuisine Cook，全职合法工作。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Work visa application approved
+✔ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Asian Cuisine Cook（中式厨师）
+✔ 工作地点：Wellington（惠灵顿）
+✔ 批签日期：2026 年 5 月 25 日
+✔ 签证生效：2026 年 5 月 25 日
+✔ 可停留至：2028 年 8 月 9 日
+✔ 最后入境日期：2028 年 8 月 9 日
+✔ 可多次往返（Multiple entry）
+
+签证条件（以批文为准）：
+✔ 全职工作，每周不少于 30 小时
+✔ 必须按合同约定时薪/工时支付
+✔ 必要时可被要求提供薪资发放凭证
+✔ 不得置于受第三方控制的三角用工关系
+
+中式厨师续签的关键在于：雇主合规性、岗位真实性、工时与薪资证据三件套必须互相印证。我们提前帮客户准备好工资单、考勤、雇佣合同等材料，避免补件，缩短审理时间。`,
+  },
+  {
+    id: 100,
+    title: '焊工海外配额获批',
+    summary:
+      '雇主岗位 Welder（ANZSCO 322313 - Welder，Skill Level 3）Job Check 获批，地点 Auckland，可招募 3 名移民工人，为后续 AEWV 招聘做好准备（以移民局文件为准）。',
+    date: '2026年5月25日',
+    image: '/pic/case/052503.jpg',
+    images: ['/pic/case/052503.jpg'],
+    fullContent: `焊工海外配额（Job Check）获批 ✅
+
+雇主端 Job Check 顺利通过：岗位 Welder，ANZSCO 322313 - Welder（Skill Level 3），工作地点 Auckland，获批可招募 3 名移民工人。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Job check application approved
+✔ 签证类别：Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Welder（焊工）
+✔ ANZSCO：322313 - Welder（Skill Level 3）
+✔ 工作地点：Auckland（奥克兰）
+✔ 批签日期：2026 年 5 月 25 日
+✔ 可招募人数：3 人
+✔ Job Check 有效期：至 2026 年 11 月 25 日（以批文为准）
+
+提示：海外申请人需在 Job Check 有效期内递交 AEWV 或 Job Change 申请。建筑/制造类技术岗位获批后，雇主可按合规流程从海外招聘焊工等技术工种，岗位描述、薪资标准与用工真实性是后续工签环节的关键。`,
+  },
+  {
     id: 95,
     title: '厨师升职 VOC 获批',
     summary:
