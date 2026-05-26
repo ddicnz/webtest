@@ -4,7 +4,8 @@ export const STUDY_SECTION_PATH_SEGMENTS = {
   tertiary: 'University',
   technical: 'skill',
   language: 'language',
-  secondary: 'secondary',
+  highschool: 'high-school',
+  middleschool: 'middle-school',
   primary: 'primary',
 }
 
@@ -12,7 +13,10 @@ const PATH_TO_ID = {
   University: 'tertiary',
   skill: 'technical',
   language: 'language',
-  secondary: 'secondary',
+  'high-school': 'highschool',
+  'middle-school': 'middleschool',
+  // 旧链接兼容：原「初高中留学」整体已拆分，secondary 默认落到高中留学
+  secondary: 'highschool',
   primary: 'primary',
 }
 
@@ -38,7 +42,9 @@ export function studyPathSegmentToSectionId(rawSegment) {
   if (lower === 'university') return 'tertiary'
   if (lower === 'skill') return 'technical'
   if (lower === 'language') return 'language'
-  if (lower === 'secondary') return 'secondary'
+  if (lower === 'high-school' || lower === 'highschool') return 'highschool'
+  if (lower === 'middle-school' || lower === 'middleschool') return 'middleschool'
+  if (lower === 'secondary') return 'highschool'
   if (lower === 'primary') return 'primary'
   return null
 }

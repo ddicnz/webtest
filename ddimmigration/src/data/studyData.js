@@ -12,9 +12,13 @@ export const studyIntro = {
   ],
 }
 
-/** 初高中留学 · 初中项目宣传海报 */
+/** 初中留学 · 初中项目宣传海报 */
 export const STUDY_ANI_POSTER = `/pic/study/${encodeURIComponent('Auckland normal intermediate.png')}`
 export const STUDY_REMUERA_POSTER = `/pic/study/${encodeURIComponent('remuera intermediate.png')}`
+
+/** 高中留学 · 顶级私校宣传海报 */
+export const STUDY_KINGS_POSTER = '/pic/study/kingscollege.png'
+export const STUDY_SKEN_POSTER = '/pic/study/sken.png'
 
 /** 小学留学 · Willowbank School 宣传海报 */
 export const STUDY_WILLOWBANK_POSTER = `/pic/study/${encodeURIComponent('willow bank.png')}`
@@ -246,12 +250,12 @@ export const studySections = [
     ],
   },
   {
-    id: 'secondary',
-    title: '初高中留学',
+    id: 'highschool',
+    title: '高中留学',
     paragraphs: [
-      '新西兰中学通常为 Year 9–13，对应国内初一到高三。主流课程体系包括 NCEA（新西兰本土）、以及部分学校提供 IB 或 Cambridge。NCEA 成绩被新西兰及澳、英、美、加等多国高校认可。',
-      '国际生入读公立中学需支付国际生学费（约 1.2–2.5 万纽币/年），再加上生活费（约 1.5–2.5 万纽币/年），具体因学校、城市与年级而异；持工签家长其子女若获批 Dependent 学生签，可按本地生身份入读公立中学，成本大幅降低。',
-      '我们可协助选校、选课与签证规划，并可根据未来升读新西兰或海外大学的目标，帮您规划 NCEA 选课与时间线，并评估整体学费 + 生活费预算。新西兰嘀嘀移民是持牌校代免费申请！！！',
+      '新西兰高中通常为 Year 9–13，对应国内初三到高三。主流课程体系包括 NCEA（新西兰本土），以及部分学校提供 IB 或 Cambridge。NCEA 成绩被新西兰及澳、英、美、加等多国高校认可。',
+      '公立高中国际生学费约 1.6–2.5 万纽币/年，King\'s College、Saint Kentigern 等顶级私校学费约 5 万纽币/年起；生活费约 1.5–2.5 万纽币/年，具体因学校、城市与年级而异。持工签家长其子女若获批 Dependent 学生签，可按本地生身份入读公立中学，成本大幅降低。',
+      '我们可协助选校、选课与签证规划，并可根据未来升读新西兰或海外大学的目标，帮您规划 NCEA 选课与升学路径，评估整体学费 + 生活费预算。新西兰嘀嘀移民是持牌校代免费申请！！！',
     ],
     routes: [
       {
@@ -272,6 +276,98 @@ export const studySections = [
           '对成绩要求相对友好，专业衔接性强，整体时间安排更灵活。',
         ],
       },
+    ],
+    programs: [
+      {
+        id: 'kings-college',
+        type: '高中留学',
+        titleZh: 'King\'s College',
+        titleEn: "King's College",
+        image: STUDY_KINGS_POSTER,
+        coverImage: STUDY_KINGS_POSTER,
+        detailImages: [STUDY_KINGS_POSTER],
+        highlight: '新西兰顶级私校 · 百年名校传承 · 培养未来精英',
+        cost: '国际学生年度学费 NZ$52,575/年\n（具体费用以学校当年公布为准）',
+        detail:
+          "King's College（位于奥克兰 Otahuhu 校区）创校于 1896 年，是新西兰最具声誉的私立中学之一，融合英式精英教育与现代办学理念。学校学术成绩长期居全国前列，毕业生通往奥克兰大学等本地顶尖高校以及英美澳一流大学；课程涵盖 NCEA 与 Cambridge International（IGCSE / AS / A Level），强调学术、运动、艺术、领导力与品格培养。持牌团队协助 Offer 申请与签证规划。",
+        languageReq: '适合年龄：Year 9–13（约 13–18 周岁），具体以学校录取要求为准',
+        academicReq: '国内初中或高中在读/毕业，需校方面试与笔试评估，部分入学时段需提前一年申请',
+        intakes: '入学时间以校方公布为准，建议提前 6–12 个月规划与申请',
+        prospects: [
+          '新西兰顶级私立中学，百年名校传承',
+          '通往奥大、英美澳一流大学的精英路径',
+          'NCEA + Cambridge 双轨课程',
+          '全人教育：学术 · 体育 · 艺术 · 领导力',
+        ],
+      },
+      {
+        id: 'saint-kentigern',
+        type: '高中留学',
+        titleZh: 'Saint Kentigern 圣肯提根学院',
+        titleEn: 'Saint Kentigern College',
+        image: STUDY_SKEN_POSTER,
+        coverImage: STUDY_SKEN_POSTER,
+        detailImages: [STUDY_SKEN_POSTER],
+        highlight: '新西兰顶级私校（EST. 1896）· 奥克兰海滨校区 · 全人教育',
+        cost: '国际学生年度学费 NZ$55,479.00/年\n（具体费用以学校当年公布为准）',
+        detail:
+          'Saint Kentigern（圣肯提根学院）创立于 1896 年，是新西兰著名的长老会私立学校，旗下设有学院（中学）与男校、女校等多校区，主校位于奥克兰东区 Pakuranga 海滨。学校以学术卓越、全人教育著称，提供 NCEA、Cambridge 与 IB 等多元课程，强调小班教学与个性化关怀；体育、艺术、音乐、领导力培养均为强项，毕业生升入奥克兰大学及英美澳一流名校的比例长期处于前列。持牌团队协助 Offer 申请与签证材料指导。',
+        languageReq: '适合年龄：Year 7–13（约 11–18 周岁），具体以学校录取要求为准',
+        academicReq: '国内小学高年级、初中或高中在读/毕业，需校方面试与笔试评估，建议提前申请',
+        intakes: '入学时间以校方公布为准，建议提前 6–12 个月规划与申请',
+        prospects: [
+          '新西兰顶级私立中学，1896 年建校',
+          '奥克兰海滨校区 · 校园环境优美',
+          'NCEA / Cambridge / IB 多元课程',
+          '全面发展：学术 · 体育 · 艺术 · 领导力',
+        ],
+      },
+      {
+        id: 'uoa-foundation',
+        type: '预科',
+        titleZh: '奥克兰大学预科',
+        titleEn: 'University of Auckland Certificate in Foundation Studies',
+        image: '/pic/study/foundation.png',
+        highlight: '6–12 个月，UP Education 运营，直通奥克兰大学本科',
+        cost: '2026 国际生：加速班（6 个月）$27,623；标准/快班（8–12 个月）$36,830\n另报名费 $550；医疗保险 12 个月约 $925',
+        detail: '奥克兰大学预科（Level 3）；核心科目 EAP 学术英语 + 4 门选修（会计、生物、化学、经济学、地理、物理、数学、统计等）；衔接奥大商科、工程、法律、医学、理学、艺术等本科。',
+        languageReq: '加速班雅思 6.0（单项不低于 5.5）；快班 5.5（5.0）；标准班 5.0（4.5）。也可提供 UPELT 或 GCE/IGCSE/NCEA 等替代成绩',
+        academicReq: '完成高二或相当学历；综合考量成绩单、相关科目、评语及出勤率；7 月入学可凭高二上半学期成绩申请',
+        intakes: '2026 年：加速班 2 月、9 月；快班 4 月、10 月；标准班 2 月、7 月',
+        prospects: [
+          '直通奥克兰大学本科',
+          '课程与奥大体系衔接紧密',
+          '可选加速/快班/标准多种学制',
+        ],
+      },
+      {
+        id: 'aut-foundation',
+        type: '预科',
+        titleZh: 'AUT 奥克兰理工大学预科',
+        titleEn: 'AUT Certificate in Foundation Studies',
+        image: '/pic/study/aut.jpg',
+        highlight: '6–12 个月，直通 AUT 本科；可申请 Pathway 学生签覆盖预科+本科',
+        cost: '2026 国际生：加速班（4-5 个月）学费 $21,525 + 资源费 $1,100；快班（8–9 个月）$26,775 + $1,100；标准班（12 个月）$34,440 + $1,100\n另报名费 $550；医疗保险 12 个月约 $925',
+        detail: 'AUT 预科（UP Education 代表 AUT 颁发）；核心科目为学术英语、大学学习技能、文化与社会；另选 4 门选修（数学、生物、物理、经济学、市场营销、艺术设计等）；衔接 AUT 本科各专业。',
+        languageReq: '加速班雅思 6.0（单项不低于 5.0）；快班 5.5（5.0）；标准班 5.0（4.5）。不符合者可衔接 Foundation Connect 或 Pathways Link',
+        academicReq: '新西兰 Year 12（NCEA 2 级）在读；或国内高二/高三在读；或同等学历',
+        intakes: '2026 年：1 月 27 日、4 月 20 日、7 月 13 日、9 月 28 日',
+        prospects: [
+          '直通 AUT 本科',
+          'UP Education 与 AUT 合作逾 20 年',
+          '可选加速/快班/标准多种学制',
+          '可申请 Pathway 学生签一次覆盖预科+本科',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'middleschool',
+    title: '初中留学',
+    paragraphs: [
+      '新西兰初中（Intermediate）通常为 Year 7–8，约 11–13 岁，是衔接小学与高中的关键学段，注重学习习惯、学术基础与个人发展。',
+      '公立初中国际生学费约 1.2–1.8 万纽币/年，生活费视家庭安排而定；持工签家长其子女若获批 Dependent 学生签，可按本地生身份入读公立中学，成本大幅降低。',
+      '我们可协助选校、签证规划与陪读安排，并可结合后续高中升学规划提供建议。新西兰嘀嘀移民是持牌校代免费申请！！！',
     ],
     programs: [
       {
@@ -316,43 +412,6 @@ export const studySections = [
           '优越地理位置 · 卓越学术表现',
           '丰富课程与体育活动',
           '免费申请 Offer · 免费签证申请',
-        ],
-      },
-      {
-        id: 'uoa-foundation',
-        type: '预科',
-        titleZh: '奥克兰大学预科',
-        titleEn: 'University of Auckland Certificate in Foundation Studies',
-        image: '/pic/study/foundation.png',
-        highlight: '6–12 个月，UP Education 运营，直通奥克兰大学本科',
-        cost: '2026 国际生：加速班（6 个月）$27,623；标准/快班（8–12 个月）$36,830\n另报名费 $550；医疗保险 12 个月约 $925',
-        detail: '奥克兰大学预科（Level 3）；核心科目 EAP 学术英语 + 4 门选修（会计、生物、化学、经济学、地理、物理、数学、统计等）；衔接奥大商科、工程、法律、医学、理学、艺术等本科。',
-        languageReq: '加速班雅思 6.0（单项不低于 5.5）；快班 5.5（5.0）；标准班 5.0（4.5）。也可提供 UPELT 或 GCE/IGCSE/NCEA 等替代成绩',
-        academicReq: '完成高二或相当学历；综合考量成绩单、相关科目、评语及出勤率；7 月入学可凭高二上半学期成绩申请',
-        intakes: '2026 年：加速班 2 月、9 月；快班 4 月、10 月；标准班 2 月、7 月',
-        prospects: [
-          '直通奥克兰大学本科',
-          '课程与奥大体系衔接紧密',
-          '可选加速/快班/标准多种学制',
-        ],
-      },
-      {
-        id: 'aut-foundation',
-        type: '预科',
-        titleZh: 'AUT 奥克兰理工大学预科',
-        titleEn: 'AUT Certificate in Foundation Studies',
-        image: '/pic/study/aut.jpg',
-        highlight: '6–12 个月，直通 AUT 本科；可申请 Pathway 学生签覆盖预科+本科',
-        cost: '2026 国际生：加速班（4-5 个月）学费 $21,525 + 资源费 $1,100；快班（8–9 个月）$26,775 + $1,100；标准班（12 个月）$34,440 + $1,100\n另报名费 $550；医疗保险 12 个月约 $925',
-        detail: 'AUT 预科（UP Education 代表 AUT 颁发）；核心科目为学术英语、大学学习技能、文化与社会；另选 4 门选修（数学、生物、物理、经济学、市场营销、艺术设计等）；衔接 AUT 本科各专业。',
-        languageReq: '加速班雅思 6.0（单项不低于 5.0）；快班 5.5（5.0）；标准班 5.0（4.5）。不符合者可衔接 Foundation Connect 或 Pathways Link',
-        academicReq: '新西兰 Year 12（NCEA 2 级）在读；或国内高二/高三在读；或同等学历',
-        intakes: '2026 年：1 月 27 日、4 月 20 日、7 月 13 日、9 月 28 日',
-        prospects: [
-          '直通 AUT 本科',
-          'UP Education 与 AUT 合作逾 20 年',
-          '可选加速/快班/标准多种学制',
-          '可申请 Pathway 学生签一次覆盖预科+本科',
         ],
       },
     ],
