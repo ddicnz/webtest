@@ -144,6 +144,29 @@ export const studySections = [
     ],
     programs: [
       {
+        id: 'pte29-sprint',
+        type: '语言班',
+        titleZh: '冲刺 PTE 29 分（工签英语要求）',
+        titleEn: 'PTE 29 Sprint Course',
+        image: '/pic/study/pte29.png',
+        coverImage: '/pic/study/pte29.png',
+        detailImages: ['/pic/study/pte29.png'],
+        highlight: '课程周期不限！可一直学到考到 29 分为止 · 目标 29+ 一次达标',
+        cost: '¥2,999 人民币（超值课程价）',
+        detail:
+          '专为需要达到 PTE 29 分（如 AEWV 技能等级 3 等岗位英语门槛）的学员设计。含课件与录屏可反复听、反复上；课后每日学习计划与作业，老师每日批改反馈；随时随地学习，灵活高效；名师全程陪伴指导。完全 0 基础约 3 个月左右可达标；有一定基础（如高中英语水平）约 1–2 个月左右。考前冲刺稳冲 30+，技巧 + 练习 + 反馈高效提分，助力工签与移民规划。',
+        schedule: '线上学习，时间灵活；课件录屏可反复回看',
+        languageReq: '适合各起点；完全零基础与有一定英语基础均可报名',
+        academicReq: '计划考取 PTE 29 分及以上，用于工签、升学或移民语言要求',
+        intakes: '随时报名，开课后可一直学到达标为止',
+        prospects: [
+          '课程周期不限，考到 29 分为止',
+          '课件 + 录屏反复听、反复上',
+          '每日学习计划 + 作业老师批改反馈',
+          '名师团队全程陪伴 · 考前冲刺稳冲 30+',
+        ],
+      },
+      {
         id: 'icl-nzcel',
         type: '语言班',
         titleZh: 'NZCEL 新西兰英语语言证书课程',
