@@ -1,6 +1,32 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 102,
+    title: 'AEWV 工签担保子女学签获批',
+    summary:
+      '持 AEWV 工签家长为其子女成功获批 Student Visa - Dependent of a Worker；子女可在新西兰任何中小学以本地生（domestic student）身份就读，签证 2026 年 5 月 27 日生效，可停留至 2027 年 12 月 15 日（以批签函为准）。',
+    date: '2026年5月27日',
+    image: '/pic/case/052701.jpg',
+    images: ['/pic/case/052701.jpg', '/pic/case/052702.jpg'],
+    fullContent: `AEWV 工签子女学签获批（本地生学费）✅
+
+恭喜客户子女学签顺利获批。家长持认证雇主工签（AEWV），子女以工签持有人家属身份申请学签，可在新西兰中小学以本地生身份就读。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Student visa application approved
+✔ 签证类别：Student visa - Dependent of a Worker
+✔ 批签日期：2026 年 5 月 27 日
+✔ 签证生效：2026 年 5 月 27 日
+✔ 可停留至：2027 年 12 月 15 日
+✔ 入境次数：Multiple（可多次往返）
+
+【签证条件（以批文为准）】
+✔ 持签人可在新西兰任何中小学以本地生（domestic student）身份就读
+✔ 须遵守学签持有人在新西兰的学习义务
+
+提示：家长持 AEWV 等符合条件的工签时，子女学签往往可按本地生标准缴纳学费，整体留学成本远低于国际生学费。我们可协助评估家长签证类型、子女年龄与选校，并办理学签与入学衔接。`,
+  },
+  {
     id: 101,
     title: '认证雇主资格 Renew 获批',
     summary:
