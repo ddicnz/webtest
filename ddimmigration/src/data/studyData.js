@@ -14,7 +14,7 @@ export const studyIntro = {
 
 /** 初中留学 · 初中项目宣传海报 */
 export const STUDY_ANI_POSTER = `/pic/study/${encodeURIComponent('Auckland normal intermediate.png')}`
-export const STUDY_REMUERA_POSTER = `/pic/study/${encodeURIComponent('remuera intermediate.png')}`
+export const STUDY_REMUERA_POSTER = `/pic/study/${encodeURIComponent('remuera intermediate1.png')}`
 
 /** Remuera 初中 · 详情页相册（竖图优先 + public/pic/study/remuera/*.jpg） */
 const STUDY_REMUERA_PHOTO_IDS = [
