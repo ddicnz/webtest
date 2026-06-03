@@ -435,7 +435,7 @@ export const studySections = [
         highlight: '奥克兰前五优质初中 · Reliability · Integrity · Service',
         cost: '一年学费 ¥60,000/年\n约 NZ$15,000/年',
         detail:
-          'Remuera Intermediate School（1953 年建校）。奥克兰中区富人区名校，奥克兰 TOP 5 优质初中之一。适合 12–13 岁孩子；学术表现突出，体育、艺术、科技等课程与活动丰富。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+          'Remuera Intermediate School（1953 年建校）。奥克兰中区富人区名校，奥克兰 TOP 5 优质初中之一。适合 11–13 岁孩子；学术表现突出，体育、艺术、科技等课程与活动丰富。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
         languageReq: '适合年龄：11–13 周岁（具体以学校录取要求为准）',
         academicReq: '国内小学或初中在读/毕业，具体以学校评估为准',
         intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
