@@ -1,5 +1,13 @@
 import { useState } from 'react'
 
+const JOB_LEVEL3_PREFIX = ['岗位等级：3级', '英语要求：雅思 4.0 或 PTE 29']
+const JOB_LEVEL2_PREFIX = ['岗位等级：2级', '不需要英语']
+
+function normalizeJob(job) {
+  const prefix = job.skillLevel === 2 ? JOB_LEVEL2_PREFIX : JOB_LEVEL3_PREFIX
+  return { ...job, requirements: [...prefix, ...job.requirements] }
+}
+
 function JobsPage() {
   const [selectedCategory, setSelectedCategory] = useState('auto')
 
@@ -76,6 +84,36 @@ function JobsPage() {
       },
     ],
     construction: [
+      {
+        id: 33,
+        skillLevel: 2,
+        title: '建筑助理',
+        requirements: ['协助现场施工协调、材料与进度跟进等相关经验', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 34,
+        skillLevel: 2,
+        title: '项目管理员',
+        requirements: ['建筑或工程项目协调、资料与进度管理经验', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 35,
+        skillLevel: 2,
+        title: '项目协调员',
+        requirements: ['工程项目现场协调、沟通对接相关经验', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
       {
         id: 1,
         title: '木工',
@@ -212,6 +250,26 @@ function JobsPage() {
       },
     ],
     catering: [
+      {
+        id: 37,
+        skillLevel: 2,
+        title: '主厨',
+        requirements: ['有餐厅主厨或厨房管理经验', '能独立负责出餐与厨房运作', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 38,
+        skillLevel: 2,
+        title: '饭店经理',
+        requirements: ['餐饮门店运营管理经验', '人员协调、前台与楼面管理', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
       {
         id: 25,
         title: '寿司师傅',
@@ -491,6 +549,16 @@ function JobsPage() {
     ],
     other: [
       {
+        id: 36,
+        skillLevel: 2,
+        title: '农业技术员',
+        requirements: ['农业种植、农技或农场技术相关经验', '工时 40 小时/周起'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
         id: 28,
         title: '英文好的前台',
         requirements: [
@@ -504,6 +572,7 @@ function JobsPage() {
       },
       {
         id: 23,
+        skillLevel: 2,
         title: '按摩师',
         requirements: ['有按摩、理疗相关经验', '工时 40 小时/周起', '有提成'],
         salary: '25 纽币/小时起',
@@ -523,7 +592,7 @@ function JobsPage() {
     ],
   }
 
-  const currentJobs = jobsByCategory[selectedCategory] || []
+  const currentJobs = (jobsByCategory[selectedCategory] || []).map(normalizeJob)
   const currentLabel = categories.find((c) => c.id === selectedCategory)?.label || ''
 
   return (
