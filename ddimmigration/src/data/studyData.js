@@ -16,6 +16,34 @@ export const studyIntro = {
 export const STUDY_ANI_POSTER = `/pic/study/${encodeURIComponent('Auckland normal intermediate.png')}`
 export const STUDY_REMUERA_POSTER = `/pic/study/${encodeURIComponent('remuera intermediate.png')}`
 
+/** Remuera 初中 · 详情页相册（竖图优先 + public/pic/study/remuera/*.jpg） */
+const STUDY_REMUERA_PHOTO_IDS = [
+  'IMG_1039',
+  'IMG_1059',
+  'IMG_1061',
+  'IMG_1073',
+  'IMG_1088',
+  'IMG_1089',
+  'IMG_1090',
+  'IMG_1091',
+  'IMG_1098',
+  'IMG_1115',
+  'IMG_1125',
+  'IMG_1142',
+  'IMG_1168',
+  'IMG_1181',
+]
+/** 竖构图实景照，排在宣传海报之后优先展示 */
+const STUDY_REMUERA_PORTRAIT_FIRST = ['IMG_1039', 'IMG_1088', 'IMG_1090']
+const STUDY_REMUERA_PHOTO_REST = STUDY_REMUERA_PHOTO_IDS.filter(
+  (id) => !STUDY_REMUERA_PORTRAIT_FIRST.includes(id),
+)
+export const STUDY_REMUERA_GALLERY = [
+  STUDY_REMUERA_POSTER,
+  ...STUDY_REMUERA_PORTRAIT_FIRST.map((id) => `/pic/study/remuera/${id}.jpg`),
+  ...STUDY_REMUERA_PHOTO_REST.map((id) => `/pic/study/remuera/${id}.jpg`),
+]
+
 /** 高中留学 · 顶级私校宣传海报 */
 export const STUDY_KINGS_POSTER = '/pic/study/kingscollege.png'
 export const STUDY_SKEN_POSTER = '/pic/study/sken.png'
@@ -394,6 +422,31 @@ export const studySections = [
     ],
     programs: [
       {
+        id: 'remuera-intermediate',
+        type: '初中留学',
+        titleZh: 'Remuera Intermediate 初中留学',
+        titleEn: 'Remuera Intermediate School',
+        image: STUDY_REMUERA_POSTER,
+        coverImage: STUDY_REMUERA_POSTER,
+        galleryImages: STUDY_REMUERA_GALLERY,
+        galleryLayout: 'carousel',
+        galleryCoverIndex: 0,
+        detailImages: STUDY_REMUERA_GALLERY,
+        highlight: '奥克兰前五优质初中 · Reliability · Integrity · Service',
+        cost: '一年学费 ¥60,000/年\n约 NZ$15,000/年',
+        detail:
+          'Remuera Intermediate School（1953 年建校）。奥克兰中区富人区名校，奥克兰 TOP 5 优质初中之一。适合 12–13 岁孩子；学术表现突出，体育、艺术、科技等课程与活动丰富。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+        languageReq: '适合年龄：11–13 周岁（具体以学校录取要求为准）',
+        academicReq: '国内小学或初中在读/毕业，具体以学校评估为准',
+        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
+        prospects: [
+          '奥克兰前五优质初中',
+          '优越地理位置 · 卓越学术表现',
+          '丰富课程与体育活动',
+          '免费申请 Offer · 免费签证申请',
+        ],
+      },
+      {
         id: 'ani-intermediate',
         type: '初中留学',
         titleZh: '奥克兰 Normal Intermediate（ANI）初中留学',
@@ -412,28 +465,6 @@ export const studySections = [
           '奥克兰 9 分优质初中',
           '中区黄金地段 · 学术与课外活动并重',
           '欢迎国际生 · 安全社区环境',
-          '免费申请 Offer · 免费签证申请',
-        ],
-      },
-      {
-        id: 'remuera-intermediate',
-        type: '初中留学',
-        titleZh: 'Remuera Intermediate 初中留学',
-        titleEn: 'Remuera Intermediate School',
-        image: STUDY_REMUERA_POSTER,
-        coverImage: STUDY_REMUERA_POSTER,
-        detailImages: [STUDY_REMUERA_POSTER],
-        highlight: '奥克兰前五优质初中 · Reliability · Integrity · Service',
-        cost: '一年学费 ¥60,000/年\n约 NZ$15,000/年',
-        detail:
-          'Remuera Intermediate School（1953 年建校）。奥克兰中区富人区名校，奥克兰 TOP 5 优质初中之一。适合 12–13 岁孩子；学术表现突出，体育、艺术、科技等课程与活动丰富。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
-        languageReq: '适合年龄：12–13 周岁（具体以学校录取要求为准）',
-        academicReq: '国内小学或初中在读/毕业，具体以学校评估为准',
-        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
-        prospects: [
-          '奥克兰前五优质初中',
-          '优越地理位置 · 卓越学术表现',
-          '丰富课程与体育活动',
           '免费申请 Offer · 免费签证申请',
         ],
       },

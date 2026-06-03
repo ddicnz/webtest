@@ -3,6 +3,7 @@ import { Link, useParams, useLocation } from 'react-router-dom'
 import { getStudyProgramById } from '../data/studyData.js'
 import { parseStudyProgramIdFromSlug } from '../utils/studySlug.js'
 import { studyListPathForSectionId } from '../utils/studySectionPath.js'
+import StudyImageGallery from '../components/StudyImageGallery.jsx'
 
 function StudyProgramDetailPage() {
   const { id: idParam } = useParams()
@@ -43,6 +44,10 @@ function StudyProgramDetailPage() {
   const detailImages = Array.isArray(prog.detailImages)
     ? prog.detailImages.filter(Boolean)
     : [prog.image, prog.image2, prog.image3].filter(Boolean)
+  const galleryImages = Array.isArray(prog.galleryImages)
+    ? prog.galleryImages.filter(Boolean)
+    : null
+  const galleryCaptions = Array.isArray(prog.galleryCaptions) ? prog.galleryCaptions : []
 
   return (
     <main className="main-content case-detail-page">
@@ -51,13 +56,34 @@ function StudyProgramDetailPage() {
       <article className="case-detail">
         <h1 className="case-detail-title">{prog.titleZh}</h1>
         <p className="case-detail-date">{prog.titleEn}</p>
-        <div className="case-detail-images">
-          {detailImages.map((src, i) => (
-            <div key={i} className="case-detail-image-wrap">
-              <img src={src} alt={i === 0 ? prog.titleZh : `${prog.titleZh} 费用`} className="case-detail-image" loading="lazy" />
-            </div>
-          ))}
-        </div>
+        {galleryImages && galleryImages.length > 0 ? (
+          <StudyImageGallery
+            images={galleryImages}
+            title={prog.titleZh}
+            captions={galleryCaptions}
+            layout={
+              prog.galleryLayout === 'carousel'
+                ? 'carousel'
+                : prog.galleryLayout === 'cover'
+                  ? 'cover'
+                  : 'grid'
+            }
+            coverIndex={prog.galleryCoverIndex ?? 0}
+          />
+        ) : (
+          <div className="case-detail-images">
+            {detailImages.map((src, i) => (
+              <div key={i} className="case-detail-image-wrap">
+                <img
+                  src={src}
+                  alt={i === 0 ? prog.titleZh : `${prog.titleZh} ${i + 1}`}
+                  className="case-detail-image"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        )}
         <div className="case-detail-content">
           {prog.highlight && <p><strong>{prog.highlight}</strong></p>}
           {prog.address && (
