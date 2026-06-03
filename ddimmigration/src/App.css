@@ -754,18 +754,18 @@
   max-width: min(92vw, 520px);
 }
 
-/* 首页 Hero 左侧 CTA：跳转联络我们（改小：调 padding、font-size） */
+/* 首页 Hero 左侧 CTA：跳转联络我们 */
 .hero-cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 16px 25px;
+  padding: 14px 25px;
   border: none;
   border-radius: 8px;
   background: linear-gradient(90deg, #9B7BCB 0%, #6fd9ff 100%);
   color: #fff;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 600;
   text-decoration: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -804,8 +804,8 @@
   }
 
   .hero-cta-btn {
-    padding: 12px 20px;
-    font-size: 15px;
+    padding: 11px 20px;
+    font-size: 14px;
   }
 
   .hero-cta-btn--compact {
