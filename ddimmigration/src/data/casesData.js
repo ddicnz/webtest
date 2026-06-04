@@ -1,6 +1,99 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 106,
+    title: '配偶开放工签与子女免费留学同步获批',
+    summary:
+      '客户家庭同步获批配偶开放工签（Partner of a worker）与子女学签（Student visa - Dependent of a Worker）。配偶可在新西兰从事任意工作，子女可按本地生身份就读新西兰中小学（以批签函为准）。',
+    date: '2026年6月4日',
+    image: '/pic/case/060405.jpg',
+    images: ['/pic/case/060405.jpg', '/pic/case/060406.jpg'],
+    fullContent: `配偶 open 工签与子女免费留学同步获批 ✅
+
+恭喜客户家庭身份顺利落地：配偶获批新西兰开放工签，子女同步获批工签持有人家属学签，可在新西兰中小学以本地生身份就读。
+
+【案例要点（以移民局批准函为准）】
+✔ 配偶签证：Work visa - Partner of a worker
+✔ 子女签证：Student visa - Dependent of a Worker
+✔ 批签日期：2026 年 6 月 4 日
+✔ 签证生效：2026 年 6 月 4 日
+✔ 配偶工签可在新西兰为任意雇主、从事任意职业工作
+✔ 子女学签可按 domestic student 身份在新西兰中小学就读
+
+这类家庭组合申请的重点在于主申请人签证条件、家庭关系证据、子女学习安排与资金/居住规划需要互相衔接。我们会帮助客户把家庭成员身份路径一起规划，减少反复补件和时间成本。`,
+  },
+  {
+    id: 105,
+    title: '配偶 AEWV open 工签获批',
+    summary:
+      '申请人成功获批 Work visa - Partner of AEWV (open)，签证 2026 年 6 月 4 日生效，可在新西兰从事任意工作，签证有效期至 2031 年 3 月 12 日（以批签函为准）。',
+    date: '2026年6月4日',
+    image: '/pic/case/060404.jpg',
+    images: ['/pic/case/060404.jpg'],
+    fullContent: `配偶 AEWV open 工签获批 ✅
+
+恭喜客户成功获批新西兰配偶开放工签（Work visa - Partner of AEWV (open)）。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Work visa application approved
+✔ 签证类别：Work visa - Partner of AEWV (open)
+✔ 批签日期：2026 年 6 月 4 日
+✔ 签证生效：2026 年 6 月 4 日
+✔ 可多次往返（Multiple entry）
+✔ 可停留至：2031 年 3 月 12 日
+
+【签证条件（以批文为准）】
+✔ 持有人可在新西兰从事任意工作、任意职业、任意地点
+✔ 不得雇佣他人或通过自营业务雇佣他人
+
+配偶 open 工签的核心是关系真实性、主申请人签证资格以及双方共同生活证据。材料准备越完整，越能降低补件和审理不确定性。`,
+  },
+  {
+    id: 104,
+    title: '配偶开放工签与子女免费留学同步获批',
+    summary:
+      '客户家庭获批配偶开放工签（Partner of AEWV open）及子女学签（Student visa - Dependent of a Worker）。配偶可自由工作，子女可在新西兰中小学以本地生身份就读（以批签函为准）。',
+    date: '2026年6月4日',
+    image: '/pic/case/060402.jpg',
+    images: ['/pic/case/060402.jpg', '/pic/case/060403.jpg'],
+    fullContent: `AEWV 工签与子女免费留学获批 ✅
+
+恭喜客户家庭身份组合顺利获批：配偶 open 工签与子女学签一起落地。
+
+【案例要点（以移民局批准函为准）】
+✔ 配偶签证：Work visa - Partner of AEWV (open)
+✔ 子女签证：Student visa - Dependent of a Worker
+✔ 配偶工签生效：2026 年 5 月 8 日
+✔ 子女学签生效：2026 年 6 月 4 日
+✔ 配偶可在新西兰任意地点、任意职业工作
+✔ 子女可作为 domestic student 在新西兰中小学就读
+
+AEWV 家庭成员签证规划不仅看单个申请人的条件，也要整体评估主申请人签证、伴侣关系证据、子女年龄、学校安排与签证有效期衔接。规划得当，可以让一家人的工作、生活和孩子教育同步稳定下来。`,
+  },
+  {
+    id: 103,
+    title: '奥克兰大学预科学签获批',
+    summary:
+      '申请人成功获批新西兰学生签证，入读 University of Auckland Certificate in Foundation Studies at University of Auckland，签证 2026 年 6 月 3 日生效，可停留至 2027 年 7 月 19 日（以批签函为准）。',
+    date: '2026年6月3日',
+    image: '/pic/case/060401.jpg',
+    images: ['/pic/case/060401.jpg'],
+    fullContent: `奥克兰大学预科学签获批 ✅
+
+恭喜客户成功获批新西兰学生签证，入读奥克兰大学预科课程。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Student visa application approved
+✔ 签证类别：Fee Paying Student Visa
+✔ 学习项目：University of Auckland Certificate in Foundation Studies at University of Auckland
+✔ 批签日期：2026 年 6 月 3 日
+✔ 签证生效：2026 年 6 月 3 日
+✔ 可停留至：2027 年 7 月 19 日
+✔ 可多次往返（Multiple entry）
+
+预科课程适合计划衔接新西兰本科、本地大学体系或后续升学路径的学生。学签申请需要把学校 Offer、资金安排、学习计划、保险与未来升学逻辑说明清楚。`,
+  },
+  {
     id: 102,
     title: 'AEWV 工签担保子女学签获批',
     summary:
