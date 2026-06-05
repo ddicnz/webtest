@@ -1296,6 +1296,11 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 35%;
 }
 
+/* 060502.jpg（认证雇主资格 Renew）封面：上移以露出蓝色标题 */
+.case-card-image-wrap:has(img[src*="060502"]) .case-card-image {
+  object-position: center 45%;
+}
+
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;

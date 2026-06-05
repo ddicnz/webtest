@@ -1,6 +1,52 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 108,
+    title: '认证雇主资格 Renew 获批',
+    summary:
+      '雇主 Standard Employer Accreditation 续期申请顺利获批，认证从 2026 年 6 月 5 日起生效，有效期至 2027 年 6 月 5 日，可继续支持 Job Check 及 AEWV 工签申请（以移民局批准函为准）。',
+    date: '2026年6月5日',
+    image: '/pic/case/060502.jpg',
+    images: ['/pic/case/060502.jpg'],
+    fullContent: `认证雇主资格 Renew 获批 ✅
+
+恭喜雇主 Employer Accreditation（雇主认证）续期申请顺利获批，可继续支持 Job Check 及 AEWV 工签申请。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Application for employer accreditation approved
+✔ 认证类型：Standard employer accreditation
+✔ 递交日期：2026 年 5 月 26 日
+✔ 批签日期：2026 年 6 月 5 日
+✔ 认证生效：2026 年 6 月 5 日
+✔ 认证有效期：至 2027 年 6 月 5 日
+
+雇主认证续期并不是自动通过，移民局仍会重新审查公司用工合规、薪资记录、岗位真实性及雇主责任履行情况。我们会协助雇主提前整理材料，确保后续 Job Check 与 AEWV 申请顺利衔接。`,
+  },
+  {
+    id: 107,
+    title: '汽修师傅 8 天获批五年工签',
+    summary:
+      '客户成功获批新西兰认证雇主工签（AEWV），职位为 Motor Mechanic，工作地点奥克兰，2026 年 6 月 4 日获批，签证按首次入境后 60 个月计算（以批签函为准）。',
+    date: '2026年6月4日',
+    image: '/pic/case/060501.jpg',
+    images: ['/pic/case/060501.jpg'],
+    fullContent: `汽修师傅 8 天获批五年工签 ✅
+
+恭喜客户成功获批新西兰认证雇主工签（Accredited Employer Work Visa，AEWV），职位为 Motor Mechanic，工作地点奥克兰。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Work visa application approved
+✔ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa
+✔ 岗位：Motor Mechanic（汽修师傅）
+✔ 工作地点：Auckland（奥克兰）
+✔ 批签日期：2026 年 6 月 4 日
+✔ 签证生效：2026 年 6 月 4 日
+✔ 须在 2026 年 11 月 4 日前入境
+✔ 签证有效期按首次入境后 60 个月计算
+
+汽修岗位申请的关键在于岗位真实性、雇主认证、薪资工时、工作经验与申请人背景的匹配。材料准备到位后，审理速度也会明显更稳，本案 8 天顺利获批。`,
+  },
+  {
     id: 106,
     title: '配偶开放工签与子女免费留学同步获批',
     summary:
