@@ -85,6 +85,15 @@ function JobsPage() {
     ],
     construction: [
       {
+        id: 36,
+        title: '样板房安装工',
+        requirements: ['有建筑背景，年轻学习能力强，可培训', '样板房安装、现场施工配合', '每周 40 小时以上'],
+        salary: '27 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
         id: 33,
         skillLevel: 2,
         title: '建筑助理',
