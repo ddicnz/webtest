@@ -51,6 +51,24 @@ export const STUDY_SKEN_POSTER = '/pic/study/sken.png'
 /** 小学留学 · Willowbank School 宣传海报 */
 export const STUDY_WILLOWBANK_POSTER = `/pic/study/${encodeURIComponent('willow bank.png')}`
 export const STUDY_SUNNYHILLS_POSTER = '/pic/study/sunnyhills.png'
+export const STUDY_HOWICK_POSTER = '/pic/study/howick.png'
+const STUDY_HOWICK_PHOTO_IDS = [
+  'IMG_1936',
+  'IMG_1937',
+  'IMG_1940',
+  'IMG_1941',
+  'IMG_1943',
+  'IMG_1949',
+  'IMG_1950',
+  'IMG_1954',
+  'IMG_1955',
+  'IMG_1966',
+]
+export const STUDY_HOWICK_GALLERY = [
+  STUDY_HOWICK_POSTER,
+  ...STUDY_HOWICK_PHOTO_IDS.map((id) => `/pic/study/howick/${id}.jpg`),
+  '/pic/study/howick/IMG_1968.JPG',
+]
 
 export const studySections = [
   {
@@ -523,6 +541,31 @@ export const studySections = [
           '卓越学术 · 小班关怀',
           '体育·艺术·科技等丰富课外活动',
           '免费申请 Offer · 免费签证申请指导',
+        ],
+      },
+      {
+        id: 'howick-primary',
+        type: '小学留学',
+        titleZh: 'Howick Primary School 小学留学',
+        titleEn: 'Howick Primary School Primary Study Abroad',
+        image: STUDY_HOWICK_POSTER,
+        coverImage: STUDY_HOWICK_POSTER,
+        galleryImages: STUDY_HOWICK_GALLERY,
+        galleryLayout: 'carousel',
+        galleryCoverIndex: 0,
+        detailImages: STUDY_HOWICK_GALLERY,
+        highlight: '奥克兰东区优质公立小学 · Inspiring confident life long learners',
+        cost: '一年学费 ¥62,560/年',
+        detail:
+          'Howick Primary School（豪威克小学）位于奥克兰东区安全友好的成熟社区，适合小学阶段孩子入读。学校注重卓越教学与全面发展，为国际学生提供支持，课程活动涵盖体育、艺术、科技等方向。持牌团队可免费协助学校 Offer 申请与签证材料指导。',
+        languageReq: '适合年龄：5–11 周岁（具体以学校录取要求为准）',
+        academicReq: '国内幼儿园或小学在读/毕业，具体以学校评估为准',
+        intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
+        prospects: [
+          '奥克兰东区优质公立小学',
+          '国际学生支持 · 贴心关怀',
+          '安全友好社区 · 生活便利',
+          '体育·艺术·科技等丰富课程活动',
         ],
       },
       {
