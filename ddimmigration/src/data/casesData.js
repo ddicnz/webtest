@@ -1,6 +1,77 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 111,
+    title: '分居 3 年高难度配偶旅游签获批',
+    summary:
+      '申请人成功获批新西兰 Visitor Visa - General。该案为分居 3 年背景下的高难度配偶旅游签申请，签证 2026 年 6 月 11 日生效，单次入境，可停留安排以批签函为准。',
+    date: '2026年6月11日',
+    image: '/pic/case/061102.jpg',
+    images: ['/pic/case/061102.jpg'],
+    fullContent: `分居 3 年高难度配偶旅游签获批 ✅
+
+恭喜客户成功获批新西兰普通访客签证（Visitor Visa - General）。本案属于分居时间较长背景下的配偶旅游签申请，对关系真实性、访问目的、资金安排与回国约束力都有较高说明要求。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Visitor visa application approved
+✔ 签证类别：Visitor visa - General
+✔ 批签日期：2026 年 6 月 11 日
+✔ 签证生效：2026 年 6 月 11 日
+✔ 入境次数：Single
+✔ 最后可旅行日期：2026 年 9 月 11 日
+✔ 签证有效期：首次入境后 6 个月
+
+长期分居的配偶签证材料不能只简单提交关系证明，还需要把双方关系发展、分居原因、持续联系、访问计划和回国安排完整串联起来。材料逻辑清晰，才能更好回应移民官对真实访问目的与关系稳定性的审查。`,
+  },
+  {
+    id: 110,
+    title: '汽修师傅获批五年工签',
+    summary:
+      '客户成功获批新西兰认证雇主工签（AEWV），职位为 Motor Mechanic，工作地点 Otago，签证 2026 年 6 月 11 日生效，按首次入境后 60 个月计算（以批签函为准）。',
+    date: '2026年6月11日',
+    image: '/pic/case/061101.jpg',
+    images: ['/pic/case/061101.jpg'],
+    fullContent: `汽修师傅获批五年工签 ✅
+
+恭喜客户成功获批新西兰认证雇主工签（Accredited Employer Work Visa，AEWV），职位为 Motor Mechanic，工作地点 Otago。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Work visa application approved
+✔ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa
+✔ 岗位：Motor Mechanic（汽修师傅）
+✔ 工作地点：Otago
+✔ 批签日期：2026 年 6 月 11 日
+✔ 签证生效：2026 年 6 月 11 日
+✔ 须在 2026 年 11 月 11 日前入境
+✔ 签证有效期按首次入境后 60 个月计算
+
+汽修类岗位申请的重点在于岗位真实性、雇主资质、薪资工时以及申请人过往维修经验的匹配。材料准备充分后，汽修师傅这类技术岗位仍然是新西兰工签路径中非常稳的方向之一。`,
+  },
+  {
+    id: 109,
+    title: '主厨海外配额获批',
+    summary:
+      '雇主 Job Check 申请获批，岗位为 Asian Cuisine Chef，ANZSCO 351311 - Chef（Skill Level 2），工作地点 Auckland，可招募 3 名移民工人，批文有效期至 2026 年 12 月 9 日（以移民局文件为准）。',
+    date: '2026年6月9日',
+    image: '/pic/case/060901.jpg',
+    images: ['/pic/case/060901.jpg'],
+    fullContent: `主厨海外配额获批 ✅
+
+恭喜雇主端 Job Check 顺利获批，可为 Asian Cuisine Chef 岗位招聘移民工人，为后续 AEWV 工签申请打下基础。
+
+【案例要点（以移民局批准函为准）】
+✔ 申请类型：Job check application approved
+✔ 签证类别：Work Visa - Accredited Employer Work Visa（AEWV）
+✔ 岗位：Asian Cuisine Chef
+✔ ANZSCO：351311 - Chef（Skill Level 2）
+✔ 工作地点：Auckland
+✔ 批签日期：2026 年 6 月 9 日
+✔ 可招募人数：3 人
+✔ Job Check 有效期：至 2026 年 12 月 9 日
+
+餐饮类 Job Check 的核心在于岗位职责、薪资工时、雇主认证与真实招聘需求是否互相匹配。配额获批后，申请人可在有效期内递交 AEWV 或 Job Change 申请。`,
+  },
+  {
     id: 108,
     title: '认证雇主资格 Renew 获批',
     summary:
