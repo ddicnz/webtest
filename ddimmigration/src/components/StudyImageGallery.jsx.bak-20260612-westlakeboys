@@ -108,7 +108,6 @@ function StudyImageGallery({
   )
   if (layout === 'carousel') {
     const lastSlot = visibleIndices.length - 1
-    const showCarouselNav = true
     return (
       <div className="study-gallery-carousel-block">
         <div className="study-gallery-carousel study-gallery-carousel--uniform" aria-label={`${title}照片浏览`}>
@@ -118,7 +117,7 @@ function StudyImageGallery({
                 key={`${list[imgIndex]}-${imgIndex}-${slot}`}
                 className={`study-gallery-carousel-item${imgIndex === coverIndex ? ' study-gallery-carousel-item--poster' : ''}`}
               >
-                {showCarouselNav && slot === 0 && (
+                {list.length > 1 && slot === 0 && (
                   <button
                     type="button"
                     className="study-carousel-nav study-carousel-prev"
@@ -131,7 +130,7 @@ function StudyImageGallery({
                 <div className="study-gallery-carousel-media">
                   <img src={list[imgIndex]} alt={altFor(imgIndex)} loading={slot === 0 ? 'eager' : 'lazy'} />
                 </div>
-                {showCarouselNav && slot === lastSlot && (
+                {list.length > 1 && slot === lastSlot && (
                   <button
                     type="button"
                     className="study-carousel-nav study-carousel-next"

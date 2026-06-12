@@ -1531,17 +1531,18 @@ img[src*="album/office"][src*="IMG_2486"] {
 
 /* 与封面海报 remuera intermediate.png（1024×1536）同比例，三列等高 */
 .study-gallery-carousel--uniform .study-gallery-carousel-track {
+  --study-gallery-carousel-gap: 14px;
   display: flex;
   align-items: stretch;
   justify-content: center;
-  gap: 14px;
+  gap: var(--study-gallery-carousel-gap);
   width: 100%;
   min-width: 0;
 }
 
 .study-gallery-carousel--uniform .study-gallery-carousel-item {
   position: relative;
-  flex: 1 1 0;
+  flex: 0 1 calc((100% - (var(--study-gallery-carousel-gap) * 2)) / 3);
   min-width: 0;
   aspect-ratio: 1024 / 1536;
   display: flex;
