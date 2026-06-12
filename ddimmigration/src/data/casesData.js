@@ -1,6 +1,53 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 116,
+    title: 'NZQA 5级 Diploma 学历认证获批',
+    summary:
+      '客户海外学历成功通过 NZQA International Qualifications Recognition，评估结果为 Diploma at Level 5，证书于 2026 年 6 月 12 日签发，为后续新西兰学习、工签或职业规划提供学历层面的支持（以 NZQA 文件为准）。',
+    date: '2026年6月12日',
+    image: '/pic/case/061205.jpg',
+    images: ['/pic/case/061205.jpg'],
+    fullContent: `NZQA 5级 Diploma 学历认证获批 ✅
+
+恭喜客户海外学历顺利完成 NZQA International Qualifications Recognition 评估，最终结果为 Diploma at Level 5。
+
+【案例要点（以 NZQA 文件为准）】
+✅ 认证类型：International Qualifications Recognition Statement
+✅ 签发日期：2026 年 6 月 12 日
+✅ 学历方向：Interior Design of Architecture
+✅ 学制：3 年
+✅ 评估结果：Diploma at Level 5
+
+NZQA 学历认证看起来只是一个评估文件，但在很多新西兰签证、学习和职业路径里都很关键。材料是否完整、学历文件是否能被验证、课程信息是否清楚，都会影响评估进度和结果。
+
+提前做好学历认证，可以为后续学习申请、工签路径或职业规划打好基础，也能减少后面临时补材料带来的时间压力。`,
+  },
+  {
+    id: 115,
+    title: '合同管理员 AEWV 五年工签获批',
+    summary:
+      '客户成功获批新西兰认证雇主工签（AEWV），职位为 Contract Administrator，工作地点 Auckland，签证 2026 年 6 月 12 日生效，按首次入境后 60 个月计算（以批签函为准）。',
+    date: '2026年6月12日',
+    image: '/pic/case/061204.jpg',
+    images: ['/pic/case/061204.jpg'],
+    fullContent: `合同管理员 AEWV 五年工签获批 ✅
+
+恭喜客户成功获批新西兰认证雇主工签。本案职位为 Contract Administrator，工作地点 Auckland，签证于 2026 年 6 月 12 日生效，需在 2026 年 11 月 12 日前入境，签证有效期按首次入境后 60 个月计算（以移民局批签函为准）。
+
+管理类岗位的 AEWV 申请，重点不只是职位名称，还要看岗位职责、雇主真实需求、薪资工时和申请人背景是否能对应起来。材料逻辑越清楚，越能减少审理中的不确定性。
+
+【本案重点】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa
+✅ 岗位：Contract Administrator
+✅ 工作地点：Auckland
+✅ 签证生效：2026 年 6 月 12 日
+✅ 签证有效期按首次入境后 60 个月计算
+
+AEWV 对很多申请人来说，不只是一次工作机会，也关系到后续家庭生活、配偶工签、子女读书和长期规划。政策和审理要求变化快，提前整理材料、把岗位和个人经历讲清楚，真的很重要。`,
+  },
+  {
     id: 114,
     title: '焊工 AEWV 五年工签获批',
     summary:

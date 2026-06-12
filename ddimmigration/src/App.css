@@ -1301,6 +1301,11 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 45%;
 }
 
+/* 061205.jpg（NZQA 5级 Diploma）封面：上移以露出蓝色大标题 */
+.case-card-image-wrap:has(img[src*="061205"]) .case-card-image {
+  object-position: center 52%;
+}
+
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;
