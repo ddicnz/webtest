@@ -1,6 +1,54 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 118,
+    title: '本科学历申请合同管理员五年工签获批',
+    summary:
+      '客户成功获批新西兰认证雇主工签（AEWV），职位为 Contract Administrator，工作地点 Otago。申请人凭本科学历及相关材料顺利获批，签证 2026 年 6 月 15 日生效，有效期至 2031 年 6 月 15 日（以批签函为准）。',
+    date: '2026年6月15日',
+    image: '/pic/case/061502.jpg',
+    images: ['/pic/case/061502.jpg'],
+    fullContent: `本科学历申请合同管理员五年工签获批 ✅
+
+恭喜客户成功获批新西兰认证雇主工签。本案职位为 Contract Administrator，工作地点 Otago，签证于 2026 年 6 月 15 日生效，可停留至 2031 年 6 月 15 日（以移民局批签函为准）。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa
+✅ 岗位：Contract Administrator
+✅ 工作地点：Otago
+✅ 批签日期：2026 年 6 月 15 日
+✅ 签证有效期：至 2031 年 6 月 15 日
+
+管理类岗位申请，重点在于学历背景、岗位职责、雇主需求和薪资工时之间是否能形成完整逻辑。不是简单把学历和岗位放在一起就可以，材料需要清楚说明申请人为什么能够胜任该岗位。
+
+这类申请建议提前梳理学历文件、工作经历、岗位说明和雇主材料，避免因为材料表达不清而增加补件或审理风险。`,
+  },
+  {
+    id: 117,
+    title: '汽修师傅体检被质疑两次后获批五年工签',
+    summary:
+      '客户成功获批新西兰认证雇主工签（AEWV），职位为 Motor Mechanic，工作地点 Otago。申请过程中体检曾被质疑两次，最终顺利获批五年工签，签证 2026 年 6 月 15 日生效（以批签函为准）。',
+    date: '2026年6月15日',
+    image: '/pic/case/061501.jpg',
+    images: ['/pic/case/061501.jpg'],
+    fullContent: `汽修师傅体检被质疑两次后获批五年工签 ✅
+
+又一位汽修师傅成功拿到新西兰认证雇主工签。本案职位为 Motor Mechanic，工作地点 Otago，签证于 2026 年 6 月 15 日生效，需在 2026 年 11 月 15 日前入境，签证有效期按首次入境后 60 个月计算（以移民局批签函为准）。
+
+这次申请过程中并不是一路顺利，客户体检情况曾被移民局质疑两次。我们根据移民局关注点协助整理解释材料，配合补充相关说明，最终帮助客户顺利获批五年工签。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa
+✅ 岗位：Motor Mechanic
+✅ 工作地点：Otago
+✅ 批签日期：2026 年 6 月 15 日
+✅ 签证有效期按首次入境后 60 个月计算
+
+工签申请不只是岗位和雇主材料，体检、无犯罪、经历匹配等环节同样重要。遇到质疑或补件时，关键是看清移民局真正担心的问题，再用完整、准确的材料去回应。`,
+  },
+  {
     id: 116,
     title: 'NZQA 5级 Diploma 学历认证获批',
     summary:
