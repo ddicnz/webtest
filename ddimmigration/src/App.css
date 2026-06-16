@@ -3135,6 +3135,539 @@ img[src*="album/office"][src*="IMG_2486"] {
   text-align: center;
 }
 
+/* 签证个人信息表：分步骤填写 */
+.visa-form-page {
+  max-width: 1180px;
+}
+
+.visa-form-heading {
+  margin: 0 auto 24px;
+  max-width: 820px;
+  text-align: center;
+}
+
+.visa-eyebrow {
+  margin: 0 0 8px;
+  color: var(--nav-bg);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visa-form-heading h1 {
+  margin: 0 0 12px;
+  color: #16324f;
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+.visa-form-heading p {
+  margin: 0;
+  color: #59636e;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.visa-form-shell {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.visa-stepper {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.visa-progress {
+  padding: 16px;
+  border: 1px solid rgba(91, 163, 198, 0.28);
+  border-radius: 8px;
+  background: #eef7fb;
+}
+
+.visa-progress span,
+.visa-progress strong {
+  display: inline-block;
+  color: #16324f;
+  font-size: 14px;
+}
+
+.visa-progress strong {
+  float: right;
+}
+
+.visa-progress-track {
+  clear: both;
+  height: 8px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #d5e8f0;
+}
+
+.visa-progress-track div {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--nav-bg);
+  transition: width 0.2s ease;
+}
+
+.visa-step {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 2px 10px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8e1e8;
+  border-radius: 8px;
+  background: #fff;
+  color: #243447;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.visa-step span {
+  grid-row: span 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf2f7;
+  color: #415466;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.visa-step strong {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.visa-step small {
+  color: #6f7d8a;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.visa-step--active {
+  border-color: rgba(91, 163, 198, 0.85);
+  background: #f7fcff;
+  box-shadow: 0 4px 14px rgba(91, 163, 198, 0.14);
+}
+
+.visa-step--active span,
+.visa-step--done span {
+  background: var(--nav-bg);
+  color: #fff;
+}
+
+.visa-form-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+.visa-current-step {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e8edf2;
+}
+
+.visa-current-step span {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--nav-bg);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.visa-current-step h2 {
+  margin: 0 0 6px;
+  color: #16324f;
+  font-size: 24px;
+}
+
+.visa-current-step p {
+  margin: 0;
+  color: #6f7d8a;
+  font-size: 14px;
+}
+
+.visa-section-block {
+  margin-bottom: 20px;
+}
+
+.visa-section-head {
+  margin-bottom: 14px;
+}
+
+.visa-section-head h3 {
+  margin: 0 0 6px;
+  color: #243447;
+  font-size: 18px;
+}
+
+.visa-section-head p {
+  margin: 0;
+  color: #6a7580;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.visa-section-head .visa-section-note--highlight {
+  display: inline-block;
+  padding: 8px 10px;
+  border-left: 4px solid #f2b705;
+  border-radius: 6px;
+  color: #5f4200;
+  background: #fff6c7;
+  font-weight: 800;
+}
+
+.visa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.visa-grid--wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.visa-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.visa-field span,
+.visa-choice-field p {
+  margin: 0;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.visa-field input,
+.visa-field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  color: #17212b;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.visa-field textarea {
+  resize: vertical;
+  min-height: 86px;
+}
+
+.visa-field input:focus,
+.visa-field textarea:focus {
+  border-color: var(--nav-bg);
+  box-shadow: 0 0 0 2px rgba(91, 163, 198, 0.18);
+}
+
+.visa-question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.visa-choice-field {
+  padding: 14px;
+  border: 1px solid #dfe6ed;
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.visa-choice-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.visa-choice {
+  min-width: 72px;
+  padding: 8px 12px;
+  border: 1px solid rgba(91, 163, 198, 0.32);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--nav-bg);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.visa-choice--active {
+  background: var(--nav-bg);
+  color: #fff;
+}
+
+.visa-repeat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.visa-repeat-card {
+  padding: 16px;
+  border: 1px solid #dfe6ed;
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.visa-repeat-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.visa-repeat-card-head strong {
+  color: #16324f;
+  font-size: 15px;
+}
+
+.visa-link-btn {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #b42318;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.visa-form-nav,
+.visa-review-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #e8edf2;
+}
+
+.visa-primary-btn,
+.visa-secondary-btn {
+  min-height: 42px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.visa-primary-btn {
+  border: none;
+  color: #fff;
+  background: var(--nav-bg);
+}
+
+.visa-primary-btn:hover:not(:disabled) {
+  background: #4a92b5;
+}
+
+.visa-secondary-btn {
+  border: 1px solid #cfd8e3;
+  color: #243447;
+  background: #fff;
+}
+
+.visa-secondary-btn:hover:not(:disabled) {
+  background: #f4f7fa;
+}
+
+.visa-primary-btn:disabled,
+.visa-secondary-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.visa-declaration {
+  margin: 18px 0 0;
+  padding: 14px;
+  border-left: 4px solid var(--nav-bg);
+  border-radius: 6px;
+  background: #eef7fb;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.visa-review-actions {
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 18px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.visa-review-actions p {
+  margin: 0;
+  color: #5d6975;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.visa-print-area {
+  padding: 20px;
+  border: 1px solid #dfe6ed;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.visa-print-area h2 {
+  margin: 0 0 18px;
+  color: #16324f;
+  font-size: 24px;
+  text-align: center;
+}
+
+.visa-print-section {
+  margin-bottom: 20px;
+  break-inside: avoid;
+}
+
+.visa-print-section h3 {
+  margin: 0 0 10px;
+  color: #16324f;
+  font-size: 17px;
+}
+
+.visa-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid #dfe6ed;
+  border-left: 1px solid #dfe6ed;
+}
+
+.visa-summary-grid--questions {
+  grid-template-columns: 1fr;
+}
+
+.visa-summary-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  min-height: 42px;
+  border-right: 1px solid #dfe6ed;
+  border-bottom: 1px solid #dfe6ed;
+}
+
+.visa-summary-grid--questions .visa-summary-row {
+  grid-template-columns: minmax(0, 2fr) minmax(150px, 1fr);
+}
+
+.visa-summary-row span,
+.visa-summary-row strong {
+  padding: 9px 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.visa-summary-row span {
+  color: #475569;
+  background: #f6f8fb;
+}
+
+.visa-summary-row strong {
+  color: #17212b;
+  font-weight: 600;
+}
+
+.visa-print-section table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.visa-print-section th,
+.visa-print-section td {
+  padding: 8px;
+  border: 1px solid #dfe6ed;
+  text-align: left;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.visa-print-section th {
+  color: #243447;
+  background: #f6f8fb;
+  font-weight: 800;
+}
+
+.visa-personal-table {
+  display: grid;
+  grid-template-columns: 1.1fr 1.35fr 1.1fr 1.35fr 1.1fr 1.35fr;
+  border-top: 1px solid #dfe6ed;
+  border-left: 1px solid #dfe6ed;
+}
+
+.visa-personal-label,
+.visa-personal-value {
+  min-height: 42px;
+  padding: 9px 10px;
+  border-right: 1px solid #dfe6ed;
+  border-bottom: 1px solid #dfe6ed;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.visa-personal-label {
+  display: flex;
+  align-items: center;
+  color: #243447;
+  background: #f6f8fb;
+  font-weight: 800;
+}
+
+.visa-personal-value {
+  color: #17212b;
+  font-weight: 600;
+}
+
+.visa-personal-value--wide {
+  grid-column: span 3;
+}
+
+.visa-personal-label--address {
+  min-height: 62px;
+}
+
+.visa-personal-value--address {
+  grid-column: span 5;
+  min-height: 62px;
+}
+
 @media (max-width: 600px) {
   .assessment-messages {
     min-height: 180px;
@@ -3142,6 +3675,127 @@ img[src*="album/office"][src*="IMG_2486"] {
 
   .assessment-page-title {
     font-size: 22px;
+  }
+}
+
+@media (max-width: 980px) {
+  .visa-form-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .visa-stepper {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .visa-progress {
+    grid-column: 1 / -1;
+  }
+
+  .visa-grid,
+  .visa-grid--wide,
+  .visa-question-grid,
+  .visa-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .visa-form-page {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .visa-form-heading h1 {
+    font-size: 24px;
+  }
+
+  .visa-form-card {
+    padding: 16px;
+  }
+
+  .visa-stepper {
+    grid-template-columns: 1fr;
+  }
+
+  .visa-form-nav,
+  .visa-review-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .visa-primary-btn,
+  .visa-secondary-btn {
+    width: 100%;
+  }
+
+  .visa-summary-row {
+    grid-template-columns: 112px minmax(0, 1fr);
+  }
+
+  .visa-summary-grid--questions .visa-summary-row {
+    grid-template-columns: 1fr;
+  }
+
+  .visa-personal-table {
+    grid-template-columns: 118px minmax(0, 1fr);
+  }
+
+  .visa-personal-value--wide,
+  .visa-personal-value--address {
+    grid-column: auto;
+  }
+
+  .visa-personal-label--address,
+  .visa-personal-value--address {
+    min-height: 42px;
+  }
+}
+
+@media print {
+  .header-shell,
+  .about-hero,
+  .left-sidebar,
+  .visa-form-heading,
+  .visa-stepper,
+  .visa-current-step,
+  .visa-form-nav,
+  .visa-review-actions,
+  .page-back-to-top-btn,
+  footer {
+    display: none !important;
+  }
+
+  .homepage,
+  .main-area,
+  .main-content,
+  .visa-form-page,
+  .visa-form-shell,
+  .visa-form-card,
+  .visa-print-area {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .page-with-sidebar {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .visa-print-area {
+    color: #000;
+  }
+
+  .visa-print-section {
+    page-break-inside: avoid;
   }
 }
 
@@ -3301,19 +3955,32 @@ img[src*="album/office"][src*="IMG_2486"] {
 .contact-form-type-options {
   display: flex;
   gap: 0;
-  max-width: 520px;
+  max-width: 780px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #d0d7de;
   background: #f6f8fa;
 }
 
-.contact-form-type-option {
+.contact-form-type-option,
+.contact-form-type-link {
   flex: 1;
   display: flex;
   position: relative;
   cursor: pointer;
   min-height: 0;
+}
+
+.contact-form-type-link {
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #d0d7de;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .contact-form-type-option input {
@@ -3347,11 +4014,20 @@ img[src*="album/office"][src*="IMG_2486"] {
   color: #333;
 }
 
+.contact-form-type-link:hover {
+  background: #fff;
+  color: #333;
+}
+
 .contact-form-type-option input:checked + span {
   background: #d8dadd;
   color: #333;
   font-weight: 600;
   border-bottom: 2px solid var(--nav-bg);
+}
+
+.contact-form-type-link {
+  padding: 12px 20px;
 }
 
 .contact-form {

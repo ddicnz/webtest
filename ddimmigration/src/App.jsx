@@ -19,6 +19,7 @@ import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
 import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 import AssessmentPage from './pages/AssessmentPage.jsx'
+import VisaInfoFormPage from './pages/VisaInfoFormPage.jsx'
 import AdminPage from './pages/AdminPage.jsx'
 import { studySections } from './data/studyData.js'
 import { studyListPathForSectionId } from './utils/studySectionPath.js'
@@ -83,6 +84,9 @@ function HeroSidebarLayout() {
   } else if (location.pathname.startsWith('/assessment')) {
     heroImage = '/pic/services.jpg'
     heroClassName = 'about-hero about-hero--services'
+  } else if (location.pathname.startsWith('/visa-info-form')) {
+    heroImage = '/pic/services.jpg'
+    heroClassName = 'about-hero about-hero--services'
   }
 
   return (
@@ -119,7 +123,8 @@ function App() {
     location.pathname.startsWith('/cases') ||
     location.pathname.startsWith('/about') ||
     location.pathname.startsWith('/faq') ||
-    location.pathname.startsWith('/assessment')
+    location.pathname.startsWith('/assessment') ||
+    location.pathname.startsWith('/visa-info-form')
 
   // GA4：SPA 路由切换时上报页面浏览
   useEffect(() => {
@@ -226,7 +231,7 @@ function App() {
                 >
                   <NavLink
                     to={item.path}
-                    className={({ isActive }) => {
+                    className={() => {
                       const studyActive =
                         location.pathname.startsWith('/study') &&
                         !location.pathname.startsWith('/study/program')
@@ -376,6 +381,7 @@ function App() {
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/assessment" element={<AssessmentPage />} />
+          <Route path="/visa-info-form" element={<VisaInfoFormPage />} />
           <Route path="/assesment" element={<Navigate to="/assessment" replace />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />

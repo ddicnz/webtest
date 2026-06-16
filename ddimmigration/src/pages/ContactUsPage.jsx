@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { OFFICE_ADDRESS } from '../data/siteContact.js'
 import { trackFormSubmit } from '../utils/analytics'
 
@@ -152,6 +153,9 @@ function ContactUsPage() {
               />
               <span>留学意向</span>
             </label>
+            <Link className="contact-form-type-link" to="/visa-info-form">
+              签证个人信息表
+            </Link>
           </div>
         </div>
 
