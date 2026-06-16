@@ -504,8 +504,8 @@ export const studySections = [
         highlight: '奥克兰 9 分优质初中 · 中区黄金地段名校',
         cost: '一年学费 ¥68,000/年\n约 NZ$17,000/年',
         detail:
-          'Auckland Normal Intermediate（ANI，ani.school.nz）。奥克兰中区优质地段，适合 12–13 岁孩子入读。学术卓越、全面发展（体育·艺术·领导力）、多元国际环境、安全安心社区。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
-        languageReq: '适合年龄：12–13 周岁（具体以学校录取要求为准）',
+          'Auckland Normal Intermediate（ANI，ani.school.nz）。奥克兰中区优质地段，适合 11–13 岁孩子入读。学术卓越、全面发展（体育·艺术·领导力）、多元国际环境、安全安心社区。持牌团队免费协助学校 OFFER 申请与签证材料指导。',
+        languageReq: '适合年龄：11–13 周岁（具体以学校录取要求为准）',
         academicReq: '国内小学或初中在读/毕业，具体以 ANI 评估为准',
         intakes: '入学时间因学校而异，欢迎咨询当年名额与开学安排',
         prospects: [
