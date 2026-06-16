@@ -779,7 +779,7 @@
 
 /* 与主 CTA 同宽、同色系；字号与内边距略小一点 */
 .hero-cta-btn--compact {
-  padding: 14px 25px;
+  padding: 12px 25px;
   font-size: 17px;
   gap: 7px;
   box-shadow: 0 3px 16px rgba(0, 0, 0, 0.22);
@@ -809,7 +809,7 @@
   }
 
   .hero-cta-btn--compact {
-    padding: 11px 20px;
+    padding: 10px 20px;
     font-size: 14px;
     gap: 6px;
   }
