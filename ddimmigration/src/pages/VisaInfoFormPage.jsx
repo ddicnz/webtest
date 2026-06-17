@@ -4,6 +4,9 @@ const yesNoOptions = ['是', '否']
 const stayOptions = ['0-6个月', '6-12个月', '12个月以上']
 const DRAFT_STORAGE_KEY = 'ddimmigration_visa_info_form_draft_v1'
 const DRAFT_SAVE_DELAY_MS = 700
+const VISA_PROFILE_API_URL =
+  'https://pi130w8nza.execute-api.ap-southeast-2.amazonaws.com/default/saveVisaProfile'
+const VISA_PROFILE_ID_KEY = 'ddimmigration_visa_profile_id_v1'
 
 const emptyWork = {
   from: '',
@@ -151,6 +154,38 @@ function readDraftFromStorage() {
   } catch {
     return null
   }
+}
+
+function createProfileId() {
+  if (window.crypto?.randomUUID) {
+    return `visa_${window.crypto.randomUUID()}`
+  }
+
+  return `visa_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+}
+
+function getOrCreateProfileId() {
+  try {
+    const existing = localStorage.getItem(VISA_PROFILE_ID_KEY)
+    if (existing) return existing
+
+    const next = createProfileId()
+    localStorage.setItem(VISA_PROFILE_ID_KEY, next)
+    return next
+  } catch {
+    return createProfileId()
+  }
+}
+
+function formatSaveTime(value) {
+  if (!value) return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return ''
+  return date.toLocaleTimeString('zh-CN', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
 }
 
 const reviewQuestionGroups = [
@@ -377,6 +412,9 @@ function VisaInfoFormPage() {
   const [pdfHelpOpen, setPdfHelpOpen] = useState(false)
   const [copyStatus, setCopyStatus] = useState('')
   const [declarationAccepted, setDeclarationAccepted] = useState(false)
+  const [serverSaveStatus, setServerSaveStatus] = useState('idle')
+  const [serverSaveError, setServerSaveError] = useState('')
+  const [lastServerSavedAt, setLastServerSavedAt] = useState('')
 
   const progress = useMemo(
     () => Math.round(((activeStep + 1) / steps.length) * 100),
@@ -416,7 +454,43 @@ function VisaInfoFormPage() {
     }))
   }
 
-  const goNext = () => setActiveStep((step) => Math.min(step + 1, steps.length - 1))
+  const saveToServer = async (nextStep) => {
+    const profileId = getOrCreateProfileId()
+    setServerSaveStatus('saving')
+    setServerSaveError('')
+
+    const res = await fetch(VISA_PROFILE_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        profileId,
+        activeStep: nextStep,
+        status: nextStep >= steps.length - 1 ? 'submitted' : 'draft',
+        formData,
+      }),
+    })
+
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok || data?.ok === false) {
+      throw new Error(data?.message || data?.error || `保存失败 HTTP ${res.status}`)
+    }
+
+    setLastServerSavedAt(data?.updatedAt || new Date().toISOString())
+    setServerSaveStatus('saved')
+  }
+
+  const goNext = async () => {
+    const nextStep = Math.min(activeStep + 1, steps.length - 1)
+    try {
+      await saveToServer(nextStep)
+    } catch (error) {
+      setServerSaveStatus('error')
+      setServerSaveError(error instanceof Error ? error.message : '服务器保存失败')
+    } finally {
+      setActiveStep(nextStep)
+    }
+  }
+
   const goPrev = () => setActiveStep((step) => Math.max(step - 1, 0))
   const currentStep = steps[activeStep]
 
@@ -817,9 +891,17 @@ function VisaInfoFormPage() {
             <button type="button" className="visa-secondary-btn" onClick={goPrev} disabled={activeStep === 0}>
               上一步
             </button>
-            <button type="button" className="visa-primary-btn" onClick={goNext} disabled={activeStep === steps.length - 1}>
-              下一步
-            </button>
+            <div className="visa-save-control">
+              <p className={`visa-save-status visa-save-status--${serverSaveStatus}`}>
+                {serverSaveStatus === 'saving' && '正在保存到服务器...'}
+                {serverSaveStatus === 'saved' && `已保存到服务器${formatSaveTime(lastServerSavedAt) ? `：${formatSaveTime(lastServerSavedAt)}` : ''}`}
+                {serverSaveStatus === 'error' && `本页已继续填写，服务器暂未保存：${serverSaveError}`}
+                {serverSaveStatus === 'idle' && '点击下一步时会自动保存到服务器'}
+              </p>
+              <button type="button" className="visa-primary-btn" onClick={() => void goNext()} disabled={activeStep === steps.length - 1 || serverSaveStatus === 'saving'}>
+                {serverSaveStatus === 'saving' ? '保存中...' : '下一步'}
+              </button>
+            </div>
           </div>
         </form>
       </div>

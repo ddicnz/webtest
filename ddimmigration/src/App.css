@@ -3511,6 +3511,35 @@ img[src*="album/office"][src*="IMG_2486"] {
   cursor: not-allowed;
 }
 
+.visa-save-control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
+}
+
+.visa-save-status {
+  margin: 0;
+  max-width: 320px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.visa-save-status--saved {
+  color: #027a48;
+}
+
+.visa-save-status--saving {
+  color: #216184;
+}
+
+.visa-save-status--error {
+  color: #b42318;
+}
+
 .visa-declaration {
   margin: 18px 0 0;
   padding: 14px;
@@ -3798,6 +3827,17 @@ img[src*="album/office"][src*="IMG_2486"] {
   .visa-review-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .visa-save-control {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .visa-save-status {
+    max-width: none;
+    text-align: left;
   }
 
   .visa-pdf-help,
