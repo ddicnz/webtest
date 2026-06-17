@@ -3537,6 +3537,34 @@ img[src*="album/office"][src*="IMG_2486"] {
   line-height: 1.6;
 }
 
+.visa-declaration-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 720px;
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid #dfe6ed;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+}
+
+.visa-declaration-check input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--nav-bg);
+}
+
+.visa-declaration-check span {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
 .visa-pdf-help {
   display: flex;
   align-items: flex-start;

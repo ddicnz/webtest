@@ -131,7 +131,7 @@ const steps = [
   { id: 'visaMedical', title: '签证与医疗', subtitle: '新西兰签证历史和健康问题' },
   { id: 'character', title: '道德品质', subtitle: '犯罪、拒签、无犯罪等问题' },
   { id: 'other', title: '其他确认', subtitle: '联系人、兵役、随行人和声明' },
-  { id: 'review', title: '预览生成', subtitle: '检查后生成PDF' },
+  { id: 'review', title: '预览生成', subtitle: '' },
 ]
 
 const reviewQuestionGroups = [
@@ -352,6 +352,7 @@ function VisaInfoFormPage() {
   const [formData, setFormData] = useState(initialData)
   const [pdfHelpOpen, setPdfHelpOpen] = useState(false)
   const [copyStatus, setCopyStatus] = useState('')
+  const [declarationAccepted, setDeclarationAccepted] = useState(false)
 
   const progress = useMemo(
     () => Math.round(((activeStep + 1) / steps.length) * 100),
@@ -396,6 +397,7 @@ function VisaInfoFormPage() {
   const currentStep = steps[activeStep]
 
   const handlePrintPdf = () => {
+    if (!declarationAccepted) return
     setPdfHelpOpen(true)
     setCopyStatus('')
     window.print()
@@ -448,7 +450,7 @@ function VisaInfoFormPage() {
         <p className="visa-eyebrow">DD Immigration Client Intake</p>
         <h1>签证个人信息表</h1>
         <p>
-          按签证递交流程分步骤填写，最后检查无误后生成 PDF。信息较敏感，请确认网络环境安全后再提交。
+          个人信息较为敏感，我们会依据新西兰《隐私法 2020》妥善处理并严格保护您的信息。
         </p>
       </div>
 
@@ -479,7 +481,7 @@ function VisaInfoFormPage() {
           <div className="visa-current-step">
             <span>第 {activeStep + 1} 步 / 共 {steps.length} 步</span>
             <h2>{currentStep.title}</h2>
-            <p>{currentStep.subtitle}</p>
+            {currentStep.subtitle && <p>{currentStep.subtitle}</p>}
           </div>
 
           {currentStep.id === 'personal' && (
@@ -678,8 +680,25 @@ function VisaInfoFormPage() {
           {currentStep.id === 'review' && (
             <div className="visa-review">
               <div className="visa-review-actions">
-                <p>请先检查预览内容。点击“生成/打印 PDF”后，在系统打印窗口选择“另存为 PDF”。</p>
-                <button type="button" className="visa-primary-btn" onClick={handlePrintPdf}>
+                <div>
+                  <p>请先检查预览内容。点击“生成/打印 PDF”后，在系统打印窗口选择“另存为 PDF”。</p>
+                  <label className="visa-declaration-check">
+                    <input
+                      type="checkbox"
+                      checked={declarationAccepted}
+                      onChange={(e) => setDeclarationAccepted(e.target.checked)}
+                    />
+                    <span>
+                      本人确认以上所填写、证明及陈述的信息均真实、准确、完整；我已知悉个人信息将仅用于签证咨询及申请相关服务，并会受到妥善保护，不会向无关第三方披露。
+                    </span>
+                  </label>
+                </div>
+                <button
+                  type="button"
+                  className="visa-primary-btn"
+                  onClick={handlePrintPdf}
+                  disabled={!declarationAccepted}
+                >
                   生成/打印 PDF
                 </button>
               </div>
