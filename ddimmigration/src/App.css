@@ -4850,6 +4850,44 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin-bottom: 0;
 }
 
+.admin-visa-edit-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.admin-visa-edit-input {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid #cfd8df;
+  border-radius: 6px;
+  background: #fff;
+  color: #17212b;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+textarea.admin-visa-edit-input {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.admin-visa-update-success {
+  color: #027a48;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-visa-update-error {
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .admin-loading,
 .admin-error,
 .admin-empty {

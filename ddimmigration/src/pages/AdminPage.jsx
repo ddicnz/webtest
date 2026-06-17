@@ -6,6 +6,8 @@ const SHOW_SURVEY_URL =
   'https://m0swbhpph9.execute-api.ap-southeast-2.amazonaws.com/default/showSurvey'
 const SHOW_VISA_PROFILES_URL =
   'https://aixwxfo4xg.execute-api.ap-southeast-2.amazonaws.com/default/showVisaProfiles'
+const UPDATE_VISA_PROFILE_URL =
+  'https://wx34ecupwj.execute-api.ap-southeast-2.amazonaws.com/default/updateVisaProfile'
 const ADMIN_PASSWORD = 'Ddtrip800'
 const ADMIN_UNLOCK_KEY = 'ddimmigration_admin_unlocked'
 const SURVEY_PAGE_SIZE = 20
@@ -350,16 +352,34 @@ const visaReviewQuestionGroups = [
   },
 ]
 
-function AdminVisaSummaryRow({ label, value }) {
+function AdminVisaEditInput({ value, onChange, textarea = false }) {
+  const Tag = textarea ? 'textarea' : 'input'
+  return (
+    <Tag
+      className="admin-visa-edit-input"
+      value={value || ''}
+      onChange={(e) => onChange(e.target.value)}
+      rows={textarea ? 3 : undefined}
+    />
+  )
+}
+
+function AdminVisaSummaryRow({ label, value, isEditing, onChange }) {
   return (
     <div className="visa-summary-row">
       <span>{label}</span>
-      <strong>{value || '未填写'}</strong>
+      <strong>
+        {isEditing ? (
+          <AdminVisaEditInput value={value} onChange={onChange} textarea={String(value || '').length > 36} />
+        ) : (
+          value || '未填写'
+        )}
+      </strong>
     </div>
   )
 }
 
-function AdminVisaSummaryTable({ title, rows = [], columns }) {
+function AdminVisaSummaryTable({ title, rows = [], columns, isEditing, onListChange }) {
   return (
     <section className="visa-print-section">
       <h3>{title}</h3>
@@ -375,7 +395,17 @@ function AdminVisaSummaryTable({ title, rows = [], columns }) {
           {(rows.length ? rows : [{}]).map((row, index) => (
             <tr key={index}>
               {columns.map((col) => (
-                <td key={col.key}>{row[col.key] || ''}</td>
+                <td key={col.key}>
+                  {isEditing ? (
+                    <AdminVisaEditInput
+                      value={row[col.key] || ''}
+                      onChange={(value) => onListChange(index, col.key, value)}
+                      textarea={col.key === 'address' || col.key === 'proof'}
+                    />
+                  ) : (
+                    row[col.key] || ''
+                  )}
+                </td>
               ))}
             </tr>
           ))}
@@ -385,64 +415,75 @@ function AdminVisaSummaryTable({ title, rows = [], columns }) {
   )
 }
 
-function AdminVisaPersonalInfo({ data = {} }) {
+function AdminVisaPersonalInfo({ data = {}, isEditing, onFieldChange }) {
   const value = (key) => data[key] || '未填写'
+  const renderValue = (key, options = {}) => (
+    isEditing ? (
+      <AdminVisaEditInput
+        value={data[key] || ''}
+        onChange={(nextValue) => onFieldChange('personal', key, nextValue)}
+        textarea={options.textarea}
+      />
+    ) : (
+      value(key)
+    )
+  )
 
   return (
     <section className="visa-print-section">
       <h3>个人信息</h3>
       <div className="visa-personal-table">
         <div className="visa-personal-label">姓名</div>
-        <div className="visa-personal-value">{value('name')}</div>
+        <div className="visa-personal-value">{renderValue('name')}</div>
         <div className="visa-personal-label">护照号码</div>
-        <div className="visa-personal-value">{value('passportNo')}</div>
+        <div className="visa-personal-value">{renderValue('passportNo')}</div>
         <div className="visa-personal-label">出生日期</div>
-        <div className="visa-personal-value">{value('birthday')}</div>
+        <div className="visa-personal-value">{renderValue('birthday')}</div>
 
         <div className="visa-personal-label">护照颁发时间</div>
-        <div className="visa-personal-value">{value('passportIssueDate')}</div>
+        <div className="visa-personal-value">{renderValue('passportIssueDate')}</div>
         <div className="visa-personal-label">护照到期时间</div>
-        <div className="visa-personal-value">{value('passportExpiryDate')}</div>
+        <div className="visa-personal-value">{renderValue('passportExpiryDate')}</div>
         <div className="visa-personal-label">身份证号码</div>
-        <div className="visa-personal-value">{value('idNo')}</div>
+        <div className="visa-personal-value">{renderValue('idNo')}</div>
 
         <div className="visa-personal-label">手机号码</div>
-        <div className="visa-personal-value">{value('phone')}</div>
+        <div className="visa-personal-value">{renderValue('phone')}</div>
         <div className="visa-personal-label">婚姻状态</div>
-        <div className="visa-personal-value">{value('maritalStatus')}</div>
+        <div className="visa-personal-value">{renderValue('maritalStatus')}</div>
         <div className="visa-personal-label">性别</div>
-        <div className="visa-personal-value">{value('gender')}</div>
+        <div className="visa-personal-value">{renderValue('gender')}</div>
 
         <div className="visa-personal-label">电子邮箱</div>
-        <div className="visa-personal-value">{value('email')}</div>
+        <div className="visa-personal-value">{renderValue('email')}</div>
         <div className="visa-personal-label">出生地（按户口本填写）</div>
-        <div className="visa-personal-value visa-personal-value--wide">{value('birthplace')}</div>
+        <div className="visa-personal-value visa-personal-value--wide">{renderValue('birthplace')}</div>
 
         <div className="visa-personal-label visa-personal-label--address">
           现居住地址<br />（新西兰地址，如适用）
         </div>
-        <div className="visa-personal-value visa-personal-value--address">{value('nzAddress')}</div>
+        <div className="visa-personal-value visa-personal-value--address">{renderValue('nzAddress', { textarea: true })}</div>
 
         <div className="visa-personal-label">最后一次中国居住地址</div>
-        <div className="visa-personal-value visa-personal-value--address">{value('chinaAddress')}</div>
+        <div className="visa-personal-value visa-personal-value--address">{renderValue('chinaAddress', { textarea: true })}</div>
       </div>
     </section>
   )
 }
 
-function AdminVisaFormPreview({ formData = {} }) {
+function AdminVisaFormPreview({ formData = {}, isEditing, onFieldChange, onListChange }) {
   return (
     <div className="visa-print-area admin-visa-print-area">
       <h2>签证个人信息表</h2>
-      <AdminVisaPersonalInfo data={formData.personal} />
-      <AdminVisaSummaryTable title="当前工作" rows={formData.currentWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} />
-      <AdminVisaSummaryTable title="过去10年工作经验" rows={formData.pastWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} />
-      <AdminVisaSummaryTable title="教育经历" rows={formData.education} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'school', label: '学校' }, { key: 'major', label: '专业' }, { key: 'degree', label: '学历' }]} />
-      <AdminVisaSummaryTable title="证书" rows={formData.certificates} columns={[{ key: 'date', label: '发证时间' }, { key: 'name', label: '证书名称' }, { key: 'authority', label: '发证机构' }]} />
-      <AdminVisaSummaryTable title="父母" rows={formData.parents} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }]} />
-      <AdminVisaSummaryTable title="子女" rows={formData.children} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} />
-      <AdminVisaSummaryTable title="兄弟姐妹" rows={formData.siblings} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} />
-      <AdminVisaSummaryTable title="海外出入境记录" rows={formData.travel} columns={[{ key: 'departure', label: '出境' }, { key: 'returnDate', label: '回国' }, { key: 'country', label: '国家' }, { key: 'airport', label: '机场' }, { key: 'purpose', label: '事由' }]} />
+      <AdminVisaPersonalInfo data={formData.personal} isEditing={isEditing} onFieldChange={onFieldChange} />
+      <AdminVisaSummaryTable title="当前工作" rows={formData.currentWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('currentWork', index, key, value)} />
+      <AdminVisaSummaryTable title="过去10年工作经验" rows={formData.pastWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('pastWork', index, key, value)} />
+      <AdminVisaSummaryTable title="教育经历" rows={formData.education} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'school', label: '学校' }, { key: 'major', label: '专业' }, { key: 'degree', label: '学历' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('education', index, key, value)} />
+      <AdminVisaSummaryTable title="证书" rows={formData.certificates} columns={[{ key: 'date', label: '发证时间' }, { key: 'name', label: '证书名称' }, { key: 'authority', label: '发证机构' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('certificates', index, key, value)} />
+      <AdminVisaSummaryTable title="父母" rows={formData.parents} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('parents', index, key, value)} />
+      <AdminVisaSummaryTable title="子女" rows={formData.children} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('children', index, key, value)} />
+      <AdminVisaSummaryTable title="兄弟姐妹" rows={formData.siblings} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('siblings', index, key, value)} />
+      <AdminVisaSummaryTable title="海外出入境记录" rows={formData.travel} columns={[{ key: 'departure', label: '出境' }, { key: 'returnDate', label: '回国' }, { key: 'country', label: '国家' }, { key: 'airport', label: '机场' }, { key: 'purpose', label: '事由' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('travel', index, key, value)} />
       {visaReviewQuestionGroups.map((questionGroup) => (
         <section className="visa-print-section" key={questionGroup.title}>
           <h3>{questionGroup.title}</h3>
@@ -452,6 +493,8 @@ function AdminVisaFormPreview({ formData = {} }) {
                 key={`${questionGroup.group}.${question.key}`}
                 label={question.label}
                 value={formData[questionGroup.group]?.[question.key]}
+                isEditing={isEditing}
+                onChange={(value) => onFieldChange(questionGroup.group, question.key, value)}
               />
             ))}
           </div>
@@ -462,33 +505,142 @@ function AdminVisaFormPreview({ formData = {} }) {
 }
 
 function VisaProfileCard({ item }) {
-  const formData = item.formData || {}
+  const cloneFormData = (value) => JSON.parse(JSON.stringify(value || {}))
+  const [currentItem, setCurrentItem] = useState(item)
+  const [draftFormData, setDraftFormData] = useState(() => cloneFormData(item.formData))
+  const [isEditing, setIsEditing] = useState(false)
+  const [updateStatus, setUpdateStatus] = useState('idle')
+  const [updateError, setUpdateError] = useState('')
+
+  const formData = isEditing ? draftFormData : currentItem.formData || {}
   const personal = formData.personal || {}
-  const clientName = item.clientName || personal.name
+  const clientName = currentItem.clientName || personal.name
+
+  const updateDraftField = (group, key, value) => {
+    setDraftFormData((prev) => ({
+      ...prev,
+      [group]: {
+        ...(prev[group] || {}),
+        [key]: value,
+      },
+    }))
+  }
+
+  const updateDraftListField = (group, index, key, value) => {
+    setDraftFormData((prev) => {
+      const rows = Array.isArray(prev[group]) && prev[group].length ? prev[group] : [{}]
+      return {
+        ...prev,
+        [group]: rows.map((row, rowIndex) =>
+          rowIndex === index ? { ...row, [key]: value } : row,
+        ),
+      }
+    })
+  }
+
+  const startEditing = () => {
+    setDraftFormData(cloneFormData(currentItem.formData))
+    setUpdateError('')
+    setUpdateStatus('idle')
+    setIsEditing(true)
+  }
+
+  const cancelEditing = () => {
+    setDraftFormData(cloneFormData(currentItem.formData))
+    setUpdateError('')
+    setUpdateStatus('idle')
+    setIsEditing(false)
+  }
+
+  const saveUpdate = async () => {
+    setUpdateStatus('saving')
+    setUpdateError('')
+    try {
+      const res = await fetch(UPDATE_VISA_PROFILE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profileId: currentItem.profileId,
+          status: currentItem.status || 'draft',
+          activeStep: currentItem.activeStep || 0,
+          formData: draftFormData,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.message || data?.error || `HTTP ${res.status}`)
+      }
+      const nextItem = data?.item || {
+        ...currentItem,
+        formData: draftFormData,
+        updatedAt: new Date().toISOString(),
+      }
+      setCurrentItem(nextItem)
+      setDraftFormData(cloneFormData(nextItem.formData))
+      setIsEditing(false)
+      setUpdateStatus('saved')
+    } catch (e) {
+      setUpdateStatus('error')
+      setUpdateError(e instanceof Error ? e.message : String(e))
+    }
+  }
 
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
         <h3 className="admin-lead-title">姓名：{displayValue(clientName)}</h3>
-        <p className="admin-lead-time">{formatTime(item.updatedAt || item.createdAt)}</p>
+        <p className="admin-lead-time">{formatTime(currentItem.updatedAt || currentItem.createdAt)}</p>
       </header>
       <div className="admin-visa-profile-summary">
-        <p><strong>完成度：</strong>{displayValue(item.completionPercent)}%</p>
-        <p><strong>更新时间：</strong>{formatTime(item.updatedAt)}</p>
+        <p><strong>完成度：</strong>{displayValue(currentItem.completionPercent)}%</p>
+        <p><strong>更新时间：</strong>{formatTime(currentItem.updatedAt)}</p>
       </div>
       <details className="admin-lead-details">
         <summary>查看完整签证信息表</summary>
-        <div className="admin-lead-grid">
-          <p><strong>Profile ID：</strong>{displayValue(item.profileId)}</p>
-          <p><strong>状态：</strong>{displayValue(item.status)}</p>
-          <p><strong>当前步骤：</strong>{displayValue(item.activeStep)}</p>
-          <p><strong>出生日期：</strong>{displayValue(item.birthday || personal.birthday)}</p>
-          <p><strong>护照号码：</strong>{displayValue(item.passportNo || personal.passportNo)}</p>
-          <p><strong>手机：</strong>{displayValue(item.phone || personal.phone)}</p>
-          <p><strong>邮箱：</strong>{displayValue(item.email || personal.email)}</p>
-          <p><strong>创建时间：</strong>{formatTime(item.createdAt)}</p>
+        <div className="admin-visa-edit-actions">
+          {!isEditing ? (
+            <button type="button" className="admin-auth-btn" onClick={startEditing}>
+              编辑表格
+            </button>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="admin-auth-btn"
+                onClick={() => void saveUpdate()}
+                disabled={updateStatus === 'saving'}
+              >
+                {updateStatus === 'saving' ? '更新中...' : '更新到后台'}
+              </button>
+              <button
+                type="button"
+                className="admin-tab-btn"
+                onClick={cancelEditing}
+                disabled={updateStatus === 'saving'}
+              >
+                取消
+              </button>
+            </>
+          )}
+          {updateStatus === 'saved' && <span className="admin-visa-update-success">已更新</span>}
+          {updateStatus === 'error' && <span className="admin-visa-update-error">更新失败：{updateError}</span>}
         </div>
-        <AdminVisaFormPreview formData={formData} />
+        <div className="admin-lead-grid">
+          <p><strong>Profile ID：</strong>{displayValue(currentItem.profileId)}</p>
+          <p><strong>状态：</strong>{displayValue(currentItem.status)}</p>
+          <p><strong>当前步骤：</strong>{displayValue(currentItem.activeStep)}</p>
+          <p><strong>出生日期：</strong>{displayValue(currentItem.birthday || personal.birthday)}</p>
+          <p><strong>护照号码：</strong>{displayValue(currentItem.passportNo || personal.passportNo)}</p>
+          <p><strong>手机：</strong>{displayValue(currentItem.phone || personal.phone)}</p>
+          <p><strong>邮箱：</strong>{displayValue(currentItem.email || personal.email)}</p>
+          <p><strong>创建时间：</strong>{formatTime(currentItem.createdAt)}</p>
+        </div>
+        <AdminVisaFormPreview
+          formData={formData}
+          isEditing={isEditing}
+          onFieldChange={updateDraftField}
+          onListChange={updateDraftListField}
+        />
       </details>
     </article>
   )
