@@ -4,6 +4,8 @@ const SHOW_ALL_ANSWER_URL =
   'https://y6imnkbld5.execute-api.ap-southeast-2.amazonaws.com/default/showAllanswer'
 const SHOW_SURVEY_URL =
   'https://m0swbhpph9.execute-api.ap-southeast-2.amazonaws.com/default/showSurvey'
+const SHOW_VISA_PROFILES_URL =
+  'https://aixwxfo4xg.execute-api.ap-southeast-2.amazonaws.com/default/showVisaProfiles'
 const ADMIN_PASSWORD = 'Ddtrip800'
 const ADMIN_UNLOCK_KEY = 'ddimmigration_admin_unlocked'
 const SURVEY_PAGE_SIZE = 20
@@ -288,6 +290,210 @@ function SurveyCard({ item }) {
   )
 }
 
+const visaReviewQuestionGroups = [
+  {
+    title: '签证信息',
+    group: 'visa',
+    items: [
+      { key: 'hadNzVisa', label: '是否确认过新西兰签证？' },
+      { key: 'clientNumber', label: '如果是“是”，请提供之前签证客户号码 Client number。' },
+      { key: 'visaFileNote', label: '如果是“是”，请提供之前签证留底 PDF 文件说明。' },
+      { key: 'expectedStay', label: '预计新西兰停留时间？' },
+    ],
+  },
+  {
+    title: '新西兰签证申请医疗信息确认',
+    group: 'medical',
+    items: [
+      { key: 'tb', label: '您是否患有结核病（TB）？' },
+      { key: 'dialysis', label: '您在新西兰停留期间是否需要进行肾透析？' },
+      { key: 'hospitalCare', label: '您是否有需要或可能需要在新西兰接受医院或专科治疗的医疗状况？' },
+      { key: 'longTermCare', label: '您在新西兰停留期间是否需要或可能需要接受长期护理？' },
+      { key: 'plannedStay', label: '您计划在新西兰停留多久？' },
+      { key: 'previousMedical', label: '您之前是否为新西兰签证申请接受过体检？' },
+      { key: 'currentMedical', label: '您是否已经为这次签证申请接受了体检？' },
+      { key: 'medicalNumber', label: '如果已经体检，请提供体检编号（N000）。' },
+      { key: 'xray36Months', label: '您最近的一次体检是否包括在过去36个月内拍摄的胸部X光片？' },
+      { key: 'healthWorse', label: '自那次体检之后，您的健康状况是否有恶化？' },
+    ],
+  },
+  {
+    title: '道德品质确认',
+    group: 'character',
+    items: [
+      { key: 'convicted', label: '您是否曾因任何罪行被定罪，包括任何交通违法行为？' },
+      { key: 'underInvestigation', label: '您目前是否正在接受调查、被通缉、被传唤问话，或在任何国家（包括新西兰）面临指控？' },
+      { key: 'deported', label: '您是否曾在任何国家被驱逐、遣返、拒绝入境或被要求离境？' },
+      { key: 'visaDeclinedOutsideNz', label: '您是否曾被除新西兰以外的任何国家拒发签证或许可？' },
+      { key: 'livedFiveYears', label: '自17岁起，您是否曾在其他任何国家连续居住5年或以上？' },
+      { key: 'submittedPoliceCert', label: '您是否在之前的新西兰签证申请中提交过该国的无犯罪证明？' },
+      { key: 'policeCertWithin24Months', label: '该无犯罪证明是否是在过去24个月内签发的？' },
+      { key: 'intelligenceOrLaw', label: '您是否曾与任何情报机构、组织或执法机构有过关联？' },
+      { key: 'violentGroup', label: '您是否曾与任何曾使用或宣扬暴力、或以侵犯人权方式来实现其目标的组织或团体有过关联？' },
+      { key: 'humanRights', label: '您是否曾经实施、参与或涉及战争罪、反人类罪或侵犯人权的行为？' },
+    ],
+  },
+  {
+    title: '其他相关问题',
+    group: 'other',
+    items: [
+      { key: 'localContact', label: '是否有本地联系人（家人或者朋友）？' },
+      { key: 'localContactDetail', label: '如有本地联系人，请填写姓名、生日、地址及电话。' },
+      { key: 'employerRelative', label: '雇主是否为您的直系亲属，或是否曾在之前任何签证申请中向移民局提供过其姓名？' },
+      { key: 'sponsorFamilyFuture', label: '未来是否有担保小孩和配偶的需要（如适用）？' },
+      { key: 'militaryHistory', label: '是否有任何兵役历史？' },
+      { key: 'militaryDetail', label: '如有兵役历史，请提供开始和结束时间、部队番号、军衔、具体职位、上级领导名称，并说明退伍证情况。' },
+      { key: 'coApplicants', label: '如有其他人随行或一同申请，请在此提供另外申请人姓名，并另行提供其个人信息表格。' },
+      { key: 'declarationName', label: '本人确认签字姓名。' },
+      { key: 'declarationDate', label: '本人确认日期。' },
+    ],
+  },
+]
+
+function AdminVisaSummaryRow({ label, value }) {
+  return (
+    <div className="visa-summary-row">
+      <span>{label}</span>
+      <strong>{value || '未填写'}</strong>
+    </div>
+  )
+}
+
+function AdminVisaSummaryTable({ title, rows = [], columns }) {
+  return (
+    <section className="visa-print-section">
+      <h3>{title}</h3>
+      <table>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.key}>{col.label}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {(rows.length ? rows : [{}]).map((row, index) => (
+            <tr key={index}>
+              {columns.map((col) => (
+                <td key={col.key}>{row[col.key] || ''}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )
+}
+
+function AdminVisaPersonalInfo({ data = {} }) {
+  const value = (key) => data[key] || '未填写'
+
+  return (
+    <section className="visa-print-section">
+      <h3>个人信息</h3>
+      <div className="visa-personal-table">
+        <div className="visa-personal-label">姓名</div>
+        <div className="visa-personal-value">{value('name')}</div>
+        <div className="visa-personal-label">护照号码</div>
+        <div className="visa-personal-value">{value('passportNo')}</div>
+        <div className="visa-personal-label">出生日期</div>
+        <div className="visa-personal-value">{value('birthday')}</div>
+
+        <div className="visa-personal-label">护照颁发时间</div>
+        <div className="visa-personal-value">{value('passportIssueDate')}</div>
+        <div className="visa-personal-label">护照到期时间</div>
+        <div className="visa-personal-value">{value('passportExpiryDate')}</div>
+        <div className="visa-personal-label">身份证号码</div>
+        <div className="visa-personal-value">{value('idNo')}</div>
+
+        <div className="visa-personal-label">手机号码</div>
+        <div className="visa-personal-value">{value('phone')}</div>
+        <div className="visa-personal-label">婚姻状态</div>
+        <div className="visa-personal-value">{value('maritalStatus')}</div>
+        <div className="visa-personal-label">性别</div>
+        <div className="visa-personal-value">{value('gender')}</div>
+
+        <div className="visa-personal-label">电子邮箱</div>
+        <div className="visa-personal-value">{value('email')}</div>
+        <div className="visa-personal-label">出生地（按户口本填写）</div>
+        <div className="visa-personal-value visa-personal-value--wide">{value('birthplace')}</div>
+
+        <div className="visa-personal-label visa-personal-label--address">
+          现居住地址<br />（新西兰地址，如适用）
+        </div>
+        <div className="visa-personal-value visa-personal-value--address">{value('nzAddress')}</div>
+
+        <div className="visa-personal-label">最后一次中国居住地址</div>
+        <div className="visa-personal-value visa-personal-value--address">{value('chinaAddress')}</div>
+      </div>
+    </section>
+  )
+}
+
+function AdminVisaFormPreview({ formData = {} }) {
+  return (
+    <div className="visa-print-area admin-visa-print-area">
+      <h2>签证个人信息表</h2>
+      <AdminVisaPersonalInfo data={formData.personal} />
+      <AdminVisaSummaryTable title="当前工作" rows={formData.currentWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} />
+      <AdminVisaSummaryTable title="过去10年工作经验" rows={formData.pastWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} />
+      <AdminVisaSummaryTable title="教育经历" rows={formData.education} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'school', label: '学校' }, { key: 'major', label: '专业' }, { key: 'degree', label: '学历' }]} />
+      <AdminVisaSummaryTable title="证书" rows={formData.certificates} columns={[{ key: 'date', label: '发证时间' }, { key: 'name', label: '证书名称' }, { key: 'authority', label: '发证机构' }]} />
+      <AdminVisaSummaryTable title="父母" rows={formData.parents} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }]} />
+      <AdminVisaSummaryTable title="子女" rows={formData.children} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} />
+      <AdminVisaSummaryTable title="兄弟姐妹" rows={formData.siblings} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} />
+      <AdminVisaSummaryTable title="海外出入境记录" rows={formData.travel} columns={[{ key: 'departure', label: '出境' }, { key: 'returnDate', label: '回国' }, { key: 'country', label: '国家' }, { key: 'airport', label: '机场' }, { key: 'purpose', label: '事由' }]} />
+      {visaReviewQuestionGroups.map((questionGroup) => (
+        <section className="visa-print-section" key={questionGroup.title}>
+          <h3>{questionGroup.title}</h3>
+          <div className="visa-summary-grid visa-summary-grid--questions">
+            {questionGroup.items.map((question) => (
+              <AdminVisaSummaryRow
+                key={`${questionGroup.group}.${question.key}`}
+                label={question.label}
+                value={formData[questionGroup.group]?.[question.key]}
+              />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  )
+}
+
+function VisaProfileCard({ item }) {
+  const formData = item.formData || {}
+  const personal = formData.personal || {}
+  const clientName = item.clientName || personal.name
+
+  return (
+    <article className="admin-lead-card">
+      <header className="admin-lead-header">
+        <h3 className="admin-lead-title">姓名：{displayValue(clientName)}</h3>
+        <p className="admin-lead-time">{formatTime(item.updatedAt || item.createdAt)}</p>
+      </header>
+      <div className="admin-visa-profile-summary">
+        <p><strong>完成度：</strong>{displayValue(item.completionPercent)}%</p>
+        <p><strong>更新时间：</strong>{formatTime(item.updatedAt)}</p>
+      </div>
+      <details className="admin-lead-details">
+        <summary>查看完整签证信息表</summary>
+        <div className="admin-lead-grid">
+          <p><strong>Profile ID：</strong>{displayValue(item.profileId)}</p>
+          <p><strong>状态：</strong>{displayValue(item.status)}</p>
+          <p><strong>当前步骤：</strong>{displayValue(item.activeStep)}</p>
+          <p><strong>出生日期：</strong>{displayValue(item.birthday || personal.birthday)}</p>
+          <p><strong>护照号码：</strong>{displayValue(item.passportNo || personal.passportNo)}</p>
+          <p><strong>手机：</strong>{displayValue(item.phone || personal.phone)}</p>
+          <p><strong>邮箱：</strong>{displayValue(item.email || personal.email)}</p>
+          <p><strong>创建时间：</strong>{formatTime(item.createdAt)}</p>
+        </div>
+        <AdminVisaFormPreview formData={formData} />
+      </details>
+    </article>
+  )
+}
+
 function AdminPage() {
   const [passwordInput, setPasswordInput] = useState('')
   const [authError, setAuthError] = useState('')
@@ -318,6 +524,10 @@ function AdminPage() {
   const [surveyError, setSurveyError] = useState('')
   const [surveyLoaded, setSurveyLoaded] = useState(false)
   const [surveyPage, setSurveyPage] = useState(1)
+  const [visaProfileItems, setVisaProfileItems] = useState([])
+  const [visaProfilesLoading, setVisaProfilesLoading] = useState(false)
+  const [visaProfilesError, setVisaProfilesError] = useState('')
+  const [visaProfilesLoaded, setVisaProfilesLoaded] = useState(false)
 
   useEffect(() => {
     if (!authorized) return
@@ -385,6 +595,30 @@ function AdminPage() {
     if (!authorized || activeView !== 'survey' || surveyLoaded) return
     void loadSurvey(null, false)
   }, [authorized, activeView, surveyLoaded])
+
+  const loadVisaProfiles = async () => {
+    setVisaProfilesLoading(true)
+    setVisaProfilesError('')
+    try {
+      const res = await fetch(SHOW_VISA_PROFILES_URL)
+      const data = await res.json()
+      if (!res.ok || data?.ok !== true) {
+        throw new Error(data?.detail || data?.error || data?.message || `HTTP ${res.status}`)
+      }
+      const nextItems = Array.isArray(data?.items) ? data.items : []
+      setVisaProfileItems(nextItems)
+      setVisaProfilesLoaded(true)
+    } catch (e) {
+      setVisaProfilesError(e instanceof Error ? e.message : String(e))
+    } finally {
+      setVisaProfilesLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!authorized || activeView !== 'visaProfiles' || visaProfilesLoaded) return
+    void loadVisaProfiles()
+  }, [authorized, activeView, visaProfilesLoaded])
 
   const currentItems = useMemo(() => grouped[activeTab] || [], [grouped, activeTab])
   const visibleSurveyItems = useMemo(
@@ -461,6 +695,13 @@ function AdminPage() {
         >
           Survey 数据
         </button>
+        <button
+          type="button"
+          className={`admin-tab-btn${activeView === 'visaProfiles' ? ' active' : ''}`}
+          onClick={() => setActiveView('visaProfiles')}
+        >
+          签证信息表
+        </button>
       </nav>
 
       {activeView === 'answers' ? (
@@ -506,7 +747,7 @@ function AdminPage() {
             </section>
           )}
         </>
-      ) : (
+      ) : activeView === 'survey' ? (
         <>
           {surveyLoading && surveyItems.length === 0 && <p className="admin-loading">加载中...</p>}
           {!surveyLoading && surveyError && <p className="admin-error">加载失败：{surveyError}</p>}
@@ -561,6 +802,35 @@ function AdminPage() {
               </button>
             </nav>
           </div>
+        </>
+      ) : (
+        <>
+          <div className="admin-survey-actions">
+            <button
+              type="button"
+              className="admin-auth-btn"
+              onClick={() => {
+                setVisaProfilesLoaded(false)
+                void loadVisaProfiles()
+              }}
+              disabled={visaProfilesLoading}
+            >
+              {visaProfilesLoading ? '刷新中...' : '刷新签证信息表'}
+            </button>
+          </div>
+          {visaProfilesLoading && visaProfileItems.length === 0 && <p className="admin-loading">加载中...</p>}
+          {!visaProfilesLoading && visaProfilesError && <p className="admin-error">加载失败：{visaProfilesError}</p>}
+          {!visaProfilesLoading && !visaProfilesError && (
+            <section className="admin-list">
+              {visaProfileItems.length === 0 ? (
+                <p className="admin-empty">当前暂无签证信息表。</p>
+              ) : (
+                visaProfileItems.map((item) => (
+                  <VisaProfileCard key={item.profileId || item.updatedAt} item={item} />
+                ))
+              )}
+            </section>
+          )}
         </>
       )}
     </main>
