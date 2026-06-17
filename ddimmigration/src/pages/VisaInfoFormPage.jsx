@@ -689,7 +689,7 @@ function VisaInfoFormPage() {
                     <strong>手机端提示</strong>
                     <p>
                       如果手机点击后没有反应，请用系统浏览器打开本页，或复制链接到电脑端生成 PDF。
-                      微信内置浏览器、部分手机浏览器可能不支持直接打印网页。
+                      微信内点击右上角三个小点，选择在默认浏览器打开。
                     </p>
                     {copyStatus && <span>{copyStatus}</span>}
                   </div>
