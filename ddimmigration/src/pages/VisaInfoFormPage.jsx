@@ -1,7 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 const yesNoOptions = ['是', '否']
 const stayOptions = ['0-6个月', '6-12个月', '12个月以上']
+const DRAFT_STORAGE_KEY = 'ddimmigration_visa_info_form_draft_v1'
+const DRAFT_SAVE_DELAY_MS = 700
 
 const emptyWork = {
   from: '',
@@ -133,6 +135,33 @@ const steps = [
   { id: 'other', title: '其他确认', subtitle: '联系人、兵役、随行人和声明' },
   { id: 'review', title: '预览生成', subtitle: '' },
 ]
+
+function formatDraftTime(value) {
+  if (!value) return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return ''
+  return date.toLocaleTimeString('zh-CN', {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
+
+function readDraftFromStorage() {
+  try {
+    const raw = localStorage.getItem(DRAFT_STORAGE_KEY)
+    if (!raw) return null
+    const draft = JSON.parse(raw)
+    if (!draft || typeof draft !== 'object') return null
+    if (!draft.formData || typeof draft.formData !== 'object') return null
+    return {
+      activeStep: Number.isInteger(draft.activeStep) ? draft.activeStep : 0,
+      formData: draft.formData,
+      updatedAt: draft.updatedAt || '',
+    }
+  } catch {
+    return null
+  }
+}
 
 const reviewQuestionGroups = [
   {
@@ -348,11 +377,19 @@ function PersonalInfoSummary({ data }) {
 }
 
 function VisaInfoFormPage() {
+  const initialDraftRef = useRef(readDraftFromStorage())
+  const didSkipInitialSaveRef = useRef(false)
   const [activeStep, setActiveStep] = useState(0)
   const [formData, setFormData] = useState(initialData)
   const [pdfHelpOpen, setPdfHelpOpen] = useState(false)
   const [copyStatus, setCopyStatus] = useState('')
   const [declarationAccepted, setDeclarationAccepted] = useState(false)
+  const [pendingDraft, setPendingDraft] = useState(initialDraftRef.current)
+  const [draftReady, setDraftReady] = useState(!initialDraftRef.current)
+  const [lastSavedAt, setLastSavedAt] = useState('')
+  const [draftMessage, setDraftMessage] = useState(
+    initialDraftRef.current ? '检测到未完成的信息表，是否继续填写？' : '',
+  )
 
   const progress = useMemo(
     () => Math.round(((activeStep + 1) / steps.length) * 100),
@@ -395,6 +432,70 @@ function VisaInfoFormPage() {
   const goNext = () => setActiveStep((step) => Math.min(step + 1, steps.length - 1))
   const goPrev = () => setActiveStep((step) => Math.max(step - 1, 0))
   const currentStep = steps[activeStep]
+
+  useEffect(() => {
+    if (!draftReady) return undefined
+    if (!didSkipInitialSaveRef.current) {
+      didSkipInitialSaveRef.current = true
+      return undefined
+    }
+
+    const timer = window.setTimeout(() => {
+      try {
+        const updatedAt = new Date().toISOString()
+        localStorage.setItem(
+          DRAFT_STORAGE_KEY,
+          JSON.stringify({
+            activeStep,
+            formData,
+            updatedAt,
+          }),
+        )
+        setLastSavedAt(updatedAt)
+        setDraftMessage('已自动保存到本设备')
+      } catch {
+        setDraftMessage('自动保存失败，请检查浏览器设置')
+      }
+    }, DRAFT_SAVE_DELAY_MS)
+
+    return () => window.clearTimeout(timer)
+  }, [activeStep, draftReady, formData])
+
+  const handleContinueDraft = () => {
+    if (!pendingDraft) return
+    setFormData(pendingDraft.formData)
+    setActiveStep(Math.min(Math.max(pendingDraft.activeStep, 0), steps.length - 1))
+    setLastSavedAt(pendingDraft.updatedAt || '')
+    setPendingDraft(null)
+    setDraftReady(true)
+    setDraftMessage('已恢复本机草稿')
+    didSkipInitialSaveRef.current = true
+  }
+
+  const handleRestartDraft = () => {
+    try {
+      localStorage.removeItem(DRAFT_STORAGE_KEY)
+    } catch {
+      // 清除失败不影响重新填写
+    }
+    setFormData(initialData)
+    setActiveStep(0)
+    setLastSavedAt('')
+    setPendingDraft(null)
+    setDraftReady(true)
+    setDraftMessage('已重新开始填写')
+    didSkipInitialSaveRef.current = true
+  }
+
+  const handleClearDraft = () => {
+    try {
+      localStorage.removeItem(DRAFT_STORAGE_KEY)
+      setLastSavedAt('')
+      setDraftMessage('本机草稿已清除')
+    } catch {
+      setDraftMessage('清除草稿失败，请检查浏览器设置')
+    }
+  }
 
   const handlePrintPdf = () => {
     if (!declarationAccepted) return
@@ -452,6 +553,32 @@ function VisaInfoFormPage() {
         <p>
           个人信息较为敏感，我们会依据新西兰《隐私法 2020》妥善处理并严格保护您的信息。
         </p>
+      </div>
+
+      <div className={`visa-draft-banner${pendingDraft ? ' visa-draft-banner--restore' : ''}`}>
+        <div>
+          <strong>{draftMessage || '草稿会自动保存到本设备'}</strong>
+          <p>
+            草稿仅保存在当前设备和当前浏览器；换手机、清缓存，或从微信切换到其他浏览器后可能无法自动恢复。
+            {lastSavedAt && <span> 最近保存：{formatDraftTime(lastSavedAt)}</span>}
+          </p>
+        </div>
+        <div className="visa-draft-actions">
+          {pendingDraft ? (
+            <>
+              <button type="button" className="visa-primary-btn" onClick={handleContinueDraft}>
+                继续填写
+              </button>
+              <button type="button" className="visa-secondary-btn" onClick={handleRestartDraft}>
+                重新开始
+              </button>
+            </>
+          ) : (
+            <button type="button" className="visa-secondary-btn" onClick={handleClearDraft}>
+              清除本机草稿
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="visa-form-shell">
@@ -700,6 +827,11 @@ function VisaInfoFormPage() {
                   disabled={!declarationAccepted}
                 >
                   生成/打印 PDF
+                </button>
+              </div>
+              <div className="visa-review-clear">
+                <button type="button" className="visa-secondary-btn" onClick={handleClearDraft}>
+                  清除本机草稿
                 </button>
               </div>
               {pdfHelpOpen && (
