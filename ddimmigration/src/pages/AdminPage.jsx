@@ -8,6 +8,8 @@ const SHOW_VISA_PROFILES_URL =
   'https://aixwxfo4xg.execute-api.ap-southeast-2.amazonaws.com/default/showVisaProfiles'
 const UPDATE_VISA_PROFILE_URL =
   'https://wx34ecupwj.execute-api.ap-southeast-2.amazonaws.com/default/updateVisaProfile'
+const DELETE_VISA_PROFILE_URL =
+  'https://41uill5fg6.execute-api.ap-southeast-2.amazonaws.com/default/deleteVisaProfile'
 const ADMIN_PASSWORD = 'Ddtrip800'
 const ADMIN_UNLOCK_KEY = 'ddimmigration_admin_unlocked'
 const SURVEY_PAGE_SIZE = 20
@@ -504,13 +506,14 @@ function AdminVisaFormPreview({ formData = {}, isEditing, onFieldChange, onListC
   )
 }
 
-function VisaProfileCard({ item }) {
+function VisaProfileCard({ item, onDeleted }) {
   const cloneFormData = (value) => JSON.parse(JSON.stringify(value || {}))
   const [currentItem, setCurrentItem] = useState(item)
   const [draftFormData, setDraftFormData] = useState(() => cloneFormData(item.formData))
   const [isEditing, setIsEditing] = useState(false)
   const [updateStatus, setUpdateStatus] = useState('idle')
   const [updateError, setUpdateError] = useState('')
+  const [deleteStatus, setDeleteStatus] = useState('idle')
 
   const formData = isEditing ? draftFormData : currentItem.formData || {}
   const personal = formData.personal || {}
@@ -585,11 +588,45 @@ function VisaProfileCard({ item }) {
     }
   }
 
+  const deleteProfile = async () => {
+    const confirmed = window.confirm(`确认删除 ${displayValue(clientName)} 的签证信息表吗？删除后无法恢复。`)
+    if (!confirmed) return
+
+    setDeleteStatus('deleting')
+    try {
+      const res = await fetch(DELETE_VISA_PROFILE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profileId: currentItem.profileId,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.message || data?.error || `HTTP ${res.status}`)
+      }
+      onDeleted(currentItem.profileId)
+    } catch (e) {
+      setDeleteStatus('idle')
+      window.alert(`删除失败：${e instanceof Error ? e.message : String(e)}`)
+    }
+  }
+
   return (
     <article className="admin-lead-card">
       <header className="admin-lead-header">
         <h3 className="admin-lead-title">姓名：{displayValue(clientName)}</h3>
-        <p className="admin-lead-time">{formatTime(currentItem.updatedAt || currentItem.createdAt)}</p>
+        <div className="admin-visa-card-tools">
+          <p className="admin-lead-time">{formatTime(currentItem.updatedAt || currentItem.createdAt)}</p>
+          <button
+            type="button"
+            className="admin-delete-btn"
+            onClick={() => void deleteProfile()}
+            disabled={deleteStatus === 'deleting'}
+          >
+            {deleteStatus === 'deleting' ? '删除中...' : '删除'}
+          </button>
+        </div>
       </header>
       <div className="admin-visa-profile-summary">
         <p><strong>完成度：</strong>{displayValue(currentItem.completionPercent)}%</p>
@@ -765,6 +802,10 @@ function AdminPage() {
     if (!authorized || activeView !== 'visaProfiles' || visaProfilesLoaded) return
     void loadVisaProfiles()
   }, [authorized, activeView, visaProfilesLoaded])
+
+  const handleVisaProfileDeleted = (profileId) => {
+    setVisaProfileItems((prev) => prev.filter((item) => item.profileId !== profileId))
+  }
 
   const currentItems = useMemo(() => grouped[activeTab] || [], [grouped, activeTab])
   const visibleSurveyItems = useMemo(
@@ -972,7 +1013,11 @@ function AdminPage() {
                 <p className="admin-empty">当前暂无签证信息表。</p>
               ) : (
                 visaProfileItems.map((item) => (
-                  <VisaProfileCard key={item.profileId || item.updatedAt} item={item} />
+                  <VisaProfileCard
+                    key={item.profileId || item.updatedAt}
+                    item={item}
+                    onDeleted={handleVisaProfileDeleted}
+                  />
                 ))
               )}
             </section>
