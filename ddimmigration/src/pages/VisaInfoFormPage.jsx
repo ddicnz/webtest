@@ -6,6 +6,8 @@ const DRAFT_STORAGE_KEY = 'ddimmigration_visa_info_form_draft_v1'
 const DRAFT_SAVE_DELAY_MS = 700
 const VISA_PROFILE_API_URL =
   'https://pi130w8nza.execute-api.ap-southeast-2.amazonaws.com/default/saveVisaProfile'
+const VISA_PROFILE_GET_API_URL =
+  'https://3dslqsetfl.execute-api.ap-southeast-2.amazonaws.com/default/getVisaProfile'
 const VISA_PROFILE_ID_KEY = 'ddimmigration_visa_profile_id_v1'
 
 const emptyWork = {
@@ -174,6 +176,14 @@ function getOrCreateProfileId() {
     return next
   } catch {
     return createProfileId()
+  }
+}
+
+function getExistingProfileId() {
+  try {
+    return localStorage.getItem(VISA_PROFILE_ID_KEY) || ''
+  } catch {
+    return ''
   }
 }
 
@@ -420,6 +430,46 @@ function VisaInfoFormPage() {
     () => Math.round(((activeStep + 1) / steps.length) * 100),
     [activeStep],
   )
+
+  useEffect(() => {
+    const profileId = getExistingProfileId()
+    if (!profileId) return undefined
+
+    let cancelled = false
+
+    const restoreFromServer = async () => {
+      try {
+        const url = `${VISA_PROFILE_GET_API_URL}?profileId=${encodeURIComponent(profileId)}`
+        const res = await fetch(url)
+        const data = await res.json().catch(() => ({}))
+
+        if (!res.ok || data?.ok === false) return
+
+        const nextFormData = data?.formData || data?.item?.formData
+        if (!nextFormData || typeof nextFormData !== 'object') return
+        if (cancelled) return
+
+        const nextStep = Number.isInteger(data?.activeStep)
+          ? data.activeStep
+          : Number.isInteger(data?.item?.activeStep)
+            ? data.item.activeStep
+            : 0
+
+        setFormData(nextFormData)
+        setActiveStep(Math.min(Math.max(nextStep, 0), steps.length - 1))
+        setLastServerSavedAt(data?.updatedAt || data?.item?.updatedAt || '')
+        setServerSaveStatus('saved')
+      } catch {
+        // 后端恢复失败时继续使用本地草稿，不阻断客户填写。
+      }
+    }
+
+    void restoreFromServer()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const updateGroup = (group, key, value) => {
     setFormData((prev) => ({
