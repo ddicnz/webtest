@@ -350,6 +350,8 @@ function PersonalInfoSummary({ data }) {
 function VisaInfoFormPage() {
   const [activeStep, setActiveStep] = useState(0)
   const [formData, setFormData] = useState(initialData)
+  const [pdfHelpOpen, setPdfHelpOpen] = useState(false)
+  const [copyStatus, setCopyStatus] = useState('')
 
   const progress = useMemo(
     () => Math.round(((activeStep + 1) / steps.length) * 100),
@@ -392,6 +394,21 @@ function VisaInfoFormPage() {
   const goNext = () => setActiveStep((step) => Math.min(step + 1, steps.length - 1))
   const goPrev = () => setActiveStep((step) => Math.max(step - 1, 0))
   const currentStep = steps[activeStep]
+
+  const handlePrintPdf = () => {
+    setPdfHelpOpen(true)
+    setCopyStatus('')
+    window.print()
+  }
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      setCopyStatus('链接已复制')
+    } catch {
+      setCopyStatus('复制失败，请手动复制浏览器地址')
+    }
+  }
 
   const renderWorkFields = (group, item, index) => (
     <div className="visa-grid visa-grid--wide">
@@ -661,11 +678,31 @@ function VisaInfoFormPage() {
           {currentStep.id === 'review' && (
             <div className="visa-review">
               <div className="visa-review-actions">
-                <p>请先检查预览内容。点击“生成PDF”后，在系统打印窗口选择“另存为 PDF”。</p>
-                <button type="button" className="visa-primary-btn" onClick={() => window.print()}>
-                  生成PDF
+                <p>请先检查预览内容。点击“生成/打印 PDF”后，在系统打印窗口选择“另存为 PDF”。</p>
+                <button type="button" className="visa-primary-btn" onClick={handlePrintPdf}>
+                  生成/打印 PDF
                 </button>
               </div>
+              {pdfHelpOpen && (
+                <div className="visa-pdf-help" role="status">
+                  <div>
+                    <strong>手机端提示</strong>
+                    <p>
+                      如果手机点击后没有反应，请用系统浏览器打开本页，或复制链接到电脑端生成 PDF。
+                      微信内置浏览器、部分手机浏览器可能不支持直接打印网页。
+                    </p>
+                    {copyStatus && <span>{copyStatus}</span>}
+                  </div>
+                  <div className="visa-pdf-help-actions">
+                    <button type="button" className="visa-secondary-btn" onClick={handleCopyLink}>
+                      复制当前页面链接
+                    </button>
+                    <button type="button" className="visa-primary-btn" onClick={() => setPdfHelpOpen(false)}>
+                      知道了
+                    </button>
+                  </div>
+                </div>
+              )}
               <div className="visa-print-area">
                 <h2>签证个人信息表</h2>
                 <PersonalInfoSummary data={formData.personal} />
