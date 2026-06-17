@@ -600,7 +600,7 @@ function VisaProfileCard({ item }) {
         <div className="admin-visa-edit-actions">
           {!isEditing ? (
             <button type="button" className="admin-auth-btn" onClick={startEditing}>
-              编辑表格
+              更新信息
             </button>
           ) : (
             <>
@@ -627,12 +627,6 @@ function VisaProfileCard({ item }) {
         </div>
         <div className="admin-lead-grid">
           <p><strong>Profile ID：</strong>{displayValue(currentItem.profileId)}</p>
-          <p><strong>状态：</strong>{displayValue(currentItem.status)}</p>
-          <p><strong>当前步骤：</strong>{displayValue(currentItem.activeStep)}</p>
-          <p><strong>出生日期：</strong>{displayValue(currentItem.birthday || personal.birthday)}</p>
-          <p><strong>护照号码：</strong>{displayValue(currentItem.passportNo || personal.passportNo)}</p>
-          <p><strong>手机：</strong>{displayValue(currentItem.phone || personal.phone)}</p>
-          <p><strong>邮箱：</strong>{displayValue(currentItem.email || personal.email)}</p>
           <p><strong>创建时间：</strong>{formatTime(currentItem.createdAt)}</p>
         </div>
         <AdminVisaFormPreview
