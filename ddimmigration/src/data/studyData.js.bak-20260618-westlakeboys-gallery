@@ -48,19 +48,8 @@ export const STUDY_REMUERA_GALLERY = [
 export const STUDY_KINGS_POSTER = '/pic/study/kingscollege.png'
 export const STUDY_SKEN_POSTER = '/pic/study/sken.png'
 export const STUDY_WESTLAKE_BOYS_POSTER = '/pic/study/westlakeboys/westlakeboys.png'
-const STUDY_WESTLAKE_BOYS_PHOTOS = [
-  '2022_04_27_img_6679',
-  '2022_04_27_img_6698',
-  '2022_04_27_img_6704',
-  '2022_04_27_img_6709',
-  '699273819_1570917678366655_533991334662454009_n',
-  '702375770_1574457981345958_7432941613150049173_n',
-  '707329199_1579803924144697_6691246096884311764_n',
-  '718461260_1594384689353287_2254715542139368593_n',
-]
 export const STUDY_WESTLAKE_BOYS_GALLERY = [
   STUDY_WESTLAKE_BOYS_POSTER,
-  ...STUDY_WESTLAKE_BOYS_PHOTOS.map((id) => `/pic/study/westlakeboys/${id}.jpg`),
 ]
 
 /** 小学留学 · Willowbank School 宣传海报 */
@@ -374,10 +363,10 @@ export const studySections = [
         galleryCoverIndex: 0,
         detailImages: STUDY_WESTLAKE_BOYS_GALLERY,
         highlight: '新西兰公立男校 · 百年公立名校 · 培养未来领袖',
-        cost: '国际学生年度学费 NZ$26,800/年\nHomestay 费用 NZ$19,300/年\n（具体费用以学校当年公布为准）',
+        cost: '国际学生年度学费 NZ$26,800/年\n（具体费用以学校当年公布为准）',
         detail:
           'Westlake Boys High School（西湖男子高中）位于奥克兰北岸核心区域，是新西兰知名公立男校。学校注重学术成绩、体育、艺术与领导力培养，校园环境成熟，适合希望在公立高中体系中接受高质量教育并规划后续升学路径的学生。持牌团队可协助 Offer 申请、材料准备与学生签证规划。',
-        languageReq: '适合年龄：Year 9–13（约 14–18 周岁），具体以学校录取要求为准',
+        languageReq: '适合年龄：Year 9–13（约 13–18 周岁），具体以学校录取要求为准',
         academicReq: '国内初中或高中在读/毕业，需提供成绩单等材料，具体以学校评估为准',
         intakes: '入学时间以校方公布为准，建议提前 6–12 个月规划与申请',
         prospects: [

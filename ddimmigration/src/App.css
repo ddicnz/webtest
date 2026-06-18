@@ -1572,12 +1572,20 @@ img[src*="album/office"][src*="IMG_2486"] {
   box-sizing: border-box;
 }
 
+.study-gallery-carousel--uniform .study-gallery-carousel-item:not(.study-gallery-carousel-item--poster) .study-gallery-carousel-media {
+  padding: 0;
+}
+
 .study-gallery-carousel--uniform .study-gallery-carousel-media img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.study-gallery-carousel--uniform .study-gallery-carousel-item--poster .study-gallery-carousel-media img {
+  object-fit: contain;
 }
 
 .study-carousel-nav {
