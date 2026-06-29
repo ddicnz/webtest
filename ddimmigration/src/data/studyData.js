@@ -711,7 +711,7 @@ export const iclPrograms = [
     languageReq: '雅思 6.5（单项不低于 6.0）或 NZQA 认可同等成绩',
     academicReq: 'IT、商科或相关专业本科学历',
     schedule: '周六周日 8am-2pm（工作日可以上班）',
-    intakes: '1 月、4 月、7 月、11 月',
+    intakes: '4 月、7 月、11 月',
     prospects: [
       '毕业之后可申请技术移民，获得6分制6分',
       '配偶可申请工作签证',
