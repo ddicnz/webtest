@@ -763,7 +763,7 @@ function VisaInfoFormPage() {
                     />
                   ))}
                   <Field label="配偶出生地" value={formData.spouse.birthplace} onChange={(value) => setFormData((prev) => ({ ...prev, spouse: { ...prev.spouse, birthplace: value } }))} />
-                  <Field label="护照情况说明" value={formData.spouse.passportNote} onChange={(value) => setFormData((prev) => ({ ...prev, spouse: { ...prev.spouse, passportNote: value } }))} textarea />
+                  <Field label="护照情况说明（护照号码，签发和到期时间，签发地）" value={formData.spouse.passportNote} onChange={(value) => setFormData((prev) => ({ ...prev, spouse: { ...prev.spouse, passportNote: value } }))} textarea />
                 </div>
               </SectionBlock>
               <Repeater title="父母" note="包括已故父亲信息，请在名字后面标注“已故”（如适用）。" items={formData.parents} onAdd={() => addListItem('parents', emptyFamily)} onRemove={(index) => removeListItem('parents', index)} renderItem={(item, index) => renderFamilyFields('parents', item, index)} />
