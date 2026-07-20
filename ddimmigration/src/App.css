@@ -3573,6 +3573,22 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin: -6px 0 18px;
 }
 
+.visa-submit-status {
+  min-height: 24px;
+  margin: -6px 0 18px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.visa-submit-status--success {
+  color: #027a48;
+}
+
+.visa-submit-status--error {
+  color: #b42318;
+}
+
 .visa-review-actions p {
   margin: 0;
   color: #5d6975;

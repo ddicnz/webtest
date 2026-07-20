@@ -8,6 +8,8 @@ const VISA_PROFILE_API_URL =
   'https://pi130w8nza.execute-api.ap-southeast-2.amazonaws.com/default/saveVisaProfile'
 const VISA_PROFILE_GET_API_URL =
   'https://3dslqsetfl.execute-api.ap-southeast-2.amazonaws.com/default/getVisaProfile'
+const VISA_PROFILE_SUBMIT_PDF_API_URL =
+  'https://918vdvy5vh.execute-api.ap-southeast-2.amazonaws.com/default/submitVisaProfilePdf'
 const VISA_PROFILE_ID_KEY = 'ddimmigration_visa_profile_id_v1'
 
 const emptyWork = {
@@ -419,9 +421,9 @@ function VisaInfoFormPage() {
     restoredDraft ? Math.min(Math.max(restoredDraft.activeStep, 0), steps.length - 1) : 0,
   )
   const [formData, setFormData] = useState(() => restoredDraft?.formData || initialData)
-  const [pdfHelpOpen, setPdfHelpOpen] = useState(false)
-  const [copyStatus, setCopyStatus] = useState('')
   const [declarationAccepted, setDeclarationAccepted] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState('idle')
+  const [submitError, setSubmitError] = useState('')
   const [serverSaveStatus, setServerSaveStatus] = useState('idle')
   const [serverSaveError, setServerSaveError] = useState('')
   const [lastServerSavedAt, setLastServerSavedAt] = useState('')
@@ -577,19 +579,29 @@ function VisaInfoFormPage() {
     }
   }
 
-  const handlePrintPdf = () => {
+  const handleSubmit = async () => {
     if (!declarationAccepted) return
-    setPdfHelpOpen(true)
-    setCopyStatus('')
-    window.print()
-  }
+    setSubmitStatus('submitting')
+    setSubmitError('')
 
-  const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href)
-      setCopyStatus('链接已复制')
-    } catch {
-      setCopyStatus('复制失败，请手动复制浏览器地址')
+      await saveToServer(steps.length - 1)
+      const profileId = getOrCreateProfileId()
+      const res = await fetch(VISA_PROFILE_SUBMIT_PDF_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ profileId }),
+      })
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok || data?.success === false) {
+        throw new Error(data?.message || data?.error || `提交失败 HTTP ${res.status}`)
+      }
+
+      setSubmitStatus('success')
+    } catch (error) {
+      setSubmitStatus('error')
+      setSubmitError(error instanceof Error ? error.message : '提交失败，请稍后重试')
     }
   }
 
@@ -862,7 +874,7 @@ function VisaInfoFormPage() {
             <div className="visa-review">
               <div className="visa-review-actions">
                 <div>
-                  <p>请先检查预览内容。点击“生成/打印 PDF”后，在系统打印窗口选择“另存为 PDF”。</p>
+                  <p>请先检查预览内容。点击“提交”后，完整信息表将生成 PDF，并通过邮件发送至持牌移民顾问。</p>
                   <label className="visa-declaration-check">
                     <input
                       type="checkbox"
@@ -877,37 +889,23 @@ function VisaInfoFormPage() {
                 <button
                   type="button"
                   className="visa-primary-btn"
-                  onClick={handlePrintPdf}
-                  disabled={!declarationAccepted}
+                  onClick={() => void handleSubmit()}
+                  disabled={!declarationAccepted || submitStatus === 'submitting' || submitStatus === 'success'}
                 >
-                  生成/打印 PDF
+                  {submitStatus === 'submitting' && '正在提交...'}
+                  {submitStatus === 'success' && '提交成功'}
+                  {(submitStatus === 'idle' || submitStatus === 'error') && '提交'}
                 </button>
+              </div>
+              <div className={`visa-submit-status visa-submit-status--${submitStatus}`} role="status" aria-live="polite">
+                {submitStatus === 'success' && '提交成功。PDF 信息表已通过邮件发送至持牌移民顾问，我们会妥善处理您的资料。'}
+                {submitStatus === 'error' && `提交失败：${submitError}`}
               </div>
               <div className="visa-review-clear">
                 <button type="button" className="visa-secondary-btn" onClick={handleClearDraft}>
                   清除本机草稿
                 </button>
               </div>
-              {pdfHelpOpen && (
-                <div className="visa-pdf-help" role="status">
-                  <div>
-                    <strong>手机端提示</strong>
-                    <p>
-                      如果手机点击后没有反应，请用系统浏览器打开本页，或复制链接到电脑端生成 PDF。
-                      微信内点击右上角三个小点，选择在默认浏览器打开。
-                    </p>
-                    {copyStatus && <span>{copyStatus}</span>}
-                  </div>
-                  <div className="visa-pdf-help-actions">
-                    <button type="button" className="visa-secondary-btn" onClick={handleCopyLink}>
-                      复制当前页面链接
-                    </button>
-                    <button type="button" className="visa-primary-btn" onClick={() => setPdfHelpOpen(false)}>
-                      知道了
-                    </button>
-                  </div>
-                </div>
-              )}
               <div className="visa-print-area">
                 <h2>签证个人信息表</h2>
                 <PersonalInfoSummary data={formData.personal} />
