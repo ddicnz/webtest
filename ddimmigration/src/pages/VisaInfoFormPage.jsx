@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getCurrentCognitoSession } from '../auth/cognito.js'
 
 const yesNoOptions = ['是', '否']
@@ -417,12 +418,15 @@ function PersonalInfoSummary({ data }) {
 }
 
 function VisaInfoFormPage({ portalUserSub = '' }) {
+  const navigate = useNavigate()
   const isPortalMode = Boolean(portalUserSub)
   const draftStorageKey = isPortalMode
     ? `${DRAFT_STORAGE_KEY}:${portalUserSub}`
     : DRAFT_STORAGE_KEY
   const initialDraftRef = useRef(readDraftFromStorage(draftStorageKey))
   const didSkipInitialSaveRef = useRef(false)
+  const currentStepRef = useRef(null)
+  const shouldScrollAfterNextRef = useRef(false)
   const portalProfileIdRef = useRef('')
   const restoredDraft = initialDraftRef.current
   const [activeStep, setActiveStep] = useState(() =>
@@ -588,12 +592,23 @@ function VisaInfoFormPage({ portalUserSub = '' }) {
       setServerSaveStatus('error')
       setServerSaveError(error instanceof Error ? error.message : '服务器保存失败')
     } finally {
+      shouldScrollAfterNextRef.current = true
       setActiveStep(nextStep)
     }
   }
 
   const goPrev = () => setActiveStep((step) => Math.max(step - 1, 0))
   const currentStep = steps[activeStep]
+
+  useEffect(() => {
+    if (!shouldScrollAfterNextRef.current) return
+    shouldScrollAfterNextRef.current = false
+    if (!window.matchMedia('(max-width: 600px)').matches) return
+
+    window.requestAnimationFrame(() => {
+      currentStepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }, [activeStep])
 
   useEffect(() => {
     if (!didSkipInitialSaveRef.current) {
@@ -690,6 +705,13 @@ function VisaInfoFormPage({ portalUserSub = '' }) {
 
   return (
     <main className={`main-content visa-form-page${isPortalMode ? ' visa-form-page--portal' : ''}`}>
+      {isPortalMode && (
+        <div className="visa-form-portal-actions">
+          <button type="button" className="visa-secondary-btn" onClick={() => navigate('/visa-portal')}>
+            返回客户主页
+          </button>
+        </div>
+      )}
       <div className="visa-form-heading">
         <p className="visa-eyebrow">DD Immigration Client Intake</p>
         <h1>签证个人信息表</h1>
@@ -722,7 +744,7 @@ function VisaInfoFormPage({ portalUserSub = '' }) {
         </aside>
 
         <form className="visa-form-card" onSubmit={(e) => e.preventDefault()}>
-          <div className="visa-current-step">
+          <div className="visa-current-step" ref={currentStepRef}>
             <span>第 {activeStep + 1} 步 / 共 {steps.length} 步</span>
             <h2>{currentStep.title}</h2>
             {currentStep.subtitle && <p>{currentStep.subtitle}</p>}
@@ -964,6 +986,20 @@ function VisaInfoFormPage({ portalUserSub = '' }) {
                 <SummaryTable title="过去10年工作经验" rows={formData.pastWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} />
                 <SummaryTable title="教育经历" rows={formData.education} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'school', label: '学校' }, { key: 'major', label: '专业' }, { key: 'degree', label: '学历' }]} />
                 <SummaryTable title="证书" rows={formData.certificates} columns={[{ key: 'date', label: '发证时间' }, { key: 'name', label: '证书名称' }, { key: 'authority', label: '发证机构' }]} />
+                <section className="visa-print-section">
+                  <h3>配偶</h3>
+                  <div className="visa-summary-grid">
+                    <SummaryRow label="姓名" value={formData.spouse.name} />
+                    <SummaryRow label="姓名拼音" value={formData.spouse.pinyin} />
+                    <SummaryRow label="亲属关系" value={formData.spouse.relation} />
+                    <SummaryRow label="出生日期" value={formData.spouse.birthday} />
+                    <SummaryRow label="现居住国家" value={formData.spouse.country} />
+                    <SummaryRow label="职业" value={formData.spouse.occupation} />
+                    <SummaryRow label="婚姻状态" value={formData.spouse.maritalStatus} />
+                    <SummaryRow label="出生地" value={formData.spouse.birthplace} />
+                    <SummaryRow label="护照情况说明" value={formData.spouse.passportNote} />
+                  </div>
+                </section>
                 <SummaryTable title="父母" rows={formData.parents} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }]} />
                 <SummaryTable title="子女" rows={formData.children} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} />
                 <SummaryTable title="兄弟姐妹" rows={formData.siblings} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} />

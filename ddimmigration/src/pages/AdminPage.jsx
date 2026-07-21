@@ -482,6 +482,30 @@ function AdminVisaFormPreview({ formData = {}, isEditing, onFieldChange, onListC
       <AdminVisaSummaryTable title="过去10年工作经验" rows={formData.pastWork} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'company', label: '单位' }, { key: 'position', label: '职位' }, { key: 'address', label: '地址' }, { key: 'supervisor', label: '上司' }, { key: 'proof', label: '社保/流水' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('pastWork', index, key, value)} />
       <AdminVisaSummaryTable title="教育经历" rows={formData.education} columns={[{ key: 'from', label: '从' }, { key: 'to', label: '到' }, { key: 'school', label: '学校' }, { key: 'major', label: '专业' }, { key: 'degree', label: '学历' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('education', index, key, value)} />
       <AdminVisaSummaryTable title="证书" rows={formData.certificates} columns={[{ key: 'date', label: '发证时间' }, { key: 'name', label: '证书名称' }, { key: 'authority', label: '发证机构' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('certificates', index, key, value)} />
+      <section className="visa-print-section">
+        <h3>配偶</h3>
+        <div className="visa-summary-grid">
+          {[
+            ['name', '姓名'],
+            ['pinyin', '姓名拼音'],
+            ['relation', '亲属关系'],
+            ['birthday', '出生日期'],
+            ['country', '现居住国家'],
+            ['occupation', '职业'],
+            ['maritalStatus', '婚姻状态'],
+            ['birthplace', '出生地'],
+            ['passportNote', '护照情况说明'],
+          ].map(([key, label]) => (
+            <AdminVisaSummaryRow
+              key={key}
+              label={label}
+              value={formData.spouse?.[key]}
+              isEditing={isEditing}
+              onChange={(value) => onFieldChange('spouse', key, value)}
+            />
+          ))}
+        </div>
+      </section>
       <AdminVisaSummaryTable title="父母" rows={formData.parents} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('parents', index, key, value)} />
       <AdminVisaSummaryTable title="子女" rows={formData.children} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('children', index, key, value)} />
       <AdminVisaSummaryTable title="兄弟姐妹" rows={formData.siblings} columns={[{ key: 'name', label: '姓名' }, { key: 'pinyin', label: '拼音' }, { key: 'relation', label: '关系' }, { key: 'birthday', label: '生日' }, { key: 'country', label: '居住国家' }, { key: 'occupation', label: '职业' }, { key: 'maritalStatus', label: '婚姻' }]} isEditing={isEditing} onListChange={(index, key, value) => onListChange('siblings', index, key, value)} />

@@ -3186,6 +3186,20 @@ img[src*="album/office"][src*="IMG_2486"] {
   line-height: 1.75;
 }
 
+.visa-form-portal-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 14px;
+}
+
+.visa-form-portal-actions .visa-secondary-btn {
+  width: auto;
+  min-height: 36px;
+  padding: 7px 13px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
 .visa-form-shell {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -3301,6 +3315,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin-bottom: 20px;
   padding-bottom: 16px;
   border-bottom: 1px solid #e8edf2;
+  scroll-margin-top: 170px;
 }
 
 .visa-current-step span {
@@ -3846,6 +3861,10 @@ img[src*="album/office"][src*="IMG_2486"] {
 
   .visa-form-heading h1 {
     font-size: 24px;
+  }
+
+  .visa-form-portal-actions .visa-secondary-btn {
+    width: auto;
   }
 
   .visa-form-card {
