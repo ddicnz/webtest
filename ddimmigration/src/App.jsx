@@ -21,6 +21,8 @@ import ServicesDetailPage from './pages/ServicesDetailPage.jsx'
 import AssessmentPage from './pages/AssessmentPage.jsx'
 import VisaInfoFormPage from './pages/VisaInfoFormPage.jsx'
 import AdminPage from './pages/AdminPage.jsx'
+import VisaPortalLoginPage from './pages/VisaPortalLoginPage.jsx'
+import VisaPortalPage from './pages/VisaPortalPage.jsx'
 import { studySections } from './data/studyData.js'
 import { studyListPathForSectionId } from './utils/studySectionPath.js'
 
@@ -366,6 +368,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/visa-portal/login" element={<VisaPortalLoginPage />} />
+        <Route path="/visa-portal/auth/callback" element={<Navigate to="/visa-portal/login" replace />} />
+        <Route path="/visa-portal" element={<VisaPortalPage />} />
         {/* 除首页外的其它页面：上面半屏大图，下面 sidebar + 正文 */}
         <Route element={<HeroSidebarLayout />}>
           <Route path="/about" element={<AboutPage />} />

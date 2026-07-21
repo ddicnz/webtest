@@ -4951,6 +4951,331 @@ textarea.admin-visa-edit-input {
   color: #b42318;
 }
 
+/* 签证客户资料中心 */
+.visa-portal-page {
+  min-height: 640px;
+  padding: 72px 28px 84px;
+  background: #f3f7f9;
+  color: #172f45;
+}
+
+.visa-portal-login-shell,
+.visa-portal-dashboard {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+}
+
+.visa-portal-login-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
+  gap: 72px;
+  align-items: center;
+}
+
+.visa-portal-login-intro {
+  max-width: 520px;
+}
+
+.visa-portal-logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  border: 1px solid #d7e1e7;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.visa-portal-eyebrow {
+  margin: 0 0 8px;
+  color: #307d91;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.visa-portal-login-intro h1,
+.visa-portal-dashboard-head h1 {
+  margin: 0;
+  color: #102f49;
+  font-size: 38px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.visa-portal-login-intro > p:not(.visa-portal-eyebrow) {
+  margin: 20px 0 0;
+  color: #52687a;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.visa-portal-security-note {
+  margin-top: 32px;
+  padding: 16px 18px;
+  border-left: 4px solid #2f8b78;
+  background: #e8f3ef;
+  color: #315c54;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.visa-portal-login-card {
+  min-height: 440px;
+  padding: 34px;
+  border: 1px solid #d7e1e7;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(16, 47, 73, 0.1);
+}
+
+.visa-portal-form-head {
+  margin-bottom: 26px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e9ed;
+}
+
+.visa-portal-form-head h2 {
+  margin: 0;
+  color: #102f49;
+  font-size: 25px;
+  letter-spacing: 0;
+}
+
+.visa-portal-form-head p {
+  margin: 8px 0 0;
+  color: #71818e;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.visa-portal-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #294257;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.visa-portal-field input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid #bac9d3;
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  color: #172f45;
+  font: inherit;
+  font-weight: 400;
+  letter-spacing: 0;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.visa-portal-field input:focus {
+  border-color: #3c8fa8;
+  box-shadow: 0 0 0 3px rgba(60, 143, 168, 0.15);
+}
+
+.visa-portal-show-password {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: -2px 0 20px;
+  color: #596e7d;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.visa-portal-show-password input {
+  width: 16px;
+  height: 16px;
+  accent-color: #3c8fa8;
+}
+
+.visa-portal-primary-btn,
+.visa-portal-secondary-btn,
+.visa-portal-text-btn {
+  font: inherit;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.visa-portal-primary-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #327f98;
+  border-radius: 6px;
+  background: #327f98;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.visa-portal-primary-btn:hover:not(:disabled) {
+  background: #286d83;
+}
+
+.visa-portal-primary-btn:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.visa-portal-text-btn {
+  display: block;
+  margin: 18px auto 0;
+  border: 0;
+  background: transparent;
+  color: #276f88;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.visa-portal-text-btn:hover {
+  text-decoration: underline;
+}
+
+.visa-portal-status {
+  margin: 0 0 16px;
+  padding: 11px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.visa-portal-status--error {
+  border: 1px solid #f2b8b5;
+  background: #fff1f0;
+  color: #a52a24;
+}
+
+.visa-portal-status--info {
+  border: 1px solid #b8d8e4;
+  background: #edf7fa;
+  color: #285d70;
+}
+
+.visa-portal-status--success {
+  border: 1px solid #acd8c5;
+  background: #edf8f3;
+  color: #24644f;
+}
+
+.visa-portal-loading {
+  margin: 80px auto;
+  color: #52687a;
+  text-align: center;
+}
+
+.visa-portal-dashboard-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #ccd9e1;
+}
+
+.visa-portal-dashboard-head > div > p:last-child {
+  margin: 12px 0 0;
+  color: #5b6f7f;
+}
+
+.visa-portal-secondary-btn {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid #9fb2bf;
+  border-radius: 6px;
+  background: #fff;
+  color: #294257;
+  font-weight: 700;
+}
+
+.visa-portal-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.visa-portal-dashboard-item {
+  min-height: 190px;
+  padding: 24px;
+  border: 1px solid #d5e0e6;
+  border-top: 4px solid #3c8fa8;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.visa-portal-dashboard-item:nth-child(2) {
+  border-top-color: #2f8b78;
+}
+
+.visa-portal-dashboard-item:nth-child(3) {
+  border-top-color: #c48a35;
+}
+
+.visa-portal-dashboard-item h2 {
+  margin: 0;
+  color: #153552;
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+.visa-portal-dashboard-item p {
+  min-height: 52px;
+  margin: 14px 0 22px;
+  color: #687a88;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.visa-portal-dashboard-item span {
+  color: #3e7080;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 820px) {
+  .visa-portal-page {
+    min-height: 0;
+    padding: 44px 18px 56px;
+  }
+
+  .visa-portal-login-shell {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .visa-portal-login-intro {
+    max-width: none;
+  }
+
+  .visa-portal-login-intro h1,
+  .visa-portal-dashboard-head h1 {
+    font-size: 30px;
+  }
+
+  .visa-portal-security-note {
+    margin-top: 22px;
+  }
+
+  .visa-portal-login-card {
+    min-height: 0;
+    padding: 26px 20px;
+  }
+
+  .visa-portal-dashboard-head {
+    flex-direction: column;
+  }
+
+  .visa-portal-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 800px) {
   .admin-stats {
     grid-template-columns: 1fr;

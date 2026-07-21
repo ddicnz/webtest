@@ -279,7 +279,6 @@ export const studySections = [
         schedule: '周一到周四。雅思早班 08:00–13:00；PTE 早班 08:00–13:00；PTE 下午班 13:00–18:00',
         languageReq: '雅思 5(5) 或 PTE 36(36) 或 入学分班测试达 Pre-Inter 以上',
         academicReq: '16 岁及以上',
-    schedule: '周六周日 8am-2pm（工作日可以上班）',
         intakes: '每周一开学，随时加入学习',
         prospects: [
           '提供所有英语水平课程，入门至高级',
