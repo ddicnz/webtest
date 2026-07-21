@@ -23,6 +23,7 @@ import VisaInfoFormPage from './pages/VisaInfoFormPage.jsx'
 import AdminPage from './pages/AdminPage.jsx'
 import VisaPortalLoginPage from './pages/VisaPortalLoginPage.jsx'
 import VisaPortalPage from './pages/VisaPortalPage.jsx'
+import VisaPortalInfoFormPage from './pages/VisaPortalInfoFormPage.jsx'
 import { studySections } from './data/studyData.js'
 import { studyListPathForSectionId } from './utils/studySectionPath.js'
 
@@ -118,6 +119,7 @@ function App() {
   const [mobileStudyPanelOpen, setMobileStudyPanelOpen] = useState(false)
   const [showPageBackToTop, setShowPageBackToTop] = useState(false)
   const location = useLocation()
+  const isVisaPortalRoute = location.pathname.startsWith('/visa-portal')
   const showBackToTopRoute =
     location.pathname.startsWith('/study') ||
     location.pathname.startsWith('/album') ||
@@ -188,7 +190,7 @@ function App() {
       </header>
 
       {/* 导航栏 */}
-      <nav className={`nav-bar${navSolid ? ' nav-bar--solid' : ''}${navOpen ? ' nav-bar--menu-open' : ''}`}>
+      <nav className={`nav-bar${navSolid ? ' nav-bar--solid' : ''}${isVisaPortalRoute ? ' nav-bar--portal' : ''}${navOpen ? ' nav-bar--menu-open' : ''}`}>
         <div className="nav-menu-btn-wrap">
           <button
             type="button"
@@ -371,6 +373,7 @@ function App() {
         <Route path="/visa-portal/login" element={<VisaPortalLoginPage />} />
         <Route path="/visa-portal/auth/callback" element={<Navigate to="/visa-portal/login" replace />} />
         <Route path="/visa-portal" element={<VisaPortalPage />} />
+        <Route path="/visa-portal/info-form" element={<VisaPortalInfoFormPage />} />
         {/* 除首页外的其它页面：上面半屏大图，下面 sidebar + 正文 */}
         <Route element={<HeroSidebarLayout />}>
           <Route path="/about" element={<AboutPage />} />

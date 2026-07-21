@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { getCurrentCognitoSession } from '../auth/cognito.js'
 
 const yesNoOptions = ['是', '否']
 const stayOptions = ['0-6个月', '6-12个月', '12个月以上']
@@ -8,6 +9,8 @@ const VISA_PROFILE_API_URL =
   'https://pi130w8nza.execute-api.ap-southeast-2.amazonaws.com/default/saveVisaProfile'
 const VISA_PROFILE_GET_API_URL =
   'https://3dslqsetfl.execute-api.ap-southeast-2.amazonaws.com/default/getVisaProfile'
+const VISA_PORTAL_PROFILE_API_URL =
+  'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
 const VISA_PROFILE_SUBMIT_PDF_API_URL =
   'https://918vdvy5vh.execute-api.ap-southeast-2.amazonaws.com/default/submitVisaProfilePdf'
 const VISA_PROFILE_ID_KEY = 'ddimmigration_visa_profile_id_v1'
@@ -143,9 +146,9 @@ const steps = [
   { id: 'review', title: '预览生成', subtitle: '' },
 ]
 
-function readDraftFromStorage() {
+function readDraftFromStorage(storageKey = DRAFT_STORAGE_KEY) {
   try {
-    const raw = localStorage.getItem(DRAFT_STORAGE_KEY)
+    const raw = localStorage.getItem(storageKey)
     if (!raw) return null
     const draft = JSON.parse(raw)
     if (!draft || typeof draft !== 'object') return null
@@ -413,9 +416,14 @@ function PersonalInfoSummary({ data }) {
   )
 }
 
-function VisaInfoFormPage() {
-  const initialDraftRef = useRef(readDraftFromStorage())
+function VisaInfoFormPage({ portalUserSub = '' }) {
+  const isPortalMode = Boolean(portalUserSub)
+  const draftStorageKey = isPortalMode
+    ? `${DRAFT_STORAGE_KEY}:${portalUserSub}`
+    : DRAFT_STORAGE_KEY
+  const initialDraftRef = useRef(readDraftFromStorage(draftStorageKey))
   const didSkipInitialSaveRef = useRef(false)
+  const portalProfileIdRef = useRef('')
   const restoredDraft = initialDraftRef.current
   const [activeStep, setActiveStep] = useState(() =>
     restoredDraft ? Math.min(Math.max(restoredDraft.activeStep, 0), steps.length - 1) : 0,
@@ -434,18 +442,37 @@ function VisaInfoFormPage() {
   )
 
   useEffect(() => {
-    const profileId = getExistingProfileId()
-    if (!profileId) return undefined
+    const localProfileId = isPortalMode ? '' : getExistingProfileId()
+    if (!isPortalMode && !localProfileId) return undefined
 
     let cancelled = false
 
     const restoreFromServer = async () => {
       try {
-        const url = `${VISA_PROFILE_GET_API_URL}?profileId=${encodeURIComponent(profileId)}`
-        const res = await fetch(url)
+        let url = `${VISA_PROFILE_GET_API_URL}?profileId=${encodeURIComponent(localProfileId)}`
+        let headers
+
+        if (isPortalMode) {
+          const session = await getCurrentCognitoSession()
+          url = VISA_PORTAL_PROFILE_API_URL
+          headers = {
+            Authorization: session.getIdToken().getJwtToken(),
+          }
+        }
+
+        const res = await fetch(url, { headers })
         const data = await res.json().catch(() => ({}))
 
-        if (!res.ok || data?.ok === false) return
+        if (!res.ok || data?.ok === false) {
+          if (isPortalMode) {
+            throw new Error(data?.message || `读取资料失败 HTTP ${res.status}`)
+          }
+          return
+        }
+        if (isPortalMode && data?.profileId) {
+          portalProfileIdRef.current = data.profileId
+        }
+        if (data?.found === false) return
 
         const nextFormData = data?.formData || data?.item?.formData
         if (!nextFormData || typeof nextFormData !== 'object') return
@@ -461,7 +488,11 @@ function VisaInfoFormPage() {
         setActiveStep(Math.min(Math.max(nextStep, 0), steps.length - 1))
         setLastServerSavedAt(data?.updatedAt || data?.item?.updatedAt || '')
         setServerSaveStatus('saved')
-      } catch {
+      } catch (error) {
+        if (isPortalMode && !cancelled) {
+          setServerSaveStatus('error')
+          setServerSaveError(error instanceof Error ? error.message : '服务器资料读取失败')
+        }
         // 后端恢复失败时继续使用本地草稿，不阻断客户填写。
       }
     }
@@ -471,7 +502,7 @@ function VisaInfoFormPage() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [isPortalMode, portalUserSub])
 
   const updateGroup = (group, key, value) => {
     setFormData((prev) => ({
@@ -507,19 +538,31 @@ function VisaInfoFormPage() {
   }
 
   const saveToServer = async (nextStep) => {
-    const profileId = getOrCreateProfileId()
+    const localProfileId = isPortalMode ? '' : getOrCreateProfileId()
     setServerSaveStatus('saving')
     setServerSaveError('')
 
-    const res = await fetch(VISA_PROFILE_API_URL, {
+    let url = VISA_PROFILE_API_URL
+    const headers = { 'Content-Type': 'application/json' }
+
+    if (isPortalMode) {
+      const session = await getCurrentCognitoSession()
+      url = VISA_PORTAL_PROFILE_API_URL
+      headers.Authorization = session.getIdToken().getJwtToken()
+    }
+
+    const requestBody = {
+      activeStep: nextStep,
+      status: nextStep >= steps.length - 1 ? 'submitted' : 'draft',
+      formData,
+    }
+
+    if (!isPortalMode) requestBody.profileId = localProfileId
+
+    const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        profileId,
-        activeStep: nextStep,
-        status: nextStep >= steps.length - 1 ? 'submitted' : 'draft',
-        formData,
-      }),
+      headers,
+      body: JSON.stringify(requestBody),
     })
 
     const data = await res.json().catch(() => ({}))
@@ -527,8 +570,14 @@ function VisaInfoFormPage() {
       throw new Error(data?.message || data?.error || `保存失败 HTTP ${res.status}`)
     }
 
-    setLastServerSavedAt(data?.updatedAt || new Date().toISOString())
+    const savedProfileId = data?.profileId || localProfileId
+    if (isPortalMode && savedProfileId) {
+      portalProfileIdRef.current = savedProfileId
+    }
+
+    setLastServerSavedAt(data?.updatedAt || data?.item?.updatedAt || new Date().toISOString())
     setServerSaveStatus('saved')
+    return savedProfileId
   }
 
   const goNext = async () => {
@@ -556,7 +605,7 @@ function VisaInfoFormPage() {
       try {
         const updatedAt = new Date().toISOString()
         localStorage.setItem(
-          DRAFT_STORAGE_KEY,
+          draftStorageKey,
           JSON.stringify({
             activeStep,
             formData,
@@ -569,11 +618,11 @@ function VisaInfoFormPage() {
     }, DRAFT_SAVE_DELAY_MS)
 
     return () => window.clearTimeout(timer)
-  }, [activeStep, formData])
+  }, [activeStep, draftStorageKey, formData])
 
   const handleClearDraft = () => {
     try {
-      localStorage.removeItem(DRAFT_STORAGE_KEY)
+      localStorage.removeItem(draftStorageKey)
     } catch {
       // 清除失败不影响当前页面继续填写。
     }
@@ -585,8 +634,10 @@ function VisaInfoFormPage() {
     setSubmitError('')
 
     try {
-      await saveToServer(steps.length - 1)
-      const profileId = getOrCreateProfileId()
+      const savedProfileId = await saveToServer(steps.length - 1)
+      const profileId = savedProfileId
+        || portalProfileIdRef.current
+        || (isPortalMode ? `visa_user_${portalUserSub}` : getOrCreateProfileId())
       const res = await fetch(VISA_PROFILE_SUBMIT_PDF_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -638,7 +689,7 @@ function VisaInfoFormPage() {
   )
 
   return (
-    <main className="main-content visa-form-page">
+    <main className={`main-content visa-form-page${isPortalMode ? ' visa-form-page--portal' : ''}`}>
       <div className="visa-form-heading">
         <p className="visa-eyebrow">DD Immigration Client Intake</p>
         <h1>签证个人信息表</h1>

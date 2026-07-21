@@ -56,7 +56,13 @@ function VisaPortalPage() {
           <section className="visa-portal-dashboard-item">
             <h2>个人信息表</h2>
             <p>查看并继续完善您的签证个人信息。</p>
-            <span>即将接入</span>
+            <button
+              type="button"
+              className="visa-portal-entry-btn"
+              onClick={() => navigate('/visa-portal/info-form')}
+            >
+              填写/继续填写
+            </button>
           </section>
           <section className="visa-portal-dashboard-item">
             <h2>签证材料</h2>
