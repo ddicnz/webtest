@@ -348,6 +348,7 @@ const visaReviewQuestionGroups = [
       { key: 'militaryHistory', label: '是否有任何兵役历史？' },
       { key: 'militaryDetail', label: '如有兵役历史，请提供开始和结束时间、部队番号、军衔、具体职位、上级领导名称，并说明退伍证情况。' },
       { key: 'coApplicants', label: '如有其他人随行或一同申请，请在此提供另外申请人姓名，并另行提供其个人信息表格。' },
+      { key: 'applicationRequest', label: '请简要说明您想申请什么签证，以及希望我们协助完成什么评估或服务。' },
       { key: 'declarationName', label: '本人确认签字姓名。' },
       { key: 'declarationDate', label: '本人确认日期。' },
     ],
@@ -530,7 +531,81 @@ function AdminVisaFormPreview({ formData = {}, isEditing, onFieldChange, onListC
   )
 }
 
-function VisaProfileCard({ item, onDeleted }) {
+function getVisaProfileClientName(item) {
+  return item.clientName || item.formData?.personal?.name
+}
+
+function VisaProfileCard({ item, onDeleted, onOpen }) {
+  const [deleteStatus, setDeleteStatus] = useState('idle')
+  const clientName = getVisaProfileClientName(item)
+
+  const deleteProfile = async () => {
+    const confirmed = window.confirm(`确认删除 ${displayValue(clientName)} 的客户签证材料吗？删除后无法恢复。`)
+    if (!confirmed) return
+
+    setDeleteStatus('deleting')
+    try {
+      const res = await fetch(DELETE_VISA_PROFILE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profileId: item.profileId,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.message || data?.error || `HTTP ${res.status}`)
+      }
+      onDeleted(item.profileId)
+    } catch (e) {
+      setDeleteStatus('idle')
+      window.alert(`删除失败：${e instanceof Error ? e.message : String(e)}`)
+    }
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onOpen(item)
+    }
+  }
+
+  return (
+    <article
+      className="admin-lead-card admin-visa-profile-card"
+      role="button"
+      tabIndex={0}
+      onClick={() => onOpen(item)}
+      onKeyDown={handleKeyDown}
+    >
+      <header className="admin-lead-header">
+        <h3 className="admin-lead-title">姓名：{displayValue(clientName)}</h3>
+        <div className="admin-visa-card-tools">
+          <p className="admin-lead-time">{formatTime(item.updatedAt || item.createdAt)}</p>
+          <button
+            type="button"
+            className="admin-delete-btn"
+            onKeyDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation()
+              void deleteProfile()
+            }}
+            disabled={deleteStatus === 'deleting'}
+          >
+            {deleteStatus === 'deleting' ? '删除中...' : '删除'}
+          </button>
+        </div>
+      </header>
+      <div className="admin-visa-profile-summary">
+        <p><strong>完成度：</strong>{displayValue(item.completionPercent)}%</p>
+        <p><strong>更新时间：</strong>{formatTime(item.updatedAt)}</p>
+      </div>
+      <p className="admin-visa-profile-open">进入客户页面</p>
+    </article>
+  )
+}
+
+function VisaProfileDetail({ item, onBack, onDeleted }) {
   const cloneFormData = (value) => JSON.parse(JSON.stringify(value || {}))
   const [currentItem, setCurrentItem] = useState(item)
   const [draftFormData, setDraftFormData] = useState(() => cloneFormData(item.formData))
@@ -538,6 +613,7 @@ function VisaProfileCard({ item, onDeleted }) {
   const [updateStatus, setUpdateStatus] = useState('idle')
   const [updateError, setUpdateError] = useState('')
   const [deleteStatus, setDeleteStatus] = useState('idle')
+  const [activeSection, setActiveSection] = useState('visaInfo')
 
   const formData = isEditing ? draftFormData : currentItem.formData || {}
   const personal = formData.personal || {}
@@ -613,7 +689,7 @@ function VisaProfileCard({ item, onDeleted }) {
   }
 
   const deleteProfile = async () => {
-    const confirmed = window.confirm(`确认删除 ${displayValue(clientName)} 的签证信息表吗？删除后无法恢复。`)
+    const confirmed = window.confirm(`确认删除 ${displayValue(clientName)} 的客户签证材料吗？删除后无法恢复。`)
     if (!confirmed) return
 
     setDeleteStatus('deleting')
@@ -637,9 +713,15 @@ function VisaProfileCard({ item, onDeleted }) {
   }
 
   return (
-    <article className="admin-lead-card">
-      <header className="admin-lead-header">
-        <h3 className="admin-lead-title">姓名：{displayValue(clientName)}</h3>
+    <section className="admin-client-detail">
+      <button type="button" className="admin-back-btn" onClick={onBack}>
+        返回客户列表
+      </button>
+      <div className="admin-client-detail-head">
+        <div>
+          <p className="admin-client-eyebrow">客户签证材料</p>
+          <h2>客户：{displayValue(clientName)}</h2>
+        </div>
         <div className="admin-visa-card-tools">
           <p className="admin-lead-time">{formatTime(currentItem.updatedAt || currentItem.createdAt)}</p>
           <button
@@ -651,13 +733,33 @@ function VisaProfileCard({ item, onDeleted }) {
             {deleteStatus === 'deleting' ? '删除中...' : '删除'}
           </button>
         </div>
-      </header>
-      <div className="admin-visa-profile-summary">
+      </div>
+      <div className="admin-visa-profile-summary admin-client-detail-summary">
         <p><strong>完成度：</strong>{displayValue(currentItem.completionPercent)}%</p>
         <p><strong>更新时间：</strong>{formatTime(currentItem.updatedAt)}</p>
       </div>
-      <details className="admin-lead-details">
-        <summary>查看完整签证信息表</summary>
+      <nav className="admin-tabs admin-client-tabs" aria-label="客户材料板块">
+        <button
+          type="button"
+          className={`admin-tab-btn${activeSection === 'visaInfo' ? ' active' : ''}`}
+          onClick={() => setActiveSection('visaInfo')}
+        >
+          签证信息表
+        </button>
+        <button
+          type="button"
+          className={`admin-tab-btn${activeSection === 'documents' ? ' active' : ''}`}
+          onClick={() => setActiveSection('documents')}
+        >
+          材料
+        </button>
+      </nav>
+
+      {activeSection === 'visaInfo' ? (
+        <section className="admin-client-panel">
+          <header className="admin-client-panel-head">
+            <h3>签证信息表</h3>
+          </header>
         <div className="admin-visa-edit-actions">
           {!isEditing ? (
             <button type="button" className="admin-auth-btn" onClick={startEditing}>
@@ -696,8 +798,16 @@ function VisaProfileCard({ item, onDeleted }) {
           onFieldChange={updateDraftField}
           onListChange={updateDraftListField}
         />
-      </details>
-    </article>
+        </section>
+      ) : (
+        <section className="admin-client-panel">
+          <header className="admin-client-panel-head">
+            <h3>材料</h3>
+          </header>
+          <p className="admin-empty">材料板块稍后制作。</p>
+        </section>
+      )}
+    </section>
   )
 }
 
@@ -735,6 +845,7 @@ function AdminPage() {
   const [visaProfilesLoading, setVisaProfilesLoading] = useState(false)
   const [visaProfilesError, setVisaProfilesError] = useState('')
   const [visaProfilesLoaded, setVisaProfilesLoaded] = useState(false)
+  const [selectedVisaProfile, setSelectedVisaProfile] = useState(null)
 
   useEffect(() => {
     if (!authorized) return
@@ -829,6 +940,7 @@ function AdminPage() {
 
   const handleVisaProfileDeleted = (profileId) => {
     setVisaProfileItems((prev) => prev.filter((item) => item.profileId !== profileId))
+    setSelectedVisaProfile((prev) => (prev?.profileId === profileId ? null : prev))
   }
 
   const currentItems = useMemo(() => grouped[activeTab] || [], [grouped, activeTab])
@@ -895,14 +1007,20 @@ function AdminPage() {
         <button
           type="button"
           className={`admin-tab-btn${activeView === 'answers' ? ' active' : ''}`}
-          onClick={() => setActiveView('answers')}
+          onClick={() => {
+            setActiveView('answers')
+            setSelectedVisaProfile(null)
+          }}
         >
           后台回答管理
         </button>
         <button
           type="button"
           className={`admin-tab-btn${activeView === 'survey' ? ' active' : ''}`}
-          onClick={() => setActiveView('survey')}
+          onClick={() => {
+            setActiveView('survey')
+            setSelectedVisaProfile(null)
+          }}
         >
           Survey 数据
         </button>
@@ -911,7 +1029,7 @@ function AdminPage() {
           className={`admin-tab-btn${activeView === 'visaProfiles' ? ' active' : ''}`}
           onClick={() => setActiveView('visaProfiles')}
         >
-          签证信息表
+          客户签证材料
         </button>
       </nav>
 
@@ -1016,35 +1134,47 @@ function AdminPage() {
         </>
       ) : (
         <>
-          <div className="admin-survey-actions">
-            <button
-              type="button"
-              className="admin-auth-btn"
-              onClick={() => {
-                setVisaProfilesLoaded(false)
-                void loadVisaProfiles()
-              }}
-              disabled={visaProfilesLoading}
-            >
-              {visaProfilesLoading ? '刷新中...' : '刷新签证信息表'}
-            </button>
-          </div>
-          {visaProfilesLoading && visaProfileItems.length === 0 && <p className="admin-loading">加载中...</p>}
-          {!visaProfilesLoading && visaProfilesError && <p className="admin-error">加载失败：{visaProfilesError}</p>}
-          {!visaProfilesLoading && !visaProfilesError && (
-            <section className="admin-list">
-              {visaProfileItems.length === 0 ? (
-                <p className="admin-empty">当前暂无签证信息表。</p>
-              ) : (
-                visaProfileItems.map((item) => (
-                  <VisaProfileCard
-                    key={item.profileId || item.updatedAt}
-                    item={item}
-                    onDeleted={handleVisaProfileDeleted}
-                  />
-                ))
+          {selectedVisaProfile ? (
+            <VisaProfileDetail
+              item={selectedVisaProfile}
+              onBack={() => setSelectedVisaProfile(null)}
+              onDeleted={handleVisaProfileDeleted}
+            />
+          ) : (
+            <>
+              <div className="admin-survey-actions">
+                <button
+                  type="button"
+                  className="admin-auth-btn"
+                  onClick={() => {
+                    setVisaProfilesLoaded(false)
+                    setSelectedVisaProfile(null)
+                    void loadVisaProfiles()
+                  }}
+                  disabled={visaProfilesLoading}
+                >
+                  {visaProfilesLoading ? '刷新中...' : '刷新客户签证材料'}
+                </button>
+              </div>
+              {visaProfilesLoading && visaProfileItems.length === 0 && <p className="admin-loading">加载中...</p>}
+              {!visaProfilesLoading && visaProfilesError && <p className="admin-error">加载失败：{visaProfilesError}</p>}
+              {!visaProfilesLoading && !visaProfilesError && (
+                <section className="admin-list">
+                  {visaProfileItems.length === 0 ? (
+                    <p className="admin-empty">当前暂无客户签证材料。</p>
+                  ) : (
+                    visaProfileItems.map((item) => (
+                      <VisaProfileCard
+                        key={item.profileId || item.updatedAt}
+                        item={item}
+                        onOpen={setSelectedVisaProfile}
+                        onDeleted={handleVisaProfileDeleted}
+                      />
+                    ))
+                  )}
+                </section>
               )}
-            </section>
+            </>
           )}
         </>
       )}

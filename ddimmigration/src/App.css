@@ -4780,6 +4780,19 @@ img[src*="album/office"][src*="IMG_2486"] {
   padding: 14px;
 }
 
+.admin-visa-profile-card {
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.admin-visa-profile-card:hover,
+.admin-visa-profile-card:focus {
+  border-color: var(--nav-bg);
+  box-shadow: 0 8px 22px rgba(33, 97, 132, 0.12);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .admin-lead-header {
   display: flex;
   align-items: baseline;
@@ -4852,6 +4865,80 @@ img[src*="album/office"][src*="IMG_2486"] {
 .admin-visa-profile-summary p {
   margin: 0;
   line-height: 1.6;
+}
+
+.admin-visa-profile-open {
+  margin: 8px 0 0;
+  color: #216184;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-back-btn {
+  margin-bottom: 14px;
+  padding: 8px 12px;
+  border: 1px solid #cfd8df;
+  border-radius: 8px;
+  background: #fff;
+  color: #216184;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-back-btn:hover {
+  background: #f4f8fb;
+}
+
+.admin-client-detail {
+  max-width: 1040px;
+}
+
+.admin-client-detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding: 16px;
+  border: 1px solid rgba(33, 97, 132, 0.16);
+  border-radius: 10px;
+  background: #f7fbfd;
+}
+
+.admin-client-detail-head h2 {
+  margin: 4px 0 0;
+  color: #214f69;
+  font-size: 24px;
+}
+
+.admin-client-eyebrow {
+  margin: 0;
+  color: #5b8ca8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-client-detail-summary {
+  margin-bottom: 16px;
+}
+
+.admin-client-tabs {
+  margin-top: 4px;
+}
+
+.admin-client-panel {
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.admin-client-panel-head h3 {
+  margin: 0 0 10px;
+  color: #214f69;
+  font-size: 18px;
 }
 
 .admin-advice--base {

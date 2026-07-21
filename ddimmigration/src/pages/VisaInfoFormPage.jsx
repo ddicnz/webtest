@@ -130,6 +130,7 @@ const initialData = {
     militaryHistory: '',
     militaryDetail: '',
     coApplicants: '',
+    applicationRequest: '',
     declarationName: '',
     declarationDate: '',
   },
@@ -258,6 +259,7 @@ const reviewQuestionGroups = [
       { key: 'militaryHistory', label: '是否有任何兵役历史？' },
       { key: 'militaryDetail', label: '如有兵役历史，请提供开始和结束时间、部队番号、军衔、具体职位、上级领导名称，并说明退伍证情况。' },
       { key: 'coApplicants', label: '如有其他人随行或一同申请，请在此提供另外申请人姓名，并另行提供其个人信息表格。' },
+      { key: 'applicationRequest', label: '请简要说明您想申请什么签证，以及希望我们协助完成什么评估或服务。' },
       { key: 'declarationName', label: '本人确认签字姓名。' },
       { key: 'declarationDate', label: '本人确认日期。' },
     ],
@@ -934,6 +936,7 @@ function VisaInfoFormPage({ portalUserSub = '' }) {
                 <Field label="本地联系人详情" value={formData.other.localContactDetail} onChange={(value) => updateGroup('other', 'localContactDetail', value)} placeholder="姓名、生日、地址及电话" textarea />
                 <Field label="兵役详情" value={formData.other.militaryDetail} onChange={(value) => updateGroup('other', 'militaryDetail', value)} placeholder="开始/结束时间、部队番号、军衔、职位、上级领导、退伍证说明" textarea />
                 <Field label="随行或一同申请人姓名" value={formData.other.coApplicants} onChange={(value) => updateGroup('other', 'coApplicants', value)} textarea />
+                <Field label="申请需求说明" value={formData.other.applicationRequest} onChange={(value) => updateGroup('other', 'applicationRequest', value)} placeholder="请简要说明您想申请什么签证、目前的诉求，以及希望我们协助完成什么评估或服务。" textarea />
                 <Field label="签字姓名" value={formData.other.declarationName} onChange={(value) => updateGroup('other', 'declarationName', value)} />
                 <Field label="日期" value={formData.other.declarationDate} onChange={(value) => updateGroup('other', 'declarationDate', value)} />
               </div>
