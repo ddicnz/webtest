@@ -374,20 +374,6 @@ function VisaPortalMaterialsPage({
   }, [adminMaterials, adminProfileId, isAdminMode])
 
   const loadSavedMaterials = useCallback(async ({ silent = false } = {}) => {
-    if (isAdminMode && adminMaterials && typeof adminMaterials === 'object') {
-      const totalCount = Object.values(adminMaterials).reduce(
-        (total, records) => total + (Array.isArray(records) ? records.length : 0),
-        0,
-      )
-      setSavedMaterialsByGroup(adminMaterials)
-      setMaterialListState({
-        status: 'success',
-        message: '',
-        totalCount,
-      })
-      return
-    }
-
     if (!silent) {
       setMaterialListState((prev) => ({ ...prev, status: 'loading', message: '' }))
     }
@@ -413,13 +399,27 @@ function VisaPortalMaterialsPage({
         totalCount: Number(data?.totalCount) || 0,
       })
     } catch (error) {
+      if (isAdminMode && adminMaterials && typeof adminMaterials === 'object') {
+        const totalCount = Object.values(adminMaterials).reduce(
+          (total, records) => total + (Array.isArray(records) ? records.length : 0),
+          0,
+        )
+        setSavedMaterialsByGroup(adminMaterials)
+        setMaterialListState({
+          status: 'success',
+          message: '',
+          totalCount,
+        })
+        return
+      }
+
       setMaterialListState((prev) => ({
         ...prev,
         status: 'error',
         message: error instanceof Error ? error.message : '读取已上传材料失败',
       }))
     }
-  }, [adminMaterials, authState.profileId, isAdminMode])
+  }, [authState.profileId, isAdminMode])
 
   useEffect(() => {
     if (!authState.loading && authState.sub && authState.profileId) {
