@@ -568,7 +568,7 @@ function VisaProfileCard({ item, onDeleted, onOpen, authToken }) {
     try {
       const res = await fetch(DELETE_VISA_PROFILE_URL, {
         method: 'POST',
-        headers: makeAuthHeaders(authToken, true),
+        headers: makePlainJsonHeaders(),
         body: JSON.stringify({
           profileId: item.profileId,
         }),
@@ -720,7 +720,7 @@ function VisaProfileDetail({ item, onBack, onDeleted, authToken }) {
     try {
       const res = await fetch(DELETE_VISA_PROFILE_URL, {
         method: 'POST',
-        headers: makeAuthHeaders(authToken, true),
+        headers: makePlainJsonHeaders(),
         body: JSON.stringify({
           profileId: currentItem.profileId,
         }),
