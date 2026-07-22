@@ -1,0 +1,798 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { getCurrentCognitoSession, userPool } from '../auth/cognito.js'
+
+const UPLOAD_VISA_MATERIAL_URL =
+  'https://13vv85w9ef.execute-api.ap-southeast-2.amazonaws.com/default/uploadVisaMaterial'
+const LIST_VISA_MATERIALS_URL =
+  'https://sukx9s9w04.execute-api.ap-southeast-2.amazonaws.com/default/listVisaMaterials'
+const DELETE_VISA_MATERIAL_URL =
+  'https://860qyhzj7h.execute-api.ap-southeast-2.amazonaws.com/default/deleteVisaMaterial'
+const VISA_PORTAL_PROFILE_API_URL =
+  'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
+const MAX_FILES_PER_UPLOAD = 10
+const MAX_FILE_BYTES = 50 * 1024 * 1024
+
+const contentTypeByExtension = {
+  pdf: 'application/pdf',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  png: 'image/png',
+  webp: 'image/webp',
+  doc: 'application/msword',
+  docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+}
+
+const visaTypeOptions = [
+  { id: 'visitor', label: '旅游签' },
+  { id: 'student', label: '学签' },
+  { id: 'work', label: '工签' },
+  { id: 'partner', label: '配偶类签证' },
+]
+
+const materialGroupsByVisaType = {
+  visitor: [
+    {
+      id: 'identity',
+      title: '基础身份材料',
+      description: '申请人清晰大头贴照片、护照首页、身份证正反面、户口本清晰扫描件。',
+    },
+    {
+      id: 'visaHistory',
+      title: '签证历史与背景',
+      description: '之前新西兰签证或其他国家签证；如有其他国家拒签记录或犯罪记录，也请上传说明或相关文件。',
+    },
+    {
+      id: 'employment',
+      title: '工作或退休证明',
+      description: '如在职：单位准假信、个税社保记录、雇佣合同；如退休：退休证清晰扫描件。',
+    },
+    {
+      id: 'invitation',
+      title: '邀请人与关系材料',
+      description: '新西兰本地邀请人邀请函、邀请人护照、居民签证页，以及邀请人与申请人的关系证明文件。',
+    },
+    {
+      id: 'funds',
+      title: '资金与资产材料',
+      description: '个人银行流水、国内固定资产、理财或其他大额固定资产文件。',
+    },
+    {
+      id: 'travelForms',
+      title: '行程与表格',
+      description: '机票信息（如有）、申请人信息表格、网签授权表格。',
+    },
+  ],
+  student: [
+    {
+      id: 'identity',
+      title: '基础身份材料',
+      description: '申请人清晰大头贴照片、护照首页、身份证正反面、户口本清晰扫描件。',
+    },
+    {
+      id: 'school',
+      title: '学校材料',
+      description: 'Offer of Place、学费缴费证明、住宿安排（如有）等。',
+    },
+    {
+      id: 'education',
+      title: '学历材料',
+      description: '毕业证、成绩单、在读证明、英语成绩（如有）。',
+    },
+    {
+      id: 'funds',
+      title: '资金材料',
+      description: '银行流水、存款证明、父母收入证明、资金来源说明等。',
+    },
+    {
+      id: 'family',
+      title: '家庭关系材料',
+      description: '父母身份证、出生证明、亲属关系证明等。',
+    },
+    {
+      id: 'visaHistory',
+      title: '签证历史与声明',
+      description: '之前签证、拒签记录、无犯罪或体检相关材料（如适用）。',
+    },
+  ],
+  work: [
+    {
+      id: 'identity',
+      title: '基础身份材料',
+      description: '申请人清晰大头贴照片、护照首页、身份证正反面、户口本清晰扫描件。',
+    },
+    {
+      id: 'employer',
+      title: '雇主与职位材料',
+      description: 'Job Offer、雇佣合同、Job Description、雇主补充材料（如有）。',
+    },
+    {
+      id: 'experience',
+      title: '工作经验证明',
+      description: '工作证明、推荐信、社保/个税、工资流水、过往雇佣合同等。',
+    },
+    {
+      id: 'qualification',
+      title: '学历与资格证书',
+      description: '毕业证、成绩单、职业证书、培训证书等。',
+    },
+    {
+      id: 'background',
+      title: '签证历史与背景',
+      description: '之前签证、拒签记录、犯罪记录说明等。',
+    },
+    {
+      id: 'family',
+      title: '家庭成员材料',
+      description: '如带配偶或孩子，请上传结婚证、子女出生证明、配偶/子女护照等。',
+    },
+  ],
+  partner: [
+    {
+      id: 'identity',
+      title: '基础身份材料',
+      description: '申请人清晰大头贴照片、护照首页、身份证正反面、户口本清晰扫描件。',
+    },
+    {
+      id: 'marriageCertificate',
+      title: '1. 结婚证',
+      description: '结婚证原件、翻译件或公证件。',
+    },
+    {
+      id: 'childrenBirthCertificates',
+      title: '2. 双方共同子女出生证明',
+      description: '双方共同子女的出生证明原件、翻译件或公证件。',
+    },
+    {
+      id: 'sharedIncomeBankTransfer',
+      title: '3. 共同收入或资金往来',
+      description: '共同收入、联名银行账户、能够显示双方资金往来的账户记录，或微信等互相转款证明。',
+    },
+    {
+      id: 'sharedAssets',
+      title: '4. 共同资产证明',
+      description: '共同拥有任何资产的证明，例如房产证、保险等。',
+    },
+    {
+      id: 'sharedFinanceAgreement',
+      title: '5. 联名信用卡或财务协议',
+      description: '联名信用卡或共同签署的财务协议，例如汽车贷款；或一方房本加房贷合同等。',
+    },
+    {
+      id: 'chatRecords',
+      title: '6. 聊天及通信记录',
+      description: '双方聊天及其他通信记录，例如微信聊天记录；微信名字建议改成拼音名字，例如张三 = ZHANG San。',
+    },
+    {
+      id: 'socialMediaPhotos',
+      title: '7. 社交媒体内容或合照',
+      description: '双方共同发布的社交媒体内容或合照；微信名字也建议修改为拼音名字。',
+    },
+    {
+      id: 'supportLetters',
+      title: '8. 支持信',
+      description: '认可并证明双方伴侣关系的支持信，例如亲属、朋友、当地居委会支持信。',
+    },
+    {
+      id: 'otherRelationshipEvidence',
+      title: '9. 其他关系证明',
+      description: '其他能够证明双方关系真实且稳定的材料。',
+    },
+    {
+      id: 'jointLease',
+      title: '10. 联名租赁合同或租金收据',
+      description: '联名租赁合同或租金收据。',
+    },
+    {
+      id: 'jointUtilityBills',
+      title: '11. 联名账单',
+      description: '联名水电、燃气或电话账户及账单。',
+    },
+    {
+      id: 'sameAddressLetters',
+      title: '12. 共同地址信件',
+      description: '寄送至双方共同居住地址，并写有其中一方或双方姓名的信件。',
+    },
+    {
+      id: 'timelinePhotos',
+      title: '13. 同框照片',
+      description: '过去10年内同框照片15-20张，时间跨度建议至少2年。',
+    },
+    {
+      id: 'videoCallScreenshots',
+      title: '14. 视频电话截图',
+      description: '视频电话截图6-8张。',
+    },
+  ],
+}
+
+function formatFileSize(bytes) {
+  if (!bytes) return '0 KB'
+  if (bytes < 1024 * 1024) return `${Math.ceil(bytes / 1024)} KB`
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`
+}
+
+function formatUploadedAt(value) {
+  if (!value) return '时间未记录'
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+  return date.toLocaleString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
+
+function getMaterialTypeLabel(material) {
+  if (material.isImage) return '图片'
+  if (material.isPdf) return 'PDF'
+  if (material.originalName?.toLowerCase().endsWith('.docx')) return 'DOCX'
+  if (material.originalName?.toLowerCase().endsWith('.doc')) return 'DOC'
+  return '文件'
+}
+
+function MaterialPreview({ material }) {
+  const [imageFailed, setImageFailed] = useState(false)
+
+  if (material.isImage && material.viewUrl && !imageFailed) {
+    return (
+      <img
+        src={material.viewUrl}
+        alt={material.originalName || '已上传图片'}
+        loading="lazy"
+        onError={() => setImageFailed(true)}
+      />
+    )
+  }
+
+  return <span>{getMaterialTypeLabel(material)}</span>
+}
+
+function getFileContentType(file) {
+  const extension = file.name.split('.').pop()?.toLowerCase() || ''
+  return contentTypeByExtension[extension] || file.type || ''
+}
+
+async function parseApiResponse(response) {
+  const data = await response.json().catch(() => ({}))
+  if (!response.ok || data?.success === false || data?.ok === false) {
+    throw new Error(data?.message || data?.error || `请求失败：HTTP ${response.status}`)
+  }
+  return data
+}
+
+function VisaPortalMaterialsPage() {
+  const navigate = useNavigate()
+  const [authState, setAuthState] = useState({ loading: true, sub: '', profileId: '', error: '' })
+  const [selectedVisaType, setSelectedVisaType] = useState('visitor')
+  const [filesByGroup, setFilesByGroup] = useState({})
+  const [submitStateByGroup, setSubmitStateByGroup] = useState({})
+  const [savedMaterialsByGroup, setSavedMaterialsByGroup] = useState({})
+  const [deleteDialog, setDeleteDialog] = useState(null)
+  const [deleteState, setDeleteState] = useState({ status: 'idle', message: '' })
+  const [materialListState, setMaterialListState] = useState({
+    status: 'idle',
+    message: '',
+    totalCount: 0,
+  })
+
+  useEffect(() => {
+    let cancelled = false
+
+    getCurrentCognitoSession()
+      .then(async (session) => {
+        if (cancelled) return
+        const payload = session.getIdToken().payload || {}
+        const sub = payload.sub || ''
+
+        try {
+          const res = await fetch(VISA_PORTAL_PROFILE_API_URL, {
+            headers: {
+              Authorization: session.getIdToken().getJwtToken(),
+            },
+          })
+          const data = await res.json().catch(() => ({}))
+          if (!res.ok || data?.ok === false) {
+            throw new Error(data?.message || `读取客户资料失败 HTTP ${res.status}`)
+          }
+          if (cancelled) return
+          setAuthState({
+            loading: false,
+            sub,
+            profileId: data?.profileId || '',
+            error: '',
+          })
+        } catch (error) {
+          if (cancelled) return
+          setAuthState({
+            loading: false,
+            sub,
+            profileId: '',
+            error: error instanceof Error ? error.message : '客户资料读取失败',
+          })
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setAuthState({
+            loading: false,
+            sub: '',
+            profileId: '',
+            error: '',
+          })
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const loadSavedMaterials = useCallback(async ({ silent = false } = {}) => {
+    if (!silent) {
+      setMaterialListState((prev) => ({ ...prev, status: 'loading', message: '' }))
+    }
+
+    try {
+      const session = await getCurrentCognitoSession()
+      const response = await fetch(LIST_VISA_MATERIALS_URL, {
+        method: 'GET',
+        headers: {
+          Authorization: session.getIdToken().getJwtToken(),
+        },
+      })
+      const data = await parseApiResponse(response)
+      const materials = data?.materials && typeof data.materials === 'object' ? data.materials : {}
+
+      setSavedMaterialsByGroup(materials)
+      setMaterialListState({
+        status: 'success',
+        message: '',
+        totalCount: Number(data?.totalCount) || 0,
+      })
+    } catch (error) {
+      setMaterialListState((prev) => ({
+        ...prev,
+        status: 'error',
+        message: error instanceof Error ? error.message : '读取已上传材料失败',
+      }))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!authState.loading && authState.sub && authState.profileId) {
+      void loadSavedMaterials()
+    }
+  }, [authState.loading, authState.profileId, authState.sub, loadSavedMaterials])
+
+  const totalFiles = useMemo(
+    () => Object.values(filesByGroup).reduce((total, groupFiles) => total + groupFiles.length, 0),
+    [filesByGroup],
+  )
+
+  const currentMaterialGroups = materialGroupsByVisaType[selectedVisaType] || materialGroupsByVisaType.visitor
+  const selectedVisaLabel =
+    visaTypeOptions.find((option) => option.id === selectedVisaType)?.label || '旅游签'
+
+  const groupKey = (groupId) => `${selectedVisaType}:${groupId}`
+
+  const addFiles = (groupId, fileList) => {
+    const nextFiles = Array.from(fileList || [])
+    if (!nextFiles.length) return
+    const key = groupKey(groupId)
+    setFilesByGroup((prev) => ({
+      ...prev,
+      [key]: [...(prev[key] || []), ...nextFiles],
+    }))
+  }
+
+  const removeFile = (groupId, fileIndex) => {
+    const key = groupKey(groupId)
+    setFilesByGroup((prev) => ({
+      ...prev,
+      [key]: (prev[key] || []).filter((_, index) => index !== fileIndex),
+    }))
+  }
+
+  const openDeleteDialog = (group, material) => {
+    setDeleteState({ status: 'idle', message: '' })
+    setDeleteDialog({
+      visaType: selectedVisaType,
+      categoryId: group.id,
+      categoryTitle: group.title,
+      material,
+    })
+  }
+
+  const closeDeleteDialog = () => {
+    if (deleteState.status === 'deleting') return
+    setDeleteDialog(null)
+    setDeleteState({ status: 'idle', message: '' })
+  }
+
+  const deleteSavedMaterial = async () => {
+    if (!deleteDialog || !authState.profileId) return
+
+    setDeleteState({ status: 'deleting', message: '' })
+    try {
+      const session = await getCurrentCognitoSession()
+      const response = await fetch(DELETE_VISA_MATERIAL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: session.getIdToken().getJwtToken(),
+        },
+        body: JSON.stringify({
+          profileId: authState.profileId,
+          visaType: deleteDialog.visaType,
+          categoryId: deleteDialog.categoryId,
+          materialId: deleteDialog.material.materialId,
+          s3Key: deleteDialog.material.s3Key,
+        }),
+      })
+
+      await parseApiResponse(response)
+      setDeleteDialog(null)
+      setDeleteState({ status: 'idle', message: '' })
+      await loadSavedMaterials({ silent: true })
+    } catch (error) {
+      setDeleteState({
+        status: 'error',
+        message: error instanceof Error ? error.message : '删除材料失败，请重试',
+      })
+    }
+  }
+
+  const submitGroupFiles = async (group) => {
+    const key = groupKey(group.id)
+    const groupFiles = filesByGroup[key] || []
+    if (!groupFiles.length) return
+    if (!authState.profileId) {
+      setSubmitStateByGroup((prev) => ({
+        ...prev,
+        [key]: { status: 'error', message: '请先填写并保存个人信息表，再上传材料。' },
+      }))
+      return
+    }
+
+    setSubmitStateByGroup((prev) => ({
+      ...prev,
+      [key]: { status: 'uploading', message: '正在上传...' },
+    }))
+
+    try {
+      if (groupFiles.length > MAX_FILES_PER_UPLOAD) {
+        throw new Error(`每次最多上传 ${MAX_FILES_PER_UPLOAD} 个文件`)
+      }
+
+      const invalidFile = groupFiles.find((file) => !getFileContentType(file))
+      if (invalidFile) {
+        throw new Error(`不支持的文件格式：${invalidFile.name}`)
+      }
+
+      const oversizedFile = groupFiles.find((file) => file.size > MAX_FILE_BYTES)
+      if (oversizedFile) {
+        throw new Error(`文件不能超过 50MB：${oversizedFile.name}`)
+      }
+
+      const session = await getCurrentCognitoSession()
+      const idToken = session.getIdToken().getJwtToken()
+      const files = groupFiles.map((file) => ({
+          name: file.name,
+          type: getFileContentType(file),
+          size: file.size,
+        }))
+
+      const createResponse = await fetch(UPLOAD_VISA_MATERIAL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: idToken,
+        },
+        body: JSON.stringify({
+          action: 'create-upload',
+          profileId: authState.profileId,
+          visaType: selectedVisaType,
+          categoryId: group.id,
+          categoryTitle: group.title,
+          files,
+        }),
+      })
+
+      const createData = await parseApiResponse(createResponse)
+      const uploads = Array.isArray(createData?.uploads) ? createData.uploads : []
+      if (uploads.length !== groupFiles.length) {
+        throw new Error('服务器返回的上传地址数量不正确，请重试')
+      }
+
+      const confirmedUploads = []
+      for (let index = 0; index < uploads.length; index += 1) {
+        const upload = uploads[index]
+        const file = groupFiles[index]
+
+        setSubmitStateByGroup((prev) => ({
+          ...prev,
+          [key]: {
+            status: 'uploading',
+            message: `正在上传 ${index + 1}/${uploads.length}：${file.name}`,
+          },
+        }))
+
+        const uploadResponse = await fetch(upload.uploadUrl, {
+          method: 'PUT',
+          headers: upload.headers || { 'Content-Type': getFileContentType(file) },
+          body: file,
+        })
+        if (!uploadResponse.ok) {
+          throw new Error(`文件上传失败：${file.name}（HTTP ${uploadResponse.status}）`)
+        }
+
+        confirmedUploads.push({
+          uploadId: upload.uploadId,
+          name: upload.name,
+          contentType: upload.contentType,
+          s3Key: upload.s3Key,
+        })
+      }
+
+      setSubmitStateByGroup((prev) => ({
+        ...prev,
+        [key]: { status: 'uploading', message: '文件已上传，正在保存材料记录...' },
+      }))
+
+      const confirmResponse = await fetch(UPLOAD_VISA_MATERIAL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: idToken,
+        },
+        body: JSON.stringify({
+          action: 'confirm-upload',
+          profileId: authState.profileId,
+          visaType: selectedVisaType,
+          categoryId: group.id,
+          categoryTitle: group.title,
+          uploads: confirmedUploads,
+        }),
+      })
+
+      const confirmData = await parseApiResponse(confirmResponse)
+
+      setFilesByGroup((prev) => ({
+        ...prev,
+        [key]: [],
+      }))
+      setSubmitStateByGroup((prev) => ({
+        ...prev,
+        [key]: {
+          status: 'success',
+          message: `已成功上传并保存 ${confirmData.savedCount ?? groupFiles.length} 个文件`,
+        },
+      }))
+      await loadSavedMaterials({ silent: true })
+    } catch (error) {
+      setSubmitStateByGroup((prev) => ({
+        ...prev,
+        [key]: {
+          status: 'error',
+          message: error instanceof Error ? error.message : String(error),
+        },
+      }))
+    }
+  }
+
+  if (authState.loading) {
+    return <main className="visa-portal-page"><p className="visa-portal-loading">正在读取客户资料...</p></main>
+  }
+
+  if (!authState.sub || !userPool.getCurrentUser()) {
+    return <Navigate to="/visa-portal/login" replace />
+  }
+
+  return (
+    <main className="visa-portal-page">
+      <section className="visa-portal-materials">
+        <button type="button" className="visa-portal-back-btn" onClick={() => navigate('/visa-portal')}>
+          返回客户中心
+        </button>
+
+        <header className="visa-portal-dashboard-head">
+          <div>
+            <p className="visa-portal-eyebrow">DD Immigration Client Portal</p>
+            <h1>上传签证材料</h1>
+            <p>请先选择申请类型，再按类别上传对应材料。</p>
+          </div>
+          <div className="visa-portal-materials-count">
+            <span>已上传 <strong>{materialListState.totalCount}</strong></span>
+            <small>待提交 {totalFiles} 个</small>
+          </div>
+        </header>
+
+        <div className="visa-portal-materials-note">
+          当前选择：{selectedVisaLabel}。请选择对应文件后，按每个类别单独提交。
+        </div>
+
+        {!authState.profileId && (
+          <div className="visa-portal-materials-note visa-portal-materials-note--warning">
+            暂未找到客户资料记录。请先返回客户中心，填写并保存一次个人信息表，再上传材料。
+          </div>
+        )}
+
+        {materialListState.status === 'error' && (
+          <div className="visa-portal-materials-note visa-portal-materials-note--warning">
+            已上传材料读取失败：{materialListState.message}
+            <button type="button" onClick={() => void loadSavedMaterials()}>
+              重新读取
+            </button>
+          </div>
+        )}
+
+        <div className="visa-portal-material-type-tabs" aria-label="选择申请类型">
+          {visaTypeOptions.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              className={`visa-portal-material-type-btn${selectedVisaType === option.id ? ' active' : ''}`}
+              onClick={() => setSelectedVisaType(option.id)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="visa-portal-materials-list">
+          {currentMaterialGroups.map((group) => {
+            const key = groupKey(group.id)
+            const groupFiles = filesByGroup[key] || []
+            const savedGroupFiles = savedMaterialsByGroup[`${selectedVisaType}#${group.id}`] || []
+            const submitState = submitStateByGroup[key]
+            const isUploading = submitState?.status === 'uploading'
+            return (
+              <section className="visa-portal-material-card" key={group.id}>
+                <div>
+                  <h2>{group.title}</h2>
+                  <p>{group.description}</p>
+                </div>
+
+                <label className="visa-portal-upload-box">
+                  <input
+                    type="file"
+                    multiple
+                    accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx"
+                    onChange={(e) => {
+                      addFiles(group.id, e.target.files)
+                      e.target.value = ''
+                    }}
+                  />
+                  <span>选择文件</span>
+                  <small>支持 PDF、图片、Word；单个不超过 50MB</small>
+                </label>
+
+                {groupFiles.length > 0 && (
+                  <ul className="visa-portal-file-list">
+                    {groupFiles.map((file, index) => (
+                      <li key={`${file.name}-${file.lastModified}-${index}`}>
+                        <span>{file.name}</span>
+                        <small>{formatFileSize(file.size)}</small>
+                        <button type="button" onClick={() => removeFile(group.id, index)}>
+                          删除
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+
+                <div className="visa-portal-saved-materials">
+                  <div className="visa-portal-saved-materials-head">
+                    <h3>已上传材料</h3>
+                    <span>{savedGroupFiles.length} 个文件</span>
+                  </div>
+                  {materialListState.status === 'loading' ? (
+                    <p className="visa-portal-saved-materials-empty">正在读取...</p>
+                  ) : savedGroupFiles.length > 0 ? (
+                    <ul className="visa-portal-saved-material-list">
+                      {savedGroupFiles.map((material) => (
+                        <li key={material.materialId || material.s3Key}>
+                          <a
+                            className="visa-portal-material-preview"
+                            href={material.viewUrl || material.downloadUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`查看 ${material.originalName}`}
+                          >
+                            <MaterialPreview material={material} />
+                          </a>
+                          <div className="visa-portal-saved-material-info">
+                            <strong title={material.originalName}>{material.originalName}</strong>
+                            <small>
+                              {formatFileSize(material.size)} · {formatUploadedAt(material.uploadedAt)}
+                            </small>
+                          </div>
+                          <div className="visa-portal-saved-material-actions">
+                            {material.viewUrl && (
+                              <a href={material.viewUrl} target="_blank" rel="noreferrer">
+                                查看
+                              </a>
+                            )}
+                            <a href={material.downloadUrl} target="_blank" rel="noreferrer">
+                              下载
+                            </a>
+                            <button type="button" onClick={() => openDeleteDialog(group, material)}>
+                              删除
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="visa-portal-saved-materials-empty">尚未上传此类材料</p>
+                  )}
+                </div>
+                <div className="visa-portal-material-card-actions">
+                  <button
+                    type="button"
+                    className="visa-portal-entry-btn"
+                    disabled={groupFiles.length === 0 || isUploading || !authState.profileId}
+                    onClick={() => void submitGroupFiles(group)}
+                  >
+                    {isUploading ? '上传中...' : `提交${group.title}`}
+                  </button>
+                  <p>{groupFiles.length > 0 ? `已选择 ${groupFiles.length} 个文件` : '请先选择文件'}</p>
+                </div>
+                {submitState?.message && (
+                  <p className={`visa-portal-material-status visa-portal-material-status--${submitState.status}`}>
+                    {submitState.message}
+                  </p>
+                )}
+              </section>
+            )
+          })}
+        </div>
+      </section>
+
+      {deleteDialog && (
+        <div className="visa-material-delete-backdrop" role="presentation">
+          <section
+            className="visa-material-delete-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="visa-material-delete-title"
+          >
+            <h2 id="visa-material-delete-title">确认删除材料</h2>
+            <p>
+              将从“{deleteDialog.categoryTitle}”中永久删除
+              <strong>{deleteDialog.material.originalName || '此文件'}</strong>。
+            </p>
+            <p className="visa-material-delete-warning">删除后无法恢复，请确认文件不再需要。</p>
+            {deleteState.message && (
+              <p className="visa-material-delete-error" role="alert">{deleteState.message}</p>
+            )}
+            <div className="visa-material-delete-actions">
+              <button
+                type="button"
+                className="visa-secondary-btn"
+                disabled={deleteState.status === 'deleting'}
+                onClick={closeDeleteDialog}
+              >
+                取消
+              </button>
+              <button
+                type="button"
+                className="visa-material-delete-confirm"
+                disabled={deleteState.status === 'deleting'}
+                onClick={() => void deleteSavedMaterial()}
+              >
+                {deleteState.status === 'deleting' ? '正在删除...' : '确认删除'}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+    </main>
+  )
+}
+
+export default VisaPortalMaterialsPage

@@ -67,7 +67,13 @@ function VisaPortalPage() {
           <section className="visa-portal-dashboard-item">
             <h2>签证材料</h2>
             <p>上传护照、工作、学历及家庭相关材料。</p>
-            <span>即将开放</span>
+            <button
+              type="button"
+              className="visa-portal-entry-btn"
+              onClick={() => navigate('/visa-portal/materials')}
+            >
+              上传材料
+            </button>
           </section>
           <section className="visa-portal-dashboard-item">
             <h2>材料进度</h2>

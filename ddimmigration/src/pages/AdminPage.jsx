@@ -821,7 +821,7 @@ function AdminPage() {
       return false
     }
   })
-  const [activeView, setActiveView] = useState('answers')
+  const [activeView, setActiveView] = useState('visaProfiles')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('work_visa')
@@ -1006,6 +1006,13 @@ function AdminPage() {
       <nav className="admin-tabs" aria-label="后台模块">
         <button
           type="button"
+          className={`admin-tab-btn${activeView === 'visaProfiles' ? ' active' : ''}`}
+          onClick={() => setActiveView('visaProfiles')}
+        >
+          客户签证材料
+        </button>
+        <button
+          type="button"
           className={`admin-tab-btn${activeView === 'answers' ? ' active' : ''}`}
           onClick={() => {
             setActiveView('answers')
@@ -1023,13 +1030,6 @@ function AdminPage() {
           }}
         >
           Survey 数据
-        </button>
-        <button
-          type="button"
-          className={`admin-tab-btn${activeView === 'visaProfiles' ? ' active' : ''}`}
-          onClick={() => setActiveView('visaProfiles')}
-        >
-          客户签证材料
         </button>
       </nav>
 
