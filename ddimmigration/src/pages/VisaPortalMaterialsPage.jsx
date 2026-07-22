@@ -8,6 +8,8 @@ const LIST_VISA_MATERIALS_URL =
   'https://sukx9s9w04.execute-api.ap-southeast-2.amazonaws.com/default/listVisaMaterials'
 const DELETE_VISA_MATERIAL_URL =
   'https://860qyhzj7h.execute-api.ap-southeast-2.amazonaws.com/default/deleteVisaMaterial'
+const RENAME_VISA_MATERIAL_URL =
+  'https://u2yxmpqr3f.execute-api.ap-southeast-2.amazonaws.com/default/renameVisaMaterial'
 const VISA_PORTAL_PROFILE_API_URL =
   'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
 const MAX_FILES_PER_UPLOAD = 10
@@ -272,6 +274,9 @@ function VisaPortalMaterialsPage() {
   const [savedMaterialsByGroup, setSavedMaterialsByGroup] = useState({})
   const [deleteDialog, setDeleteDialog] = useState(null)
   const [deleteState, setDeleteState] = useState({ status: 'idle', message: '' })
+  const [renameDialog, setRenameDialog] = useState(null)
+  const [renameName, setRenameName] = useState('')
+  const [renameState, setRenameState] = useState({ status: 'idle', message: '' })
   const [materialListState, setMaterialListState] = useState({
     status: 'idle',
     message: '',
@@ -441,6 +446,64 @@ function VisaPortalMaterialsPage() {
       setDeleteState({
         status: 'error',
         message: error instanceof Error ? error.message : '删除材料失败，请重试',
+      })
+    }
+  }
+
+  const openRenameDialog = (group, material) => {
+    setRenameState({ status: 'idle', message: '' })
+    setRenameName(material.originalName || '')
+    setRenameDialog({
+      visaType: selectedVisaType,
+      categoryId: group.id,
+      categoryTitle: group.title,
+      material,
+    })
+  }
+
+  const closeRenameDialog = () => {
+    if (renameState.status === 'renaming') return
+    setRenameDialog(null)
+    setRenameName('')
+    setRenameState({ status: 'idle', message: '' })
+  }
+
+  const renameSavedMaterial = async () => {
+    const newName = renameName.trim()
+    if (!renameDialog || !authState.profileId) return
+    if (!newName) {
+      setRenameState({ status: 'error', message: '请输入新的文件名' })
+      return
+    }
+
+    setRenameState({ status: 'renaming', message: '' })
+    try {
+      const session = await getCurrentCognitoSession()
+      const response = await fetch(RENAME_VISA_MATERIAL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: session.getIdToken().getJwtToken(),
+        },
+        body: JSON.stringify({
+          profileId: authState.profileId,
+          visaType: renameDialog.visaType,
+          categoryId: renameDialog.categoryId,
+          materialId: renameDialog.material.materialId,
+          s3Key: renameDialog.material.s3Key,
+          newName,
+        }),
+      })
+
+      await parseApiResponse(response)
+      setRenameDialog(null)
+      setRenameName('')
+      setRenameState({ status: 'idle', message: '' })
+      await loadSavedMaterials({ silent: true })
+    } catch (error) {
+      setRenameState({
+        status: 'error',
+        message: error instanceof Error ? error.message : '重命名失败，请重试',
       })
     }
   }
@@ -720,6 +783,13 @@ function VisaPortalMaterialsPage() {
                             <a href={material.downloadUrl} target="_blank" rel="noreferrer">
                               下载
                             </a>
+                            <button
+                              type="button"
+                              className="visa-material-rename-btn"
+                              onClick={() => openRenameDialog(group, material)}
+                            >
+                              重命名
+                            </button>
                             <button type="button" onClick={() => openDeleteDialog(group, material)}>
                               删除
                             </button>
@@ -786,6 +856,60 @@ function VisaPortalMaterialsPage() {
                 onClick={() => void deleteSavedMaterial()}
               >
                 {deleteState.status === 'deleting' ? '正在删除...' : '确认删除'}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {renameDialog && (
+        <div className="visa-material-delete-backdrop" role="presentation">
+          <section
+            className="visa-material-delete-dialog visa-material-rename-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="visa-material-rename-title"
+          >
+            <h2 id="visa-material-rename-title">重命名材料</h2>
+            <p>
+              正在修改“{renameDialog.categoryTitle}”中的文件：
+              <strong>{renameDialog.material.originalName || '此文件'}</strong>
+            </p>
+            <label htmlFor="visa-material-rename-input">新文件名</label>
+            <input
+              id="visa-material-rename-input"
+              type="text"
+              value={renameName}
+              autoFocus
+              disabled={renameState.status === 'renaming'}
+              onChange={(event) => setRenameName(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault()
+                  void renameSavedMaterial()
+                }
+              }}
+            />
+            <p className="visa-material-rename-help">可以不填写扩展名，系统会保留原文件格式。</p>
+            {renameState.message && (
+              <p className="visa-material-delete-error" role="alert">{renameState.message}</p>
+            )}
+            <div className="visa-material-delete-actions">
+              <button
+                type="button"
+                className="visa-secondary-btn"
+                disabled={renameState.status === 'renaming'}
+                onClick={closeRenameDialog}
+              >
+                取消
+              </button>
+              <button
+                type="button"
+                className="visa-material-rename-confirm"
+                disabled={renameState.status === 'renaming' || !renameName.trim()}
+                onClick={() => void renameSavedMaterial()}
+              >
+                {renameState.status === 'renaming' ? '正在重命名...' : '确认修改'}
               </button>
             </div>
           </section>

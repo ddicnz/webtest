@@ -5695,6 +5695,10 @@ textarea.admin-visa-edit-input {
   cursor: pointer;
 }
 
+.visa-portal-saved-material-actions .visa-material-rename-btn {
+  color: #2f829c;
+}
+
 .visa-portal-saved-material-actions a:hover,
 .visa-portal-saved-material-actions button:hover {
   text-decoration: underline;
@@ -5772,6 +5776,50 @@ textarea.admin-visa-edit-input {
   color: #fff;
   font-weight: 800;
   cursor: pointer;
+}
+
+.visa-material-rename-dialog label {
+  display: block;
+  margin: 18px 0 7px;
+  color: #253f54;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.visa-material-rename-dialog input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #bdcdd7;
+  border-radius: 5px;
+  color: #17354f;
+  font: inherit;
+}
+
+.visa-material-rename-dialog input:focus {
+  border-color: #2f829c;
+  outline: 2px solid rgba(47, 130, 156, 0.16);
+}
+
+.visa-material-rename-dialog .visa-material-rename-help {
+  margin-top: 7px;
+  color: #71818e;
+  font-size: 12px;
+}
+
+.visa-material-rename-confirm {
+  padding: 10px 18px;
+  border: 1px solid #2f829c;
+  border-radius: 5px;
+  background: #2f829c;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.visa-material-rename-confirm:disabled {
+  cursor: wait;
+  opacity: 0.62;
 }
 
 .visa-material-delete-confirm:disabled,
