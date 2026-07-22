@@ -58,6 +58,13 @@ def clean_str(value):
     return str(value or "").strip()
 
 
+def is_admin(claims):
+    groups = claims.get("cognito:groups") or claims.get("groups") or ""
+    if isinstance(groups, list):
+        return "admin" in groups
+    return "admin" in [group.strip() for group in str(groups).split(",")]
+
+
 def profile_owner(profile):
     return clean_str(
         profile.get("cognitoSub")
@@ -171,7 +178,7 @@ def lambda_handler(event, context):
         profile = table.get_item(Key={"profileId": profile_id}, ConsistentRead=True).get("Item")
         if not profile:
             return make_response(404, {"ok": False, "message": "Visa profile not found"})
-        if profile_owner(profile) != user_sub:
+        if profile_owner(profile) != user_sub and not is_admin(claims):
             return make_response(403, {"ok": False, "message": "You cannot modify this visa profile"})
 
         field_key = f"{visa_type}#{category_id}"

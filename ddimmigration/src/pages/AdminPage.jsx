@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { getCurrentCognitoSession, userPool } from '../auth/cognito.js'
+import VisaPortalMaterialsPage from './VisaPortalMaterialsPage.jsx'
 
 const SHOW_ALL_ANSWER_URL =
   'https://y6imnkbld5.execute-api.ap-southeast-2.amazonaws.com/default/showAllanswer'
@@ -10,8 +13,6 @@ const UPDATE_VISA_PROFILE_URL =
   'https://wx34ecupwj.execute-api.ap-southeast-2.amazonaws.com/default/updateVisaProfile'
 const DELETE_VISA_PROFILE_URL =
   'https://41uill5fg6.execute-api.ap-southeast-2.amazonaws.com/default/deleteVisaProfile'
-const ADMIN_PASSWORD = 'Ddtrip800'
-const ADMIN_UNLOCK_KEY = 'ddimmigration_admin_unlocked'
 const SURVEY_PAGE_SIZE = 20
 
 const TAB_OPTIONS = [
@@ -19,6 +20,26 @@ const TAB_OPTIONS = [
   { id: 'student_visa', label: '学签' },
   { id: 'visitor_visa', label: '旅游签' },
 ]
+
+function getCognitoGroups(payload) {
+  const groups = payload?.['cognito:groups']
+  if (Array.isArray(groups)) return groups
+  if (typeof groups === 'string') {
+    return groups.split(',').map((group) => group.trim()).filter(Boolean)
+  }
+  return []
+}
+
+function makeAuthHeaders(token, includeJson = false) {
+  return {
+    ...(includeJson ? { 'Content-Type': 'application/json' } : {}),
+    ...(token ? { Authorization: token } : {}),
+  }
+}
+
+function makePlainJsonHeaders() {
+  return { 'Content-Type': 'text/plain;charset=UTF-8' }
+}
 
 function buildPageItems(current, total) {
   if (total <= 7) {
@@ -535,7 +556,7 @@ function getVisaProfileClientName(item) {
   return item.clientName || item.formData?.personal?.name
 }
 
-function VisaProfileCard({ item, onDeleted, onOpen }) {
+function VisaProfileCard({ item, onDeleted, onOpen, authToken }) {
   const [deleteStatus, setDeleteStatus] = useState('idle')
   const clientName = getVisaProfileClientName(item)
 
@@ -547,7 +568,7 @@ function VisaProfileCard({ item, onDeleted, onOpen }) {
     try {
       const res = await fetch(DELETE_VISA_PROFILE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: makeAuthHeaders(authToken, true),
         body: JSON.stringify({
           profileId: item.profileId,
         }),
@@ -605,7 +626,7 @@ function VisaProfileCard({ item, onDeleted, onOpen }) {
   )
 }
 
-function VisaProfileDetail({ item, onBack, onDeleted }) {
+function VisaProfileDetail({ item, onBack, onDeleted, authToken }) {
   const cloneFormData = (value) => JSON.parse(JSON.stringify(value || {}))
   const [currentItem, setCurrentItem] = useState(item)
   const [draftFormData, setDraftFormData] = useState(() => cloneFormData(item.formData))
@@ -661,7 +682,7 @@ function VisaProfileDetail({ item, onBack, onDeleted }) {
     try {
       const res = await fetch(UPDATE_VISA_PROFILE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: makePlainJsonHeaders(),
         body: JSON.stringify({
           profileId: currentItem.profileId,
           status: currentItem.status || 'draft',
@@ -678,7 +699,10 @@ function VisaProfileDetail({ item, onBack, onDeleted }) {
         formData: draftFormData,
         updatedAt: new Date().toISOString(),
       }
-      setCurrentItem(nextItem)
+      setCurrentItem({
+        ...nextItem,
+        materials: nextItem.materials || currentItem.materials,
+      })
       setDraftFormData(cloneFormData(nextItem.formData))
       setIsEditing(false)
       setUpdateStatus('saved')
@@ -696,7 +720,7 @@ function VisaProfileDetail({ item, onBack, onDeleted }) {
     try {
       const res = await fetch(DELETE_VISA_PROFILE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: makeAuthHeaders(authToken, true),
         body: JSON.stringify({
           profileId: currentItem.profileId,
         }),
@@ -800,26 +824,25 @@ function VisaProfileDetail({ item, onBack, onDeleted }) {
         />
         </section>
       ) : (
-        <section className="admin-client-panel">
-          <header className="admin-client-panel-head">
-            <h3>材料</h3>
-          </header>
-          <p className="admin-empty">材料板块稍后制作。</p>
-        </section>
+        <VisaPortalMaterialsPage
+          embedded
+          adminProfileId={currentItem.profileId}
+          adminClientName={displayValue(clientName)}
+          adminMaterials={currentItem.materials}
+        />
       )}
     </section>
   )
 }
 
 function AdminPage() {
-  const [passwordInput, setPasswordInput] = useState('')
-  const [authError, setAuthError] = useState('')
-  const [authorized, setAuthorized] = useState(() => {
-    try {
-      return sessionStorage.getItem(ADMIN_UNLOCK_KEY) === 'true'
-    } catch {
-      return false
-    }
+  const navigate = useNavigate()
+  const [adminAuth, setAdminAuth] = useState({
+    loading: true,
+    signedIn: false,
+    authorized: false,
+    username: '',
+    token: '',
   })
   const [activeView, setActiveView] = useState('visaProfiles')
   const [loading, setLoading] = useState(true)
@@ -846,9 +869,42 @@ function AdminPage() {
   const [visaProfilesError, setVisaProfilesError] = useState('')
   const [visaProfilesLoaded, setVisaProfilesLoaded] = useState(false)
   const [selectedVisaProfile, setSelectedVisaProfile] = useState(null)
+  const canManageVisaProfiles = adminAuth.authorized
 
   useEffect(() => {
-    if (!authorized) return
+    let cancelled = false
+
+    getCurrentCognitoSession()
+      .then((session) => {
+        if (cancelled) return
+        const idToken = session.getIdToken()
+        const payload = idToken.decodePayload()
+        setAdminAuth({
+          loading: false,
+          signedIn: true,
+          authorized: getCognitoGroups(payload).includes('admin'),
+          username: payload['cognito:username'] || payload.email || '管理员',
+          token: idToken.getJwtToken(),
+        })
+      })
+      .catch(() => {
+        if (cancelled) return
+        setAdminAuth({
+          loading: false,
+          signedIn: false,
+          authorized: false,
+          username: '',
+          token: '',
+        })
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!adminAuth.signedIn) return
     const run = async () => {
       setLoading(true)
       setError('')
@@ -875,7 +931,7 @@ function AdminPage() {
       }
     }
     void run()
-  }, [authorized])
+  }, [adminAuth.signedIn])
 
   const loadSurvey = async (lastKey = null, append = false) => {
     setSurveyLoading(true)
@@ -910,9 +966,9 @@ function AdminPage() {
   }
 
   useEffect(() => {
-    if (!authorized || activeView !== 'survey' || surveyLoaded) return
+    if (!adminAuth.signedIn || activeView !== 'survey' || surveyLoaded) return
     void loadSurvey(null, false)
-  }, [authorized, activeView, surveyLoaded])
+  }, [adminAuth.signedIn, activeView, surveyLoaded])
 
   const loadVisaProfiles = async () => {
     setVisaProfilesLoading(true)
@@ -934,9 +990,9 @@ function AdminPage() {
   }
 
   useEffect(() => {
-    if (!authorized || activeView !== 'visaProfiles' || visaProfilesLoaded) return
+    if (!canManageVisaProfiles || activeView !== 'visaProfiles' || visaProfilesLoaded) return
     void loadVisaProfiles()
-  }, [authorized, activeView, visaProfilesLoaded])
+  }, [canManageVisaProfiles, activeView, visaProfilesLoaded])
 
   const handleVisaProfileDeleted = (profileId) => {
     setVisaProfileItems((prev) => prev.filter((item) => item.profileId !== profileId))
@@ -963,46 +1019,43 @@ function AdminPage() {
     }
   }
 
-  const handleAuth = (e) => {
-    e.preventDefault()
-    if (passwordInput === ADMIN_PASSWORD) {
-      setAuthorized(true)
-      setAuthError('')
-      try {
-        sessionStorage.setItem(ADMIN_UNLOCK_KEY, 'true')
-      } catch {
-        // ignore
-      }
-      return
-    }
-    setAuthError('密码错误，请重试。')
+  const handleAdminLogout = () => {
+    userPool.getCurrentUser()?.signOut()
+    navigate('/visa-portal/login?returnTo=%2Fadmin', { replace: true })
   }
 
-  if (!authorized) {
+  if (adminAuth.loading) {
     return (
-      <main className="main-content admin-page">
-        <h1 className="admin-title">后台回答管理</h1>
-        <form className="admin-auth-form" onSubmit={handleAuth}>
-          <label htmlFor="admin-password" className="admin-auth-label">请输入管理密码</label>
-          <input
-            id="admin-password"
-            type="password"
-            className="admin-auth-input"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            autoComplete="off"
-            placeholder="请输入密码"
-          />
-          <button type="submit" className="admin-auth-btn">进入后台</button>
-          {authError ? <p className="admin-error">{authError}</p> : null}
-        </form>
+      <main className="main-content admin-page admin-portal-page">
+        <section className="admin-portal-shell admin-portal-auth-shell">
+          <header className="visa-portal-dashboard-head admin-portal-head">
+            <div>
+              <p className="visa-portal-eyebrow">DD Immigration Admin</p>
+              <h1>客户签证管理</h1>
+              <p>查看客户信息表、签证材料与提交进度。</p>
+            </div>
+          </header>
+          <p className="admin-loading">正在验证管理员身份...</p>
+        </section>
       </main>
     )
   }
 
+  if (!adminAuth.signedIn) {
+    return <Navigate to="/visa-portal/login?returnTo=%2Fadmin" replace />
+  }
+
   return (
-    <main className="main-content admin-page">
-      <h1 className="admin-title">后台回答管理</h1>
+    <main className="main-content admin-page admin-portal-page">
+      <section className="admin-portal-shell">
+      <header className="visa-portal-dashboard-head admin-portal-head">
+        <div>
+          <p className="visa-portal-eyebrow">DD Immigration Admin</p>
+          <h1>客户签证管理</h1>
+          <p>管理员：{adminAuth.username}</p>
+        </div>
+        <button type="button" className="admin-back-btn" onClick={handleAdminLogout}>退出登录</button>
+      </header>
       <nav className="admin-tabs" aria-label="后台模块">
         <button
           type="button"
@@ -1134,11 +1187,14 @@ function AdminPage() {
         </>
       ) : (
         <>
-          {selectedVisaProfile ? (
+          {!canManageVisaProfiles ? (
+            <p className="admin-error">客户签证材料需要 Cognito 管理员权限。后台回答管理和 Survey 数据可以继续使用原来的 API 查看。</p>
+          ) : selectedVisaProfile ? (
             <VisaProfileDetail
               item={selectedVisaProfile}
               onBack={() => setSelectedVisaProfile(null)}
               onDeleted={handleVisaProfileDeleted}
+              authToken={adminAuth.token}
             />
           ) : (
             <>
@@ -1169,6 +1225,7 @@ function AdminPage() {
                         item={item}
                         onOpen={setSelectedVisaProfile}
                         onDeleted={handleVisaProfileDeleted}
+                        authToken={adminAuth.token}
                       />
                     ))
                   )}
@@ -1178,6 +1235,7 @@ function AdminPage() {
           )}
         </>
       )}
+      </section>
     </main>
   )
 }

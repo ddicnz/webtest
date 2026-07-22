@@ -230,8 +230,9 @@ function formatUploadedAt(value) {
 function getMaterialTypeLabel(material) {
   if (material.isImage) return '图片'
   if (material.isPdf) return 'PDF'
-  if (material.originalName?.toLowerCase().endsWith('.docx')) return 'DOCX'
-  if (material.originalName?.toLowerCase().endsWith('.doc')) return 'DOC'
+  const materialName = getMaterialName(material).toLowerCase()
+  if (materialName.endsWith('.docx')) return 'DOCX'
+  if (materialName.endsWith('.doc')) return 'DOC'
   return '文件'
 }
 
@@ -242,7 +243,7 @@ function MaterialPreview({ material }) {
     return (
       <img
         src={material.viewUrl}
-        alt={material.originalName || '已上传图片'}
+        alt={getMaterialName(material)}
         loading="lazy"
         onError={() => setImageFailed(true)}
       />
@@ -257,6 +258,10 @@ function getFileContentType(file) {
   return contentTypeByExtension[extension] || file.type || ''
 }
 
+function getMaterialName(material) {
+  return material.originalName || material.displayName || material.name || material.s3Key?.split('/').pop() || '未命名文件'
+}
+
 async function parseApiResponse(response) {
   const data = await response.json().catch(() => ({}))
   if (!response.ok || data?.success === false || data?.ok === false) {
@@ -265,8 +270,14 @@ async function parseApiResponse(response) {
   return data
 }
 
-function VisaPortalMaterialsPage() {
+function VisaPortalMaterialsPage({
+  embedded = false,
+  adminProfileId = '',
+  adminClientName = '',
+  adminMaterials = null,
+}) {
   const navigate = useNavigate()
+  const isAdminMode = embedded && Boolean(adminProfileId)
   const [authState, setAuthState] = useState({ loading: true, sub: '', profileId: '', error: '' })
   const [selectedVisaType, setSelectedVisaType] = useState('visitor')
   const [filesByGroup, setFilesByGroup] = useState({})
@@ -291,6 +302,32 @@ function VisaPortalMaterialsPage() {
         if (cancelled) return
         const payload = session.getIdToken().payload || {}
         const sub = payload.sub || ''
+        const rawGroups = payload['cognito:groups']
+        const groups = Array.isArray(rawGroups)
+          ? rawGroups
+          : String(rawGroups || '').replace(/^\[|\]$/g, '').split(',').map((group) => group.trim()).filter(Boolean)
+
+        if (isAdminMode) {
+          const initialMaterials =
+            adminMaterials && typeof adminMaterials === 'object' ? adminMaterials : {}
+          const initialTotalCount = Object.values(initialMaterials).reduce(
+            (total, records) => total + (Array.isArray(records) ? records.length : 0),
+            0,
+          )
+          setSavedMaterialsByGroup(initialMaterials)
+          setMaterialListState({
+            status: 'success',
+            message: '',
+            totalCount: initialTotalCount,
+          })
+          setAuthState({
+            loading: false,
+            sub,
+            profileId: groups.includes('admin') ? adminProfileId : '',
+            error: groups.includes('admin') ? '' : '后台材料管理需要使用 Cognito 管理员账号登录。',
+          })
+          return
+        }
 
         try {
           const res = await fetch(VISA_PORTAL_PROFILE_API_URL, {
@@ -311,11 +348,12 @@ function VisaPortalMaterialsPage() {
           })
         } catch (error) {
           if (cancelled) return
+          const fallbackProfileId = sub ? `visa_user_${sub}` : ''
           setAuthState({
             loading: false,
             sub,
-            profileId: '',
-            error: error instanceof Error ? error.message : '客户资料读取失败',
+            profileId: fallbackProfileId,
+            error: fallbackProfileId ? '' : error instanceof Error ? error.message : '客户资料读取失败',
           })
         }
       })
@@ -333,16 +371,33 @@ function VisaPortalMaterialsPage() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [adminMaterials, adminProfileId, isAdminMode])
 
   const loadSavedMaterials = useCallback(async ({ silent = false } = {}) => {
+    if (isAdminMode && adminMaterials && typeof adminMaterials === 'object') {
+      const totalCount = Object.values(adminMaterials).reduce(
+        (total, records) => total + (Array.isArray(records) ? records.length : 0),
+        0,
+      )
+      setSavedMaterialsByGroup(adminMaterials)
+      setMaterialListState({
+        status: 'success',
+        message: '',
+        totalCount,
+      })
+      return
+    }
+
     if (!silent) {
       setMaterialListState((prev) => ({ ...prev, status: 'loading', message: '' }))
     }
 
     try {
       const session = await getCurrentCognitoSession()
-      const response = await fetch(LIST_VISA_MATERIALS_URL, {
+      const listUrl = isAdminMode
+        ? `${LIST_VISA_MATERIALS_URL}?profileId=${encodeURIComponent(authState.profileId)}`
+        : LIST_VISA_MATERIALS_URL
+      const response = await fetch(listUrl, {
         method: 'GET',
         headers: {
           Authorization: session.getIdToken().getJwtToken(),
@@ -364,7 +419,7 @@ function VisaPortalMaterialsPage() {
         message: error instanceof Error ? error.message : '读取已上传材料失败',
       }))
     }
-  }, [])
+  }, [adminMaterials, authState.profileId, isAdminMode])
 
   useEffect(() => {
     if (!authState.loading && authState.sub && authState.profileId) {
@@ -452,7 +507,7 @@ function VisaPortalMaterialsPage() {
 
   const openRenameDialog = (group, material) => {
     setRenameState({ status: 'idle', message: '' })
-    setRenameName(material.originalName || '')
+    setRenameName(getMaterialName(material))
     setRenameDialog({
       visaType: selectedVisaType,
       categoryId: group.id,
@@ -647,25 +702,48 @@ function VisaPortalMaterialsPage() {
   }
 
   if (authState.loading) {
-    return <main className="visa-portal-page"><p className="visa-portal-loading">正在读取客户资料...</p></main>
+    return embedded
+      ? <div className="admin-materials-manager"><p className="visa-portal-loading">正在读取客户材料...</p></div>
+      : <main className="visa-portal-page"><p className="visa-portal-loading">正在读取客户资料...</p></main>
   }
 
   if (!authState.sub || !userPool.getCurrentUser()) {
+    if (embedded) {
+      return (
+        <div className="admin-materials-manager">
+          <div className="visa-portal-materials-note visa-portal-materials-note--warning">
+            请先使用加入 Cognito <strong>admin</strong> 组的管理员账号登录客户资料中心，再管理客户材料。
+          </div>
+        </div>
+      )
+    }
     return <Navigate to="/visa-portal/login" replace />
   }
 
+  if (embedded && authState.error) {
+    return (
+      <div className="admin-materials-manager">
+        <div className="visa-portal-materials-note visa-portal-materials-note--warning">{authState.error}</div>
+      </div>
+    )
+  }
+
+  const PageContainer = embedded ? 'div' : 'main'
+
   return (
-    <main className="visa-portal-page">
+    <PageContainer className={embedded ? 'admin-materials-manager' : 'visa-portal-page'}>
       <section className="visa-portal-materials">
-        <button type="button" className="visa-portal-back-btn" onClick={() => navigate('/visa-portal')}>
-          返回客户中心
-        </button>
+        {!embedded && (
+          <button type="button" className="visa-portal-back-btn" onClick={() => navigate('/visa-portal')}>
+            返回客户中心
+          </button>
+        )}
 
         <header className="visa-portal-dashboard-head">
           <div>
-            <p className="visa-portal-eyebrow">DD Immigration Client Portal</p>
-            <h1>上传签证材料</h1>
-            <p>请先选择申请类型，再按类别上传对应材料。</p>
+            <p className="visa-portal-eyebrow">{embedded ? '客户签证材料' : 'DD Immigration Client Portal'}</p>
+            <h1>{embedded ? `${adminClientName}的签证材料` : '上传签证材料'}</h1>
+            <p>{embedded ? '查看、上传和管理该客户的材料。' : '请先选择申请类型，再按类别上传对应材料。'}</p>
           </div>
           <div className="visa-portal-materials-count">
             <span>已上传 <strong>{materialListState.totalCount}</strong></span>
@@ -764,12 +842,12 @@ function VisaPortalMaterialsPage() {
                             href={material.viewUrl || material.downloadUrl}
                             target="_blank"
                             rel="noreferrer"
-                            aria-label={`查看 ${material.originalName}`}
+                            aria-label={`查看 ${getMaterialName(material)}`}
                           >
                             <MaterialPreview material={material} />
                           </a>
                           <div className="visa-portal-saved-material-info">
-                            <strong title={material.originalName}>{material.originalName}</strong>
+                            <strong title={getMaterialName(material)}>{getMaterialName(material)}</strong>
                             <small>
                               {formatFileSize(material.size)} · {formatUploadedAt(material.uploadedAt)}
                             </small>
@@ -834,7 +912,7 @@ function VisaPortalMaterialsPage() {
             <h2 id="visa-material-delete-title">确认删除材料</h2>
             <p>
               将从“{deleteDialog.categoryTitle}”中永久删除
-              <strong>{deleteDialog.material.originalName || '此文件'}</strong>。
+              <strong>{getMaterialName(deleteDialog.material)}</strong>。
             </p>
             <p className="visa-material-delete-warning">删除后无法恢复，请确认文件不再需要。</p>
             {deleteState.message && (
@@ -873,7 +951,7 @@ function VisaPortalMaterialsPage() {
             <h2 id="visa-material-rename-title">重命名材料</h2>
             <p>
               正在修改“{renameDialog.categoryTitle}”中的文件：
-              <strong>{renameDialog.material.originalName || '此文件'}</strong>
+              <strong>{getMaterialName(renameDialog.material)}</strong>
             </p>
             <label htmlFor="visa-material-rename-input">新文件名</label>
             <input
@@ -915,7 +993,7 @@ function VisaPortalMaterialsPage() {
           </section>
         </div>
       )}
-    </main>
+    </PageContainer>
   )
 }
 

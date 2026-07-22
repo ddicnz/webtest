@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthenticationDetails, CognitoUser, CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { userPool } from '../auth/cognito.js'
 
@@ -7,6 +7,10 @@ const initialStatus = { type: '', message: '' }
 
 function VisaPortalLoginPage() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const requestedReturnTo = new URLSearchParams(location.search).get('returnTo')
+  const postLoginPath = requestedReturnTo === '/admin' ? '/admin' : '/visa-portal'
+  const isAdminLogin = postLoginPath === '/admin'
   const [mode, setMode] = useState('login')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -24,9 +28,9 @@ function VisaPortalLoginPage() {
     const currentUser = userPool.getCurrentUser()
     if (!currentUser) return
     currentUser.getSession((error, session) => {
-      if (!error && session?.isValid()) navigate('/visa-portal', { replace: true })
+      if (!error && session?.isValid()) navigate(postLoginPath, { replace: true })
     })
-  }, [navigate])
+  }, [navigate, postLoginPath])
 
   const resetStatus = () => setStatus(initialStatus)
 
@@ -44,7 +48,7 @@ function VisaPortalLoginPage() {
   const authCallbacks = (cognitoUser) => ({
     onSuccess: () => {
       setSubmitting(false)
-      navigate('/visa-portal', { replace: true })
+      navigate(postLoginPath, { replace: true })
     },
     onFailure: (error) => {
       setSubmitting(false)
@@ -52,6 +56,7 @@ function VisaPortalLoginPage() {
     },
     newPasswordRequired: (userAttributes) => {
       const attributes = { ...userAttributes }
+      delete attributes.email
       delete attributes.email_verified
       setSubmitting(false)
       setChallengeUser(cognitoUser)
@@ -222,8 +227,8 @@ function VisaPortalLoginPage() {
           {mode === 'login' && (
             <form onSubmit={handleLogin}>
               <div className="visa-portal-form-head">
-                <h2>客户登录</h2>
-                <p>使用您注册时设置的用户名和密码登录。</p>
+                <h2>{isAdminLogin ? '管理员登录' : '客户登录'}</h2>
+                <p>{isAdminLogin ? '使用已加入管理员组的账号登录。' : '使用您注册时设置的用户名和密码登录。'}</p>
               </div>
               <label className="visa-portal-field">
                 <span>用户名</span>
@@ -258,7 +263,7 @@ function VisaPortalLoginPage() {
                 {submitting ? '正在登录...' : '登录'}
               </button>
               <div className="visa-portal-link-actions">
-                <button type="button" className="visa-portal-text-btn" onClick={() => openMode('sign-up')}>注册账号</button>
+                {!isAdminLogin && <button type="button" className="visa-portal-text-btn" onClick={() => openMode('sign-up')}>注册账号</button>}
                 <button type="button" className="visa-portal-text-btn" onClick={() => openMode('forgot-password')}>忘记密码</button>
               </div>
             </form>

@@ -120,7 +120,8 @@ function App() {
   const [mobileStudyPanelOpen, setMobileStudyPanelOpen] = useState(false)
   const [showPageBackToTop, setShowPageBackToTop] = useState(false)
   const location = useLocation()
-  const isVisaPortalRoute = location.pathname.startsWith('/visa-portal')
+  const isVisaPortalRoute =
+    location.pathname.startsWith('/visa-portal') || location.pathname === '/admin'
   const showBackToTopRoute =
     location.pathname.startsWith('/study') ||
     location.pathname.startsWith('/album') ||
@@ -376,6 +377,7 @@ function App() {
         <Route path="/visa-portal" element={<VisaPortalPage />} />
         <Route path="/visa-portal/info-form" element={<VisaPortalInfoFormPage />} />
         <Route path="/visa-portal/materials" element={<VisaPortalMaterialsPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         {/* 除首页外的其它页面：上面半屏大图，下面 sidebar + 正文 */}
         <Route element={<HeroSidebarLayout />}>
           <Route path="/about" element={<AboutPage />} />
@@ -393,7 +395,6 @@ function App() {
           <Route path="/assessment" element={<AssessmentPage />} />
           <Route path="/visa-info-form" element={<VisaInfoFormPage />} />
           <Route path="/assesment" element={<Navigate to="/assessment" replace />} />
-          <Route path="/admin" element={<AdminPage />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
           <Route path="/study" element={<Navigate to="/study/University" replace />} />
           <Route path="/study/:studyPath" element={<StudyPage />} />
