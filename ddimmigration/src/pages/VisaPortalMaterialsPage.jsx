@@ -262,6 +262,122 @@ function getMaterialName(material) {
   return material.originalName || material.displayName || material.name || material.s3Key?.split('/').pop() || '未命名文件'
 }
 
+function getAllMaterials(materialsByGroup) {
+  return Object.entries(materialsByGroup).flatMap(([key, records]) => (
+    Array.isArray(records) ? records.map((material) => ({ ...material, groupKey: key })) : []
+  ))
+}
+
+function getVisaTypeLabel(visaType) {
+  return visaTypeOptions.find((option) => option.id === visaType)?.label || visaType || '未分类签证'
+}
+
+function getMaterialGroupTitle(visaType, categoryId) {
+  const group = materialGroupsByVisaType[visaType]?.find((item) => item.id === categoryId)
+  return group?.title || categoryId || '未分类材料'
+}
+
+function sanitizeZipPathPart(value, fallback) {
+  const text = String(value || '').trim().replace(/[\\/:*?"<>|\x00-\x1f]+/g, '-').replace(/\.+$/g, '')
+  return text || fallback
+}
+
+function getZipPath(material, index) {
+  const [keyVisaType = material.visaType, keyCategoryId = material.categoryId] = String(material.groupKey || '').split('#')
+  const visaType = material.visaType || keyVisaType
+  const categoryId = material.categoryId || keyCategoryId
+  const visaLabel = sanitizeZipPathPart(getVisaTypeLabel(visaType), '未分类签证')
+  const categoryTitle = sanitizeZipPathPart(material.categoryTitle || getMaterialGroupTitle(visaType, categoryId), '未分类材料')
+  const filename = sanitizeZipPathPart(getMaterialName(material), `材料-${index + 1}`)
+  return `materials/${visaLabel}/${categoryTitle}/${filename}`
+}
+
+function encodeUtf8(value) {
+  return new TextEncoder().encode(value)
+}
+
+function makeCrcTable() {
+  return Array.from({ length: 256 }, (_, index) => {
+    let value = index
+    for (let bit = 0; bit < 8; bit += 1) {
+      value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1
+    }
+    return value >>> 0
+  })
+}
+
+const crcTable = makeCrcTable()
+
+function crc32(bytes) {
+  let crc = 0xffffffff
+  for (let index = 0; index < bytes.length; index += 1) {
+    crc = crcTable[(crc ^ bytes[index]) & 0xff] ^ (crc >>> 8)
+  }
+  return (crc ^ 0xffffffff) >>> 0
+}
+
+function writeUint16(bytes, offset, value) {
+  bytes[offset] = value & 0xff
+  bytes[offset + 1] = (value >>> 8) & 0xff
+}
+
+function writeUint32(bytes, offset, value) {
+  bytes[offset] = value & 0xff
+  bytes[offset + 1] = (value >>> 8) & 0xff
+  bytes[offset + 2] = (value >>> 16) & 0xff
+  bytes[offset + 3] = (value >>> 24) & 0xff
+}
+
+function createZip(files) {
+  const fileParts = []
+  const centralParts = []
+  let offset = 0
+
+  files.forEach((file) => {
+    const nameBytes = encodeUtf8(file.path)
+    const data = file.bytes
+    const checksum = crc32(data)
+
+    const localHeader = new Uint8Array(30 + nameBytes.length)
+    writeUint32(localHeader, 0, 0x04034b50)
+    writeUint16(localHeader, 4, 20)
+    writeUint16(localHeader, 6, 0x0800)
+    writeUint16(localHeader, 8, 0)
+    writeUint32(localHeader, 14, checksum)
+    writeUint32(localHeader, 18, data.length)
+    writeUint32(localHeader, 22, data.length)
+    writeUint16(localHeader, 26, nameBytes.length)
+    localHeader.set(nameBytes, 30)
+
+    const centralHeader = new Uint8Array(46 + nameBytes.length)
+    writeUint32(centralHeader, 0, 0x02014b50)
+    writeUint16(centralHeader, 4, 20)
+    writeUint16(centralHeader, 6, 20)
+    writeUint16(centralHeader, 8, 0x0800)
+    writeUint16(centralHeader, 10, 0)
+    writeUint32(centralHeader, 16, checksum)
+    writeUint32(centralHeader, 20, data.length)
+    writeUint32(centralHeader, 24, data.length)
+    writeUint16(centralHeader, 28, nameBytes.length)
+    writeUint32(centralHeader, 42, offset)
+    centralHeader.set(nameBytes, 46)
+
+    fileParts.push(localHeader, data)
+    centralParts.push(centralHeader)
+    offset += localHeader.length + data.length
+  })
+
+  const centralSize = centralParts.reduce((total, part) => total + part.length, 0)
+  const endRecord = new Uint8Array(22)
+  writeUint32(endRecord, 0, 0x06054b50)
+  writeUint16(endRecord, 8, files.length)
+  writeUint16(endRecord, 10, files.length)
+  writeUint32(endRecord, 12, centralSize)
+  writeUint32(endRecord, 16, offset)
+
+  return new Blob([...fileParts, ...centralParts, endRecord], { type: 'application/zip' })
+}
+
 async function parseApiResponse(response) {
   const data = await response.json().catch(() => ({}))
   if (!response.ok || data?.success === false || data?.ok === false) {
@@ -293,6 +409,7 @@ function VisaPortalMaterialsPage({
     message: '',
     totalCount: 0,
   })
+  const [downloadAllState, setDownloadAllState] = useState({ status: 'idle', message: '' })
 
   useEffect(() => {
     let cancelled = false
@@ -431,12 +548,77 @@ function VisaPortalMaterialsPage({
     () => Object.values(filesByGroup).reduce((total, groupFiles) => total + groupFiles.length, 0),
     [filesByGroup],
   )
+  const allSavedMaterials = useMemo(
+    () => getAllMaterials(savedMaterialsByGroup),
+    [savedMaterialsByGroup],
+  )
 
   const currentMaterialGroups = materialGroupsByVisaType[selectedVisaType] || materialGroupsByVisaType.visitor
   const selectedVisaLabel =
     visaTypeOptions.find((option) => option.id === selectedVisaType)?.label || '旅游签'
 
   const groupKey = (groupId) => `${selectedVisaType}:${groupId}`
+
+  const downloadAllMaterials = async () => {
+    const downloadableMaterials = allSavedMaterials.filter((material) => material.downloadUrl || material.viewUrl)
+    if (!downloadableMaterials.length) {
+      setDownloadAllState({ status: 'error', message: '暂无可下载的材料' })
+      return
+    }
+
+    try {
+      setDownloadAllState({
+        status: 'downloading',
+        message: `正在打包 ${downloadableMaterials.length} 个文件...`,
+      })
+
+      const usedPaths = new Map()
+      const files = []
+      for (let index = 0; index < downloadableMaterials.length; index += 1) {
+        const material = downloadableMaterials[index]
+        setDownloadAllState({
+          status: 'downloading',
+          message: `正在打包 ${index + 1}/${downloadableMaterials.length}：${getMaterialName(material)}`,
+        })
+
+        const response = await fetch(material.downloadUrl || material.viewUrl)
+        if (!response.ok) {
+          throw new Error(`下载失败：${getMaterialName(material)}（HTTP ${response.status}）`)
+        }
+
+        const rawPath = getZipPath(material, index)
+        const seenCount = usedPaths.get(rawPath) || 0
+        usedPaths.set(rawPath, seenCount + 1)
+        const path = seenCount
+          ? rawPath.replace(/(\.[^./]+)?$/, `-${seenCount + 1}$1`)
+          : rawPath
+
+        files.push({
+          path,
+          bytes: new Uint8Array(await response.arrayBuffer()),
+        })
+      }
+
+      const zipBlob = createZip(files)
+      const zipUrl = URL.createObjectURL(zipBlob)
+      const link = document.createElement('a')
+      link.href = zipUrl
+      link.download = `${sanitizeZipPathPart(adminClientName, '客户')}-materials.zip`
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      URL.revokeObjectURL(zipUrl)
+      setDownloadAllState({
+        status: 'success',
+        message: `已打包 ${files.length} 个文件为 materials 文件夹`,
+      })
+    } catch (error) {
+      setDownloadAllState({
+        status: 'error',
+        message: error instanceof Error ? error.message : '打包下载失败，请重试',
+      })
+    }
+  }
 
   const addFiles = (groupId, fileList) => {
     const nextFiles = Array.from(fileList || [])
@@ -748,8 +930,32 @@ function VisaPortalMaterialsPage({
           <div className="visa-portal-materials-count">
             <span>已上传 <strong>{materialListState.totalCount}</strong></span>
             <small>待提交 {totalFiles} 个</small>
+            {embedded && (
+              <button
+                type="button"
+                className="visa-portal-download-all-btn"
+                disabled={
+                  !allSavedMaterials.length
+                  || materialListState.status === 'loading'
+                  || downloadAllState.status === 'downloading'
+                }
+                onClick={() => void downloadAllMaterials()}
+              >
+                {downloadAllState.status === 'downloading' ? '打包中...' : '下载全部'}
+              </button>
+            )}
           </div>
         </header>
+
+        {embedded && downloadAllState.message && (
+          <div
+            className={`visa-portal-materials-note${
+              downloadAllState.status === 'error' ? ' visa-portal-materials-note--warning' : ''
+            }`}
+          >
+            {downloadAllState.message}
+          </div>
+        )}
 
         <div className="visa-portal-materials-note">
           当前选择：{selectedVisaLabel}。请选择对应文件后，按每个类别单独提交。

@@ -5432,6 +5432,30 @@ textarea.admin-visa-edit-input {
   font-size: 24px;
 }
 
+.visa-portal-download-all-btn {
+  width: 100%;
+  min-height: 34px;
+  margin-top: 10px;
+  border: 1px solid #2f829c;
+  border-radius: 6px;
+  background: #2f829c;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.visa-portal-download-all-btn:hover {
+  background: #246c83;
+  border-color: #246c83;
+}
+
+.visa-portal-download-all-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .visa-portal-materials-note {
   margin: 22px 0;
   padding: 14px 16px;
