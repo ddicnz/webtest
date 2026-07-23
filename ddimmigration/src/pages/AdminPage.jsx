@@ -1021,7 +1021,7 @@ function AdminPage() {
 
   const handleAdminLogout = () => {
     userPool.getCurrentUser()?.signOut()
-    navigate('/visa-portal/login?returnTo=%2Fadmin', { replace: true })
+    navigate('/admin/login', { replace: true })
   }
 
   if (adminAuth.loading) {
@@ -1042,7 +1042,7 @@ function AdminPage() {
   }
 
   if (!adminAuth.signedIn) {
-    return <Navigate to="/visa-portal/login?returnTo=%2Fadmin" replace />
+    return <Navigate to="/admin/login" replace />
   }
 
   return (

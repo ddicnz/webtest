@@ -372,6 +372,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/admin/login" element={<VisaPortalLoginPage />} />
         <Route path="/visa-portal/login" element={<VisaPortalLoginPage />} />
         <Route path="/visa-portal/auth/callback" element={<Navigate to="/visa-portal/login" replace />} />
         <Route path="/visa-portal" element={<VisaPortalPage />} />

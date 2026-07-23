@@ -9,7 +9,7 @@ function VisaPortalLoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const requestedReturnTo = new URLSearchParams(location.search).get('returnTo')
-  const postLoginPath = requestedReturnTo === '/admin' ? '/admin' : '/visa-portal'
+  const postLoginPath = location.pathname === '/admin/login' || requestedReturnTo === '/admin' ? '/admin' : '/visa-portal'
   const isAdminLogin = postLoginPath === '/admin'
   const [mode, setMode] = useState('login')
   const [username, setUsername] = useState('')
