@@ -11,9 +11,6 @@ const FORM_API_URL = import.meta.env.DEV
   ? '/api/form-submit'
   : 'https://6gti3uh9lj.execute-api.ap-southeast-2.amazonaws.com/default/form-submit'
 
-const ORBIT_PROTECT_PARENT_BOOST_URL = 'https://quoting.orbitprotect.com/parent-boost?referrer=6598'
-const ORBIT_PROTECT_PARENT_BOOST_BANNER = 'https://affiliates.orbitprotect.com/api/banner/image/6/300250.png'
-
 function ContactUsPage() {
   const [formType, setFormType] = useState(FORM_TYPE_GENERAL)
   const [form, setForm] = useState({
@@ -112,35 +109,23 @@ function ContactUsPage() {
       <section className="contact-right">
         <h1 className="contact-title">联系我们</h1>
 
-        <div className="contact-top-row">
-          <div className="contact-details">
-            <div className="contact-detail-row">
-              <span className="contact-detail-label">电话：</span>
-              <span>+64-027-7223339</span>
-            </div>
-            <div className="contact-detail-row">
-              <span className="contact-detail-label">微信号码：</span>
-              <span>ddtrip700、ddtrip800、ddtrip999</span>
-            </div>
-            <div className="contact-detail-row">
-              <span className="contact-detail-label">客服邮箱：</span>
-              <span>dd.icnz@gmail.com</span>
-            </div>
-            <div className="contact-detail-row">
-              <span className="contact-detail-label">地址：</span>
-              <span>{OFFICE_ADDRESS}</span>
-            </div>
+        <div className="contact-details">
+          <div className="contact-detail-row">
+            <span className="contact-detail-label">电话：</span>
+            <span>+64-027-7223339</span>
           </div>
-
-          <a
-            className="contact-banner-ad"
-            href={ORBIT_PROTECT_PARENT_BOOST_URL}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            aria-label="Orbit Protect Parent Boost 保险广告"
-          >
-            <img src={ORBIT_PROTECT_PARENT_BOOST_BANNER} alt="Parent Boost" />
-          </a>
+          <div className="contact-detail-row">
+            <span className="contact-detail-label">微信号码：</span>
+            <span>ddtrip700、ddtrip800、ddtrip999</span>
+          </div>
+          <div className="contact-detail-row">
+            <span className="contact-detail-label">客服邮箱：</span>
+            <span>dd.icnz@gmail.com</span>
+          </div>
+          <div className="contact-detail-row">
+            <span className="contact-detail-label">地址：</span>
+            <span>{OFFICE_ADDRESS}</span>
+          </div>
         </div>
 
         <p className="contact-form-hint">如需我们主动联系您，请选择下方类型并填写表单。</p>

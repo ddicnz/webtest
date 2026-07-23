@@ -4075,15 +4075,8 @@ img[src*="album/office"][src*="IMG_2486"] {
   text-align: center;
 }
 
-.contact-top-row {
-  margin-top: 46px;
-  display: flex;
-  align-items: flex-start;
-  gap: 36px;
-}
-
 .contact-details {
-  flex: 1 1 auto;
+  margin-top: 46px;
   font-size: 28px;
   line-height: 1.8;
   color: #222;
@@ -4095,21 +4088,6 @@ img[src*="album/office"][src*="IMG_2486"] {
 
 .contact-detail-label {
   font-weight: 800;
-}
-
-.contact-banner-ad {
-  display: inline-block;
-  flex: 0 0 300px;
-  margin-top: 10px;
-  line-height: 0;
-}
-
-.contact-banner-ad img {
-  display: block;
-  width: 300px;
-  max-width: 100%;
-  height: auto;
-  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .contact-advisors {
@@ -4328,16 +4306,6 @@ img[src*="album/office"][src*="IMG_2486"] {
 }
 
 @media (max-width: 768px) {
-  .contact-top-row {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .contact-banner-ad {
-    flex-basis: auto;
-    margin-top: 0;
-  }
-
   .contact-form-row {
     flex-direction: column;
     gap: 12px;
