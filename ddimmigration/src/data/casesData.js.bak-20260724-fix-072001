@@ -2,27 +2,26 @@
 export const casesList = [
   {
     id: 151,
-    title: '农业工换雇主 VOC 获批',
+    title: 'AEWV 配偶旅游签获批',
     summary:
-      '客户成功获批工签条件变更（Variation of Conditions），可换到 Nursery Person 岗位工作，签证 2026 年 7 月 20 日生效，可多次往返（以批签函为准）。',
+      '申请人成功获批 New Zealand Visitor Visa - Partner of a worker，签证 2026 年 7 月 20 日生效，可多次往返，适合配偶赴新西兰短期陪伴与探访（以批签函为准）。',
     date: '2026年7月20日',
-    image: '/pic/case/072001.jpg',
-    images: ['/pic/case/072001.jpg'],
-    fullContent: `农业工换雇主 VOC 获批 ✅
+    image: '/pic/case/072002.jpg',
+    images: ['/pic/case/072002.jpg'],
+    fullContent: `AEWV 配偶旅游签获批 ✅
 
-恭喜客户成功获批工签条件变更（Variation of Conditions）。本案为农业相关岗位换雇主申请，获批后可按新条件从事 Nursery Person 岗位工作，签证于 2026 年 7 月 20 日生效，可多次往返（以移民局批签函为准）。
+恭喜客户成功获批新西兰访问签证。本案签证类别为 New Zealand Visitor Visa - Partner of a worker，签证于 2026 年 7 月 20 日生效，可多次往返，适合配偶赴新西兰短期陪伴与探访（以移民局批签函为准）。
 
 【案例要点（以移民局批准函为准）】
-✅ 申请类型：Variation of conditions application approved
-✅ 变更类型：工签换雇主 / 条件变更
-✅ 岗位：Nursery Person
+✅ 申请类型：Visitor visa application approved
+✅ 签证类别：New Zealand Visitor Visa - Partner of a worker
 ✅ 签证生效：2026 年 7 月 20 日
 ✅ 入境次数：Multiple
-✅ 可旅行至：2028 年 2 月 6 日
-✅ 签证有效期至：2028 年 2 月 6 日
-✅ 需保持全职工作，每周至少 30 小时
+✅ 持有人不得在新西兰工作
+✅ 可远程为海外雇主或客户工作
+✅ 在新西兰每 12 个月内学习不得超过 3 个月
 
-VOC 申请重点在于新雇主、新岗位、工作地点、薪资工时和原签证条件之间是否衔接清楚。换雇主或换岗位前建议先确认签证条件，避免在未获批前开始不符合条件的工作。`,
+AEWV 配偶访问签证申请重点在于关系真实性、主申请人签证状态、赴新目的、资金安排和后续计划是否清楚。材料准备越完整，越能降低补件和审理不确定性。`,
   },
   {
     id: 150,
