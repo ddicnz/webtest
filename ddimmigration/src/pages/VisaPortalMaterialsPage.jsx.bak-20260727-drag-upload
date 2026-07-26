@@ -397,7 +397,6 @@ function VisaPortalMaterialsPage({
   const [authState, setAuthState] = useState({ loading: true, sub: '', profileId: '', error: '' })
   const [selectedVisaType, setSelectedVisaType] = useState('visitor')
   const [filesByGroup, setFilesByGroup] = useState({})
-  const [draggingGroupKey, setDraggingGroupKey] = useState('')
   const [submitStateByGroup, setSubmitStateByGroup] = useState({})
   const [savedMaterialsByGroup, setSavedMaterialsByGroup] = useState({})
   const [deleteDialog, setDeleteDialog] = useState(null)
@@ -629,24 +628,6 @@ function VisaPortalMaterialsPage({
       ...prev,
       [key]: [...(prev[key] || []), ...nextFiles],
     }))
-  }
-
-  const handleUploadDragOver = (event, groupId) => {
-    event.preventDefault()
-    event.dataTransfer.dropEffect = 'copy'
-    setDraggingGroupKey(groupKey(groupId))
-  }
-
-  const handleUploadDragLeave = (event, groupId) => {
-    if (event.currentTarget.contains(event.relatedTarget)) return
-    const key = groupKey(groupId)
-    setDraggingGroupKey((currentKey) => (currentKey === key ? '' : currentKey))
-  }
-
-  const handleUploadDrop = (event, groupId) => {
-    event.preventDefault()
-    setDraggingGroupKey('')
-    addFiles(groupId, event.dataTransfer.files)
   }
 
   const removeFile = (groupId, fileIndex) => {
@@ -1022,13 +1003,7 @@ function VisaPortalMaterialsPage({
                   <p>{group.description}</p>
                 </div>
 
-                <label
-                  className={`visa-portal-upload-box${draggingGroupKey === key ? ' is-dragging' : ''}`}
-                  onDragEnter={(event) => handleUploadDragOver(event, group.id)}
-                  onDragOver={(event) => handleUploadDragOver(event, group.id)}
-                  onDragLeave={(event) => handleUploadDragLeave(event, group.id)}
-                  onDrop={(event) => handleUploadDrop(event, group.id)}
-                >
+                <label className="visa-portal-upload-box">
                   <input
                     type="file"
                     multiple
@@ -1039,7 +1014,7 @@ function VisaPortalMaterialsPage({
                     }}
                   />
                   <span>选择文件</span>
-                  <small>可从微信直接拖到这里；支持 PDF、图片、Word；单个不超过 50MB</small>
+                  <small>支持 PDF、图片、Word；单个不超过 50MB</small>
                 </label>
 
                 {groupFiles.length > 0 && (
