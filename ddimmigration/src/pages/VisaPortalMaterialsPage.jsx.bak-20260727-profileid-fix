@@ -12,8 +12,6 @@ const RENAME_VISA_MATERIAL_URL =
   'https://u2yxmpqr3f.execute-api.ap-southeast-2.amazonaws.com/default/renameVisaMaterial'
 const VISA_PORTAL_PROFILE_API_URL =
   'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
-const SHOW_VISA_PROFILES_URL =
-  'https://aixwxfo4xg.execute-api.ap-southeast-2.amazonaws.com/default/showVisaProfiles'
 const MAX_FILES_PER_UPLOAD = 10
 const MAX_FILE_BYTES = 50 * 1024 * 1024
 
@@ -33,27 +31,6 @@ const visaTypeOptions = [
   { id: 'work', label: '工签' },
   { id: 'partner', label: '配偶类签证' },
 ]
-
-function countMaterials(materials) {
-  return Object.values(materials || {}).reduce(
-    (total, records) => total + (Array.isArray(records) ? records.length : 0),
-    0,
-  )
-}
-
-async function findProfileByEmail(email) {
-  const normalizedEmail = String(email || '').trim().toLowerCase()
-  if (!normalizedEmail) return null
-
-  const response = await fetch(SHOW_VISA_PROFILES_URL)
-  const data = await parseApiResponse(response)
-  const items = Array.isArray(data?.items) ? data.items : []
-
-  return items.find((item) => {
-    const itemEmail = String(item?.email || item?.formData?.personal?.email || '').trim().toLowerCase()
-    return itemEmail === normalizedEmail
-  }) || null
-}
 
 const materialGroupsByVisaType = {
   visitor: [
@@ -417,13 +394,7 @@ function VisaPortalMaterialsPage({
 }) {
   const navigate = useNavigate()
   const isAdminMode = embedded && Boolean(adminProfileId)
-  const [authState, setAuthState] = useState({
-    loading: true,
-    sub: '',
-    profileId: '',
-    error: '',
-    loadedFromEmailMatch: false,
-  })
+  const [authState, setAuthState] = useState({ loading: true, sub: '', profileId: '', error: '' })
   const [selectedVisaType, setSelectedVisaType] = useState('visitor')
   const [filesByGroup, setFilesByGroup] = useState({})
   const [draggingGroupKey, setDraggingGroupKey] = useState('')
@@ -449,7 +420,6 @@ function VisaPortalMaterialsPage({
         if (cancelled) return
         const payload = session.getIdToken().payload || {}
         const sub = payload.sub || ''
-        const email = payload.email || ''
         const rawGroups = payload['cognito:groups']
         const groups = Array.isArray(rawGroups)
           ? rawGroups
@@ -473,7 +443,6 @@ function VisaPortalMaterialsPage({
             sub,
             profileId: groups.includes('admin') ? adminProfileId : '',
             error: groups.includes('admin') ? '' : '后台材料管理需要使用 Cognito 管理员账号登录。',
-            loadedFromEmailMatch: false,
           })
           return
         }
@@ -488,55 +457,21 @@ function VisaPortalMaterialsPage({
           if (!res.ok || data?.ok === false) {
             throw new Error(data?.message || `读取客户资料失败 HTTP ${res.status}`)
           }
-          let profileId = data?.profileId || ''
-          if (!profileId) {
-            const matchedProfile = await findProfileByEmail(email)
-            profileId = matchedProfile?.profileId || ''
-            if (matchedProfile?.materials && typeof matchedProfile.materials === 'object') {
-              setSavedMaterialsByGroup(matchedProfile.materials)
-              setMaterialListState({
-                status: 'success',
-                message: '',
-                totalCount: countMaterials(matchedProfile.materials),
-              })
-            }
-          }
           if (cancelled) return
           setAuthState({
             loading: false,
             sub,
-            profileId,
+            profileId: data?.profileId || '',
             error: '',
-            loadedFromEmailMatch: Boolean(profileId && data?.profileId !== profileId),
           })
         } catch (error) {
           if (cancelled) return
-          const matchedProfile = await findProfileByEmail(email).catch(() => null)
-          if (matchedProfile?.profileId) {
-            if (matchedProfile.materials && typeof matchedProfile.materials === 'object') {
-              setSavedMaterialsByGroup(matchedProfile.materials)
-              setMaterialListState({
-                status: 'success',
-                message: '',
-                totalCount: countMaterials(matchedProfile.materials),
-              })
-            }
-            setAuthState({
-              loading: false,
-              sub,
-              profileId: matchedProfile.profileId,
-              error: '',
-              loadedFromEmailMatch: true,
-            })
-            return
-          }
           const fallbackProfileId = sub ? `visa_user_${sub}` : ''
           setAuthState({
             loading: false,
             sub,
             profileId: fallbackProfileId,
             error: fallbackProfileId ? '' : error instanceof Error ? error.message : '客户资料读取失败',
-            loadedFromEmailMatch: false,
           })
         }
       })
@@ -547,7 +482,6 @@ function VisaPortalMaterialsPage({
             sub: '',
             profileId: '',
             error: '',
-            loadedFromEmailMatch: false,
           })
         }
       })
@@ -564,7 +498,7 @@ function VisaPortalMaterialsPage({
 
     try {
       const session = await getCurrentCognitoSession()
-      const listUrl = authState.profileId
+      const listUrl = isAdminMode
         ? `${LIST_VISA_MATERIALS_URL}?profileId=${encodeURIComponent(authState.profileId)}`
         : LIST_VISA_MATERIALS_URL
       const response = await fetch(listUrl, {
@@ -607,17 +541,9 @@ function VisaPortalMaterialsPage({
 
   useEffect(() => {
     if (!authState.loading && authState.sub && authState.profileId) {
-      if (authState.loadedFromEmailMatch && !isAdminMode) return
       void loadSavedMaterials()
     }
-  }, [
-    authState.loadedFromEmailMatch,
-    authState.loading,
-    authState.profileId,
-    authState.sub,
-    isAdminMode,
-    loadSavedMaterials,
-  ])
+  }, [authState.loading, authState.profileId, authState.sub, loadSavedMaterials])
 
   const totalFiles = useMemo(
     () => Object.values(filesByGroup).reduce((total, groupFiles) => total + groupFiles.length, 0),

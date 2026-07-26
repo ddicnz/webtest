@@ -1,0 +1,1299 @@
+{
+  "profileId": {
+    "S": "visa_50e70ea2-ce60-4a16-afc8-664e265a4e4a"
+  },
+  "activeStep": {
+    "N": "2"
+  },
+  "birthday": {
+    "S": "1982年2月26日"
+  },
+  "clientName": {
+    "S": "吴琼"
+  },
+  "completionPercent": {
+    "N": "65"
+  },
+  "createdAt": {
+    "S": "2026-07-15T14:52:29.427858Z"
+  },
+  "documents": {
+    "L": []
+  },
+  "email": {
+    "S": "lyzj1982@qq.com"
+  },
+  "formData": {
+    "M": {
+      "certificates": {
+        "L": [
+          {
+            "M": {
+              "authority": {
+                "S": "抚顺市餐饮烹饪行业协会"
+              },
+              "date": {
+                "S": "2026"
+              },
+              "name": {
+                "S": "职业技能等级证书"
+              }
+            }
+          }
+        ]
+      },
+      "character": {
+        "M": {
+          "convicted": {
+            "S": "否"
+          },
+          "deported": {
+            "S": ""
+          },
+          "humanRights": {
+            "S": "否"
+          },
+          "intelligenceOrLaw": {
+            "S": "否"
+          },
+          "livedFiveYears": {
+            "S": "否"
+          },
+          "policeCertWithin24Months": {
+            "S": "是"
+          },
+          "submittedPoliceCert": {
+            "S": "是"
+          },
+          "underInvestigation": {
+            "S": "否"
+          },
+          "violentGroup": {
+            "S": "否"
+          },
+          "visaDeclinedOutsideNz": {
+            "S": ""
+          }
+        }
+      },
+      "children": {
+        "L": [
+          {
+            "M": {
+              "birthday": {
+                "S": "20130223"
+              },
+              "country": {
+                "S": "中国"
+              },
+              "maritalStatus": {
+                "S": "否"
+              },
+              "name": {
+                "S": "吴禹桥"
+              },
+              "occupation": {
+                "S": "学生"
+              },
+              "pinyin": {
+                "S": "Wuyuqiao"
+              },
+              "relation": {
+                "S": "儿子"
+              }
+            }
+          }
+        ]
+      },
+      "currentWork": {
+        "L": [
+          {
+            "M": {
+              "address": {
+                "S": "辽宁省抚顺市新抚区永宁街4号"
+              },
+              "company": {
+                "S": "抚顺友谊宾馆"
+              },
+              "email": {
+                "S": ""
+              },
+              "from": {
+                "S": ""
+              },
+              "phone": {
+                "S": "56830006"
+              },
+              "position": {
+                "S": "厨师"
+              },
+              "proof": {
+                "S": "可以提供2006年至2014年的社保记录。工资入账范围2012年1月1日2013年12月31日（此前原单位工资发现金，后期工资打入抚顺银行工资卡）"
+              },
+              "supervisor": {
+                "S": "梁宏斌"
+              },
+              "to": {
+                "S": ""
+              }
+            }
+          }
+        ]
+      },
+      "education": {
+        "L": [
+          {
+            "M": {
+              "degree": {
+                "S": "中学"
+              },
+              "from": {
+                "S": "1994年6"
+              },
+              "major": {
+                "S": ""
+              },
+              "school": {
+                "S": "抚顺市第五中学"
+              },
+              "to": {
+                "S": "1998年6"
+              }
+            }
+          }
+        ]
+      },
+      "medical": {
+        "M": {
+          "currentMedical": {
+            "S": ""
+          },
+          "dialysis": {
+            "S": ""
+          },
+          "healthWorse": {
+            "S": ""
+          },
+          "hospitalCare": {
+            "S": ""
+          },
+          "longTermCare": {
+            "S": ""
+          },
+          "medicalNumber": {
+            "S": ""
+          },
+          "plannedStay": {
+            "S": ""
+          },
+          "previousMedical": {
+            "S": ""
+          },
+          "tb": {
+            "S": ""
+          },
+          "xray36Months": {
+            "S": ""
+          }
+        }
+      },
+      "other": {
+        "M": {
+          "applicationRequest": {
+            "S": ""
+          },
+          "coApplicants": {
+            "S": ""
+          },
+          "declarationDate": {
+            "S": ""
+          },
+          "declarationName": {
+            "S": ""
+          },
+          "employerRelative": {
+            "S": ""
+          },
+          "localContact": {
+            "S": ""
+          },
+          "localContactDetail": {
+            "S": ""
+          },
+          "militaryDetail": {
+            "S": ""
+          },
+          "militaryHistory": {
+            "S": ""
+          },
+          "sponsorFamilyFuture": {
+            "S": ""
+          }
+        }
+      },
+      "parents": {
+        "L": [
+          {
+            "M": {
+              "birthday": {
+                "S": "19570304"
+              },
+              "country": {
+                "S": "中国"
+              },
+              "maritalStatus": {
+                "S": "已婚"
+              },
+              "name": {
+                "S": "吴金利"
+              },
+              "occupation": {
+                "S": ""
+              },
+              "pinyin": {
+                "S": "Wujinli"
+              },
+              "relation": {
+                "S": "父亲"
+              }
+            }
+          },
+          {
+            "M": {
+              "birthday": {
+                "S": "19571212"
+              },
+              "country": {
+                "S": "中国"
+              },
+              "maritalStatus": {
+                "S": "已婚"
+              },
+              "name": {
+                "S": "李玲"
+              },
+              "occupation": {
+                "S": ""
+              },
+              "pinyin": {
+                "S": "Liling"
+              },
+              "relation": {
+                "S": "母亲"
+              }
+            }
+          }
+        ]
+      },
+      "pastWork": {
+        "L": [
+          {
+            "M": {
+              "address": {
+                "S": "山东省威海市荣成市成山镇北大街"
+              },
+              "company": {
+                "S": "冷面香肉馆"
+              },
+              "email": {
+                "S": ""
+              },
+              "from": {
+                "S": "2018年"
+              },
+              "phone": {
+                "S": ""
+              },
+              "position": {
+                "S": "老板"
+              },
+              "proof": {
+                "S": "可以提供进账"
+              },
+              "supervisor": {
+                "S": ""
+              },
+              "to": {
+                "S": "2019年"
+              }
+            }
+          },
+          {
+            "M": {
+              "address": {
+                "S": "抚顺商业城"
+              },
+              "company": {
+                "S": "斋藤寿司抚顺商业城店"
+              },
+              "email": {
+                "S": ""
+              },
+              "from": {
+                "S": "2026年4月"
+              },
+              "phone": {
+                "S": "18642376095"
+              },
+              "position": {
+                "S": "厨师"
+              },
+              "proof": {
+                "S": "否/寿司学徒"
+              },
+              "supervisor": {
+                "S": "金鑫"
+              },
+              "to": {
+                "S": "2026年7月"
+              }
+            }
+          },
+          {
+            "M": {
+              "address": {
+                "S": "抚顺市顺城区新城东路顺城区政府斜对面"
+              },
+              "company": {
+                "S": "佐酒•时光里"
+              },
+              "email": {
+                "S": ""
+              },
+              "from": {
+                "S": "2026年7"
+              },
+              "phone": {
+                "S": "13941386788"
+              },
+              "position": {
+                "S": "厨师"
+              },
+              "proof": {
+                "S": "否"
+              },
+              "supervisor": {
+                "S": "宋志伟"
+              },
+              "to": {
+                "S": "至今"
+              }
+            }
+          }
+        ]
+      },
+      "personal": {
+        "M": {
+          "birthday": {
+            "S": "1982年2月26日"
+          },
+          "birthplace": {
+            "S": "辽宁省抚顺市东洲区三院"
+          },
+          "chinaAddress": {
+            "S": "辽宁省抚顺市东洲区新屯街道绿都家园四号楼一单元1701"
+          },
+          "email": {
+            "S": "lyzj1982@qq.com"
+          },
+          "gender": {
+            "S": "男"
+          },
+          "idNo": {
+            "S": "210403198202261812"
+          },
+          "maritalStatus": {
+            "S": "离异"
+          },
+          "name": {
+            "S": "吴琼"
+          },
+          "nzAddress": {
+            "S": "辽宁省抚顺市东洲区新屯街道绿都家园四号楼一单元1701"
+          },
+          "passportExpiryDate": {
+            "S": "2036年1月3日"
+          },
+          "passportIssueDate": {
+            "S": "2026年1月4日"
+          },
+          "passportNo": {
+            "S": "EQ9987604"
+          },
+          "phone": {
+            "S": "15694237096"
+          }
+        }
+      },
+      "siblings": {
+        "L": [
+          {
+            "M": {
+              "birthday": {
+                "S": ""
+              },
+              "country": {
+                "S": ""
+              },
+              "maritalStatus": {
+                "S": ""
+              },
+              "name": {
+                "S": ""
+              },
+              "occupation": {
+                "S": ""
+              },
+              "pinyin": {
+                "S": ""
+              },
+              "relation": {
+                "S": ""
+              }
+            }
+          }
+        ]
+      },
+      "spouse": {
+        "M": {
+          "birthday": {
+            "S": "19800804"
+          },
+          "birthplace": {
+            "S": "抚顺市"
+          },
+          "country": {
+            "S": "中国"
+          },
+          "maritalStatus": {
+            "S": ""
+          },
+          "name": {
+            "S": "姚静"
+          },
+          "occupation": {
+            "S": ""
+          },
+          "passportNote": {
+            "S": "EQ9987603"
+          },
+          "pinyin": {
+            "S": "Yaojing"
+          },
+          "relation": {
+            "S": "爱人"
+          }
+        }
+      },
+      "travel": {
+        "L": [
+          {
+            "M": {
+              "airport": {
+                "S": "科罗尔罗曼莫图"
+              },
+              "country": {
+                "S": "帕劳共和国"
+              },
+              "departure": {
+                "S": "2018年4月"
+              },
+              "purpose": {
+                "S": "工作"
+              },
+              "returnDate": {
+                "S": "2018年10月"
+              }
+            }
+          }
+        ]
+      },
+      "visa": {
+        "M": {
+          "clientNumber": {
+            "S": ""
+          },
+          "expectedStay": {
+            "S": ""
+          },
+          "hadNzVisa": {
+            "S": ""
+          },
+          "visaFileNote": {
+            "S": ""
+          }
+        }
+      }
+    }
+  },
+  "materials": {
+    "M": {
+      "work#background": {
+        "L": [
+          {
+            "M": {
+              "categoryId": {
+                "S": "background"
+              },
+              "categoryTitle": {
+                "S": "签证历史与背景"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "001745ff2c2333e5e33bd03ca13c8099"
+              },
+              "materialId": {
+                "S": "676bd2ff331b"
+              },
+              "originalName": {
+                "S": "无犯罪记录证明(1).pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/background/20260726T231629Z-676bd2ff331b-无犯罪记录证明(1).pdf"
+              },
+              "size": {
+                "N": "1496363"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:16:29.897001Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          }
+        ]
+      },
+      "work#experience": {
+        "L": [
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "ff3b49ebdef46603916b7ae63337f4f4"
+              },
+              "materialId": {
+                "S": "bdd647c81699"
+              },
+              "originalName": {
+                "S": "图片_20260726104436_45_656.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T230331Z-bdd647c81699-图片_20260726104436_45_656.jpg"
+              },
+              "size": {
+                "N": "3927854"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:03:32.538356Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "073209675b1089b516135e94b0e548ea"
+              },
+              "materialId": {
+                "S": "6dd27d47fb9e"
+              },
+              "originalName": {
+                "S": "图片_20260726104435_44_656.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T230331Z-6dd27d47fb9e-图片_20260726104435_44_656.jpg"
+              },
+              "size": {
+                "N": "3968933"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:03:32.594170Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "76706d29f9ef3ff9850ba59ea1fc88fc"
+              },
+              "materialId": {
+                "S": "0de6788dd809"
+              },
+              "originalName": {
+                "S": "社保明细(1).pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231523Z-0de6788dd809-社保明细(1).pdf"
+              },
+              "size": {
+                "N": "1785147"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:15:24.411485Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "f63488747367fa38c9de488adc9c48fb"
+              },
+              "materialId": {
+                "S": "0e8e72877391"
+              },
+              "originalName": {
+                "S": "银行流水.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231543Z-0e8e72877391-银行流水.pdf"
+              },
+              "size": {
+                "N": "14645143"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:15:46.294291Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "d89fb6b126e9be0ecb4e9138c902d60b"
+              },
+              "materialId": {
+                "S": "0da3c26b3f27"
+              },
+              "originalName": {
+                "S": "工作证明.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231543Z-0da3c26b3f27-工作证明.pdf"
+              },
+              "size": {
+                "N": "1762256"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:15:46.344602Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "1ceba9cbf65b8523c6d83232a6e0fee6"
+              },
+              "materialId": {
+                "S": "cc644c2d371b"
+              },
+              "originalName": {
+                "S": "公积金.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231543Z-cc644c2d371b-公积金.pdf"
+              },
+              "size": {
+                "N": "2809181"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:15:46.384592Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "069905ef82a15123b1ce5611e4e52178"
+              },
+              "materialId": {
+                "S": "a48f179dfcb5"
+              },
+              "originalName": {
+                "S": "ecb556156785ba1bba9479efc6ff3d9c.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231739Z-a48f179dfcb5-ecb556156785ba1bba9479efc6ff3d9c.jpg"
+              },
+              "size": {
+                "N": "149707"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:40.553626Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "60b295b37a7dae9efe5c4e40fcd32aef"
+              },
+              "materialId": {
+                "S": "3024202581c5"
+              },
+              "originalName": {
+                "S": "5ff4438eaeea5abad5683c28f3159378.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231739Z-3024202581c5-5ff4438eaeea5abad5683c28f3159378.jpg"
+              },
+              "size": {
+                "N": "134457"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:40.584757Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "e0ffb55c1d085e1ad21cabb539b45ae0"
+              },
+              "materialId": {
+                "S": "cc8945c1d1fb"
+              },
+              "originalName": {
+                "S": "d8140f79d34131d769bf372ee3ba3a80.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231752Z-cc8945c1d1fb-d8140f79d34131d769bf372ee3ba3a80.jpg"
+              },
+              "size": {
+                "N": "129082"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:53.451483Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "experience"
+              },
+              "categoryTitle": {
+                "S": "工作经验证明"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "2df56cc5e753c0adb6dd3f9eecbcaad3"
+              },
+              "materialId": {
+                "S": "572a80488464"
+              },
+              "originalName": {
+                "S": "73fcb88889376dc5139a7db405a0b6b7.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/experience/20260726T231752Z-572a80488464-73fcb88889376dc5139a7db405a0b6b7.jpg"
+              },
+              "size": {
+                "N": "137817"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:53.504742Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          }
+        ]
+      },
+      "work#family": {
+        "L": [
+          {
+            "M": {
+              "categoryId": {
+                "S": "family"
+              },
+              "categoryTitle": {
+                "S": "家庭成员材料"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "a32eafbeaec82b5c1cd432281281fe27"
+              },
+              "materialId": {
+                "S": "e307351b99e0"
+              },
+              "originalName": {
+                "S": "姚静.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/family/20260726T231557Z-e307351b99e0-姚静.pdf"
+              },
+              "size": {
+                "N": "2441594"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:15:58.704686Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "family"
+              },
+              "categoryTitle": {
+                "S": "家庭成员材料"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "28073c51a97e667fae5c69970a6d92df"
+              },
+              "materialId": {
+                "S": "67f30b81f65e"
+              },
+              "originalName": {
+                "S": "吴金利.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/family/20260726T231557Z-67f30b81f65e-吴金利.pdf"
+              },
+              "size": {
+                "N": "2379757"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:15:58.744645Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          }
+        ]
+      },
+      "work#identity": {
+        "L": [
+          {
+            "M": {
+              "categoryId": {
+                "S": "identity"
+              },
+              "categoryTitle": {
+                "S": "基础身份材料"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "f8d71e4aae9bcf8f9234fcff361e64c4"
+              },
+              "materialId": {
+                "S": "f8c977f13264"
+              },
+              "originalName": {
+                "S": "吴琼.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/identity/20260726T231345Z-f8c977f13264-吴琼.pdf"
+              },
+              "size": {
+                "N": "9997895"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:13:47.904934Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "identity"
+              },
+              "categoryTitle": {
+                "S": "基础身份材料"
+              },
+              "contentType": {
+                "S": "application/pdf"
+              },
+              "etag": {
+                "S": "64b70011ca8157352b6719fb9aec7113"
+              },
+              "materialId": {
+                "S": "93ee4561951e"
+              },
+              "originalName": {
+                "S": "户口.pdf"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/identity/20260726T231452Z-93ee4561951e-户口.pdf"
+              },
+              "size": {
+                "N": "43827711"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:14:57.774904Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "identity"
+              },
+              "categoryTitle": {
+                "S": "基础身份材料"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "14c6e726780fd12668602a3d13efc814"
+              },
+              "materialId": {
+                "S": "a0adcdb4adc5"
+              },
+              "originalName": {
+                "S": "3f93ff4590ba36db6a805fe40f12763e.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/identity/20260726T231713Z-a0adcdb4adc5-3f93ff4590ba36db6a805fe40f12763e.jpg"
+              },
+              "size": {
+                "N": "117334"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:14.130327Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "identity"
+              },
+              "categoryTitle": {
+                "S": "基础身份材料"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "5348f8da76f6e5422b19dfc8ed1fe8e5"
+              },
+              "materialId": {
+                "S": "6a40960f2279"
+              },
+              "originalName": {
+                "S": "8bcd9bc9692e5d561025adbdd13bfbaf.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/identity/20260726T231713Z-6a40960f2279-8bcd9bc9692e5d561025adbdd13bfbaf.jpg"
+              },
+              "size": {
+                "N": "217481"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:14.174240Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          },
+          {
+            "M": {
+              "categoryId": {
+                "S": "identity"
+              },
+              "categoryTitle": {
+                "S": "基础身份材料"
+              },
+              "contentType": {
+                "S": "image/jpeg"
+              },
+              "etag": {
+                "S": "bff71d55fc109adcd4e4d193496ae4c6"
+              },
+              "materialId": {
+                "S": "3a705586bad0"
+              },
+              "originalName": {
+                "S": "bc216ff00bf54e6bfe0833cdf8799cfd.jpg"
+              },
+              "s3Bucket": {
+                "S": "ddvisapdf"
+              },
+              "s3Key": {
+                "S": "visa-profiles/吴琼-265a4e4a/materials/work/identity/20260726T231713Z-3a705586bad0-bc216ff00bf54e6bfe0833cdf8799cfd.jpg"
+              },
+              "size": {
+                "N": "1294017"
+              },
+              "status": {
+                "S": "uploaded"
+              },
+              "uploadedAt": {
+                "S": "2026-07-26T23:17:14.224795Z"
+              },
+              "visaType": {
+                "S": "work"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "notes": {
+    "S": ""
+  },
+  "passportNo": {
+    "S": "EQ9987604"
+  },
+  "phone": {
+    "S": "15694237096"
+  },
+  "recordType": {
+    "S": "visaProfile"
+  },
+  "status": {
+    "S": "draft"
+  },
+  "updatedAt": {
+    "S": "2026-07-26T23:34:58.724319Z"
+  },
+  "cognitoSub": {
+    "S": "c91ef4a8-b0a1-7061-1a03-783d8a03d777"
+  },
+  "userSub": {
+    "S": "c91ef4a8-b0a1-7061-1a03-783d8a03d777"
+  },
+  "ownerSub": {
+    "S": "c91ef4a8-b0a1-7061-1a03-783d8a03d777"
+  },
+  "sub": {
+    "S": "c91ef4a8-b0a1-7061-1a03-783d8a03d777"
+  }
+}

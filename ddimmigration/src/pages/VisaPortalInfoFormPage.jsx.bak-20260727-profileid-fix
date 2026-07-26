@@ -4,7 +4,7 @@ import { getCurrentCognitoSession, userPool } from '../auth/cognito.js'
 import VisaInfoFormPage from './VisaInfoFormPage.jsx'
 
 function VisaPortalInfoFormPage() {
-  const [authState, setAuthState] = useState({ loading: true, sub: '', email: '' })
+  const [authState, setAuthState] = useState({ loading: true, sub: '' })
 
   useEffect(() => {
     let cancelled = false
@@ -13,10 +13,10 @@ function VisaPortalInfoFormPage() {
       .then((session) => {
         if (cancelled) return
         const payload = session.getIdToken().payload || {}
-        setAuthState({ loading: false, sub: payload.sub || '', email: payload.email || '' })
+        setAuthState({ loading: false, sub: payload.sub || '' })
       })
       .catch(() => {
-        if (!cancelled) setAuthState({ loading: false, sub: '', email: '' })
+        if (!cancelled) setAuthState({ loading: false, sub: '' })
       })
 
     return () => {
@@ -32,7 +32,7 @@ function VisaPortalInfoFormPage() {
     return <Navigate to="/visa-portal/login" replace />
   }
 
-  return <VisaInfoFormPage portalUserSub={authState.sub} portalUserEmail={authState.email} />
+  return <VisaInfoFormPage portalUserSub={authState.sub} />
 }
 
 export default VisaPortalInfoFormPage

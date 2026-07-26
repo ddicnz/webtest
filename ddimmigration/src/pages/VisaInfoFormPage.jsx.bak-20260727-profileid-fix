@@ -12,8 +12,6 @@ const VISA_PROFILE_GET_API_URL =
   'https://3dslqsetfl.execute-api.ap-southeast-2.amazonaws.com/default/getVisaProfile'
 const VISA_PORTAL_PROFILE_API_URL =
   'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
-const SHOW_VISA_PROFILES_URL =
-  'https://aixwxfo4xg.execute-api.ap-southeast-2.amazonaws.com/default/showVisaProfiles'
 const VISA_PROFILE_SUBMIT_PDF_API_URL =
   'https://918vdvy5vh.execute-api.ap-southeast-2.amazonaws.com/default/submitVisaProfilePdf'
 const VISA_PROFILE_ID_KEY = 'ddimmigration_visa_profile_id_v1'
@@ -421,21 +419,7 @@ function PersonalInfoSummary({ data }) {
   )
 }
 
-async function findProfileByEmail(email) {
-  const normalizedEmail = String(email || '').trim().toLowerCase()
-  if (!normalizedEmail) return null
-
-  const response = await fetch(SHOW_VISA_PROFILES_URL)
-  const data = await response.json().catch(() => ({}))
-  const items = Array.isArray(data?.items) ? data.items : []
-
-  return items.find((item) => {
-    const itemEmail = String(item?.email || item?.formData?.personal?.email || '').trim().toLowerCase()
-    return itemEmail === normalizedEmail
-  }) || null
-}
-
-function VisaInfoFormPage({ portalUserSub = '', portalUserEmail = '' }) {
+function VisaInfoFormPage({ portalUserSub = '' }) {
   const navigate = useNavigate()
   const isPortalMode = Boolean(portalUserSub)
   const draftStorageKey = isPortalMode
@@ -484,42 +468,31 @@ function VisaInfoFormPage({ portalUserSub = '', portalUserEmail = '' }) {
 
         const res = await fetch(url, { headers })
         const data = await res.json().catch(() => ({}))
-        let profileData = data
 
-        if (!res.ok || data?.ok === false || (isPortalMode && data?.found === false)) {
+        if (!res.ok || data?.ok === false) {
           if (isPortalMode) {
-            const matchedProfile = await findProfileByEmail(portalUserEmail)
-            if (matchedProfile) {
-              profileData = {
-                ...matchedProfile,
-                item: matchedProfile,
-                profileId: matchedProfile.profileId,
-              }
-            } else {
-              throw new Error(data?.message || `读取资料失败 HTTP ${res.status}`)
-            }
-          } else {
-            return
+            throw new Error(data?.message || `读取资料失败 HTTP ${res.status}`)
           }
+          return
         }
-        if (isPortalMode && profileData?.profileId) {
-          portalProfileIdRef.current = profileData.profileId
+        if (isPortalMode && data?.profileId) {
+          portalProfileIdRef.current = data.profileId
         }
-        if (profileData?.found === false) return
+        if (data?.found === false) return
 
-        const nextFormData = profileData?.formData || profileData?.item?.formData
+        const nextFormData = data?.formData || data?.item?.formData
         if (!nextFormData || typeof nextFormData !== 'object') return
         if (cancelled) return
 
-        const nextStep = Number.isInteger(profileData?.activeStep)
-          ? profileData.activeStep
-          : Number.isInteger(profileData?.item?.activeStep)
-            ? profileData.item.activeStep
+        const nextStep = Number.isInteger(data?.activeStep)
+          ? data.activeStep
+          : Number.isInteger(data?.item?.activeStep)
+            ? data.item.activeStep
             : 0
 
         setFormData(nextFormData)
         setActiveStep(Math.min(Math.max(nextStep, 0), steps.length - 1))
-        setLastServerSavedAt(profileData?.updatedAt || profileData?.item?.updatedAt || '')
+        setLastServerSavedAt(data?.updatedAt || data?.item?.updatedAt || '')
         setServerSaveStatus('saved')
       } catch (error) {
         if (isPortalMode && !cancelled) {
@@ -535,7 +508,7 @@ function VisaInfoFormPage({ portalUserSub = '', portalUserEmail = '' }) {
     return () => {
       cancelled = true
     }
-  }, [isPortalMode, portalUserEmail, portalUserSub])
+  }, [isPortalMode, portalUserSub])
 
   const updateGroup = (group, key, value) => {
     setFormData((prev) => ({
