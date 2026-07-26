@@ -5,47 +5,6 @@ import { userPool } from '../auth/cognito.js'
 
 const initialStatus = { type: '', message: '' }
 
-const formatAuthError = (error, fallbackMessage) => {
-  const message = error?.message || ''
-  const lowerMessage = message.toLowerCase()
-
-  if (lowerMessage.includes('password did not conform with policy')) {
-    return '密码不符合要求：请至少包含 8 位，并使用大小写字母、数字和特殊符号。'
-  }
-  if (lowerMessage.includes('password must have symbol characters')) {
-    return '密码不符合要求：请至少包含一个特殊符号，例如 ! @ # $ %。'
-  }
-  if (lowerMessage.includes('password must have uppercase characters')) {
-    return '密码不符合要求：请至少包含一个大写字母。'
-  }
-  if (lowerMessage.includes('password must have lowercase characters')) {
-    return '密码不符合要求：请至少包含一个小写字母。'
-  }
-  if (lowerMessage.includes('password must have numeric characters')) {
-    return '密码不符合要求：请至少包含一个数字。'
-  }
-  if (lowerMessage.includes('password not long enough')) {
-    return '密码不符合要求：长度至少需要 8 位。'
-  }
-  if (lowerMessage.includes('username/client id combination not found') || lowerMessage.includes('user does not exist')) {
-    return '账号不存在，请检查用户名是否正确。'
-  }
-  if (lowerMessage.includes('incorrect username or password')) {
-    return '用户名或密码不正确，请重新输入。'
-  }
-  if (lowerMessage.includes('user already exists')) {
-    return '该用户名已被注册，请换一个用户名。'
-  }
-  if (lowerMessage.includes('invalid verification code')) {
-    return '验证码不正确或已过期，请重新检查。'
-  }
-  if (lowerMessage.includes('attempt limit exceeded')) {
-    return '尝试次数过多，请稍后再试。'
-  }
-
-  return fallbackMessage
-}
-
 function VisaPortalLoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -93,7 +52,7 @@ function VisaPortalLoginPage() {
     },
     onFailure: (error) => {
       setSubmitting(false)
-      setStatus({ type: 'error', message: formatAuthError(error, '登录失败，请检查用户名和密码。') })
+      setStatus({ type: 'error', message: error?.message || '登录失败，请检查用户名和密码。' })
     },
     newPasswordRequired: (userAttributes) => {
       const attributes = { ...userAttributes }
@@ -175,7 +134,7 @@ function VisaPortalLoginPage() {
     userPool.signUp(loginName, password, attributes, null, (error, result) => {
       setSubmitting(false)
       if (error) {
-        setStatus({ type: 'error', message: formatAuthError(error, '注册失败，请稍后重试。') })
+        setStatus({ type: 'error', message: error.message || '注册失败，请稍后重试。' })
         return
       }
       if (!result?.userConfirmed) {
@@ -204,7 +163,7 @@ function VisaPortalLoginPage() {
       onSuccess: () => setSubmitting(false),
       onFailure: (error) => {
         setSubmitting(false)
-        setStatus({ type: 'error', message: formatAuthError(error, '验证码发送失败，请稍后重试。') })
+        setStatus({ type: 'error', message: error?.message || '验证码发送失败，请稍后重试。' })
       },
       inputVerificationCode: () => {
         setSubmitting(false)
@@ -244,7 +203,7 @@ function VisaPortalLoginPage() {
       },
       onFailure: (error) => {
         setSubmitting(false)
-        setStatus({ type: 'error', message: formatAuthError(error, '密码重置失败，请检查验证码。') })
+        setStatus({ type: 'error', message: error?.message || '密码重置失败，请检查验证码。' })
       },
     })
   }
