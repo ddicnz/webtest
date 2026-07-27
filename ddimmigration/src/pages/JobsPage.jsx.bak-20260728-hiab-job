@@ -1,11 +1,10 @@
 import { useState } from 'react'
 
 const JOB_LEVEL3_PREFIX = ['岗位等级：3级', '英语要求：雅思 4.0 或 PTE 29']
-const JOB_LEVEL4_PREFIX = ['岗位等级：4级', '英语要求：雅思 4.0 或 PTE 29']
 const JOB_LEVEL2_PREFIX = ['岗位等级：2级', '不需要英语']
 
 function normalizeJob(job) {
-  const prefix = job.skillLevel === 2 ? JOB_LEVEL2_PREFIX : job.skillLevel === 4 ? JOB_LEVEL4_PREFIX : JOB_LEVEL3_PREFIX
+  const prefix = job.skillLevel === 2 ? JOB_LEVEL2_PREFIX : JOB_LEVEL3_PREFIX
   return { ...job, requirements: [...prefix, ...job.requirements] }
 }
 
@@ -85,23 +84,6 @@ function JobsPage() {
       },
     ],
     construction: [
-      {
-        id: 39,
-        skillLevel: 4,
-        title: '货车司机',
-        requirements: [
-          '工作地点：奥克兰',
-          '驾驶 Class 2 Hiab 吊臂卡车运输脚手架材料',
-          '按照施工计划，将材料安全送达各工地',
-          '负责车辆日常检查及基本维护',
-          '持有新西兰 Full Class 2 或以上驾照',
-          '每周 45 小时',
-        ],
-        salary: '30-35 纽币/小时，根据经验面议',
-        visa: 'AEWV 5年工签',
-        living: '食宿自理',
-        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
-      },
       {
         id: 36,
         title: '样板房安装工',
