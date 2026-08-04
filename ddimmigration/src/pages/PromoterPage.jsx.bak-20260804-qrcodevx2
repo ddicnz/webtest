@@ -5,7 +5,7 @@ function PromoterPage() {
         <div className="promoter-hero-inner">
           <div className="promoter-hero-copy">
             <p className="promoter-kicker">业务合作招募</p>
-            <h1 className="promoter-title">成为新西兰嘀嘀移民业务推广员</h1>
+            <h1 className="promoter-title">成为嘀嘀移民业务推广员</h1>
             <p className="promoter-lead">
               身边有朋友想来新西兰留学、办理工签或做签证规划？扫码联系我们，推荐真实客户成功合作后，可按项目获得推广返佣。
             </p>
@@ -18,7 +18,7 @@ function PromoterPage() {
           </div>
 
           <div className="promoter-qr-card">
-            <img src="/pic/qrcodevx2.jpg" alt="业务合作二维码" />
+            <img src="/pic/qrcodevx3.jpg" alt="业务合作二维码" />
             <h2>扫码成为推广员</h2>
             <p>添加业务合作微信，说明推荐渠道与客户情况。</p>
           </div>
