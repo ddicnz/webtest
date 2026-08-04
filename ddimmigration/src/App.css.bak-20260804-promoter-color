@@ -2291,7 +2291,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   overflow: hidden;
   color: #fff;
   background:
-    linear-gradient(135deg, rgba(7, 44, 68, 0.96) 0%, rgba(15, 91, 121, 0.94) 58%, rgba(43, 124, 151, 0.9) 100%),
+    linear-gradient(135deg, rgba(9, 84, 96, 0.96) 0%, rgba(17, 126, 105, 0.95) 56%, rgba(211, 157, 55, 0.95) 100%),
     url('/pic/services.jpg') center/cover;
   border-radius: 8px;
 }
@@ -2338,8 +2338,8 @@ img[src*="album/office"][src*="IMG_2486"] {
   padding: 8px 12px;
   font-size: 14px;
   font-weight: 800;
-  color: #0c4263;
-  background: rgba(246, 251, 253, 0.95);
+  color: #0b5a68;
+  background: rgba(255, 255, 255, 0.93);
   border-radius: 6px;
 }
 
@@ -2349,8 +2349,8 @@ img[src*="album/office"][src*="IMG_2486"] {
   align-items: center;
   padding: 18px;
   text-align: center;
-  color: #0c4263;
-  background: rgba(247, 251, 253, 0.98);
+  color: #0b5a68;
+  background: rgba(255, 255, 255, 0.97);
   border-radius: 8px;
 }
 
@@ -2365,7 +2365,7 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin: 14px 0 6px;
   font-size: 18px;
   line-height: 1.3;
-  color: #0c4263;
+  color: #0b5a68;
 }
 
 .promoter-qr-card p {

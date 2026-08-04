@@ -14,7 +14,6 @@ import NewsPage from './pages/NewsPage.jsx'
 import NewsDetailPage from './pages/NewsDetailPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 import FaqPage from './pages/FaqPage.jsx'
-import PromoterPage from './pages/PromoterPage.jsx'
 import StudyPage from './pages/StudyPage.jsx'
 import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
@@ -39,7 +38,6 @@ const navItems = [
   { label: '移民资讯', path: '/news' },
   { label: '留学专栏', path: '/study/University' },
   { label: '联络我们', path: '/contactus' },
-  { label: '业务推广', path: '/promoter' },
   { label: '常见问题', path: '/faq' },
 ]
 
@@ -84,9 +82,6 @@ function HeroSidebarLayout() {
   } else if (location.pathname === '/faq') {
     heroImage = '/pic/contactus.jpg'
     heroClassName = 'about-hero about-hero--faq'
-  } else if (location.pathname === '/promoter') {
-    heroImage = '/pic/services.jpg'
-    heroClassName = 'about-hero about-hero--promoter'
   } else if (location.pathname.startsWith('/study')) {
     heroImage = '/pic/pexels-pixabay-267885.jpg'
     heroClassName = 'about-hero about-hero--study'
@@ -134,7 +129,6 @@ function App() {
     location.pathname.startsWith('/cases') ||
     location.pathname.startsWith('/about') ||
     location.pathname.startsWith('/faq') ||
-    location.pathname.startsWith('/promoter') ||
     location.pathname.startsWith('/assessment') ||
     location.pathname.startsWith('/visa-info-form')
 
@@ -399,7 +393,6 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
           <Route path="/faq" element={<FaqPage />} />
-          <Route path="/promoter" element={<PromoterPage />} />
           <Route path="/assessment" element={<AssessmentPage />} />
           <Route path="/visa-info-form" element={<VisaInfoFormPage />} />
           <Route path="/assesment" element={<Navigate to="/assessment" replace />} />

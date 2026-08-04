@@ -1,0 +1,75 @@
+function PromoterPage() {
+  return (
+    <main className="promoter-page">
+      <section className="promoter-hero">
+        <div className="promoter-hero-inner">
+          <div className="promoter-hero-copy">
+            <p className="promoter-kicker">业务合作招募</p>
+            <h1 className="promoter-title">成为嘀嘀移民业务推广员</h1>
+            <p className="promoter-lead">
+              身边有朋友想来新西兰留学、办理工签或做签证规划？扫码联系我们，推荐真实客户成功合作后，可按项目获得推广返佣。
+            </p>
+            <div className="promoter-tags">
+              <span>留学推荐</span>
+              <span>工签办理</span>
+              <span>签证规划</span>
+              <span>业务合作</span>
+            </div>
+          </div>
+
+          <div className="promoter-qr-card">
+            <img src="/pic/qrcodevx3.jpg" alt="业务合作二维码" />
+            <h2>扫码成为推广员</h2>
+            <p>添加业务合作微信，说明推荐渠道与客户情况。</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="promoter-section">
+        <h2>适合哪些推荐</h2>
+        <div className="promoter-grid">
+          <article>
+            <h3>留学客户</h3>
+            <p>推荐计划申请新西兰学校、语言课程、大学、初高中或亲子留学的客户。</p>
+          </article>
+          <article>
+            <h3>工签客户</h3>
+            <p>推荐想了解 AEWV、配偶工签、学后工签、换雇主 VOC 等办理方向的客户。</p>
+          </article>
+          <article>
+            <h3>签证规划客户</h3>
+            <p>推荐需要结合学习、工作、家庭随行或后续移民路径做整体规划的客户。</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="promoter-process">
+        <h2>合作流程</h2>
+        <ol>
+          <li>
+            <strong>扫码联系</strong>
+            <span>添加业务合作微信，确认推广员身份。</span>
+          </li>
+          <li>
+            <strong>登记推荐</strong>
+            <span>提交客户基础需求，避免重复归属。</span>
+          </li>
+          <li>
+            <strong>客户成交</strong>
+            <span>客户与我们确认服务并完成合作。</span>
+          </li>
+          <li>
+            <strong>结算返佣</strong>
+            <span>按双方确认的合作方案结算推广返佣。</span>
+          </li>
+        </ol>
+      </section>
+
+      <p className="promoter-disclaimer">
+        返佣标准、适用项目、发放时间与条件，以双方确认的合作方案为准。
+      </p>
+    </main>
+  )
+}
+
+export default PromoterPage
