@@ -18,7 +18,7 @@ function PromoterPage() {
           </div>
 
           <div className="promoter-qr-card">
-            <img src="/pic/qrcodevx1.jpg" alt="业务合作二维码" />
+            <img src="/pic/qrcodevx2.jpg" alt="业务合作二维码" />
             <h2>扫码成为推广员</h2>
             <p>添加业务合作微信，说明推荐渠道与客户情况。</p>
           </div>

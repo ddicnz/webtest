@@ -39,7 +39,7 @@ const navItems = [
   { label: '移民资讯', path: '/news' },
   { label: '留学专栏', path: '/study/University' },
   { label: '联络我们', path: '/contactus' },
-  { label: '成为推广员', path: '/promoter' },
+  { label: '业务推广', path: '/promoter' },
   { label: '常见问题', path: '/faq' },
 ]
 
