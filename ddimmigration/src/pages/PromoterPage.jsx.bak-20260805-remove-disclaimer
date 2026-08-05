@@ -41,9 +41,6 @@ function PromoterPage() {
             <p>推荐需要结合学习、工作、家庭随行或后续移民路径做整体规划的客户。</p>
           </article>
         </div>
-        <p className="promoter-zero-cost">
-          0成本加入推广合作。只要您身边有真实想了解新西兰留学、出国劳务、签证办理或移民规划的朋友，把客户推荐给我们，后续咨询、方案沟通和材料服务由新西兰嘀嘀移民的专业团队负责，成功后会有返佣。
-        </p>
       </section>
 
       <section className="promoter-process">
@@ -67,6 +64,10 @@ function PromoterPage() {
           </li>
         </ol>
       </section>
+
+      <p className="promoter-disclaimer">
+        返佣标准、适用项目、发放时间与条件，以双方确认的合作方案为准。
+      </p>
     </main>
   )
 }
