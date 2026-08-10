@@ -37,12 +37,8 @@ function PromoterPage() {
             <p>推荐想了解 AEWV、配偶工签、学后工签、换雇主 VOC 等办理方向的客户。</p>
           </article>
           <article>
-            <h3>移民规划用户</h3>
+            <h3>签证规划客户</h3>
             <p>推荐需要结合学习、工作、家庭随行或后续移民路径做整体规划的客户。</p>
-          </article>
-          <article>
-            <h3>其他签证办理</h3>
-            <p>推荐需要办理旅游签、配偶签、父母团聚、访问签或其他新西兰签证的客户。</p>
           </article>
         </div>
         <p className="promoter-zero-cost">
