@@ -13,6 +13,7 @@ function JobsPage() {
   const [selectedCategory, setSelectedCategory] = useState('auto')
 
   const categories = [
+    { id: 'urgent', label: '紧急招聘' },
     { id: 'auto', label: '汽车类' },
     { id: 'construction', label: '建筑类' },
     { id: 'catering', label: '餐饮类' },
@@ -21,6 +22,113 @@ function JobsPage() {
   ]
 
   const jobsByCategory = {
+    urgent: [
+      {
+        id: 1001,
+        title: '样板房安装工',
+        requirements: [
+          '有建筑背景，年轻学习能力强，可培训',
+          '样板房安装、现场施工配合',
+          '每周 40 小时以上',
+        ],
+        salary: '27 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 1002,
+        title: '东北菜厨师',
+        requirements: [
+          '会炒菜、速度快，配菜都可以做，技术全面，没有大厨架子',
+          '40 岁以下，东北菜（大连籍、哈尔滨优先）',
+          '每周 6 天，每天 10 个小时',
+        ],
+        salary: '税后 1000 看能力',
+        visa: 'AEWV 5年工签',
+        living: '工作 2 餐，住自理',
+        leave: '面议',
+      },
+      {
+        id: 1003,
+        skillLevel: 2,
+        title: '主厨',
+        requirements: ['有餐厅主厨或厨房管理经验', '能独立负责出餐与厨房运作', '每周约 50 小时'],
+        salary: '28 纽币/小时税前起',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 1004,
+        title: '汽修钣金喷漆',
+        requirements: [
+          '能独立完成腻子、喷漆',
+          '熟练凹陷修复、无损修复，铝合金钣金、切割经验',
+          '有 4S 店工作经验最佳',
+        ],
+        salary: '税前28 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 1005,
+        skillLevel: 4,
+        title: '货车司机',
+        requirements: [
+          '工作地点：奥克兰',
+          '驾驶 Class 2 Hiab 吊臂卡车运输脚手架材料',
+          '按照施工计划，将材料安全送达各工地',
+          '负责车辆日常检查及基本维护',
+          '持有新西兰 Full Class 2 或以上驾照',
+          '每周 45 小时',
+        ],
+        salary: '30-35 纽币/小时，根据经验面议',
+        visa: 'AEWV 5年工签',
+        living: '食宿自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 1006,
+        title: '切配厨师',
+        requirements: [
+          '刀工好、速度快',
+          '最好年龄 35 岁以下',
+          '厨师、配菜工随时面试',
+        ],
+        salary: '每周税后 900 纽币起，看能力定',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 1007,
+        title: '西点师',
+        requirements: [
+          '女士优先，工作地点在基督城',
+          '会做简单的午餐、三明治、可颂、小餐包等面包，熟悉烘焙技术，可以独立完成工作',
+          '最好有丰富的面包店工作经验或者星级酒店饼房工作经验',
+        ],
+        salary: '25 纽币/小时起',
+        visa: 'AEWV 5年工签',
+        living: '吃住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+      {
+        id: 1008,
+        title: '中式面点师',
+        requirements: [
+          '45 岁以内，专业面点师傅',
+          '会天津狗不理包子或粤式点心、各式包点、点心、酥饼、小笼包、生煎等',
+          '提供工作餐',
+        ],
+        salary: '每周税后 1000 纽币',
+        visa: 'AEWV 5年工签',
+        living: '工作餐、住自理',
+        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+      },
+    ],
     auto: [
       {
         id: 101,
