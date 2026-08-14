@@ -5773,49 +5773,8 @@ textarea.admin-visa-edit-input {
   font: inherit;
 }
 
-.promoter-referral-link-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: stretch;
-}
-
-.promoter-referral-link-row .visa-portal-secondary-btn {
-  min-width: 104px;
-  white-space: nowrap;
-}
-
-.promoter-copy-btn.copied {
-  border-color: #2f8f62;
-  background: #2f8f62;
-  color: #fff;
-}
-
-.promoter-helper-wechat {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 128px;
-  gap: 18px;
-  align-items: center;
-  margin-top: 22px;
-  padding: 16px;
-  border: 1px solid #d4e2ea;
-  border-radius: 8px;
-  background: #f8fbfc;
-}
-
-.promoter-helper-wechat h3 {
-  margin: 0;
-  color: #102f49;
-  font-size: 18px;
-}
-
-.promoter-helper-wechat img {
-  width: 128px;
-  height: 128px;
-  object-fit: contain;
-  border: 1px solid #e2e9ed;
-  border-radius: 6px;
-  background: #fff;
+.promoter-referral-link .visa-portal-secondary-btn {
+  justify-self: start;
 }
 
 .promoter-channel-options {
@@ -6444,14 +6403,6 @@ textarea.admin-visa-edit-input {
   .visa-portal-material-card-actions {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .promoter-referral-link-row {
-    grid-template-columns: 1fr;
-  }
-
-  .promoter-helper-wechat {
-    grid-template-columns: 1fr;
   }
 }
 

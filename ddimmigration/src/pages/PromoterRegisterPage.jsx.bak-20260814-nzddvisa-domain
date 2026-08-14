@@ -11,7 +11,7 @@ const CHANNEL_OPTIONS = ['朋友圈', '微信群', '小红书', '抖音', '熟�
 
 const makeReferralLink = (code) => {
   if (!code) return ''
-  return `https://nzddvisa.com/visa-portal/login?ref=${encodeURIComponent(code)}`
+  return `https://nzdvisa.com/visa-portal/login?ref=${encodeURIComponent(code)}`
 }
 
 function PromoterRegisterPage() {

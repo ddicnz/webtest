@@ -11,7 +11,7 @@ const CHANNEL_OPTIONS = ['朋友圈', '微信群', '小红书', '抖音', '熟�
 
 const makeReferralLink = (code) => {
   if (!code) return ''
-  return `https://nzddvisa.com/visa-portal/login?ref=${encodeURIComponent(code)}`
+  return `https://nzdvisa.com/visa-portal/login?ref=${encodeURIComponent(code)}`
 }
 
 function PromoterRegisterPage() {
@@ -23,7 +23,6 @@ function PromoterRegisterPage() {
     email: '',
   }))
   const [form, setForm] = useState({
-    name: '',
     wechat: '',
     phone: '',
     channels: ['朋友圈'],
@@ -133,7 +132,6 @@ function PromoterRegisterPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: form.name.trim(),
             wechat: form.wechat.trim(),
             phone: form.phone.trim(),
             channels: form.channels,
@@ -190,7 +188,7 @@ function PromoterRegisterPage() {
                   <input type="text" value={referralLink} readOnly />
                   <button
                     type="button"
-                    className={`visa-portal-secondary-btn promoter-copy-btn${copySuccess ? ' copied' : ''}`}
+                    className="visa-portal-secondary-btn"
                     onClick={handleCopyReferralLink}
                   >
                     {copySuccess ? '复制成功' : '复制链接'}
@@ -198,13 +196,6 @@ function PromoterRegisterPage() {
                 </div>
               </div>
             )}
-            <div className="promoter-helper-wechat">
-              <div>
-                <h3>添加推广小助手微信</h3>
-                <p>扫码添加后，可以咨询推荐流程、客户登记和推广链接使用方式。</p>
-              </div>
-              <img src="/pic/qrcodevx1.jpg" alt="推广小助手微信二维码" />
-            </div>
             <div className="promoter-apply-actions">
               <button type="button" className="visa-portal-secondary-btn" onClick={() => navigate('/promoter')}>查看推广介绍页</button>
             </div>
@@ -215,17 +206,6 @@ function PromoterRegisterPage() {
               <h2>推广员申请资料</h2>
               <p>提交后会直接开通推广员身份，并生成您的专属推荐码。</p>
             </div>
-
-            <label className="visa-portal-field">
-              <span>姓名</span>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(event) => updateField('name', event.target.value)}
-                placeholder="请输入您的姓名"
-                required
-              />
-            </label>
 
             <label className="visa-portal-field">
               <span>微信号</span>
