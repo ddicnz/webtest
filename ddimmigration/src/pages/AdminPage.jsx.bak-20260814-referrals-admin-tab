@@ -13,8 +13,6 @@ const UPDATE_VISA_PROFILE_URL =
   'https://wx34ecupwj.execute-api.ap-southeast-2.amazonaws.com/default/updateVisaProfile'
 const DELETE_VISA_PROFILE_URL =
   'https://41uill5fg6.execute-api.ap-southeast-2.amazonaws.com/default/deleteVisaProfile'
-const SHOW_REFERRALS_URL =
-  'https://qghiyn141i.execute-api.ap-southeast-2.amazonaws.com/default/showReferrals'
 const SURVEY_PAGE_SIZE = 20
 
 const TAB_OPTIONS = [
@@ -312,65 +310,6 @@ function SurveyCard({ item }) {
         <p><strong>来源：</strong>{displayValue(item.source)}</p>
         <p><strong>时间：</strong>{formatTime(item.createdAt)}</p>
         <p className="admin-advice admin-advice--base"><strong>留言：</strong>{displayValue(item.message)}</p>
-      </div>
-    </article>
-  )
-}
-
-function groupReferralsByPromoter(items) {
-  const groups = new Map()
-
-  items.forEach((item) => {
-    const key =
-      item.promoterProfileId ||
-      item.promoterOwnerSub ||
-      item.promoterEmail ||
-      item.referralCode ||
-      'unknown-promoter'
-
-    if (!groups.has(key)) {
-      groups.set(key, {
-        id: key,
-        promoterUsername: item.promoterUsername,
-        promoterEmail: item.promoterEmail,
-        referrals: [],
-      })
-    }
-
-    const group = groups.get(key)
-    if (!group.promoterUsername && item.promoterUsername) {
-      group.promoterUsername = item.promoterUsername
-    }
-    if (!group.promoterEmail && item.promoterEmail) {
-      group.promoterEmail = item.promoterEmail
-    }
-
-    group.referrals.push(item)
-  })
-
-  return Array.from(groups.values())
-}
-
-function ReferralGroupCard({ group }) {
-  return (
-    <article className="admin-lead-card admin-referral-card">
-      <header className="admin-lead-header">
-        <div>
-          <h3 className="admin-lead-title">推荐人：{displayValue(group.promoterUsername)}</h3>
-          <p className="admin-referral-email">推荐人邮箱：{displayValue(group.promoterEmail)}</p>
-        </div>
-        <p className="admin-lead-time">被推荐人数：{group.referrals.length}</p>
-      </header>
-      <div className="admin-referral-list">
-        {group.referrals.map((item) => (
-          <div
-            className="admin-referral-row"
-            key={item.referralId || `${item.referredProfileId}-${item.createdAt}`}
-          >
-            <p><strong>被推荐人：</strong>{displayValue(item.referredUsername)}</p>
-            <p><strong>被推荐人邮箱：</strong>{displayValue(item.referredEmail)}</p>
-          </div>
-        ))}
       </div>
     </article>
   )
@@ -930,12 +869,7 @@ function AdminPage() {
   const [visaProfilesError, setVisaProfilesError] = useState('')
   const [visaProfilesLoaded, setVisaProfilesLoaded] = useState(false)
   const [selectedVisaProfile, setSelectedVisaProfile] = useState(null)
-  const [referralItems, setReferralItems] = useState([])
-  const [referralsLoading, setReferralsLoading] = useState(false)
-  const [referralsError, setReferralsError] = useState('')
-  const [referralsLoaded, setReferralsLoaded] = useState(false)
   const canManageVisaProfiles = adminAuth.authorized
-  const groupedReferralItems = useMemo(() => groupReferralsByPromoter(referralItems), [referralItems])
 
   useEffect(() => {
     let cancelled = false
@@ -1060,38 +994,6 @@ function AdminPage() {
     void loadVisaProfiles()
   }, [canManageVisaProfiles, activeView, visaProfilesLoaded])
 
-  const loadReferrals = async () => {
-    setReferralsLoading(true)
-    setReferralsError('')
-    try {
-      if (!SHOW_REFERRALS_URL) {
-        setReferralItems([])
-        setReferralsLoaded(true)
-        return
-      }
-
-      const res = await fetch(SHOW_REFERRALS_URL, {
-        headers: makeAuthHeaders(adminAuth.token),
-      })
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || data?.ok === false) {
-        throw new Error(data?.detail || data?.error || data?.message || `HTTP ${res.status}`)
-      }
-      const nextItems = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : []
-      setReferralItems(nextItems)
-      setReferralsLoaded(true)
-    } catch (e) {
-      setReferralsError(e instanceof Error ? e.message : String(e))
-    } finally {
-      setReferralsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    if (!canManageVisaProfiles || activeView !== 'referrals' || referralsLoaded) return
-    void loadReferrals()
-  }, [canManageVisaProfiles, activeView, referralsLoaded])
-
   const handleVisaProfileDeleted = (profileId) => {
     setVisaProfileItems((prev) => prev.filter((item) => item.profileId !== profileId))
     setSelectedVisaProfile((prev) => (prev?.profileId === profileId ? null : prev))
@@ -1161,16 +1063,6 @@ function AdminPage() {
           onClick={() => setActiveView('visaProfiles')}
         >
           客户签证材料
-        </button>
-        <button
-          type="button"
-          className={`admin-tab-btn${activeView === 'referrals' ? ' active' : ''}`}
-          onClick={() => {
-            setActiveView('referrals')
-            setSelectedVisaProfile(null)
-          }}
-        >
-          推广推荐
         </button>
         <button
           type="button"
@@ -1292,44 +1184,6 @@ function AdminPage() {
               </button>
             </nav>
           </div>
-        </>
-      ) : activeView === 'referrals' ? (
-        <>
-          {!canManageVisaProfiles ? (
-            <p className="admin-error">推广推荐需要 Cognito 管理员权限。</p>
-          ) : (
-            <>
-              <div className="admin-survey-actions">
-                <button
-                  type="button"
-                  className="admin-auth-btn"
-                  onClick={() => {
-                    setReferralsLoaded(false)
-                    void loadReferrals()
-                  }}
-                  disabled={referralsLoading || !SHOW_REFERRALS_URL}
-                >
-                  {referralsLoading ? '刷新中...' : '刷新推广推荐'}
-                </button>
-              </div>
-              {!SHOW_REFERRALS_URL && (
-                <p className="admin-empty">推广推荐前端已搭好。接入 showReferrals API 后，这里会显示 DDReferrals 里的推荐关系。</p>
-              )}
-              {referralsLoading && referralItems.length === 0 && <p className="admin-loading">加载中...</p>}
-              {!referralsLoading && referralsError && <p className="admin-error">加载失败：{referralsError}</p>}
-              {!referralsLoading && !referralsError && SHOW_REFERRALS_URL && (
-                <section className="admin-list">
-                  {groupedReferralItems.length === 0 ? (
-                    <p className="admin-empty">当前暂无推广推荐记录。</p>
-                  ) : (
-                    groupedReferralItems.map((group) => (
-                      <ReferralGroupCard key={group.id} group={group} />
-                    ))
-                  )}
-                </section>
-              )}
-            </>
-          )}
         </>
       ) : (
         <>

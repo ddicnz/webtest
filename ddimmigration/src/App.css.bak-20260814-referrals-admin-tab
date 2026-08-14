@@ -5039,39 +5039,6 @@ img[src*="album/office"][src*="IMG_2486"] {
   padding: 14px;
 }
 
-.admin-referral-card .admin-lead-title {
-  color: #102f49;
-}
-
-.admin-referral-email {
-  margin: 6px 0 0;
-  color: #566b7c;
-  font-size: 14px;
-}
-
-.admin-referral-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.admin-referral-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 18px;
-  padding: 10px 12px;
-  border: 1px solid rgba(33, 97, 132, 0.14);
-  border-radius: 8px;
-  background: #f8fbfc;
-  color: #334;
-  font-size: 14px;
-}
-
-.admin-referral-row p {
-  margin: 0;
-}
-
 .admin-visa-profile-card {
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;

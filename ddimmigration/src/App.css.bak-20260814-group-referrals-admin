@@ -5043,33 +5043,15 @@ img[src*="album/office"][src*="IMG_2486"] {
   color: #102f49;
 }
 
-.admin-referral-email {
-  margin: 6px 0 0;
-  color: #566b7c;
-  font-size: 14px;
-}
-
-.admin-referral-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.admin-referral-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 18px;
-  padding: 10px 12px;
-  border: 1px solid rgba(33, 97, 132, 0.14);
-  border-radius: 8px;
-  background: #f8fbfc;
-  color: #334;
-  font-size: 14px;
-}
-
-.admin-referral-row p {
-  margin: 0;
+.admin-referral-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: #edf8f3;
+  color: #24644f;
+  font-weight: 700;
 }
 
 .admin-visa-profile-card {

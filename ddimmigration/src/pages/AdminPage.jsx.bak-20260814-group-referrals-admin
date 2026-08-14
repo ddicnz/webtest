@@ -317,60 +317,22 @@ function SurveyCard({ item }) {
   )
 }
 
-function groupReferralsByPromoter(items) {
-  const groups = new Map()
-
-  items.forEach((item) => {
-    const key =
-      item.promoterProfileId ||
-      item.promoterOwnerSub ||
-      item.promoterEmail ||
-      item.referralCode ||
-      'unknown-promoter'
-
-    if (!groups.has(key)) {
-      groups.set(key, {
-        id: key,
-        promoterUsername: item.promoterUsername,
-        promoterEmail: item.promoterEmail,
-        referrals: [],
-      })
-    }
-
-    const group = groups.get(key)
-    if (!group.promoterUsername && item.promoterUsername) {
-      group.promoterUsername = item.promoterUsername
-    }
-    if (!group.promoterEmail && item.promoterEmail) {
-      group.promoterEmail = item.promoterEmail
-    }
-
-    group.referrals.push(item)
-  })
-
-  return Array.from(groups.values())
-}
-
-function ReferralGroupCard({ group }) {
+function ReferralCard({ item }) {
   return (
     <article className="admin-lead-card admin-referral-card">
       <header className="admin-lead-header">
-        <div>
-          <h3 className="admin-lead-title">推荐人：{displayValue(group.promoterUsername)}</h3>
-          <p className="admin-referral-email">推荐人邮箱：{displayValue(group.promoterEmail)}</p>
-        </div>
-        <p className="admin-lead-time">被推荐人数：{group.referrals.length}</p>
+        <h3 className="admin-lead-title">推荐码：{displayValue(item.referralCode)}</h3>
+        <p className="admin-lead-time">{formatTime(item.createdAt)}</p>
       </header>
-      <div className="admin-referral-list">
-        {group.referrals.map((item) => (
-          <div
-            className="admin-referral-row"
-            key={item.referralId || `${item.referredProfileId}-${item.createdAt}`}
-          >
-            <p><strong>被推荐人：</strong>{displayValue(item.referredUsername)}</p>
-            <p><strong>被推荐人邮箱：</strong>{displayValue(item.referredEmail)}</p>
-          </div>
-        ))}
+      <div className="admin-lead-grid">
+        <p><strong>推荐人：</strong>{displayValue(item.promoterUsername)}</p>
+        <p><strong>推荐人邮箱：</strong>{displayValue(item.promoterEmail)}</p>
+        <p><strong>推荐人 Profile：</strong>{displayValue(item.promoterProfileId)}</p>
+        <p><strong>被推荐人：</strong>{displayValue(item.referredUsername)}</p>
+        <p><strong>被推荐人邮箱：</strong>{displayValue(item.referredEmail)}</p>
+        <p><strong>被推荐人 Profile：</strong>{displayValue(item.referredProfileId)}</p>
+        <p><strong>状态：</strong><span className="admin-referral-status">{displayValue(item.status)}</span></p>
+        <p><strong>绑定时间：</strong>{formatTime(item.createdAt)}</p>
       </div>
     </article>
   )
@@ -935,7 +897,6 @@ function AdminPage() {
   const [referralsError, setReferralsError] = useState('')
   const [referralsLoaded, setReferralsLoaded] = useState(false)
   const canManageVisaProfiles = adminAuth.authorized
-  const groupedReferralItems = useMemo(() => groupReferralsByPromoter(referralItems), [referralItems])
 
   useEffect(() => {
     let cancelled = false
@@ -1319,11 +1280,11 @@ function AdminPage() {
               {!referralsLoading && referralsError && <p className="admin-error">加载失败：{referralsError}</p>}
               {!referralsLoading && !referralsError && SHOW_REFERRALS_URL && (
                 <section className="admin-list">
-                  {groupedReferralItems.length === 0 ? (
+                  {referralItems.length === 0 ? (
                     <p className="admin-empty">当前暂无推广推荐记录。</p>
                   ) : (
-                    groupedReferralItems.map((group) => (
-                      <ReferralGroupCard key={group.id} group={group} />
+                    referralItems.map((item) => (
+                      <ReferralCard key={item.referralId || `${item.referredProfileId}-${item.createdAt}`} item={item} />
                     ))
                   )}
                 </section>
