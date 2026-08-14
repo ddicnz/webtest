@@ -617,16 +617,6 @@ function getVisaProfileClientName(item) {
   return item.clientName || item.formData?.personal?.name
 }
 
-function isVisaClientProfile(item) {
-  const clientName = getVisaProfileClientName(item)
-  const formData = item.formData && typeof item.formData === 'object' ? item.formData : {}
-  const hasFormData = Object.keys(formData).length > 0
-  const hasProgress = Number(item.completionPercent || 0) > 0 || Number(item.activeStep || 0) > 0
-  const hasDocuments = Array.isArray(item.documents) && item.documents.length > 0
-
-  return Boolean(clientName) || hasFormData || hasProgress || hasDocuments
-}
-
 function VisaProfileCard({ item, onDeleted, onOpen, authToken }) {
   const [deleteStatus, setDeleteStatus] = useState('idle')
   const clientName = getVisaProfileClientName(item)
@@ -1108,10 +1098,6 @@ function AdminPage() {
   }
 
   const currentItems = useMemo(() => grouped[activeTab] || [], [grouped, activeTab])
-  const visibleVisaProfileItems = useMemo(
-    () => visaProfileItems.filter(isVisaClientProfile),
-    [visaProfileItems],
-  )
   const visibleSurveyItems = useMemo(
     () => surveyItems.slice((surveyPage - 1) * SURVEY_PAGE_SIZE, surveyPage * SURVEY_PAGE_SIZE),
     [surveyItems, surveyPage],
@@ -1372,14 +1358,14 @@ function AdminPage() {
                   {visaProfilesLoading ? '刷新中...' : '刷新客户签证材料'}
                 </button>
               </div>
-              {visaProfilesLoading && visibleVisaProfileItems.length === 0 && <p className="admin-loading">加载中...</p>}
+              {visaProfilesLoading && visaProfileItems.length === 0 && <p className="admin-loading">加载中...</p>}
               {!visaProfilesLoading && visaProfilesError && <p className="admin-error">加载失败：{visaProfilesError}</p>}
               {!visaProfilesLoading && !visaProfilesError && (
                 <section className="admin-list">
-                  {visibleVisaProfileItems.length === 0 ? (
+                  {visaProfileItems.length === 0 ? (
                     <p className="admin-empty">当前暂无客户签证材料。</p>
                   ) : (
-                    visibleVisaProfileItems.map((item) => (
+                    visaProfileItems.map((item) => (
                       <VisaProfileCard
                         key={item.profileId || item.updatedAt}
                         item={item}
