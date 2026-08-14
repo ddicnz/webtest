@@ -15,8 +15,8 @@ function VisaPortalPage() {
   }))
   const [promoterState, setPromoterState] = useState(() => ({
     loading: false,
-    status: '',
-    referralCode: '',
+    status: localStorage.getItem('ddimmigration_promoter_application_status') || '',
+    referralCode: localStorage.getItem('ddimmigration_promoter_referral_code') || '',
   }))
 
   useEffect(() => {
@@ -50,20 +50,16 @@ function VisaPortalPage() {
 
           if (nextStatus) {
             localStorage.setItem('ddimmigration_promoter_application_status', nextStatus)
-          } else {
-            localStorage.removeItem('ddimmigration_promoter_application_status')
           }
           if (nextReferralCode) {
             localStorage.setItem('ddimmigration_promoter_referral_code', nextReferralCode)
-          } else {
-            localStorage.removeItem('ddimmigration_promoter_referral_code')
           }
 
-          setPromoterState({
+          setPromoterState((current) => ({
             loading: false,
-            status: nextStatus,
-            referralCode: nextReferralCode,
-          })
+            status: nextStatus || current.status,
+            referralCode: nextReferralCode || current.referralCode,
+          }))
         })
         .catch(() => {
           setPromoterState((current) => ({ ...current, loading: false }))
@@ -73,8 +69,6 @@ function VisaPortalPage() {
   }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem('ddimmigration_promoter_application_status')
-    localStorage.removeItem('ddimmigration_promoter_referral_code')
     userPool.getCurrentUser()?.signOut()
     navigate('/visa-portal/login', { replace: true })
   }

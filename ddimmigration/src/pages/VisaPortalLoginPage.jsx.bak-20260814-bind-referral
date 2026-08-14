@@ -4,8 +4,6 @@ import { AuthenticationDetails, CognitoUser, CognitoUserAttribute } from 'amazon
 import { userPool } from '../auth/cognito.js'
 
 const initialStatus = { type: '', message: '' }
-const PENDING_REFERRAL_STORAGE_KEY = 'ddimmigration_pending_referral_code'
-const BIND_REFERRAL_API_URL = 'https://5das0b00zk.execute-api.ap-southeast-2.amazonaws.com/default/bindReferral'
 
 const formatAuthError = (error, fallbackMessage) => {
   const message = error?.message || ''
@@ -51,9 +49,7 @@ const formatAuthError = (error, fallbackMessage) => {
 function VisaPortalLoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const requestedReturnTo = searchParams.get('returnTo')
-  const referralCodeFromUrl = (searchParams.get('ref') || searchParams.get('referralCode') || '').trim().toUpperCase()
+  const requestedReturnTo = new URLSearchParams(location.search).get('returnTo')
   const safeReturnTo = requestedReturnTo && requestedReturnTo.startsWith('/') ? requestedReturnTo : ''
   const postLoginPath = location.pathname === '/admin/login' || requestedReturnTo === '/admin' ? '/admin' : (safeReturnTo || '/visa-portal')
   const isAdminLogin = postLoginPath === '/admin'
@@ -71,44 +67,10 @@ function VisaPortalLoginPage() {
   const [status, setStatus] = useState(initialStatus)
 
   useEffect(() => {
-    if (referralCodeFromUrl && !isAdminLogin) {
-      localStorage.setItem(PENDING_REFERRAL_STORAGE_KEY, referralCodeFromUrl)
-    }
-  }, [isAdminLogin, referralCodeFromUrl])
-
-  const bindPendingReferral = async (session) => {
-    if (isAdminLogin) return
-    const referralCode = localStorage.getItem(PENDING_REFERRAL_STORAGE_KEY)
-    if (!referralCode) return
-
-    try {
-      const response = await fetch(BIND_REFERRAL_API_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: session.getIdToken().getJwtToken(),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ referralCode }),
-      })
-      const data = await response.json().catch(() => ({}))
-      if ((response.ok && data?.success !== false) || [400, 404, 409].includes(response.status)) {
-        localStorage.removeItem(PENDING_REFERRAL_STORAGE_KEY)
-      }
-    } catch {
-      // 推荐绑定失败不阻断客户登录，用户资料仍可正常填写。
-    }
-  }
-
-  const completeLogin = async (session) => {
-    await bindPendingReferral(session)
-    navigate(postLoginPath, { replace: true })
-  }
-
-  useEffect(() => {
     const currentUser = userPool.getCurrentUser()
     if (!currentUser) return
     currentUser.getSession((error, session) => {
-      if (!error && session?.isValid()) void completeLogin(session)
+      if (!error && session?.isValid()) navigate(postLoginPath, { replace: true })
     })
   }, [navigate, postLoginPath])
 
@@ -126,9 +88,9 @@ function VisaPortalLoginPage() {
   }
 
   const authCallbacks = (cognitoUser) => ({
-    onSuccess: (session) => {
+    onSuccess: () => {
       setSubmitting(false)
-      void completeLogin(session)
+      navigate(postLoginPath, { replace: true })
     },
     onFailure: (error) => {
       setSubmitting(false)

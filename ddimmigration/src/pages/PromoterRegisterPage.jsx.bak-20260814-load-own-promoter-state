@@ -5,13 +5,12 @@ import { userPool } from '../auth/cognito.js'
 const STORAGE_KEY = 'ddimmigration_promoter_application_status'
 const REFERRAL_CODE_STORAGE_KEY = 'ddimmigration_promoter_referral_code'
 const APPLY_PROMOTER_API_URL = 'https://rpy63sy084.execute-api.ap-southeast-2.amazonaws.com/default/applyPromoter'
-const VISA_PORTAL_PROFILE_API_URL =
-  'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
 const CHANNEL_OPTIONS = ['朋友圈', '微信群', '小红书', '抖音', '熟人介绍', '其他']
 
 const makeReferralLink = (code) => {
   if (!code) return ''
-  return `https://nzdvisa.com/visa-portal/login?ref=${encodeURIComponent(code)}`
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://nzdvisa.com'
+  return `${origin}/visa-portal/login?ref=${encodeURIComponent(code)}`
 }
 
 function PromoterRegisterPage() {
@@ -28,8 +27,8 @@ function PromoterRegisterPage() {
     channels: ['朋友圈'],
     note: '',
   })
-  const [approved, setApproved] = useState(false)
-  const [referralCode, setReferralCode] = useState('')
+  const [approved, setApproved] = useState(() => localStorage.getItem(STORAGE_KEY) === 'approved')
+  const [referralCode, setReferralCode] = useState(() => localStorage.getItem(REFERRAL_CODE_STORAGE_KEY) || '')
   const [submitState, setSubmitState] = useState({ loading: false, error: '' })
   const referralLink = makeReferralLink(referralCode)
 
@@ -52,32 +51,6 @@ function PromoterRegisterPage() {
         username: payload['cognito:username'] || currentUser.getUsername(),
         email: payload.email || '',
       })
-
-      fetch(VISA_PORTAL_PROFILE_API_URL, {
-        headers: {
-          Authorization: session.getIdToken().getJwtToken(),
-        },
-      })
-        .then((response) => response.json().catch(() => ({})))
-        .then((data) => {
-          const profile = data?.item || data
-          const nextApproved = profile?.promoterStatus === 'approved'
-          const nextReferralCode = nextApproved ? profile?.referralCode || '' : ''
-
-          if (nextApproved) {
-            localStorage.setItem(STORAGE_KEY, 'approved')
-            if (nextReferralCode) {
-              localStorage.setItem(REFERRAL_CODE_STORAGE_KEY, nextReferralCode)
-            }
-          } else {
-            localStorage.removeItem(STORAGE_KEY)
-            localStorage.removeItem(REFERRAL_CODE_STORAGE_KEY)
-          }
-
-          setApproved(nextApproved)
-          setReferralCode(nextReferralCode)
-        })
-        .catch(() => undefined)
     })
     return undefined
   }, [])

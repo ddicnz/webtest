@@ -5717,33 +5717,6 @@ textarea.admin-visa-edit-input {
   margin-top: 24px;
 }
 
-.promoter-referral-link {
-  display: grid;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.promoter-referral-link span {
-  color: #102f49;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.promoter-referral-link input {
-  width: 100%;
-  min-height: 44px;
-  padding: 0 12px;
-  border: 1px solid #bac9d3;
-  border-radius: 6px;
-  background: #f8fbfc;
-  color: #294257;
-  font: inherit;
-}
-
-.promoter-referral-link .visa-portal-secondary-btn {
-  justify-self: start;
-}
-
 .promoter-channel-options {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
