@@ -127,9 +127,7 @@ function App() {
   const [showPageBackToTop, setShowPageBackToTop] = useState(false)
   const location = useLocation()
   const isVisaPortalRoute =
-    location.pathname.startsWith('/visa-portal') ||
-    location.pathname === '/promoter-register' ||
-    location.pathname === '/admin'
+    location.pathname.startsWith('/visa-portal') || location.pathname === '/admin'
   const showBackToTopRoute =
     location.pathname.startsWith('/study') ||
     location.pathname.startsWith('/album') ||

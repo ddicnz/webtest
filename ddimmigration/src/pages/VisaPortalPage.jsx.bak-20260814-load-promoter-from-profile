@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { userPool } from '../auth/cognito.js'
 
-const VISA_PORTAL_PROFILE_API_URL =
-  'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
-
 function VisaPortalPage() {
   const navigate = useNavigate()
   const [sessionState, setSessionState] = useState(() => ({
@@ -12,11 +9,6 @@ function VisaPortalPage() {
     authenticated: false,
     username: '',
     email: '',
-  }))
-  const [promoterState, setPromoterState] = useState(() => ({
-    loading: false,
-    status: localStorage.getItem('ddimmigration_promoter_application_status') || '',
-    referralCode: localStorage.getItem('ddimmigration_promoter_referral_code') || '',
   }))
 
   useEffect(() => {
@@ -35,35 +27,6 @@ function VisaPortalPage() {
         username: payload['cognito:username'] || currentUser.getUsername(),
         email: payload.email || '',
       })
-
-      setPromoterState((current) => ({ ...current, loading: true }))
-      fetch(VISA_PORTAL_PROFILE_API_URL, {
-        headers: {
-          Authorization: session.getIdToken().getJwtToken(),
-        },
-      })
-        .then((response) => response.json().catch(() => ({})))
-        .then((data) => {
-          const profile = data?.item || data
-          const nextStatus = profile?.promoterStatus || ''
-          const nextReferralCode = profile?.referralCode || ''
-
-          if (nextStatus) {
-            localStorage.setItem('ddimmigration_promoter_application_status', nextStatus)
-          }
-          if (nextReferralCode) {
-            localStorage.setItem('ddimmigration_promoter_referral_code', nextReferralCode)
-          }
-
-          setPromoterState((current) => ({
-            loading: false,
-            status: nextStatus || current.status,
-            referralCode: nextReferralCode || current.referralCode,
-          }))
-        })
-        .catch(() => {
-          setPromoterState((current) => ({ ...current, loading: false }))
-        })
     })
     return undefined
   }, [])
@@ -73,8 +36,10 @@ function VisaPortalPage() {
     navigate('/visa-portal/login', { replace: true })
   }
 
-  const isPromoterApproved = promoterState.status === 'approved'
-  const isPromoterPending = promoterState.status === 'pending'
+  const promoterStatus = localStorage.getItem('ddimmigration_promoter_application_status')
+  const referralCode = localStorage.getItem('ddimmigration_promoter_referral_code') || ''
+  const isPromoterApproved = promoterStatus === 'approved'
+  const isPromoterPending = promoterStatus === 'pending'
 
   if (sessionState.loading) {
     return <main className="visa-portal-page"><p className="visa-portal-loading">正在验证登录状态...</p></main>
@@ -123,11 +88,9 @@ function VisaPortalPage() {
           <section className="visa-portal-dashboard-item visa-portal-dashboard-item--promoter">
             <h2>{isPromoterApproved ? '推广员中心' : (isPromoterPending ? '推广员申请' : '成为推广员')}</h2>
             <p>
-              {promoterState.loading
-                ? '正在读取推广员状态...'
-                : (isPromoterApproved
-                  ? `您已成为推广员${promoterState.referralCode ? `，推荐码：${promoterState.referralCode}` : '。'}`
-                  : (isPromoterPending ? '您的推广员申请已提交，等待后台审核。' : '申请成为推广员，获取专属推荐链接。'))}
+              {isPromoterApproved
+                ? `您已成为推广员${referralCode ? `，推荐码：${referralCode}` : '。'}`
+                : (isPromoterPending ? '您的推广员申请已提交，等待后台审核。' : '申请成为推广员，获取专属推荐链接。')}
             </p>
             <button
               type="button"

@@ -1,8 +1,4 @@
-import { useNavigate } from 'react-router-dom'
-
 function PromoterPage() {
-  const navigate = useNavigate()
-
   return (
     <main className="promoter-page">
       <section className="promoter-hero">
@@ -19,13 +15,6 @@ function PromoterPage() {
               <span>移民规划</span>
               <span>签证办理</span>
             </div>
-            <button
-              type="button"
-              className="promoter-hero-btn"
-              onClick={() => navigate('/promoter-register')}
-            >
-              申请成为推广员
-            </button>
           </div>
 
           <div className="promoter-qr-card">

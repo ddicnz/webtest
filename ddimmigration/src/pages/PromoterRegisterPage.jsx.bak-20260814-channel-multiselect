@@ -1,0 +1,139 @@
+import { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { userPool } from '../auth/cognito.js'
+
+const STORAGE_KEY = 'ddimmigration_promoter_application_status'
+const CHANNEL_OPTIONS = ['朋友圈', '微信群', '小红书', '抖音', '熟人介绍', '其他']
+
+function PromoterRegisterPage() {
+  const navigate = useNavigate()
+  const [sessionState, setSessionState] = useState(() => ({
+    loading: Boolean(userPool.getCurrentUser()),
+    authenticated: false,
+    username: '',
+    email: '',
+  }))
+  const [form, setForm] = useState({
+    wechat: '',
+    phone: '',
+    channel: '朋友圈',
+    note: '',
+  })
+  const [submitted, setSubmitted] = useState(() => localStorage.getItem(STORAGE_KEY) === 'pending')
+
+  useEffect(() => {
+    const currentUser = userPool.getCurrentUser()
+    if (!currentUser) {
+      setSessionState((current) => ({ ...current, loading: false }))
+      return undefined
+    }
+
+    currentUser.getSession((error, session) => {
+      if (error || !session?.isValid()) {
+        setSessionState((current) => ({ ...current, loading: false }))
+        return
+      }
+      const payload = session.getIdToken().payload || {}
+      setSessionState({
+        loading: false,
+        authenticated: true,
+        username: payload['cognito:username'] || currentUser.getUsername(),
+        email: payload.email || '',
+      })
+    })
+    return undefined
+  }, [])
+
+  const updateField = (field, value) => {
+    setForm((current) => ({ ...current, [field]: value }))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    localStorage.setItem(STORAGE_KEY, 'pending')
+    setSubmitted(true)
+  }
+
+  if (sessionState.loading) {
+    return <main className="visa-portal-page"><p className="visa-portal-loading">正在验证登录状态...</p></main>
+  }
+  if (!sessionState.authenticated) {
+    return <Navigate to="/visa-portal/login?returnTo=/promoter-register" replace />
+  }
+
+  return (
+    <main className="visa-portal-page">
+      <section className="promoter-apply-shell">
+        <header className="visa-portal-dashboard-head">
+          <div>
+            <p className="visa-portal-eyebrow">DD Immigration Promoter</p>
+            <h1>申请成为推广员</h1>
+            <p>您好，{sessionState.username}{sessionState.email ? `（${sessionState.email}）` : ''}</p>
+          </div>
+          <button type="button" className="visa-portal-secondary-btn" onClick={() => navigate('/visa-portal')}>返回客户中心</button>
+        </header>
+
+        {submitted ? (
+          <section className="promoter-apply-success">
+            <h2>申请已提交</h2>
+            <p>您的推广员申请已进入审核中。后端接好后，这里会从 DDVisaProfiles 读取真实审核状态。</p>
+            <div className="promoter-apply-actions">
+              <button type="button" className="visa-portal-entry-btn" onClick={() => navigate('/visa-portal')}>进入签证客户资料中心</button>
+              <button type="button" className="visa-portal-secondary-btn" onClick={() => navigate('/promoter')}>查看推广介绍页</button>
+            </div>
+          </section>
+        ) : (
+          <form className="promoter-apply-form" onSubmit={handleSubmit}>
+            <div className="promoter-apply-intro">
+              <h2>推广员申请资料</h2>
+              <p>先把页面流程搭起来。提交后暂时只在前端显示审核中，后面再接 Lambda 更新 DDVisaProfiles。</p>
+            </div>
+
+            <label className="visa-portal-field">
+              <span>微信号</span>
+              <input
+                type="text"
+                value={form.wechat}
+                onChange={(event) => updateField('wechat', event.target.value)}
+                placeholder="请输入微信号"
+              />
+            </label>
+
+            <label className="visa-portal-field">
+              <span>手机号</span>
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(event) => updateField('phone', event.target.value)}
+                placeholder="请输入手机号"
+              />
+            </label>
+
+            <label className="visa-portal-field">
+              <span>主要推广渠道</span>
+              <select value={form.channel} onChange={(event) => updateField('channel', event.target.value)}>
+                {CHANNEL_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="visa-portal-field">
+              <span>客户资源说明</span>
+              <textarea
+                value={form.note}
+                onChange={(event) => updateField('note', event.target.value)}
+                placeholder="例如：身边有想咨询新西兰留学、出国劳务、签证办理或移民规划的朋友。"
+                rows={5}
+              />
+            </label>
+
+            <button type="submit" className="visa-portal-primary-btn">提交申请</button>
+          </form>
+        )}
+      </section>
+    </main>
+  )
+}
+
+export default PromoterRegisterPage

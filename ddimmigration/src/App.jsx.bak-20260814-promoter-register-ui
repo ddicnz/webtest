@@ -15,7 +15,6 @@ import NewsDetailPage from './pages/NewsDetailPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
 import FaqPage from './pages/FaqPage.jsx'
 import PromoterPage from './pages/PromoterPage.jsx'
-import PromoterRegisterPage from './pages/PromoterRegisterPage.jsx'
 import StudyPage from './pages/StudyPage.jsx'
 import StudyProgramDetailPage from './pages/StudyProgramDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
@@ -127,9 +126,7 @@ function App() {
   const [showPageBackToTop, setShowPageBackToTop] = useState(false)
   const location = useLocation()
   const isVisaPortalRoute =
-    location.pathname.startsWith('/visa-portal') ||
-    location.pathname === '/promoter-register' ||
-    location.pathname === '/admin'
+    location.pathname.startsWith('/visa-portal') || location.pathname === '/admin'
   const showBackToTopRoute =
     location.pathname.startsWith('/study') ||
     location.pathname.startsWith('/album') ||
@@ -385,7 +382,6 @@ function App() {
         <Route path="/visa-portal/login" element={<VisaPortalLoginPage />} />
         <Route path="/visa-portal/auth/callback" element={<Navigate to="/visa-portal/login" replace />} />
         <Route path="/visa-portal" element={<VisaPortalPage />} />
-        <Route path="/promoter-register" element={<PromoterRegisterPage />} />
         <Route path="/visa-portal/info-form" element={<VisaPortalInfoFormPage />} />
         <Route path="/visa-portal/materials" element={<VisaPortalMaterialsPage />} />
         <Route path="/admin" element={<AdminPage />} />

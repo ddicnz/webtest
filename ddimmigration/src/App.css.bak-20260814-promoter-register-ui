@@ -2343,24 +2343,6 @@ img[src*="album/office"][src*="IMG_2486"] {
   border-radius: 6px;
 }
 
-.promoter-hero-btn {
-  min-height: 46px;
-  margin-top: 24px;
-  padding: 0 22px;
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #0c4263;
-  font: inherit;
-  font-weight: 800;
-  letter-spacing: 0;
-  cursor: pointer;
-}
-
-.promoter-hero-btn:hover {
-  background: #fff;
-}
-
 .promoter-qr-card {
   display: flex;
   flex-direction: column;
@@ -5448,38 +5430,7 @@ textarea.admin-visa-edit-input {
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.visa-portal-field select,
-.visa-portal-field textarea {
-  width: 100%;
-  min-width: 0;
-  padding: 12px 13px;
-  border: 1px solid #bac9d3;
-  border-radius: 6px;
-  outline: none;
-  background: #fff;
-  color: #172f45;
-  font: inherit;
-  font-weight: 400;
-  letter-spacing: 0;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-.visa-portal-field select {
-  height: 48px;
-}
-
-.visa-portal-field textarea {
-  resize: vertical;
-  line-height: 1.65;
-}
-
 .visa-portal-field input:focus {
-  border-color: #3c8fa8;
-  box-shadow: 0 0 0 3px rgba(60, 143, 168, 0.15);
-}
-
-.visa-portal-field select:focus,
-.visa-portal-field textarea:focus {
   border-color: #3c8fa8;
   box-shadow: 0 0 0 3px rgba(60, 143, 168, 0.15);
 }
@@ -5610,7 +5561,7 @@ textarea.admin-visa-edit-input {
 
 .visa-portal-dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 30px;
 }
@@ -5630,10 +5581,6 @@ textarea.admin-visa-edit-input {
 
 .visa-portal-dashboard-item:nth-child(3) {
   border-top-color: #c48a35;
-}
-
-.visa-portal-dashboard-item--promoter {
-  border-top-color: #5a78ad !important;
 }
 
 .visa-portal-dashboard-item h2 {
@@ -5671,77 +5618,6 @@ textarea.admin-visa-edit-input {
 .visa-portal-entry-btn:hover {
   background: #246c83;
   border-color: #246c83;
-}
-
-.promoter-apply-shell {
-  width: min(100%, 1040px);
-  margin: 0 auto;
-}
-
-.promoter-apply-form,
-.promoter-apply-success {
-  max-width: 680px;
-  margin-top: 30px;
-  padding: 30px;
-  border: 1px solid #d7e1e7;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 12px 28px rgba(16, 47, 73, 0.08);
-}
-
-.promoter-apply-intro {
-  margin-bottom: 24px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #e2e9ed;
-}
-
-.promoter-apply-intro h2,
-.promoter-apply-success h2 {
-  margin: 0;
-  color: #102f49;
-  font-size: 24px;
-}
-
-.promoter-apply-intro p,
-.promoter-apply-success p {
-  margin: 10px 0 0;
-  color: #5b6f7f;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.promoter-apply-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.promoter-channel-options {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.promoter-channel-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 12px;
-  border: 1px solid #bac9d3;
-  border-radius: 6px;
-  background: #fff;
-  color: #294257;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.promoter-channel-option input {
-  width: 16px;
-  height: 16px;
-  accent-color: #327f98;
 }
 
 .visa-portal-entry-btn:disabled {
