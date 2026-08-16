@@ -64,14 +64,14 @@ function PromoterRegisterPage() {
 
     const currentUser = userPool.getCurrentUser()
     if (!currentUser) {
-      setMyReferralsState({ loading: false, loaded: true, error: '登录状态已过期，请重新登录。' })
+      setMyReferralsState({ loading: false, loaded: false, error: '登录状态已过期，请重新登录。' })
       return
     }
 
     setMyReferralsState({ loading: true, loaded: false, error: '' })
     currentUser.getSession(async (sessionError, session) => {
       if (sessionError || !session?.isValid()) {
-        setMyReferralsState({ loading: false, loaded: true, error: '登录状态已过期，请重新登录。' })
+        setMyReferralsState({ loading: false, loaded: false, error: '登录状态已过期，请重新登录。' })
         return
       }
 
@@ -92,7 +92,7 @@ function PromoterRegisterPage() {
       } catch (error) {
         setMyReferralsState({
           loading: false,
-          loaded: true,
+          loaded: false,
           error: error?.message || '推荐客户加载失败，请稍后再试。',
         })
       }
@@ -298,7 +298,7 @@ function PromoterRegisterPage() {
               ) : myReferralsState.loading ? (
                 <p className="promoter-referral-empty">正在加载推荐客户...</p>
               ) : myReferrals.length === 0 ? (
-                <p className="promoter-referral-empty">您还没有绑定推荐客户。客户通过您的推广链接注册并登录后，会显示在这里。</p>
+                <p className="promoter-referral-empty">当前暂无已绑定的推荐客户。</p>
               ) : (
                 <div className="promoter-referral-client-list">
                   {myReferrals.map((item) => (

@@ -7,8 +7,7 @@ const REFERRAL_CODE_STORAGE_KEY = 'ddimmigration_promoter_referral_code'
 const APPLY_PROMOTER_API_URL = 'https://rpy63sy084.execute-api.ap-southeast-2.amazonaws.com/default/applyPromoter'
 const VISA_PORTAL_PROFILE_API_URL =
   'https://kv8yy4iiyg.execute-api.ap-southeast-2.amazonaws.com/default/portalVisaProfile'
-const SHOW_MY_REFERRALS_API_URL =
-  'https://la0omw3xia.execute-api.ap-southeast-2.amazonaws.com/default/showMyReferrals'
+const SHOW_MY_REFERRALS_API_URL = import.meta.env.VITE_SHOW_MY_REFERRALS_API_URL || ''
 const CHANNEL_OPTIONS = ['朋友圈', '微信群', '小红书', '抖音', '熟人介绍', '其他']
 
 const makeReferralLink = (code) => {
@@ -64,14 +63,14 @@ function PromoterRegisterPage() {
 
     const currentUser = userPool.getCurrentUser()
     if (!currentUser) {
-      setMyReferralsState({ loading: false, loaded: true, error: '登录状态已过期，请重新登录。' })
+      setMyReferralsState({ loading: false, loaded: false, error: '登录状态已过期，请重新登录。' })
       return
     }
 
     setMyReferralsState({ loading: true, loaded: false, error: '' })
     currentUser.getSession(async (sessionError, session) => {
       if (sessionError || !session?.isValid()) {
-        setMyReferralsState({ loading: false, loaded: true, error: '登录状态已过期，请重新登录。' })
+        setMyReferralsState({ loading: false, loaded: false, error: '登录状态已过期，请重新登录。' })
         return
       }
 
@@ -92,7 +91,7 @@ function PromoterRegisterPage() {
       } catch (error) {
         setMyReferralsState({
           loading: false,
-          loaded: true,
+          loaded: false,
           error: error?.message || '推荐客户加载失败，请稍后再试。',
         })
       }
@@ -250,32 +249,30 @@ function PromoterRegisterPage() {
 
         {approved ? (
           <section className="promoter-apply-success">
-            <section className="promoter-success-card">
-              <h2>已成为推广员</h2>
-              {referralCode && <p>您的推荐码：{referralCode}</p>}
-              {referralLink && (
-                <div className="promoter-referral-link">
-                  <span>您的推广链接</span>
-                  <div className="promoter-referral-link-row">
-                    <input type="text" value={referralLink} readOnly />
-                    <button
-                      type="button"
-                      className={`visa-portal-secondary-btn promoter-copy-btn${copySuccess ? ' copied' : ''}`}
-                      onClick={handleCopyReferralLink}
-                    >
-                      {copySuccess ? '复制成功' : '复制链接'}
-                    </button>
-                  </div>
+            <h2>已成为推广员</h2>
+            {referralCode && <p>您的推荐码：{referralCode}</p>}
+            {referralLink && (
+              <div className="promoter-referral-link">
+                <span>您的推广链接</span>
+                <div className="promoter-referral-link-row">
+                  <input type="text" value={referralLink} readOnly />
+                  <button
+                    type="button"
+                    className={`visa-portal-secondary-btn promoter-copy-btn${copySuccess ? ' copied' : ''}`}
+                    onClick={handleCopyReferralLink}
+                  >
+                    {copySuccess ? '复制成功' : '复制链接'}
+                  </button>
                 </div>
-              )}
-              <div className="promoter-helper-wechat">
-                <div>
-                  <h3>添加推广小助手微信</h3>
-                  <p>扫码添加后，可以咨询推荐流程、客户登记和推广链接使用方式。</p>
-                </div>
-                <img src="/pic/qrcodevx1.jpg" alt="推广小助手微信二维码" />
               </div>
-            </section>
+            )}
+            <div className="promoter-helper-wechat">
+              <div>
+                <h3>添加推广小助手微信</h3>
+                <p>扫码添加后，可以咨询推荐流程、客户登记和推广链接使用方式。</p>
+              </div>
+              <img src="/pic/qrcodevx1.jpg" alt="推广小助手微信二维码" />
+            </div>
             <section className="promoter-referral-clients">
               <div className="promoter-referral-clients-head">
                 <div>
@@ -298,7 +295,7 @@ function PromoterRegisterPage() {
               ) : myReferralsState.loading ? (
                 <p className="promoter-referral-empty">正在加载推荐客户...</p>
               ) : myReferrals.length === 0 ? (
-                <p className="promoter-referral-empty">您还没有绑定推荐客户。客户通过您的推广链接注册并登录后，会显示在这里。</p>
+                <p className="promoter-referral-empty">当前暂无已绑定的推荐客户。</p>
               ) : (
                 <div className="promoter-referral-client-list">
                   {myReferrals.map((item) => (

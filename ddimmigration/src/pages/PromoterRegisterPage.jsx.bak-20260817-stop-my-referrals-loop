@@ -64,14 +64,14 @@ function PromoterRegisterPage() {
 
     const currentUser = userPool.getCurrentUser()
     if (!currentUser) {
-      setMyReferralsState({ loading: false, loaded: true, error: '登录状态已过期，请重新登录。' })
+      setMyReferralsState({ loading: false, loaded: false, error: '登录状态已过期，请重新登录。' })
       return
     }
 
     setMyReferralsState({ loading: true, loaded: false, error: '' })
     currentUser.getSession(async (sessionError, session) => {
       if (sessionError || !session?.isValid()) {
-        setMyReferralsState({ loading: false, loaded: true, error: '登录状态已过期，请重新登录。' })
+        setMyReferralsState({ loading: false, loaded: false, error: '登录状态已过期，请重新登录。' })
         return
       }
 
@@ -92,7 +92,7 @@ function PromoterRegisterPage() {
       } catch (error) {
         setMyReferralsState({
           loading: false,
-          loaded: true,
+          loaded: false,
           error: error?.message || '推荐客户加载失败，请稍后再试。',
         })
       }

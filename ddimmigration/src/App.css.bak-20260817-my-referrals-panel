@@ -5722,25 +5722,6 @@ textarea.admin-visa-edit-input {
   box-shadow: 0 12px 28px rgba(16, 47, 73, 0.08);
 }
 
-.promoter-apply-success {
-  display: grid;
-  gap: 22px;
-  max-width: 760px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.promoter-success-card,
-.promoter-referral-clients {
-  padding: 30px;
-  border: 1px solid #d7e1e7;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 12px 28px rgba(16, 47, 73, 0.08);
-}
-
 .promoter-apply-intro {
   margin-bottom: 24px;
   padding-bottom: 18px;
@@ -5748,15 +5729,14 @@ textarea.admin-visa-edit-input {
 }
 
 .promoter-apply-intro h2,
-.promoter-success-card h2 {
+.promoter-apply-success h2 {
   margin: 0;
   color: #102f49;
   font-size: 24px;
 }
 
 .promoter-apply-intro p,
-.promoter-success-card p,
-.promoter-referral-clients p {
+.promoter-apply-success p {
   margin: 10px 0 0;
   color: #5b6f7f;
   font-size: 14px;
@@ -5836,62 +5816,6 @@ textarea.admin-visa-edit-input {
   border: 1px solid #e2e9ed;
   border-radius: 6px;
   background: #fff;
-}
-
-.promoter-referral-clients {
-  margin-top: 0;
-}
-
-.promoter-referral-clients-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.promoter-referral-clients h3 {
-  margin: 0;
-  color: #102f49;
-  font-size: 18px;
-}
-
-.promoter-referral-empty {
-  color: #5b6f7f;
-  font-size: 14px;
-}
-
-.promoter-referral-client-list {
-  display: grid;
-  gap: 10px;
-}
-
-.promoter-referral-client-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px;
-  align-items: center;
-  padding: 12px;
-  border: 1px solid rgba(33, 97, 132, 0.14);
-  border-radius: 8px;
-  background: #f8fbfc;
-}
-
-.promoter-referral-client-card div {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
-}
-
-.promoter-referral-client-card strong {
-  color: #102f49;
-  font-size: 15px;
-}
-
-.promoter-referral-client-card span,
-.promoter-referral-client-card time {
-  color: #5b6f7f;
-  font-size: 13px;
 }
 
 .promoter-channel-options {
@@ -6528,14 +6452,6 @@ textarea.admin-visa-edit-input {
 
   .promoter-helper-wechat {
     grid-template-columns: 1fr;
-  }
-
-  .promoter-referral-client-card {
-    grid-template-columns: 1fr;
-  }
-
-  .promoter-referral-clients-head {
-    flex-direction: column;
   }
 }
 
