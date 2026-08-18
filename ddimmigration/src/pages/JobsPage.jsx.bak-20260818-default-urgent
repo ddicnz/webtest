@@ -10,7 +10,7 @@ function normalizeJob(job) {
 }
 
 function JobsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('urgent')
+  const [selectedCategory, setSelectedCategory] = useState('auto')
 
   const categories = [
     { id: 'urgent', label: '紧急招聘' },
