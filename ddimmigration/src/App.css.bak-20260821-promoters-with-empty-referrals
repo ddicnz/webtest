@@ -5072,16 +5072,6 @@ img[src*="album/office"][src*="IMG_2486"] {
   margin: 0;
 }
 
-.admin-referral-empty {
-  margin: 0;
-  padding: 12px;
-  border: 1px dashed #c9d8e0;
-  border-radius: 8px;
-  color: #667b89;
-  background: #f8fbfc;
-  font-size: 14px;
-}
-
 .admin-visa-profile-card {
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;

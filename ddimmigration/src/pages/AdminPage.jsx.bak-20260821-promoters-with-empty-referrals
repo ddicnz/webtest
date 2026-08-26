@@ -321,23 +321,6 @@ function groupReferralsByPromoter(items) {
   const groups = new Map()
 
   items.forEach((item) => {
-    if (Array.isArray(item.referrals)) {
-      const key =
-        item.promoterProfileId ||
-        item.promoterOwnerSub ||
-        item.promoterEmail ||
-        item.referralCode ||
-        'unknown-promoter'
-
-      groups.set(key, {
-        id: key,
-        promoterUsername: item.promoterUsername,
-        promoterEmail: item.promoterEmail,
-        referrals: item.referrals,
-      })
-      return
-    }
-
     const key =
       item.promoterProfileId ||
       item.promoterOwnerSub ||
@@ -362,9 +345,7 @@ function groupReferralsByPromoter(items) {
       group.promoterEmail = item.promoterEmail
     }
 
-    if (item.type !== 'promoter') {
-      group.referrals.push(item)
-    }
+    group.referrals.push(item)
   })
 
   return Array.from(groups.values())
@@ -381,9 +362,7 @@ function ReferralGroupCard({ group }) {
         <p className="admin-lead-time">被推荐人数：{group.referrals.length}</p>
       </header>
       <div className="admin-referral-list">
-        {group.referrals.length === 0 ? (
-          <p className="admin-referral-empty">暂无绑定的被推荐人。</p>
-        ) : group.referrals.map((item) => (
+        {group.referrals.map((item) => (
           <div
             className="admin-referral-row"
             key={item.referralId || `${item.referredProfileId}-${item.createdAt}`}
