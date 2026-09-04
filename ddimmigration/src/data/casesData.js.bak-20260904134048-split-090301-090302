@@ -1,47 +1,27 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
-    id: 199,
-    title: '木工续签获批',
+    id: 198,
+    title: '木工续签与学历认证获批',
     summary:
-      '客户以 Carpenter 木工职位成功获批新西兰认证雇主工签（AEWV）续签，签证 2026 年 9 月 3 日生效（以批签函为准）。',
+      '客户木工 AEWV 续签获批，并取得 NZQA 新西兰学历认证 Level 5 结果，签证 2026 年 9 月 3 日生效（以批准函为准）。',
     date: '2026年9月3日',
     image: '/pic/case/090301.jpg',
-    images: ['/pic/case/090301.jpg'],
-    fullContent: `木工续签获批 ✅
+    images: ['/pic/case/090301.jpg', '/pic/case/090302.jpg'],
+    fullContent: `木工续签与学历认证获批 ✅
 
-恭喜客户成功获批新西兰认证雇主工签（AEWV）续签。本案岗位为 Carpenter（木工），工作地点 Auckland，签证于 2026 年 9 月 3 日生效（以移民局批签函为准）。
+恭喜客户木工方向申请顺利推进。本案客户以 Carpenter（木工）职位成功获批新西兰认证雇主工签（AEWV）续签，同时取得 NZQA 新西兰学历认证 Level 5 结果，为后续职业与签证规划提供了更完整的材料支持（以相关批准函和认证结果为准）。
 
-【案例要点（以移民局批准函为准）】
+【案例要点（以批准函为准）】
 ✅ 申请类型：Work visa application approved
 ✅ 签证类别：New Zealand Work Visa - Accredited Employer Work Visa
 ✅ 岗位：Carpenter
 ✅ 工作地点：Auckland
 ✅ 签证生效：2026 年 9 月 3 日
+✅ 学历认证：NZQA Diploma at Level 5
 ✅ 需保持全职工作，每周至少 30 小时
 
-木工续签重点在于岗位真实性、雇主资质、薪资工时、工作地点和申请人背景是否匹配。材料前后一致，续签申请会更稳。`,
-  },
-  {
-    id: 198,
-    title: 'NZQA 学历认证 Level 5 获批',
-    summary:
-      '客户成功取得 NZQA International Qualifications Recognition Statement，海外学历获评为新西兰 Diploma at Level 5（以认证结果为准）。',
-    date: '2026年9月3日',
-    image: '/pic/case/090302.jpg',
-    images: ['/pic/case/090302.jpg'],
-    fullContent: `NZQA 学历认证 Level 5 获批 ✅
-
-恭喜客户成功取得 NZQA International Qualifications Recognition Statement。本案海外学历经 NZQA 评估，结果为 Diploma at Level 5，为后续学习、工作或签证规划提供了重要材料支持（以 NZQA 认证结果为准）。
-
-【案例要点（以认证结果为准）】
-✅ 申请类型：NZQA 学历认证
-✅ 认证文件：International Qualifications Recognition Statement
-✅ 认证结果：Diploma at Level 5
-✅ 签发日期：2026 年 9 月 3 日
-✅ 相关专业方向：Automobile Inspection and Maintenance Technology
-
-学历认证申请重点在于学历文件、成绩单、课程信息和翻译材料是否完整清楚。材料准备充分，能更好支持 NZQA 对学历层级的评估。`,
+技术工种续签和学历认证都需要注意材料之间的对应关系。岗位、学历背景、工作经验和雇主材料衔接清楚，整体申请会更稳。`,
   },
   {
     id: 197,

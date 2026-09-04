@@ -1311,11 +1311,6 @@ img[src*="album/office"][src*="IMG_2486"] {
   object-position: center 52%;
 }
 
-/* 090302.jpg（NZQA 学历认证）封面：上移以露出证书主体 */
-.case-card-image-wrap:has(img[src*="090302"]) .case-card-image {
-  object-position: center 45%;
-}
-
 /* workvisa.jpg 有白边，放大裁剪 */
 .case-card-image-wrap:has(img[src*="workvisa"]) .case-card-image {
   object-fit: cover;
