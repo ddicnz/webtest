@@ -363,6 +363,28 @@ export const studySections = [
     ],
     programs: [
       {
+        id: 'one-tree-hill-college',
+        type: '高中留学',
+        titleZh: 'One Tree Hill College',
+        titleEn: 'One Tree Hill College',
+        image: '/pic/study/onetreehill.png',
+        coverImage: '/pic/study/onetreehill.png',
+        detailImages: ['/pic/study/onetreehill.png'],
+        highlight: '奥克兰高中 · NCEA 课程 · 国际学生关怀',
+        cost: '国际学生年度学费 NZ$16,500/年',
+        detailCost: '2027 年国际学生费用（纽币 NZ$）：\n全年：学费 $16,500；政府征费 $430；学生关怀费 $1,500；管理及入学费 $1,500；保险 $655。\n半年（2 学期）：学费 $8,250；政府征费 $215；学生关怀费 $1,500；管理及入学费 $1,500；保险 $330。\n寄宿家庭 $400/周：全年按 46 周计 $18,400，半年按 24 周计 $9,600；安置费 $300，寄宿管理费 $300/学期。\n上述费用含寄宿合计：全年 $40,485，半年 $22,295。\n其他费用参考：校服约 $500，课程书本及文具约 $150；适用时另收 NZQA 考试费 $383.30。具体以学校账单为准。',
+        detail: 'One Tree Hill College 位于奥克兰，交通便利，拥有多元文化校园与现代化教学设施。学校提供 NCEA 课程、英语学习支持及丰富的体育、艺术和文化活动。国际学生团队关注学习进度与生活适应，并与寄宿家庭及家长保持联系。',
+        languageReq: '无统一英语入学分数要求，到校后评估英语水平，按需要安排英语基础或语言支持课程',
+        academicReq: '接收 13 岁及以上学生，需提供近期学校成绩及考试记录，年级和选课以校方评估为准',
+        intakes: '按学校学期安排入学，年中入学视课程与名额而定，建议提前申请',
+        prospects: [
+          '奥克兰多元文化校园，交通便利',
+          'NCEA 课程，支持后续升学规划',
+          '英语基础与语言支持课程',
+          '国际学生团队与寄宿家庭关怀',
+        ],
+      },
+      {
         id: 'massey-high-school',
         type: '高中留学',
         titleZh: 'Massey High School',
