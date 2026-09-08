@@ -363,28 +363,6 @@ export const studySections = [
     ],
     programs: [
       {
-        id: 'massey-high-school',
-        type: '高中留学',
-        titleZh: 'Massey High School',
-        titleEn: 'Massey High School',
-        image: '/pic/study/massey.png',
-        coverImage: '/pic/study/massey.png',
-        detailImages: ['/pic/study/massey.png'],
-        highlight: '奥克兰西区男女混校 · NCEA 课程 · 国际学生关怀',
-        cost: '国际学生年度学费 NZ$17,500/年',
-        detailCost: '官网公布费用（纽币 NZ$）：\n全年学费 $17,500，包含 NCEA 考试报名、文具、校服及接机。\n短期学费 $5,000/学期；短期学生如购买本校校服，费用另计。\n管理费 $1,200/年或 $300/学期；保险约 $690。\n寄宿家庭 $440/周；安置费：6 周至 1 年 $550，5 周及以内 $450。\n特色短期项目可能另收费，具体以学校报价为准。',
-        detail: 'Massey High School 位于奥克兰西区，是一所多元文化的男女混校。学校兼顾学术、体育与文化发展，提供 NCEA 课程，以及酒店服务、旅游和时装等特色学习选择。国际学生团队提供英语学习支持与寄宿关怀，帮助学生适应校园生活。',
-        languageReq: '英语较好的学生可进入主流课堂，有需要者可获得英语支持，具体以学校评估为准',
-        academicReq: '适合中学阶段学生，年级与选课根据学习背景及校方评估安排',
-        intakes: '按学校学期安排入学，可咨询短期就读，具体时间及名额以校方确认为准',
-        prospects: [
-          '奥克兰西区男女混校，多元文化校园',
-          'NCEA 升学课程与特色职业学习选择',
-          '英语小班支持，帮助衔接主流课堂',
-          '国际学生团队与寄宿家庭关怀',
-        ],
-      },
-      {
         id: 'botany-downs-secondary-college',
         type: '高中留学',
         titleZh: 'Botany Downs Secondary College',
