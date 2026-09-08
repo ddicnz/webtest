@@ -94,7 +94,7 @@ function StudyProgramDetailPage() {
           )}
           <div className="case-detail-cost">
           <strong>学费：</strong>
-          {(prog.detailCost || prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
+          {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
             <p key={i} className="case-detail-cost-line">{line}</p>
           ))}
         </div>

@@ -363,28 +363,6 @@ export const studySections = [
     ],
     programs: [
       {
-        id: 'botany-downs-secondary-college',
-        type: '高中留学',
-        titleZh: 'Botany Downs Secondary College',
-        titleEn: 'Botany Downs Secondary College',
-        image: '/pic/study/botany.png',
-        coverImage: '/pic/study/botany.png',
-        detailImages: ['/pic/study/botany.png'],
-        highlight: '奥克兰东区公立高中 · 男女同校 · Year 9–13',
-        cost: '国际学生年度学费 NZ$21,000/年',
-        detailCost: '2027 年国际学生费用（以下金额均为纽币 NZ$，含 15% GST）：\n全年（12 个月）：学费 $21,000；管理费 $2,000；寄宿家庭费 $19,320；住宿支持费 $500；医疗及旅行保险 $730；备用金 $1,000。费用表合计 $44,550。\n2 学期（6 个月）：学费 $10,500；管理费 $1,000；寄宿家庭费 $10,500；住宿支持费 $250；医疗及旅行保险 $400；备用金 $1,000。费用表合计 $23,650。\n1 学期（3 个月）：学费 $5,250；管理费 $500；寄宿家庭费 $5,040；住宿支持费 $125；医疗及旅行保险 $260；备用金 $1,000。费用表合计 $12,175。\n其他费用：文具 $100–$150/年；户外教育 $500–$1,000/年；校服约 $350–$400（不含鞋）。\n以上为学校 2027 年费用参考，具体以学校账单为准。',
-        detail: 'Botany Downs Secondary College 位于奥克兰东区，是一所 Year 9–13 公立男女混校。学校提供 NCEA 课程及 ESOL 英语支持，国际学生与本地学生共同学习，并通过 Whānau 学院制帮助学生融入校园。可选择全年、2 学期或 1 学期就读。',
-        languageReq: '适合年级：Year 9–13（约 13–18 周岁），英语能力及年级安排以学校评估为准',
-        academicReq: '国内初中或高中在读，需提供近期英文成绩报告、护照及个人照片等申请材料，具体以学校录取要求为准',
-        intakes: '全年接受申请，具体入学时间及名额以学校确认为准',
-        prospects: [
-          '奥克兰东区公立男女混校，多元文化校园',
-          'Year 9–13 学习路径，提供 NCEA Level 1–3 课程',
-          '国际学生与本地学生共同学习，提供 ESOL 英语支持',
-          'Whānau 学院制关怀，支持学生融入校园生活',
-        ],
-      },
-      {
         id: 'catholic-cathedral-college',
         type: '高中留学',
         titleZh: 'Catholic Cathedral College',
