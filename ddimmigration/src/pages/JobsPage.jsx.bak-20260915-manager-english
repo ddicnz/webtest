@@ -5,8 +5,7 @@ const JOB_LEVEL4_PREFIX = ['岗位等级：4级', '英语要求：雅思 4.0 或
 const JOB_LEVEL2_PREFIX = ['岗位等级：2级', '不需要英语']
 
 function normalizeJob(job) {
-  const defaultPrefix = job.skillLevel === 2 ? JOB_LEVEL2_PREFIX : job.skillLevel === 4 ? JOB_LEVEL4_PREFIX : JOB_LEVEL3_PREFIX
-  const prefix = job.englishRequirement ? [defaultPrefix[0], job.englishRequirement] : defaultPrefix
+  const prefix = job.skillLevel === 2 ? JOB_LEVEL2_PREFIX : job.skillLevel === 4 ? JOB_LEVEL4_PREFIX : JOB_LEVEL3_PREFIX
   return { ...job, requirements: [...prefix, ...job.requirements] }
 }
 
@@ -437,7 +436,6 @@ function JobsPage() {
       {
         id: 38,
         skillLevel: 2,
-        englishRequirement: '英语要求：雅思 5.0 左右',
         title: '饭店经理',
         requirements: ['餐饮门店运营管理经验', '人员协调、前台与楼面管理', '每周约 50 小时'],
         salary: '28 纽币/小时税前起',
