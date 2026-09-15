@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, NavLink, Outlet, useLocation, Navigate } from 'react-router-dom'
+import { Routes, Route, Link, NavLink, Outlet, useLocation, Navigate } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer.jsx'
 import LeftSidebar from './components/LeftSidebar.jsx'
@@ -31,18 +31,27 @@ import { studySections } from './data/studyData.js'
 import { studyListPathForSectionId } from './utils/studySectionPath.js'
 
 const navItems = [
-  { label: '首页', path: '/' },
-  { label: '关于我们', path: '/about' },
-  { label: '核心业务', path: '/services' },
-  { label: '成功案例', path: '/cases' },
-  { label: '招聘信息', path: '/jobs' },
-  { label: '企业相册', path: '/album' },
-  { label: '移民资讯', path: '/news' },
-  { label: '留学专栏', path: '/study/University' },
-  { label: '联络我们', path: '/contactus' },
-  { label: '成为推广员', path: '/promoter' },
-  { label: '常见问题', path: '/faq' },
+  { id: 'home', label: '首页', labelEn: 'Home', path: '/', pathEn: '/en' },
+  { id: 'about', label: '关于我们', labelEn: 'About Us', path: '/about' },
+  { id: 'services', label: '核心业务', labelEn: 'Services', path: '/services' },
+  { id: 'cases', label: '成功案例', labelEn: 'Success Stories', path: '/cases' },
+  { id: 'jobs', label: '招聘信息', labelEn: 'Jobs', path: '/jobs' },
+  { id: 'album', label: '企业相册', labelEn: 'Gallery', path: '/album' },
+  { id: 'news', label: '移民资讯', labelEn: 'News', path: '/news' },
+  { id: 'study', label: '留学专栏', labelEn: 'Study in NZ', path: '/study/University' },
+  { id: 'contact', label: '联络我们', labelEn: 'Contact', path: '/contactus' },
+  { id: 'promoter', label: '成为推广员', labelEn: 'Partners', path: '/promoter' },
+  { id: 'faq', label: '常见问题', labelEn: 'FAQs', path: '/faq' },
 ]
+
+const studySectionLabelsEn = {
+  tertiary: 'Universities',
+  technical: 'Vocational Study',
+  language: 'English Language',
+  highschool: 'High Schools',
+  middleschool: 'Intermediate Schools',
+  primary: 'Primary Schools',
+}
 
 function SidebarLayout() {
   return (
@@ -126,6 +135,12 @@ function App() {
   const [mobileStudyPanelOpen, setMobileStudyPanelOpen] = useState(false)
   const [showPageBackToTop, setShowPageBackToTop] = useState(false)
   const location = useLocation()
+  const isEnglish = location.pathname === '/en' || location.pathname.startsWith('/en/')
+  const currentNavItems = navItems.map((item) => ({
+    ...item,
+    label: isEnglish ? item.labelEn : item.label,
+    path: isEnglish && item.pathEn ? item.pathEn : item.path,
+  }))
   const isVisaPortalRoute =
     location.pathname.startsWith('/visa-portal') ||
     location.pathname === '/promoter-register' ||
@@ -142,6 +157,13 @@ function App() {
     location.pathname.startsWith('/visa-info-form')
 
   // GA4：SPA 路由切换时上报页面浏览
+  useEffect(() => {
+    document.documentElement.lang = isEnglish ? 'en-NZ' : 'zh-CN'
+    document.title = isEnglish
+      ? 'DD Immigration Consulting | New Zealand Immigration & Education'
+      : '新西兰嘀嘀移民公司| 移民 | 签证 |留学'
+  }, [isEnglish])
+
   useEffect(() => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'page_view', {
@@ -193,10 +215,13 @@ function App() {
         <header className="top-bar">
         <div className="top-bar-inner">
           <div className="top-bar-contact">
-            <span className="top-bar-contact-item">电话：+64-027-7223339</span>
-            <span className="top-bar-contact-item">邮箱：ddicnz@gmail.com</span>
-            <span className="top-bar-contact-item">工作时间：Mon - Fri 9:00 - 17:00</span>
+            <span className="top-bar-contact-item">{isEnglish ? 'Phone: +64-027-7223339' : '电话：+64-027-7223339'}</span>
+            <span className="top-bar-contact-item">{isEnglish ? 'Email: ddicnz@gmail.com' : '邮箱：ddicnz@gmail.com'}</span>
+            <span className="top-bar-contact-item">{isEnglish ? 'Hours: Mon - Fri 9:00 - 17:00' : '工作时间：Mon - Fri 9:00 - 17:00'}</span>
           </div>
+          <Link to={isEnglish ? '/' : '/en'} className="top-bar-language-switch">
+            {isEnglish ? '中文' : 'EN'}
+          </Link>
         </div>
       </header>
 
@@ -206,7 +231,7 @@ function App() {
           <button
             type="button"
             className="nav-menu-btn"
-            aria-label="打开菜单"
+            aria-label={isEnglish ? 'Open menu' : '打开菜单'}
             aria-expanded={navOpen}
             onClick={() => setNavOpen(true)}
           >
@@ -214,27 +239,31 @@ function App() {
             <span className="nav-menu-btn-line" />
             <span className="nav-menu-btn-line" />
           </button>
-          <span className="nav-menu-btn-label">导航</span>
+          <span className="nav-menu-btn-label">{isEnglish ? 'Menu' : '导航'}</span>
         </div>
         <div className="nav-inner">
           <div className="nav-brand">
             <div className="brand">
               <img
                 src="/pic/logo.jpg"
-                alt="嘀嘀移民"
+                alt="DD Immigration"
                 className="logo-img"
               />
               <div className="company-name">
-                <h1 className="company-zh">新西兰嘀嘀移民公司</h1>
-                <p className="company-en">DD Immigration Consulting Ltd</p>
+                <h1 className="company-zh">
+                  {isEnglish ? 'DD Immigration' : '新西兰嘀嘀移民公司'}
+                </h1>
+                <p className="company-en">
+                  {isEnglish ? 'New Zealand Immigration & Education' : 'DD Immigration Consulting Ltd'}
+                </p>
               </div>
             </div>
           </div>
           <div className="nav-links">
-            {navItems.map((item) =>
-              item.label === '留学专栏' ? (
+            {currentNavItems.map((item) =>
+              item.id === 'study' ? (
                 <div
-                  key={item.label}
+                  key={item.id}
                   className="nav-item nav-item--dropdown"
                   onMouseLeave={(e) => {
                     const root = e.currentTarget
@@ -258,7 +287,7 @@ function App() {
                     {item.label}
                     <span className="nav-dropdown-caret" aria-hidden>▾</span>
                   </NavLink>
-                  <ul className="nav-dropdown" role="menu" aria-label="留学专栏子菜单">
+                  <ul className="nav-dropdown" role="menu" aria-label={isEnglish ? 'Study in New Zealand submenu' : '留学专栏子菜单'}>
                     {studySections.map((sec) => (
                       <li key={sec.id} role="none">
                         <NavLink
@@ -270,7 +299,7 @@ function App() {
                             requestAnimationFrame(() => el.blur())
                           }}
                         >
-                          {sec.title}
+                          {isEnglish ? studySectionLabelsEn[sec.id] ?? sec.title : sec.title}
                         </NavLink>
                       </li>
                     ))}
@@ -278,7 +307,7 @@ function App() {
                 </div>
               ) : (
                 <NavLink
-                  key={item.label}
+                  key={item.id}
                   to={item.path}
                   className={({ isActive }) =>
                     `nav-link${isActive ? ' active' : ''}`
@@ -292,7 +321,10 @@ function App() {
             <span className="nav-inner-spacer" aria-hidden="true" />
           </div>
         </div>
-        <p className="nav-scroll-hint" aria-hidden="true">滑动查看更多</p>
+        <p className="nav-scroll-hint" aria-hidden="true">{isEnglish ? 'Scroll to explore' : '滑动查看更多'}</p>
+        <Link to={isEnglish ? '/' : '/en'} className="nav-language-switch nav-language-switch--mobile">
+          {isEnglish ? '中文' : 'EN'}
+        </Link>
       </nav>
 
       {navOpen && (
@@ -302,20 +334,20 @@ function App() {
             aria-hidden="true"
             onClick={onMobileOverlayClick}
           />
-          <div className="nav-mobile-menu" role="dialog" aria-label="导航菜单">
+          <div className="nav-mobile-menu" role="dialog" aria-label={isEnglish ? 'Navigation menu' : '导航菜单'}>
             <button
               type="button"
               className="nav-mobile-close"
-              aria-label="关闭菜单"
+              aria-label={isEnglish ? 'Close menu' : '关闭菜单'}
               onClick={closeMobileNav}
             >
               ×
             </button>
             <div className="nav-mobile-links">
-              {navItems.map((item) =>
-                item.label === '留学专栏' ? (
+              {currentNavItems.map((item) =>
+                item.id === 'study' ? (
                   <button
-                    key={item.label}
+                    key={item.id}
                     type="button"
                     className={`nav-mobile-link nav-mobile-study-trigger${
                       location.pathname.startsWith('/study') ? ' active' : ''
@@ -330,7 +362,7 @@ function App() {
                   </button>
                 ) : (
                   <NavLink
-                    key={item.label}
+                    key={item.id}
                     to={item.path}
                     className={({ isActive }) =>
                       `nav-mobile-link${isActive ? ' active' : ''}`
@@ -342,12 +374,19 @@ function App() {
                   </NavLink>
                 ),
               )}
+              <Link
+                to={isEnglish ? '/' : '/en'}
+                className="nav-mobile-link nav-mobile-language-switch"
+                onClick={closeMobileNav}
+              >
+                {isEnglish ? '中文' : 'English'}
+              </Link>
             </div>
           </div>
           <div
             className={`nav-mobile-subpanel${mobileStudyPanelOpen ? ' nav-mobile-subpanel--open' : ''}`}
             role="dialog"
-            aria-label="留学专栏子菜单"
+            aria-label={isEnglish ? 'Study in New Zealand submenu' : '留学专栏子菜单'}
             aria-hidden={!mobileStudyPanelOpen}
           >
             <div className="nav-mobile-subpanel-header">
@@ -356,9 +395,9 @@ function App() {
                 className="nav-mobile-subpanel-back"
                 onClick={() => setMobileStudyPanelOpen(false)}
               >
-                ‹ 返回
+                ‹ {isEnglish ? 'Back' : '返回'}
               </button>
-              <span className="nav-mobile-subpanel-title">留学专栏</span>
+              <span className="nav-mobile-subpanel-title">{isEnglish ? 'Study in New Zealand' : '留学专栏'}</span>
             </div>
             <div className="nav-mobile-subpanel-links">
               {studySections.map((sec) => (
@@ -370,7 +409,7 @@ function App() {
                   }
                   onClick={closeMobileNav}
                 >
-                  {sec.title}
+                  {isEnglish ? studySectionLabelsEn[sec.id] ?? sec.title : sec.title}
                 </NavLink>
               ))}
             </div>
@@ -381,6 +420,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/en" element={<HomePage language="en" />} />
         <Route path="/admin/login" element={<VisaPortalLoginPage />} />
         <Route path="/visa-portal/login" element={<VisaPortalLoginPage />} />
         <Route path="/visa-portal/auth/callback" element={<Navigate to="/visa-portal/login" replace />} />
@@ -424,7 +464,7 @@ function App() {
         </button>
       )}
 
-      <Footer />
+      <Footer language={isEnglish ? 'en' : 'zh'} />
     </div>
   )
 }

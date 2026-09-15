@@ -1,13 +1,15 @@
 import { OFFICE_ADDRESS, OFFICE_MAP_EMBED_URL } from '../data/siteContact.js'
 
 const footerQrItems = [
-  { src: '/pic/qrcodevx1.jpg', label: '签证咨询', alt: '签证咨询二维码' },
-  { src: '/pic/qrcodevx2.jpg', label: '留学咨询', alt: '留学咨询二维码' },
-  { src: '/pic/qrcodevx3.jpg', label: '业务合作', alt: '业务合作二维码' },
-  { src: '/pic/rednote.jpg', label: '小红书', alt: '小红书二维码' },
+  { src: '/pic/qrcodevx1.jpg', zh: '签证咨询', en: 'Visa Enquiries' },
+  { src: '/pic/qrcodevx2.jpg', zh: '留学咨询', en: 'Study Enquiries' },
+  { src: '/pic/qrcodevx3.jpg', zh: '业务合作', en: 'Business Enquiries' },
+  { src: '/pic/rednote.jpg', zh: '小红书', en: 'RedNote' },
 ]
 
-function Footer() {
+function Footer({ language = 'zh' }) {
+  const isEnglish = language === 'en'
+
   return (
     <footer className="site-footer">
       <div className="footer-content">
@@ -15,19 +17,19 @@ function Footer() {
         <div className="footer-section footer-contact">
           <div className="contact-item">
             <span className="contact-icon">📞</span>
-            <span>电话: +64-027-7223339</span>
+            <span>{isEnglish ? 'Phone' : '电话'}: +64-027-7223339</span>
           </div>
           <div className="contact-item">
             <span className="contact-icon">💬</span>
-            <span>微信号码: ddtrip700、ddtrip800、ddtrip999</span>
+            <span>{isEnglish ? 'WeChat' : '微信号码'}: ddtrip700、ddtrip800、ddtrip999</span>
           </div>
           <div className="contact-item">
             <span className="contact-icon">✉️</span>
-            <span>客服邮箱: dd.icnz@gmail.com</span>
+            <span>{isEnglish ? 'Email' : '客服邮箱'}: dd.icnz@gmail.com</span>
           </div>
           <div className="contact-item">
             <span className="contact-icon">📍</span>
-            <span>地址: {OFFICE_ADDRESS}</span>
+            <span>{isEnglish ? 'Address' : '地址'}: {OFFICE_ADDRESS}</span>
           </div>
         </div>
 
@@ -41,22 +43,25 @@ function Footer() {
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="嘀嘀移民公司位置"
+            title={isEnglish ? 'DD Immigration office location' : '嘀嘀移民公司位置'}
           />
         </div>
 
         {/* 右侧：四个二维码 2×2 */}
         <div className="footer-section footer-qrcodes">
-          {footerQrItems.map((item) => (
-            <div key={item.label} className="qrcode-item">
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="qrcode-img"
-              />
-              <p className="qrcode-label">{item.label}</p>
-            </div>
-          ))}
+          {footerQrItems.map((item) => {
+            const label = isEnglish ? item.en : item.zh
+            return (
+              <div key={item.zh} className="qrcode-item">
+                <img
+                  src={item.src}
+                  alt={isEnglish ? `${label} QR code` : `${label}二维码`}
+                  className="qrcode-img"
+                />
+                <p className="qrcode-label">{label}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
 
