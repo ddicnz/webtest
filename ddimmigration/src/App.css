@@ -4411,6 +4411,20 @@ html[lang="en-NZ"] .home-business-card-label {
   font-weight: 800;
 }
 
+html[lang="en-NZ"] .contact-details {
+  font-size: 24px;
+}
+
+html[lang="en-NZ"] .contact-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+html[lang="en-NZ"] .contact-detail-label {
+  flex: 0 0 auto;
+}
+
 .contact-banner-ad {
   display: inline-block;
   flex: 0 0 300px;

@@ -39,6 +39,7 @@ const homeCopy = {
 
 function HomePage({ language = 'zh' }) {
   const copy = homeCopy[language] ?? homeCopy.zh
+  const contactPath = language === 'en' ? '/en/contactus' : '/contactus'
 
   return (
     <>
@@ -51,7 +52,7 @@ function HomePage({ language = 'zh' }) {
           }}
         />
         <div className="hero-cta-stack">
-          <Link to="/contactus" className="hero-cta-btn">
+          <Link to={contactPath} className="hero-cta-btn">
             <span className="hero-cta-text">{copy.primaryCta}</span>
             <span className="hero-cta-arrow" aria-hidden>→</span>
           </Link>

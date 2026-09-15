@@ -39,7 +39,7 @@ const navItems = [
   { id: 'album', label: '企业相册', labelEn: 'Gallery', path: '/album' },
   { id: 'news', label: '移民资讯', labelEn: 'News', path: '/news' },
   { id: 'study', label: '留学专栏', labelEn: 'Study in NZ', path: '/study/University' },
-  { id: 'contact', label: '联络我们', labelEn: 'Contact', path: '/contactus' },
+  { id: 'contact', label: '联络我们', labelEn: 'Contact', path: '/contactus', pathEn: '/en/contactus' },
   { id: 'promoter', label: '成为推广员', labelEn: 'Partners', path: '/promoter' },
   { id: 'faq', label: '常见问题', labelEn: 'FAQs', path: '/faq' },
 ]
@@ -67,6 +67,7 @@ function SidebarLayout() {
 // 通用布局：除首页外，其它页面上方都有一块半屏宽的大图，下面是侧边栏 + 正文
 function HeroSidebarLayout() {
   const location = useLocation()
+  const isEnglish = location.pathname.startsWith('/en/')
 
   // 默认 aboutus 图；企业相册用 xiangce，招聘用 zhaopin，专业团队用 teams，成功案例用 successcases，核心业务用 services，移民资讯用 news，联络我们用 contactus；各页亮度在 App.css 按模块调整
   let heroImage = '/pic/aboutus.jpg'
@@ -88,7 +89,7 @@ function HeroSidebarLayout() {
   } else if (location.pathname === '/news') {
     heroImage = '/pic/news.jpg'
     heroClassName = 'about-hero about-hero--news'
-  } else if (location.pathname === '/contactus') {
+  } else if (location.pathname === '/contactus' || location.pathname === '/en/contactus') {
     heroImage = '/pic/contactus.jpg'
     heroClassName = 'about-hero about-hero--contactus'
   } else if (location.pathname === '/faq') {
@@ -120,7 +121,7 @@ function HeroSidebarLayout() {
 
       {/* 图片下面是侧边栏 + 各页面正文 */}
       <div className="page-with-sidebar">
-        <LeftSidebar />
+        <LeftSidebar language={isEnglish ? 'en' : 'zh'} />
         <div className="main-area">
           <Outlet />
         </div>
@@ -141,6 +142,9 @@ function App() {
     label: isEnglish ? item.labelEn : item.label,
     path: isEnglish && item.pathEn ? item.pathEn : item.path,
   }))
+  const languageSwitchPath = isEnglish
+    ? location.pathname === '/en/contactus' ? '/contactus' : '/'
+    : location.pathname === '/contactus' ? '/en/contactus' : '/en'
   const isVisaPortalRoute =
     location.pathname.startsWith('/visa-portal') ||
     location.pathname === '/promoter-register' ||
@@ -159,10 +163,12 @@ function App() {
   // GA4：SPA 路由切换时上报页面浏览
   useEffect(() => {
     document.documentElement.lang = isEnglish ? 'en-NZ' : 'zh-CN'
-    document.title = isEnglish
-      ? 'DD Immigration Consulting | New Zealand Immigration & Education'
-      : '新西兰嘀嘀移民公司| 移民 | 签证 |留学'
-  }, [isEnglish])
+    document.title = location.pathname === '/en/contactus'
+      ? 'Contact DD Immigration Consulting | Auckland, New Zealand'
+      : isEnglish
+        ? 'DD Immigration Consulting | New Zealand Immigration & Education'
+        : '新西兰嘀嘀移民公司| 移民 | 签证 |留学'
+  }, [isEnglish, location.pathname])
 
   useEffect(() => {
     if (typeof window.gtag === 'function') {
@@ -219,7 +225,7 @@ function App() {
             <span className="top-bar-contact-item">{isEnglish ? 'Email: ddicnz@gmail.com' : '邮箱：ddicnz@gmail.com'}</span>
             <span className="top-bar-contact-item">{isEnglish ? 'Hours: Mon - Fri 9:00 - 17:00' : '工作时间：Mon - Fri 9:00 - 17:00'}</span>
           </div>
-          <Link to={isEnglish ? '/' : '/en'} className="top-bar-language-switch">
+          <Link to={languageSwitchPath} className="top-bar-language-switch">
             {isEnglish ? '中文' : 'EN'}
           </Link>
         </div>
@@ -322,7 +328,7 @@ function App() {
           </div>
         </div>
         <p className="nav-scroll-hint" aria-hidden="true">{isEnglish ? 'Scroll to explore' : '滑动查看更多'}</p>
-        <Link to={isEnglish ? '/' : '/en'} className="nav-language-switch nav-language-switch--mobile">
+        <Link to={languageSwitchPath} className="nav-language-switch nav-language-switch--mobile">
           {isEnglish ? '中文' : 'EN'}
         </Link>
       </nav>
@@ -375,7 +381,7 @@ function App() {
                 ),
               )}
               <Link
-                to={isEnglish ? '/' : '/en'}
+                to={languageSwitchPath}
                 className="nav-mobile-link nav-mobile-language-switch"
                 onClick={closeMobileNav}
               >
@@ -442,6 +448,7 @@ function App() {
           <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
+          <Route path="/en/contactus" element={<ContactUsPage language="en" />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/promoter" element={<PromoterPage />} />
           <Route path="/assessment" element={<AssessmentPage />} />
