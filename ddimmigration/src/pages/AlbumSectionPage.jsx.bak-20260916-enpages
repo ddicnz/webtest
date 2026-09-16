@@ -1,18 +1,15 @@
 import { useParams, Link } from 'react-router-dom'
 import { albumSections } from '../data/albumData.js'
-import { englishAlbumSections } from '../i18n/englishContent.js'
 
-function AlbumSectionPage({ language = 'zh' }) {
+function AlbumSectionPage() {
   const { sectionId } = useParams()
-  const isEnglish = language === 'en'
-  const basePath = isEnglish ? '/en/album' : '/album'
   const section = albumSections.find((s) => s.id === sectionId)
 
   if (!section) {
     return (
       <main className="main-content album-page">
-        <p>{isEnglish ? 'Album not found.' : '未找到该相册。'}</p>
-        <Link to={basePath}>{isEnglish ? 'Back to gallery' : '返回企业相册'}</Link>
+        <p>未找到该相册。</p>
+        <Link to="/album">返回企业相册</Link>
       </main>
     )
   }
@@ -23,8 +20,8 @@ function AlbumSectionPage({ language = 'zh' }) {
   return (
     <main className="main-content album-page album-section-page">
       <div className="album-section-header">
-        <Link to={basePath} className="album-back-link">← {isEnglish ? 'Back to gallery' : '返回相册'}</Link>
-        <h2 className="section-title">{isEnglish ? englishAlbumSections[section.id] || section.title : section.title}</h2>
+        <Link to="/album" className="album-back-link">← 返回相册</Link>
+        <h2 className="section-title">{section.title}</h2>
       </div>
 
       {hasImages ? (
@@ -34,17 +31,17 @@ function AlbumSectionPage({ language = 'zh' }) {
               <div className="album-section-img-wrap">
                 <img
                   src={item.src.startsWith('/') ? item.src : `/${item.src}`}
-                  alt={isEnglish ? `${englishAlbumSections[section.id] || 'Gallery'} ${i + 1}` : item.caption || `${section.title} ${i + 1}`}
+                  alt={item.caption || `${section.title} ${i + 1}`}
                   className="album-section-img"
                   loading="lazy"
                 />
               </div>
-              {!isEnglish && item.caption && <p className="album-section-caption">{item.caption}</p>}
+              {item.caption && <p className="album-section-caption">{item.caption}</p>}
             </div>
           ))}
         </div>
       ) : (
-        <p className="album-placeholder">{isEnglish ? 'More photos coming soon.' : '暂无图片，敬请期待'}</p>
+        <p className="album-placeholder">暂无图片，敬请期待</p>
       )}
     </main>
   )

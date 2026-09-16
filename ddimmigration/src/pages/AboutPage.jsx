@@ -3,46 +3,77 @@ const teamMembers = [
     id: 1,
     name: 'Eric Jia',
     role: '持牌移民顾问 （IAA 牌照编号：201800151）',
+    roleEn: 'Licensed Immigration Adviser (IAA licence 201800151)',
     photo: '/pic/eric2.jpg',
     licence: '/pic/eric_licience.jpg',
     intro: 'Eric 从业多年，累计成功获批案例超过1000份。专注留学、技术移民、商业移民及各类工作签证申请，实操经验丰富。擅长处理复杂及高难度案件，包括身份转换、历史签证瑕疵、拒签翻案等问题，成功协助大量客户顺利获批。',
+    introEn: 'Eric has extensive experience across study, skilled residence, business migration and work visa applications. He regularly assists with complex immigration histories, changes of status and applications requiring careful evidence and explanation.',
   },
   {
     id: 2,
     name: 'Tat Ming Tsui',
     role: '持牌移民顾问 （IAA 牌照编号：201400700）',
+    roleEn: 'Licensed Immigration Adviser (IAA licence 201400700)',
     photo: '/pic/tsui.jpg',
     licence: '/pic/dashu_licience.jpg',
     intro: 'Tsui 资深移民顾问，10年以上从业经验，累计数千份成功获批案例，涵盖留学签证、工作签证及各类移民类别。拥有New Zealand Ministry of Justice（新西兰司法部）工作背景，熟悉新西兰法律体系及政策逻辑。以严谨逻辑为基础，制定稳健、合规的新西兰工作 留学 移民路径。',
+    introEn: 'Tsui has more than ten years of immigration-sector experience across student, work and residence applications. His New Zealand Ministry of Justice background supports a careful, compliance-focused approach to immigration planning.',
   },
   {
     id: 3,
     name: 'Sunny',
     role: '执行总监 高级咨询顾问 业务合作',
+    roleEn: 'Executive Director · Senior Consultant · Business Partnerships',
     photo: '/pic/sunny.jpg',
     intro: 'Sunny 深耕新西兰移民与留学市场多年，深谙各类签证政策、移民局审理流程及材料规范，擅长为客户梳理背景、规划路径并全程跟进案头工作。与持牌顾问紧密配合，确保每一份申请材料逻辑清晰、合规完整。服务细致、响应及时，致力于为每一位申请人提供专业、可靠、有温度的一站式体验。',
+    introEn: 'Sunny coordinates client assessments, pathway planning, documentation and business partnerships. She works closely with the licensed advisers to keep applications organised, complete and responsive.',
   },
   {
     id: 4,
     name: 'Leo',
     role: '留学咨询',
+    roleEn: 'Education Consultant',
     photo: '/pic/leo.JPG',
     intro: 'Leo 拥有美国伊利诺伊大学及新西兰奥克兰大学硕士学历，拥有多年美国与新西兰工作经验，兼具国际视野与本地实操。深谙新西兰技术移民、家庭团聚、工作签证、学生签证等政策脉络，负责留学政策、留学咨询、新西兰小初高及本科研究生的学校申请、学校推荐。',
+    introEn: 'Leo holds master’s degrees from the University of Illinois and the University of Auckland. He supports education planning and applications across primary, secondary, undergraduate and postgraduate study.',
   },
   {
     id: 5,
     name: 'Jane',
     role: '签证咨询',
+    roleEn: 'Visa Consultant',
     photo: '/pic/logo.jpg',
     intro: 'Jane 拥有奥克兰大学硕士文凭，负责工作签证、配偶签证、旅游签证等各类签证的咨询，材料收集、整理。',
+    introEn: 'Jane holds a master’s degree from the University of Auckland and supports work, partnership and visitor visa enquiries, including document collection and organisation.',
   },
 ]
 
-function AboutPage() {
+function AboutPage({ language = 'zh' }) {
+  const isEnglish = language === 'en'
+
   return (
     <main className="main-content about-page team-page">
-      <h2 className="section-title">关于我们</h2>
+      <h2 className="section-title">{isEnglish ? 'About Us' : '关于我们'}</h2>
       <article className="about-content">
+        {isEnglish ? (
+          <>
+            <p>DD Immigration Consulting is a New Zealand-based immigration and education consultancy. We assist with AEWV work visas, changes of employment conditions, study planning, family applications and longer-term pathways.</p>
+            <p>Since March 2015, our team has supported clients planning to work, study and build family life in New Zealand.</p>
+            <p>We work with local employers across automotive, construction, hospitality, manufacturing and service industries. Our approach focuses on genuine roles, compliant evidence and practical planning.</p>
+            <p>We also assist with primary, secondary and tertiary study applications, connecting education choices with realistic work and family considerations.</p>
+            <p>For skilled and investor pathways, our licensed advisers assess the applicant’s qualifications, employment, registration, income, funds and family circumstances before recommending a strategy.</p>
+            <p className="about-values-title">Our approach:</p>
+            <ul className="about-values-list">
+              <li>Genuine employment opportunities</li>
+              <li>Clear and realistic visa pathways</li>
+              <li>End-to-end application support</li>
+              <li>Local New Zealand experience</li>
+            </ul>
+            <p>Whether you are considering work, study or a longer-term family plan, we aim to provide practical and actionable support.</p>
+            <p>Contact us to discuss your New Zealand plans.</p>
+          </>
+        ) : (
+          <>
         <p>
           我们是一家立足新西兰本地的综合签证与留学规划机构，专注于认证雇主 AEWV 工签、岗位匹配、VOC 变更、留学规划及家庭同步方案，为客户提供从「来新西兰」到「长期发展」的一站式服务。
         </p>
@@ -71,11 +102,13 @@ function AboutPage() {
         <p>
           欢迎联系我们，开启属于你的新西兰之路。
         </p>
+          </>
+        )}
       </article>
 
-      <section className="about-team-section" aria-label="专业团队">
-        <h2 className="section-title">专业团队</h2>
-        <p className="team-intro">我们的持牌移民顾问均具备新西兰移民顾问管理局（IAA）注册资质，为您提供专业、合规的移民与留学服务。</p>
+      <section className="about-team-section" aria-label={isEnglish ? 'Our team' : '专业团队'}>
+        <h2 className="section-title">{isEnglish ? 'Our Team' : '专业团队'}</h2>
+        <p className="team-intro">{isEnglish ? 'Our licensed immigration advisers are registered with New Zealand’s Immigration Advisers Authority (IAA) and provide professional, compliant immigration support.' : '我们的持牌移民顾问均具备新西兰移民顾问管理局（IAA）注册资质，为您提供专业、合规的移民与留学服务。'}</p>
         <div className="team-blocks">
           {teamMembers.map((member) => (
             <article key={member.id} className="team-block">
@@ -88,14 +121,14 @@ function AboutPage() {
                     loading="lazy"
                   />
                 ) : (
-                  <div className="team-block-photo-placeholder" aria-hidden>暂无照片</div>
+                  <div className="team-block-photo-placeholder" aria-hidden>{isEnglish ? 'Photo unavailable' : '暂无照片'}</div>
                 )}
               </div>
               {member.licenceNo && (
                 <div className="team-block-licence">
                   <img
                     src={member.licence}
-                    alt={`${member.name} 牌照`}
+                    alt={`${member.name} ${isEnglish ? 'licence' : '牌照'}`}
                     className="team-block-licence-img"
                     loading="lazy"
                   />
@@ -103,11 +136,11 @@ function AboutPage() {
               )}
               <div className="team-block-intro">
                 <h3 className="team-block-name">{member.name}</h3>
-                <p className="team-block-role">{member.role}</p>
+                <p className="team-block-role">{isEnglish ? member.roleEn : member.role}</p>
                 {member.licenceNo && (
-                  <p className="team-block-licence-no">牌照编号：{member.licenceNo}</p>
+                  <p className="team-block-licence-no">{isEnglish ? 'Licence number: ' : '牌照编号：'}{member.licenceNo}</p>
                 )}
-                <div className="team-block-intro-text">{member.intro}</div>
+                <div className="team-block-intro-text">{isEnglish ? member.introEn : member.intro}</div>
               </div>
             </article>
           ))}
@@ -118,4 +151,3 @@ function AboutPage() {
 }
 
 export default AboutPage
-

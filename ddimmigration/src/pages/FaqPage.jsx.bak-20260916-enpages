@@ -1,30 +1,27 @@
 import { useState } from 'react'
 import { faqList } from '../data/faqData.js'
-import { getEnglishFaqItem } from '../i18n/englishContent.js'
 
 const faqCategories = [
-  { id: 'work', label: '工签相关', labelEn: 'Work Visas' },
-  { id: 'study', label: '留学相关', labelEn: 'Study' },
-  { id: 'visitor', label: '旅游签', labelEn: 'Visitor Visas' },
-  { id: 'skilled', label: '技术移民', labelEn: 'Skilled Residence' },
-  { id: 'invest', label: '投资移民', labelEn: 'Investor Migration' },
-  { id: 'other', label: '其他', labelEn: 'Other' },
+  { id: 'work', label: '工签相关' },
+  { id: 'study', label: '留学相关' },
+  { id: 'visitor', label: '旅游签' },
+  { id: 'skilled', label: '技术移民' },
+  { id: 'invest', label: '投资移民' },
+  { id: 'other', label: '其他' },
 ]
 
-function FaqPage({ language = 'zh' }) {
+function FaqPage() {
   const [openId, setOpenId] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState('work')
-  const isEnglish = language === 'en'
 
   const filteredList = faqList.filter((item) => (item.category || 'other') === selectedCategory)
-  const displayList = isEnglish ? filteredList.map(getEnglishFaqItem) : filteredList
 
   return (
     <main className="main-content faq-page">
-      <h1 className="faq-title">{isEnglish ? 'Frequently Asked Questions' : '常见问题'}</h1>
-      <p className="faq-intro">{isEnglish ? 'General answers about New Zealand work, study, visitor and residence pathways. Contact us for advice based on your circumstances.' : '以下是大家常问的工签、留学与家庭规划问题，供您参考。如需一对一咨询，欢迎通过「联络我们」与我们联系。'}</p>
+      <h1 className="faq-title">常见问题</h1>
+      <p className="faq-intro">以下是大家常问的工签、留学与家庭规划问题，供您参考。如需一对一咨询，欢迎通过「联络我们」与我们联系。</p>
 
-      <nav className="faq-category-nav" aria-label={isEnglish ? 'FAQ categories' : '问题分类'}>
+      <nav className="faq-category-nav" aria-label="问题分类">
         {faqCategories.map((cat) => (
           <button
             key={cat.id}
@@ -35,13 +32,13 @@ function FaqPage({ language = 'zh' }) {
               setOpenId(null)
             }}
           >
-            {isEnglish ? cat.labelEn : cat.label}
+            {cat.label}
           </button>
         ))}
       </nav>
 
       <div className="faq-list">
-        {displayList.map((item) => (
+        {filteredList.map((item) => (
           <div
             key={item.id}
             className={`faq-item${openId === item.id ? ' faq-item--open' : ''}`}

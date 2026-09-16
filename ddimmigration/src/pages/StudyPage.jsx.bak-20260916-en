@@ -3,21 +3,16 @@ import { NavLink, useLocation, useNavigate, useParams, Navigate } from 'react-ro
 import { studyIntro, studySections, iclPrograms } from '../data/studyData.js'
 import { makeStudyProgramSlug } from '../utils/studySlug.js'
 import { studyListPathForSectionId, studyPathSegmentToSectionId } from '../utils/studySectionPath.js'
-import { englishStudyIntro, englishStudySectionLabels, getEnglishStudyProgram, getEnglishStudySection } from '../i18n/englishStudyContent.js'
 
 // 大学留学用 ICL 课程（排除语言班，语言班单独成类）
 const iclProgramsNonLanguage = iclPrograms.filter((p) => p.type !== '语言班')
 
-const studyCategories = studySections.map((s) => ({ id: s.id, label: s.title, labelEn: englishStudySectionLabels[s.id] }))
+const studyCategories = studySections.map((s) => ({ id: s.id, label: s.title }))
 const studySlogan = '新西兰嘀嘀移民是持牌校代免费申请！！！'
 
-function getStudyListPath(sectionId, isEnglish) {
-  return `${isEnglish ? '/en' : ''}${studyListPathForSectionId(sectionId)}`
-}
-
-function StudyProgramLink({ prog, sectionId, className, children, isEnglish }) {
+function StudyProgramLink({ prog, sectionId, className, children }) {
   const navigate = useNavigate()
-  const to = `${isEnglish ? '/en' : ''}/study/program/${encodeURIComponent(makeStudyProgramSlug(prog))}`
+  const to = `/study/program/${encodeURIComponent(makeStudyProgramSlug(prog))}`
   const go = () => navigate(to, { state: { fromSection: sectionId, scrollY: window.scrollY } })
   return (
     <a href={to} className={className} onClick={(e) => { e.preventDefault(); go() }}>
@@ -26,28 +21,9 @@ function StudyProgramLink({ prog, sectionId, className, children, isEnglish }) {
   )
 }
 
-function StudySectionContent({ section, isEnglish }) {
-  const sourceSection = studySections.find((s) => s.id === section.id)
-  const sec = isEnglish ? getEnglishStudySection(sourceSection) : sourceSection
+function StudySectionContent({ section }) {
+  const sec = studySections.find((s) => s.id === section.id)
   if (!sec) return null
-
-  const labels = isEnglish ? {
-    currentInfo: 'Fees and entry requirements must be confirmed with the education provider. Contact us for application support.',
-    agency: 'DD Immigration can assist with eligible school applications as an authorised education agent.',
-    tuition: 'Tuition and fees:',
-    requirements: 'Entry requirements:',
-    language: 'English: ',
-    schedule: 'Timetable:',
-    highlights: 'Key points:',
-    prospects: 'Possible outcomes:',
-    more: 'View details',
-    universities: 'New Zealand public universities',
-    routes: 'Study pathway planning',
-  } : null
-
-  const tertiaryPrograms = isEnglish
-    ? iclProgramsNonLanguage.map((program) => getEnglishStudyProgram(program, 'tertiary'))
-    : iclProgramsNonLanguage
 
   return (
     <div className="study-section-content">
@@ -65,9 +41,9 @@ function StudySectionContent({ section, isEnglish }) {
       })}
       {sec.id === 'tertiary' && (
         <>
-          <p className="study-section-intro">{isEnglish ? labels.currentInfo : '具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。'}<strong>{isEnglish ? ` ${labels.agency}` : '新西兰嘀嘀移民是持牌校代免费申请！！！'}</strong></p>
+          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
-            {tertiaryPrograms.map((prog) => (
+            {iclProgramsNonLanguage.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
                 <div className="case-card-image-wrap">
                   <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
@@ -75,23 +51,23 @@ function StudySectionContent({ section, isEnglish }) {
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
                   <div className="case-card-cost">
-                    <strong>{isEnglish ? labels.tuition : '学费：'}</strong>
+                    <strong>学费：</strong>
                     {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
                       <p key={i} className="case-card-cost-line">{line}</p>
                     ))}
                   </div>
-                  <p className="case-card-requirements"><strong>{isEnglish ? labels.requirements : '基本要求：'}</strong>{isEnglish ? '' : '语言 '}{prog.languageReq}{isEnglish ? ' ' : '；'}{prog.academicReq}</p>
-                  {prog.schedule && <p className="case-card-schedule"><strong>{isEnglish ? labels.schedule : '上课时间：'}</strong>{prog.schedule}</p>}
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  {prog.schedule && <p className="case-card-schedule"><strong>上课时间：</strong>{prog.schedule}</p>}
                   <div className="case-card-highlights">
-                    <strong>{isEnglish ? labels.highlights : '优势重点：'}</strong>
+                    <strong>优势重点：</strong>
                     <ul>
                       {prog.prospects.slice(0, 4).map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
                   </div>
-                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link" isEnglish={isEnglish}>
-                    {isEnglish ? labels.more : '查看更多'} &gt;&gt;
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
                   </StudyProgramLink>
                 </div>
               </article>
@@ -99,7 +75,7 @@ function StudySectionContent({ section, isEnglish }) {
           </div>
           {sec.universities && (
             <>
-              <h3 className="study-section-intro" style={{ marginTop: '28px', marginBottom: '12px' }}>{isEnglish ? labels.universities : '新西兰八所国立大学简介'}</h3>
+              <h3 className="study-section-intro" style={{ marginTop: '28px', marginBottom: '12px' }}>新西兰八所国立大学简介</h3>
               <ul className="study-university-list">
                 {sec.universities.map((u, i) => (
                   <li key={i} className="study-university-item">
@@ -125,7 +101,7 @@ function StudySectionContent({ section, isEnglish }) {
       )}
       {sec.id === 'technical' && sec.programs && (
         <>
-          <p className="study-section-intro">{isEnglish ? labels.currentInfo : '具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。'}<strong>{isEnglish ? ` ${labels.agency}` : '新西兰嘀嘀移民是持牌校代免费申请！！！'}</strong></p>
+          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
@@ -135,15 +111,15 @@ function StudySectionContent({ section, isEnglish }) {
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
                   <div className="case-card-cost">
-                    <strong>{isEnglish ? labels.tuition : '学费：'}</strong>
+                    <strong>学费：</strong>
                     {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
                       <p key={i} className="case-card-cost-line">{line}</p>
                     ))}
                   </div>
-                  <p className="case-card-requirements"><strong>{isEnglish ? labels.requirements : '基本要求：'}</strong>{isEnglish ? '' : '语言 '}{prog.languageReq}{isEnglish ? ' ' : '；'}{prog.academicReq}</p>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
                   {prog.prospects && prog.prospects.length > 0 && (
                     <div className="case-card-highlights">
-                      <strong>{isEnglish ? labels.prospects : '毕业前景：'}</strong>
+                      <strong>毕业前景：</strong>
                       <ul>
                         {prog.prospects.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -151,8 +127,8 @@ function StudySectionContent({ section, isEnglish }) {
                       </ul>
                     </div>
                   )}
-                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link" isEnglish={isEnglish}>
-                    {isEnglish ? labels.more : '查看更多'} &gt;&gt;
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
                   </StudyProgramLink>
                 </div>
               </article>
@@ -162,7 +138,7 @@ function StudySectionContent({ section, isEnglish }) {
       )}
       {sec.id === 'language' && sec.programs && (
         <>
-          <p className="study-section-intro">{isEnglish ? labels.currentInfo : '具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。'}<strong>{isEnglish ? ` ${labels.agency}` : '新西兰嘀嘀移民是持牌校代免费申请！！！'}</strong></p>
+          <p className="study-section-intro">具体费用与入学要求以校方及官网为准，如需申请可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
@@ -172,15 +148,15 @@ function StudySectionContent({ section, isEnglish }) {
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
                   <div className="case-card-cost">
-                    <strong>{isEnglish ? labels.tuition : '学费：'}</strong>
+                    <strong>学费：</strong>
                     {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
                       <p key={i} className="case-card-cost-line">{line}</p>
                     ))}
                   </div>
-                  <p className="case-card-requirements"><strong>{isEnglish ? labels.requirements : '基本要求：'}</strong>{isEnglish ? '' : '语言 '}{prog.languageReq}{isEnglish ? ' ' : '；'}{prog.academicReq}</p>
-                  {prog.schedule && <p className="case-card-schedule"><strong>{isEnglish ? labels.schedule : '上课时间：'}</strong>{prog.schedule}</p>}
-                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link" isEnglish={isEnglish}>
-                    {isEnglish ? labels.more : '查看更多'} &gt;&gt;
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
+                  {prog.schedule && <p className="case-card-schedule"><strong>上课时间：</strong>{prog.schedule}</p>}
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
                   </StudyProgramLink>
                 </div>
               </article>
@@ -190,7 +166,7 @@ function StudySectionContent({ section, isEnglish }) {
       )}
       {sec.id === 'primary' && sec.programs && (
         <>
-          <p className="study-section-intro">{isEnglish ? labels.currentInfo : '具体费用与安排以项目说明及当年开课计划为准，如需咨询可联络我们协助。'}<strong>{isEnglish ? ` ${labels.agency}` : '新西兰嘀嘀移民是持牌校代免费申请！！！'}</strong></p>
+          <p className="study-section-intro">具体费用与安排以项目说明及当年开课计划为准，如需咨询可联络我们协助。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
@@ -200,15 +176,15 @@ function StudySectionContent({ section, isEnglish }) {
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
                   <div className="case-card-cost">
-                    <strong>{isEnglish ? labels.tuition : '费用：'}</strong>
+                    <strong>费用：</strong>
                     {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
                       <p key={i} className="case-card-cost-line">{line}</p>
                     ))}
                   </div>
-                  {prog.highlight && <p className="case-card-requirements"><strong>{isEnglish ? labels.highlights : '项目亮点：'}</strong>{prog.highlight}</p>}
+                  {prog.highlight && <p className="case-card-requirements"><strong>项目亮点：</strong>{prog.highlight}</p>}
                   {prog.prospects && prog.prospects.length > 0 && (
                     <div className="case-card-highlights">
-                      <strong>{isEnglish ? labels.highlights : '优势重点：'}</strong>
+                      <strong>优势重点：</strong>
                       <ul>
                         {prog.prospects.slice(0, 4).map((item, i) => (
                           <li key={i}>{item}</li>
@@ -216,8 +192,8 @@ function StudySectionContent({ section, isEnglish }) {
                       </ul>
                     </div>
                   )}
-                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link" isEnglish={isEnglish}>
-                    {isEnglish ? labels.more : '查看更多'} &gt;&gt;
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
                   </StudyProgramLink>
                 </div>
               </article>
@@ -227,7 +203,7 @@ function StudySectionContent({ section, isEnglish }) {
       )}
       {sec.id === 'highschool' && sec.routes && (
         <div className="study-secondary-routes">
-          <h3 className="study-secondary-routes-heading">{isEnglish ? labels.routes : '升学路径规划'}</h3>
+          <h3 className="study-secondary-routes-heading">升学路径规划</h3>
           {sec.routes.map((route, idx) => (
             <article key={idx} className="study-secondary-route">
               <h3 className="study-secondary-route-title">{route.title}</h3>
@@ -247,7 +223,7 @@ function StudySectionContent({ section, isEnglish }) {
       )}
       {sec.id === 'highschool' && sec.programs && (
         <>
-          <p className="study-section-intro" style={{ marginTop: '24px' }}>{isEnglish ? labels.currentInfo : '以下含高中留学方案及合作预科项目，具体费用与入学要求以校方及官网为准。'}<strong>{isEnglish ? ` ${labels.agency}` : '新西兰嘀嘀移民是持牌校代免费申请！！！'}</strong></p>
+          <p className="study-section-intro" style={{ marginTop: '24px' }}>以下含高中留学方案及合作预科项目，具体费用与入学要求以校方及官网为准。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
@@ -257,15 +233,15 @@ function StudySectionContent({ section, isEnglish }) {
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
                   <div className="case-card-cost">
-                    <strong>{isEnglish ? labels.tuition : '学费：'}</strong>
+                    <strong>学费：</strong>
                     {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
                       <p key={i} className="case-card-cost-line">{line}</p>
                     ))}
                   </div>
-                  <p className="case-card-requirements"><strong>{isEnglish ? labels.requirements : '基本要求：'}</strong>{isEnglish ? '' : '语言 '}{prog.languageReq}{isEnglish ? ' ' : '；'}{prog.academicReq}</p>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
                   {prog.prospects && prog.prospects.length > 0 && (
                     <div className="case-card-highlights">
-                      <strong>{isEnglish ? labels.highlights : '优势重点：'}</strong>
+                      <strong>优势重点：</strong>
                       <ul>
                         {prog.prospects.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -273,8 +249,8 @@ function StudySectionContent({ section, isEnglish }) {
                       </ul>
                     </div>
                   )}
-                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link" isEnglish={isEnglish}>
-                    {isEnglish ? labels.more : '查看更多'} &gt;&gt;
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
                   </StudyProgramLink>
                 </div>
               </article>
@@ -284,7 +260,7 @@ function StudySectionContent({ section, isEnglish }) {
       )}
       {sec.id === 'middleschool' && sec.programs && (
         <>
-          <p className="study-section-intro" style={{ marginTop: '24px' }}>{isEnglish ? labels.currentInfo : '以下为初中留学合作学校，具体费用与入学要求以校方及官网为准。'}<strong>{isEnglish ? ` ${labels.agency}` : '新西兰嘀嘀移民是持牌校代免费申请！！！'}</strong></p>
+          <p className="study-section-intro" style={{ marginTop: '24px' }}>以下为初中留学合作学校，具体费用与入学要求以校方及官网为准。<strong>新西兰嘀嘀移民是持牌校代免费申请！！！</strong></p>
           <div className="cases-list">
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
@@ -294,15 +270,15 @@ function StudySectionContent({ section, isEnglish }) {
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>
                   <div className="case-card-cost">
-                    <strong>{isEnglish ? labels.tuition : '学费：'}</strong>
+                    <strong>学费：</strong>
                     {(prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
                       <p key={i} className="case-card-cost-line">{line}</p>
                     ))}
                   </div>
-                  <p className="case-card-requirements"><strong>{isEnglish ? labels.requirements : '基本要求：'}</strong>{isEnglish ? '' : '语言 '}{prog.languageReq}{isEnglish ? ' ' : '；'}{prog.academicReq}</p>
+                  <p className="case-card-requirements"><strong>基本要求：</strong>语言 {prog.languageReq}；{prog.academicReq}</p>
                   {prog.prospects && prog.prospects.length > 0 && (
                     <div className="case-card-highlights">
-                      <strong>{isEnglish ? labels.highlights : '优势重点：'}</strong>
+                      <strong>优势重点：</strong>
                       <ul>
                         {prog.prospects.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -310,8 +286,8 @@ function StudySectionContent({ section, isEnglish }) {
                       </ul>
                     </div>
                   )}
-                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link" isEnglish={isEnglish}>
-                    {isEnglish ? labels.more : '查看更多'} &gt;&gt;
+                  <StudyProgramLink prog={prog} sectionId={sec.id} className="case-card-link">
+                    查看更多 &gt;&gt;
                   </StudyProgramLink>
                 </div>
               </article>
@@ -323,10 +299,9 @@ function StudySectionContent({ section, isEnglish }) {
   )
 }
 
-function StudyPage({ language = 'zh' }) {
+function StudyPage() {
   const location = useLocation()
   const { studyPath } = useParams()
-  const isEnglish = language === 'en'
   const sectionIdFromUrl = studyPathSegmentToSectionId(studyPath)
   const selectedCategory = sectionIdFromUrl ?? studySections[0].id
 
@@ -340,19 +315,17 @@ function StudyPage({ language = 'zh' }) {
   }, [location.state?.scrollY, studyPath])
 
   if (!sectionIdFromUrl) {
-    return <Navigate to={isEnglish ? '/en/study/University' : '/study/University'} replace />
+    return <Navigate to="/study/University" replace />
   }
 
-  const sourceSection = studySections.find((s) => s.id === selectedCategory)
-  const currentSection = isEnglish ? getEnglishStudySection(sourceSection) : sourceSection
+  const currentSection = studySections.find((s) => s.id === selectedCategory)
 
   return (
     <main className="main-content study-page">
-      <h1 className="study-page-title">{isEnglish ? 'Study in New Zealand' : '留学专栏'}</h1>
+      <h1 className="study-page-title">留学专栏</h1>
 
       <div className="study-intro-block">
-        {(isEnglish ? englishStudyIntro : studyIntro.paragraphs).map((p, i) => {
-          if (isEnglish) return <p key={i}>{p}</p>
+        {studyIntro.paragraphs.map((p, i) => {
           if (i === studyIntro.paragraphs.length - 1) {
             const slogan = '新西兰持牌中介免费申请学校！'
             const baseText = p.replace(slogan, '').trim()
@@ -366,14 +339,14 @@ function StudyPage({ language = 'zh' }) {
         })}
       </div>
 
-      <nav className="study-category-nav" aria-label={isEnglish ? 'Study categories' : '留学分类'}>
+      <nav className="study-category-nav" aria-label="留学分类">
         {studyCategories.map((cat) => (
           <NavLink
             key={cat.id}
-            to={getStudyListPath(cat.id, isEnglish)}
+            to={studyListPathForSectionId(cat.id)}
             className={({ isActive }) => `study-category-link${isActive ? ' active' : ''}`}
           >
-            {isEnglish ? cat.labelEn : cat.label}
+            {cat.label}
           </NavLink>
         ))}
       </nav>
@@ -381,12 +354,12 @@ function StudyPage({ language = 'zh' }) {
       {currentSection && (
         <section className="study-section">
           <h2 className="study-section-title">{currentSection.title}</h2>
-          <StudySectionContent section={currentSection} isEnglish={isEnglish} />
+          <StudySectionContent section={currentSection} />
         </section>
       )}
 
       <p className="study-page-cta">
-        {isEnglish ? 'For an individual study plan and application support, contact us by phone, WeChat or through the Contact page.' : '如需针对个人情况的留学方案与申请协助，欢迎通过本站「联络我们」填写留学意向，或致电/微信联系我们。'}
+        如需针对个人情况的留学方案与申请协助，欢迎通过本站「联络我们」填写留学意向，或致电/微信联系我们。
       </p>
     </main>
   )

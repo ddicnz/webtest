@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom'
 import { albumSections } from '../data/albumData.js'
-import { englishAlbumSections } from '../i18n/englishContent.js'
 
-function AlbumPage({ language = 'zh' }) {
-  const isEnglish = language === 'en'
-
+function AlbumPage() {
   return (
     <main className="main-content album-page">
-      <h2 className="section-title">{isEnglish ? 'Company Gallery' : '企业相册'}</h2>
+      <h2 className="section-title">企业相册</h2>
       <p className="album-intro">
-        {isEnglish
-          ? 'Explore our client visits, office, team activities and everyday life in New Zealand.'
-          : '展示客户接待、办公环境、本地活动与新西兰本地风貌，欢迎了解我们的日常。'}
+        展示客户接待、办公环境、本地活动与新西兰本地风貌，欢迎了解我们的日常。
       </p>
 
       <div className="album-covers">
@@ -20,22 +15,22 @@ function AlbumPage({ language = 'zh' }) {
           return (
             <Link
               key={section.id}
-              to={`${isEnglish ? '/en' : ''}/album/${section.id}`}
+              to={`/album/${section.id}`}
               className="album-cover-card"
             >
               <div className="album-cover-frame">
                 {coverSrc ? (
                   <img
                     src={coverSrc}
-                    alt={isEnglish ? englishAlbumSections[section.id] || section.title : section.title}
+                    alt={section.title}
                     className="album-cover-img"
                     loading="lazy"
                   />
                 ) : (
-                  <div className="album-cover-placeholder">{isEnglish ? 'No images yet' : '暂无图片'}</div>
+                  <div className="album-cover-placeholder">暂无图片</div>
                 )}
               </div>
-              <h3 className="album-cover-title">{isEnglish ? englishAlbumSections[section.id] || section.title : section.title}</h3>
+              <h3 className="album-cover-title">{section.title}</h3>
             </Link>
           )
         })}

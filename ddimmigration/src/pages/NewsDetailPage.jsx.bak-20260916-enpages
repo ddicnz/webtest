@@ -2,16 +2,13 @@ import { useEffect } from 'react'
 import { useNavigate, useParams, Link, useLocation } from 'react-router-dom'
 import { newsList } from '../data/newsData.js'
 import { makeNewsSlug, findNewsBySlugOrId } from '../utils/newsSlug.js'
-import { getEnglishNewsItem } from '../i18n/englishContent.js'
 
-function NewsDetailPage({ language = 'zh' }) {
+function NewsDetailPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { id: idParam } = useParams()
   const fromPage = location.state?.fromPage ?? 1
   const scrollY = location.state?.scrollY ?? 0
-  const isEnglish = language === 'en'
-  const basePath = isEnglish ? '/en/news' : '/news'
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   const decodedParam = (() => {
@@ -23,31 +20,30 @@ function NewsDetailPage({ language = 'zh' }) {
   })()
 
   const newsItem = findNewsBySlugOrId(decodedParam, newsList)
-  const displayItem = newsItem && isEnglish ? getEnglishNewsItem(newsItem) : newsItem
 
   // 兼容旧链接：/news/10 → 自动跳转到 /news/10-标题
   useEffect(() => {
     if (!newsItem) return
     if (!/^\d+$/.test(String(decodedParam).trim())) return
-    navigate(`${basePath}/${encodeURIComponent(makeNewsSlug(isEnglish ? getEnglishNewsItem(newsItem) : newsItem))}`, { replace: true })
-  }, [basePath, decodedParam, isEnglish, navigate, newsItem])
+    navigate(`/news/${encodeURIComponent(makeNewsSlug(newsItem))}`, { replace: true })
+  }, [decodedParam, navigate, newsItem])
 
   if (!newsItem) {
     return (
       <main className="main-content news-detail-page">
-        <p>{isEnglish ? 'News item not found.' : '未找到该资讯。'}</p>
-        <Link to={basePath} state={{ fromPage: 1, scrollY: 0 }} className="case-back-link">{isEnglish ? 'Back to immigration news' : '返回移民资讯列表'}</Link>
+        <p>未找到该资讯。</p>
+        <Link to="/news" state={{ fromPage: 1, scrollY: 0 }} className="case-back-link">返回移民资讯列表</Link>
       </main>
     )
   }
 
   return (
     <main className="main-content news-detail-page case-detail-page">
-      <Link to={basePath} state={{ fromPage, scrollY }} className="case-back-link">&lt; {isEnglish ? 'Back to immigration news' : '返回移民资讯'}</Link>
+      <Link to="/news" state={{ fromPage, scrollY }} className="case-back-link">&lt; 返回移民资讯</Link>
 
       <article className="case-detail">
-        <h1 className="case-detail-title">{displayItem.title}</h1>
-        <p className="case-detail-date">{displayItem.date}</p>
+        <h1 className="case-detail-title">{newsItem.title}</h1>
+        <p className="case-detail-date">{newsItem.date}</p>
         {newsItem.image && (
           <div className="case-detail-images">
             <div className="case-detail-image-wrap">
@@ -56,13 +52,13 @@ function NewsDetailPage({ language = 'zh' }) {
           </div>
         )}
         <div className="case-detail-content">
-          {(displayItem.fullContent || '')
+          {(newsItem.fullContent || '')
             .split('\n\n')
             .filter(Boolean)
             .map((para, i) => (
               <span key={i}>
                 <p>{para}</p>
-                {!isEnglish && newsItem.bodyImages && para.includes('这三个路径都属于 SMC（Skilled Migrant Category）') && (
+                {newsItem.bodyImages && para.includes('这三个路径都属于 SMC（Skilled Migrant Category）') && (
                   <div className="case-detail-body-images">
                     {newsItem.bodyImages.map((src, j) => (
                       <div key={j} className="case-detail-image-wrap">
@@ -73,15 +69,6 @@ function NewsDetailPage({ language = 'zh' }) {
                 )}
               </span>
             ))}
-          {isEnglish && newsItem.bodyImages && (
-            <div className="case-detail-body-images">
-              {newsItem.bodyImages.map((src, i) => (
-                <div key={i} className="case-detail-image-wrap">
-                  <img src={src} alt="" className="case-detail-image" loading="lazy" />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </article>
     </main>

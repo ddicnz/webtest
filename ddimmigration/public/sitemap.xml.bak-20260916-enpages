@@ -50,60 +50,6 @@
   </url>
 
   <url>
-    <loc>https://www.nzddvisa.com/en/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/services</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/cases</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/jobs</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/album</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/news</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/promoter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://www.nzddvisa.com/en/study/University</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://www.nzddvisa.com/news/post-study-work-visa-2026</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

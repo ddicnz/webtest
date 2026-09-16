@@ -2,16 +2,13 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { newsList } from '../data/newsData.js'
 import { makeNewsSlug } from '../utils/newsSlug.js'
-import { getEnglishNewsItem } from '../i18n/englishContent.js'
 
 const PAGE_SIZE = 5
 
-function NewsPage({ language = 'zh' }) {
+function NewsPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const [page, setPage] = useState(1)
-  const isEnglish = language === 'en'
-  const basePath = isEnglish ? '/en/news' : '/news'
   const totalPages = Math.ceil(newsList.length / PAGE_SIZE)
 
   useEffect(() => {
@@ -27,13 +24,10 @@ function NewsPage({ language = 'zh' }) {
 
   return (
     <main className="main-content news-page">
-      <h2 className="section-title">{isEnglish ? 'Immigration News' : '移民资讯'}</h2>
+      <h2 className="section-title">移民资讯</h2>
 
       <div className="cases-list">
-        {currentList.map((item) => {
-          const displayItem = isEnglish ? getEnglishNewsItem(item) : item
-          const detailPath = `${basePath}/${encodeURIComponent(makeNewsSlug(displayItem))}`
-          return (
+        {currentList.map((item) => (
           <article key={item.id} className="case-card">
             <div className="case-card-image-wrap">
               <img
@@ -44,39 +38,38 @@ function NewsPage({ language = 'zh' }) {
               />
             </div>
             <div className="case-card-body">
-              <h3 className="case-card-title">{displayItem.title}</h3>
-              <p className="case-card-summary">{displayItem.summary}</p>
-              <p className="case-card-date">{displayItem.date}</p>
+              <h3 className="case-card-title">{item.title}</h3>
+              <p className="case-card-summary">{item.summary}</p>
+              <p className="case-card-date">{item.date}</p>
               <a
-                href={detailPath}
+                href={`/news/${encodeURIComponent(makeNewsSlug(item))}`}
                 className="case-card-link"
                 onClick={(e) => {
                   e.preventDefault()
-                  navigate(detailPath, {
+                  navigate(`/news/${encodeURIComponent(makeNewsSlug(item))}`, {
                     state: { fromPage: page, scrollY: window.scrollY }
                   })
                 }}
               >
-                {isEnglish ? 'Read more' : '查看更多'} &gt;&gt;
+                查看更多 &gt;&gt;
               </a>
             </div>
           </article>
-          )
-        })}
+        ))}
       </div>
 
       {totalPages > 1 && (
-        <nav className="cases-pagination" aria-label={isEnglish ? 'Immigration news pagination' : '移民资讯分页'}>
+        <nav className="cases-pagination" aria-label="移民资讯分页">
           <button
             type="button"
             className="cases-pagination-btn"
             disabled={page <= 1}
             onClick={() => setPage((p) => p - 1)}
           >
-            {isEnglish ? 'Previous' : '上一页'}
+            上一页
           </button>
           <span className="cases-pagination-info">
-            {isEnglish ? `Page ${page} of ${totalPages}` : `第 ${page} / ${totalPages} 页`}
+            第 {page} / {totalPages} 页
           </span>
           <button
             type="button"
@@ -84,7 +77,7 @@ function NewsPage({ language = 'zh' }) {
             disabled={page >= totalPages}
             onClick={() => setPage((p) => p + 1)}
           >
-            {isEnglish ? 'Next' : '下一页'}
+            下一页
           </button>
         </nav>
       )}

@@ -4,12 +4,10 @@ import { getStudyProgramById } from '../data/studyData.js'
 import { parseStudyProgramIdFromSlug } from '../utils/studySlug.js'
 import { studyListPathForSectionId } from '../utils/studySectionPath.js'
 import StudyImageGallery from '../components/StudyImageGallery.jsx'
-import { getEnglishStudyProgram } from '../i18n/englishStudyContent.js'
 
-function StudyProgramDetailPage({ language = 'zh' }) {
+function StudyProgramDetailPage() {
   const { id: idParam } = useParams()
   const location = useLocation()
-  const isEnglish = language === 'en'
   const decodedParam = (() => {
     try {
       return decodeURIComponent(idParam || '')
@@ -22,8 +20,7 @@ function StudyProgramDetailPage({ language = 'zh' }) {
   const prog = programId ? getStudyProgramById(programId) : null
   const fromSection = location.state?.fromSection || prog?.sectionId || 'tertiary'
   const scrollY = location.state?.scrollY
-  const backStudyListPath = `${isEnglish ? '/en' : ''}${studyListPathForSectionId(fromSection)}`
-  const displayProg = prog && isEnglish ? getEnglishStudyProgram(prog, fromSection) : prog
+  const backStudyListPath = studyListPathForSectionId(fromSection)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -31,17 +28,15 @@ function StudyProgramDetailPage({ language = 'zh' }) {
 
   useEffect(() => {
     if (prog && typeof document !== 'undefined') {
-      document.title = isEnglish
-        ? `${displayProg.titleZh} | Study in New Zealand | DD Immigration`
-        : `${prog.titleZh} - 留学专栏 - 嘀嘀移民`
+      document.title = `${prog.titleZh} - 留学专栏 - 嘀嘀移民`
     }
-  }, [displayProg?.titleZh, isEnglish, prog])
+  }, [prog])
 
   if (!prog) {
     return (
       <main className="main-content case-detail-page">
-        <p>{isEnglish ? 'Study programme not found.' : '未找到该项目。'}</p>
-        <Link to={isEnglish ? '/en/study/University' : '/study/University'} state={{ fromSection: 'tertiary', scrollY: 0 }} className="case-back-link">{isEnglish ? 'Back to Study in New Zealand' : '返回留学专栏'}</Link>
+        <p>未找到该项目。</p>
+        <Link to="/study/University" state={{ fromSection: 'tertiary', scrollY: 0 }} className="case-back-link">返回留学专栏</Link>
       </main>
     )
   }
@@ -52,19 +47,19 @@ function StudyProgramDetailPage({ language = 'zh' }) {
   const galleryImages = Array.isArray(prog.galleryImages)
     ? prog.galleryImages.filter(Boolean)
     : null
-  const galleryCaptions = isEnglish ? [] : Array.isArray(prog.galleryCaptions) ? prog.galleryCaptions : []
+  const galleryCaptions = Array.isArray(prog.galleryCaptions) ? prog.galleryCaptions : []
 
   return (
     <main className="main-content case-detail-page">
-      <Link to={backStudyListPath} state={{ fromSection, scrollY }} className="case-back-link">&lt; {isEnglish ? 'Back to Study in New Zealand' : '返回留学专栏'}</Link>
+      <Link to={backStudyListPath} state={{ fromSection, scrollY }} className="case-back-link">&lt; 返回留学专栏</Link>
 
       <article className="case-detail">
-        <h1 className="case-detail-title">{displayProg.titleZh}</h1>
-        {!isEnglish && <p className="case-detail-date">{prog.titleEn}</p>}
+        <h1 className="case-detail-title">{prog.titleZh}</h1>
+        <p className="case-detail-date">{prog.titleEn}</p>
         {galleryImages && galleryImages.length > 0 ? (
           <StudyImageGallery
             images={galleryImages}
-            title={displayProg.titleZh}
+            title={prog.titleZh}
             captions={galleryCaptions}
             layout={
               prog.galleryLayout === 'carousel'
@@ -81,7 +76,7 @@ function StudyProgramDetailPage({ language = 'zh' }) {
               <div key={i} className="case-detail-image-wrap">
                 <img
                   src={src}
-                  alt={i === 0 ? displayProg.titleZh : `${displayProg.titleZh} ${i + 1}`}
+                  alt={i === 0 ? prog.titleZh : `${prog.titleZh} ${i + 1}`}
                   className="case-detail-image"
                   loading="lazy"
                 />
@@ -90,28 +85,28 @@ function StudyProgramDetailPage({ language = 'zh' }) {
           </div>
         )}
         <div className="case-detail-content">
-          {displayProg.highlight && <p><strong>{displayProg.highlight}</strong></p>}
-          {displayProg.address && (
+          {prog.highlight && <p><strong>{prog.highlight}</strong></p>}
+          {prog.address && (
             <p>
-              <strong>{isEnglish ? 'Address: ' : '校址：'}</strong>
-              {displayProg.address}
+              <strong>校址：</strong>
+              {prog.address}
             </p>
           )}
           <div className="case-detail-cost">
-          <strong>{isEnglish ? 'Tuition and fees:' : '学费：'}</strong>
-          {(displayProg.detailCost || displayProg.cost || '').split('\n').filter(Boolean).map((line, i) => (
+          <strong>学费：</strong>
+          {(prog.detailCost || prog.cost || '').split('\n').filter(Boolean).map((line, i) => (
             <p key={i} className="case-detail-cost-line">{line}</p>
           ))}
         </div>
-          {displayProg.costNote && <p>{displayProg.costNote}</p>}
-          {displayProg.detail && <p>{displayProg.detail}</p>}
-          {displayProg.schedule && <p><strong>{isEnglish ? 'Timetable: ' : '上课时间：'}</strong>{displayProg.schedule}</p>}
-          <p><strong>{isEnglish ? 'English requirements: ' : '语言要求：'}</strong>{displayProg.languageReq}</p>
-          <p><strong>{isEnglish ? 'Academic requirements: ' : '学术要求：'}</strong>{displayProg.academicReq}</p>
-          <p><strong>{isEnglish ? 'Intakes: ' : '入学时间：'}</strong>{displayProg.intakes}</p>
-          <p><strong>{isEnglish ? 'Possible outcomes:' : '毕业前景：'}</strong></p>
+          {prog.costNote && <p>{prog.costNote}</p>}
+          {prog.detail && <p>{prog.detail}</p>}
+          {prog.schedule && <p><strong>上课时间：</strong>{prog.schedule}</p>}
+          <p><strong>语言要求：</strong>{prog.languageReq}</p>
+          <p><strong>学术要求：</strong>{prog.academicReq}</p>
+          <p><strong>入学时间：</strong>{prog.intakes}</p>
+          <p><strong>毕业前景：</strong></p>
           <ul>
-            {displayProg.prospects.map((item, i) => (
+            {prog.prospects.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>

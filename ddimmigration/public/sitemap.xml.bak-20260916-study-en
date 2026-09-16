@@ -98,12 +98,6 @@
   </url>
 
   <url>
-    <loc>https://www.nzddvisa.com/en/study/University</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://www.nzddvisa.com/news/post-study-work-visa-2026</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -1,26 +1,22 @@
 import { useParams, Link } from 'react-router-dom'
 import { servicesList } from '../data/servicesData.js'
-import { englishServices } from '../i18n/englishContent.js'
 
-function ServicesDetailPage({ language = 'zh' }) {
+function ServicesDetailPage() {
   const { type } = useParams()
-  const isEnglish = language === 'en'
-  const sourceItem = servicesList.find((s) => s.id === type)
-  const item = sourceItem && isEnglish ? { ...sourceItem, ...englishServices[sourceItem.id] } : sourceItem
-  const servicesPath = isEnglish ? '/en/services' : '/services'
+  const item = servicesList.find((s) => s.id === type)
 
   if (!item) {
     return (
       <main className="main-content services-detail-page">
-        <p>{isEnglish ? 'Service not found.' : '未找到该业务。'}</p>
-        <Link to={servicesPath} className="case-back-link">{isEnglish ? 'Back to services' : '返回核心业务'}</Link>
+        <p>未找到该业务。</p>
+        <Link to="/services" className="case-back-link">返回核心业务</Link>
       </main>
     )
   }
 
   return (
     <main className="main-content services-detail-page">
-      <Link to={servicesPath} className="case-back-link">&lt; {isEnglish ? 'Back to services' : '返回核心业务'}</Link>
+      <Link to="/services" className="case-back-link">&lt; 返回核心业务</Link>
 
       <article className="services-detail">
         <h1 className="case-detail-title">{item.title}</h1>
@@ -36,9 +32,6 @@ function ServicesDetailPage({ language = 'zh' }) {
       '👨‍👩‍👧 家庭同步方案',
       '🧭 留学到移民路线图',
       '📊 英美澳新对比',
-      'How we can help',
-      'Our support may include',
-      'Our study services',
     ]
             const isSectionTitle = sectionTitles.includes(t)
             return (

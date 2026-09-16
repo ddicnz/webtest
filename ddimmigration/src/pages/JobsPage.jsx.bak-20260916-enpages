@@ -10,105 +10,16 @@ function normalizeJob(job) {
   return { ...job, requirements: [...prefix, ...job.requirements] }
 }
 
-const englishJobTitles = {
-  '不锈钢厂制作工人': 'Stainless Steel Fabricator',
-  '东北菜/江浙菜厨师': 'Northeastern / Jiangsu-Zhejiang Cuisine Chef',
-  '中式面点师': 'Chinese Pastry Chef',
-  '主厨': 'Head Chef',
-  '农业工': 'Agricultural Worker',
-  '农业技术员': 'Agricultural Technician',
-  '切配厨师': 'Prep Chef',
-  '厨师': 'Chef',
-  '叉车工': 'Forklift Operator',
-  '喷漆工人': 'Spray Painter',
-  '地板/地毯工': 'Flooring / Carpet Installer',
-  '寿司师傅': 'Sushi Chef',
-  '屋顶工': 'Roofer',
-  '广东籍厨师 / 潮州厨师': 'Cantonese / Teochew Cuisine Chef',
-  '广式面点师': 'Cantonese Dim Sum Chef',
-  '建筑助理': 'Construction Assistant',
-  '建筑木工 / 瓦工': 'Construction Carpenter / Tiler',
-  '批灰工': 'Plasterer',
-  '拉面师': 'Ramen Chef',
-  '按摩师': 'Massage Therapist',
-  '挖掘机司机': 'Excavator Operator',
-  '日料店后厨': 'Japanese Restaurant Kitchen Staff',
-  '木工': 'Carpenter',
-  '机器操作员': 'Machine Operator',
-  '样板房安装工': 'Show Home Installer',
-  '框架木工': 'Framing Carpenter',
-  '橱柜厂木工': 'Cabinet Factory Joiner',
-  '橱柜安装工': 'Cabinet Installer',
-  '江浙菜厨师': 'Jiangsu-Zhejiang Cuisine Chef',
-  '汽修钣金喷漆': 'Automotive Panel Beater / Spray Painter',
-  '汽车喷漆师傅': 'Automotive Spray Painter',
-  '汽车维修': 'Automotive Mechanic',
-  '汽车美容': 'Vehicle Detailer',
-  '汽车贴膜技师': 'Automotive Film Installer',
-  '汽车钣金工': 'Automotive Panel Beater',
-  '油漆工': 'Painter',
-  '烧腊厨师': 'Cantonese Roast-Meat Chef',
-  '瓦工': 'Tiler',
-  '瓷砖工': 'Tiler',
-  '电焊工': 'Welder',
-  '石材台面工人': 'Stone Benchtop Fabricator',
-  '石膏板工': 'Plasterboard Installer',
-  '砌砖工': 'Bricklayer',
-  '花园木工': 'Landscape Carpenter',
-  '英文好的前台': 'English-speaking Receptionist',
-  '融合菜厨师': 'Fusion Cuisine Chef',
-  '裱花师': 'Cake Decorator',
-  '西点师': 'Pastry Chef',
-  '西餐厨师': 'Western Cuisine Chef',
-  '货车司机': 'Truck Driver',
-  '配菜工': 'Kitchen Prep Worker',
-  '钢筋工': 'Steel Fixer',
-  '钢结构厂：铆工': 'Structural Steel Riveter',
-  '铝合金门窗厂工人': 'Aluminium Joinery Worker',
-  '防水工人': 'Waterproofer',
-  '面点师': 'Pastry / Dim Sum Chef',
-  '项目协调员': 'Project Coordinator',
-  '项目管理员': 'Project Administrator',
-  '餐厅前台': 'Restaurant Front-of-house Staff',
-  '饭店经理': 'Restaurant Manager',
-}
-
-function getEnglishPay(value = '') {
-  const amount = value.match(/\d+(?:-\d+)?/)?.[0]
-  if (!amount) return 'Pay is negotiable and depends on experience.'
-  if (value.includes('小时')) return `Indicative pay: NZD ${amount} per hour. Final rate and tax basis will be confirmed by the employer.`
-  if (value.includes('周')) return `Indicative pay: NZD ${amount} per week. Final rate, hours and tax basis will be confirmed by the employer.`
-  return `Indicative pay: NZD ${amount}. Full details will be confirmed by the employer.`
-}
-
-function getEnglishJob(job) {
-  const title = englishJobTitles[job.title] || 'Job Opportunity'
-  return {
-    ...job,
-    title,
-    requirements: [
-      `Relevant hands-on experience in ${title.toLowerCase()} or closely related work is preferred.`,
-      'Applicants must be able to meet the employer’s practical, safety and reliability requirements.',
-      'Duties, hours, qualifications and English evidence requirements will be confirmed during assessment.',
-    ],
-    salary: getEnglishPay(job.salary),
-    visa: 'Potential AEWV support, subject to employer, role and applicant eligibility.',
-    living: job.living?.includes('工作餐') ? 'Staff meal provided; accommodation is not provided.' : 'Meals and accommodation are not provided.',
-    leave: 'New Zealand minimum employment entitlements apply.',
-  }
-}
-
-function JobsPage({ language = 'zh' }) {
+function JobsPage() {
   const [selectedCategory, setSelectedCategory] = useState('urgent')
-  const isEnglish = language === 'en'
 
   const categories = [
-    { id: 'urgent', label: '紧急招聘', labelEn: 'Urgent Roles' },
-    { id: 'auto', label: '汽车类', labelEn: 'Automotive' },
-    { id: 'construction', label: '建筑类', labelEn: 'Construction' },
-    { id: 'catering', label: '餐饮类', labelEn: 'Hospitality' },
-    { id: 'factory', label: '工厂类', labelEn: 'Manufacturing' },
-    { id: 'other', label: '其他类', labelEn: 'Other' },
+    { id: 'urgent', label: '紧急招聘' },
+    { id: 'auto', label: '汽车类' },
+    { id: 'construction', label: '建筑类' },
+    { id: 'catering', label: '餐饮类' },
+    { id: 'factory', label: '工厂类' },
+    { id: 'other', label: '其他类' },
   ]
 
   const jobsByCategory = {
@@ -856,17 +767,14 @@ function JobsPage({ language = 'zh' }) {
     ],
   }
 
-  const currentJobs = (jobsByCategory[selectedCategory] || [])
-    .map(normalizeJob)
-    .map((job) => isEnglish ? getEnglishJob(job) : job)
-  const currentCategory = categories.find((c) => c.id === selectedCategory)
-  const currentLabel = (isEnglish ? currentCategory?.labelEn : currentCategory?.label) || ''
+  const currentJobs = (jobsByCategory[selectedCategory] || []).map(normalizeJob)
+  const currentLabel = categories.find((c) => c.id === selectedCategory)?.label || ''
 
   return (
     <main className="main-content jobs-page">
-      <h1 className="jobs-title">{isEnglish ? 'Job Opportunities' : '招聘信息'}</h1>
+      <h1 className="jobs-title">招聘信息</h1>
 
-      <nav className="jobs-category-nav" aria-label={isEnglish ? 'Job categories' : '招聘分类'}>
+      <nav className="jobs-category-nav" aria-label="招聘分类">
         {categories.map((cat) => (
           <button
             key={cat.id}
@@ -874,7 +782,7 @@ function JobsPage({ language = 'zh' }) {
             className={`jobs-category-link ${selectedCategory === cat.id ? 'active' : ''}`}
             onClick={() => setSelectedCategory(cat.id)}
           >
-            {isEnglish ? cat.labelEn : cat.label}
+            {cat.label}
           </button>
         ))}
       </nav>
@@ -888,22 +796,22 @@ function JobsPage({ language = 'zh' }) {
                 <h3 className="job-card-title">{job.title}</h3>
               </div>
               <div className="job-card-body">
-                <h4 className="job-section-label">{isEnglish ? 'Requirements' : '岗位要求'}</h4>
+                <h4 className="job-section-label">岗位要求</h4>
                 <ul className="job-requirements">
                   {job.requirements.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
                 <div className="job-benefits">
-                  <p><strong>{isEnglish ? 'Pay: ' : '薪资：'}</strong>{job.salary}</p>
-                  <p><strong>{isEnglish ? 'Visa: ' : '工签：'}</strong>{job.visa}</p>
-                  <p><strong>{isEnglish ? 'Meals and accommodation: ' : '食宿：'}</strong>{job.living}</p>
-                  <p><strong>{isEnglish ? 'Leave: ' : '年假：'}</strong>{job.leave}</p>
-                  <p><strong>{isEnglish ? 'Family visas: ' : '福利：'}</strong>{isEnglish ? 'Options for partners and children depend on the role, pay and current immigration settings.' : '可以担保配偶 open 工签、18 周岁以下孩子公立学校免费学签'}</p>
+                  <p><strong>薪资：</strong>{job.salary}</p>
+                  <p><strong>工签：</strong>{job.visa}</p>
+                  <p><strong>食宿：</strong>{job.living}</p>
+                  <p><strong>年假：</strong>{job.leave}</p>
+                  <p><strong>福利：</strong>可以担保配偶 open 工签、18 周岁以下孩子公立学校免费学签</p>
                 </div>
                 <p className="job-contact">
-                  <strong>{isEnglish ? 'Enquiries / applications: ' : '咨询/投递：'}</strong>
-                  {isEnglish ? 'WeChat ddtrip700 or email dd.icnz@gmail.com' : '微信 ddtrip700 或邮箱 dd.icnz@gmail.com'}
+                  <strong>咨询/投递：</strong>
+                  微信 ddtrip700 或邮箱 dd.icnz@gmail.com
                 </p>
               </div>
             </article>
@@ -912,7 +820,7 @@ function JobsPage({ language = 'zh' }) {
       </section>
 
       <p className="jobs-footer-note">
-        {isEnglish ? 'No suitable role at the moment? Email your CV to dd.icnz@gmail.com and we may contact you when a matching vacancy becomes available.' : '暂无合适岗位？也可将简历发至 dd.icnz@gmail.com，我们有人力需求时会优先联系您。'}
+        暂无合适岗位？也可将简历发至 dd.icnz@gmail.com，我们有人力需求时会优先联系您。
       </p>
     </main>
   )

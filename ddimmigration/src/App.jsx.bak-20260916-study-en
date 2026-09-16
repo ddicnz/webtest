@@ -38,7 +38,7 @@ const navItems = [
   { id: 'jobs', label: '招聘信息', labelEn: 'Jobs', path: '/jobs', pathEn: '/en/jobs' },
   { id: 'album', label: '企业相册', labelEn: 'Gallery', path: '/album', pathEn: '/en/album' },
   { id: 'news', label: '移民资讯', labelEn: 'News', path: '/news', pathEn: '/en/news' },
-  { id: 'study', label: '留学专栏', labelEn: 'Study in NZ', path: '/study/University', pathEn: '/en/study/University' },
+  { id: 'study', label: '留学专栏', labelEn: 'Study in NZ', path: '/study/University' },
   { id: 'contact', label: '联络我们', labelEn: 'Contact', path: '/contactus', pathEn: '/en/contactus' },
   { id: 'promoter', label: '成为推广员', labelEn: 'Partners', path: '/promoter', pathEn: '/en/promoter' },
   { id: 'faq', label: '常见问题', labelEn: 'FAQs', path: '/faq', pathEn: '/en/faq' },
@@ -143,7 +143,7 @@ function App() {
     label: isEnglish ? item.labelEn : item.label,
     path: isEnglish && item.pathEn ? item.pathEn : item.path,
   }))
-  const englishRoutePrefixes = ['/about', '/services', '/cases', '/jobs', '/album', '/news', '/study', '/contactus', '/promoter', '/faq']
+  const englishRoutePrefixes = ['/about', '/services', '/cases', '/jobs', '/album', '/news', '/contactus', '/promoter', '/faq']
   const hasEnglishCounterpart = englishRoutePrefixes.some((prefix) =>
     location.pathname === prefix || location.pathname.startsWith(`${prefix}/`),
   )
@@ -169,7 +169,6 @@ function App() {
       ['/en/jobs', 'New Zealand Job Opportunities | DD Immigration'],
       ['/en/album', 'Company Gallery | DD Immigration Consulting'],
       ['/en/news', 'New Zealand Immigration News | DD Immigration'],
-      ['/en/study', 'Study in New Zealand | DD Immigration Consulting'],
       ['/en/promoter', 'Become a Referral Partner | DD Immigration'],
       ['/en/faq', 'New Zealand Immigration FAQs | DD Immigration'],
     ]
@@ -292,8 +291,8 @@ function App() {
                     to={item.path}
                     className={() => {
                       const studyActive =
-                        (location.pathname.startsWith('/study') || location.pathname.startsWith('/en/study')) &&
-                        !location.pathname.includes('/study/program')
+                        location.pathname.startsWith('/study') &&
+                        !location.pathname.startsWith('/study/program')
                       const active = studyActive
                       return `nav-link nav-link--dropdown-trigger${active ? ' active' : ''}`
                     }}
@@ -307,7 +306,7 @@ function App() {
                       <li key={sec.id} role="none">
                         <NavLink
                           role="menuitem"
-                          to={`${isEnglish ? '/en' : ''}${studyListPathForSectionId(sec.id)}`}
+                          to={studyListPathForSectionId(sec.id)}
                           className={({ isActive }) => `nav-dropdown-link${isActive ? ' active' : ''}`}
                           onClick={(e) => {
                             const el = e.currentTarget
@@ -365,7 +364,7 @@ function App() {
                     key={item.id}
                     type="button"
                     className={`nav-mobile-link nav-mobile-study-trigger${
-                      location.pathname.includes('/study') ? ' active' : ''
+                      location.pathname.startsWith('/study') ? ' active' : ''
                     }`}
                     aria-expanded={mobileStudyPanelOpen}
                     onClick={() => setMobileStudyPanelOpen(true)}
@@ -418,7 +417,7 @@ function App() {
               {studySections.map((sec) => (
                 <NavLink
                   key={sec.id}
-                  to={`${isEnglish ? '/en' : ''}${studyListPathForSectionId(sec.id)}`}
+                  to={studyListPathForSectionId(sec.id)}
                   className={({ isActive }) =>
                     `nav-mobile-link nav-mobile-subpanel-link${isActive ? ' active' : ''}`
                   }
@@ -476,11 +475,8 @@ function App() {
           <Route path="/visa-info-form" element={<VisaInfoFormPage />} />
           <Route path="/assesment" element={<Navigate to="/assessment" replace />} />
           <Route path="/study/program/:id" element={<StudyProgramDetailPage />} />
-          <Route path="/en/study/program/:id" element={<StudyProgramDetailPage language="en" />} />
           <Route path="/study" element={<Navigate to="/study/University" replace />} />
-          <Route path="/en/study" element={<Navigate to="/en/study/University" replace />} />
           <Route path="/study/:studyPath" element={<StudyPage />} />
-          <Route path="/en/study/:studyPath" element={<StudyPage language="en" />} />
         </Route>
       </Routes>
 

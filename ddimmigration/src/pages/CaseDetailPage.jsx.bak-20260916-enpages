@@ -2,16 +2,13 @@ import { useEffect } from 'react'
 import { useNavigate, useParams, Link, useLocation } from 'react-router-dom'
 import { casesList } from '../data/casesData.js'
 import { makeCaseSlug, parseCaseIdFromSlug } from '../utils/caseSlug.js'
-import { getEnglishCaseItem } from '../i18n/englishContent.js'
 
-function CaseDetailPage({ language = 'zh' }) {
+function CaseDetailPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { id: idParam } = useParams()
   const fromPage = location.state?.fromPage ?? 1
   const scrollY = location.state?.scrollY ?? 0
-  const isEnglish = language === 'en'
-  const basePath = isEnglish ? '/en/cases' : '/cases'
   const decodedParam = (() => {
     try {
       return decodeURIComponent(idParam || '')
@@ -26,31 +23,30 @@ function CaseDetailPage({ language = 'zh' }) {
   const caseItem = caseId != null
     ? casesList.find((c) => Number(c.id) === Number(caseId))
     : null
-  const displayItem = caseItem && isEnglish ? getEnglishCaseItem(caseItem) : caseItem
 
   // 兼容旧链接：/cases/10 → 自动跳转到 /cases/10-标题
   useEffect(() => {
     if (!caseItem) return
     if (!/^\d+$/.test(String(decodedParam).trim())) return
-    navigate(`${basePath}/${encodeURIComponent(makeCaseSlug(isEnglish ? getEnglishCaseItem(caseItem) : caseItem))}`, { replace: true })
-  }, [basePath, caseItem, decodedParam, isEnglish, navigate])
+    navigate(`/cases/${encodeURIComponent(makeCaseSlug(caseItem))}`, { replace: true })
+  }, [caseItem, decodedParam, navigate])
 
   if (!caseItem) {
     return (
       <main className="main-content case-detail-page">
-        <p>{isEnglish ? 'Case not found.' : '未找到该案例。'}</p>
-        <Link to={basePath} state={{ fromPage: 1, scrollY: 0 }} className="case-back-link">{isEnglish ? 'Back to success stories' : '返回成功案例列表'}</Link>
+        <p>未找到该案例。</p>
+        <Link to="/cases" state={{ fromPage: 1, scrollY: 0 }} className="case-back-link">返回成功案例列表</Link>
       </main>
     )
   }
 
   return (
     <main className="main-content case-detail-page">
-      <Link to={basePath} state={{ fromPage, scrollY }} className="case-back-link">&lt; {isEnglish ? 'Back to success stories' : '返回成功案例'}</Link>
+      <Link to="/cases" state={{ fromPage, scrollY }} className="case-back-link">&lt; 返回成功案例</Link>
 
       <article className="case-detail">
-        <h1 className="case-detail-title">{displayItem.title}</h1>
-        <p className="case-detail-date">{displayItem.date}</p>
+        <h1 className="case-detail-title">{caseItem.title}</h1>
+        <p className="case-detail-date">{caseItem.date}</p>
         <div className="case-detail-images">
           {(caseItem.images || (caseItem.image ? [caseItem.image] : [])).map((src, i) => (
             <div key={i} className="case-detail-image-wrap">
@@ -59,7 +55,7 @@ function CaseDetailPage({ language = 'zh' }) {
           ))}
         </div>
         <div className="case-detail-content">
-          {displayItem.fullContent.split('\n\n').map((para, i) => (
+          {caseItem.fullContent.split('\n\n').map((para, i) => (
             <p key={i}>{para}</p>
           ))}
         </div>
