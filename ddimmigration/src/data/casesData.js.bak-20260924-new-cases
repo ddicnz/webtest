@@ -1,68 +1,6 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
-    id: 217,
-    title: 'Remuera Intermediate 两份录取通知获批',
-    summary:
-      '两位学生分别收到 Remuera Intermediate School 的 Offer of Place，计划于 2027 年入读中学课程（以学校录取信为准）。',
-    date: '2026年9月22日',
-    image: '/pic/case/092302.jpg',
-    images: ['/pic/case/092302.jpg', '/pic/case/092303.jpg'],
-    fullContent: `Remuera Intermediate 两份录取通知获批 ✅
-
-两位学生分别收到 Remuera Intermediate School 的 Offer of Place（录取通知）。两封录取信作为同一个案例展示，计划入读 Intermediate Studies。
-
-【案例要点（以学校录取信为准）】
-✅ 学校：Remuera Intermediate School
-✅ 录取通知日期：2026 年 9 月 22 日
-✅ 课程：Intermediate Studies
-✅ 计划就读时间：2027 年 2 月 2 日至 12 月 15 日
-
-录取信注明在国际学生课程费用支付前，录取仍为暂定；后续入学及签证安排以学校和相关机构的最终确认为准。`,
-  },
-  {
-    id: 216,
-    title: '汽车维修技师获批5年工签',
-    summary:
-      '客户以 Automotive Technician 汽车维修技师职位获批新西兰认证雇主工签（AEWV），签证期限为首次入境后 60 个月（以批签函为准）。',
-    date: '2026年9月21日',
-    image: '/pic/case/092301.jpg',
-    images: ['/pic/case/092301.jpg'],
-    fullContent: `汽车维修技师获批5年工签 ✅
-
-恭喜客户以 Automotive Technician（汽车维修技师）职位获批新西兰认证雇主工签（AEWV）。签证于 2026 年 9 月 21 日生效，需在 2027 年 2 月 21 日前首次入境，签证期限为首次入境后 60 个月（以移民局批签函为准）。
-
-【案例要点（以移民局批准函为准）】
-✅ 申请类型：Work visa application approved
-✅ 签证类别：Accredited Employer Work Visa
-✅ 岗位：Automotive Technician
-✅ 工作地点：Auckland
-✅ 签证生效：2026 年 9 月 21 日
-✅ 最晚首次入境：2027 年 2 月 21 日
-✅ 签证期限：首次入境后 60 个月`,
-  },
-  {
-    id: 215,
-    title: '中式厨师海外申请工签获批',
-    summary:
-      '客户以 Chinese Cuisine Chef 中式厨师职位获批新西兰认证雇主工签（AEWV），工作地点为奥克兰（以批签函为准）。',
-    date: '2026年9月21日',
-    image: '/pic/case/092201.jpg',
-    images: ['/pic/case/092201.jpg'],
-    fullContent: `中式厨师海外申请工签获批 ✅
-
-恭喜客户以 Chinese Cuisine Chef（中式厨师）职位获批新西兰认证雇主工签（AEWV）。批准函日期为 2026 年 9 月 21 日，签证于 9 月 22 日生效，需在 2027 年 2 月 22 日前首次入境，有效期至 2028 年 7 月 26 日（以移民局批签函为准）。
-
-【案例要点（以移民局批准函为准）】
-✅ 申请类型：Work visa application approved
-✅ 签证类别：Accredited Employer Work Visa
-✅ 岗位：Chinese Cuisine Chef
-✅ 工作地点：Auckland
-✅ 签证生效：2026 年 9 月 22 日
-✅ 最晚首次入境：2027 年 2 月 22 日
-✅ 签证有效期至：2028 年 7 月 26 日`,
-  },
-  {
     id: 214,
     title: '中式主厨换雇主VOC获批',
     summary:
