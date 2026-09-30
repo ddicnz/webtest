@@ -188,6 +188,7 @@ export const faqList = [
     id: 405,
     category: 'skilled',
     question: 'SWE（技能工作经验）路线有什么要求？',
+    sourceUrl: 'https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/red-and-amber-list-occupations/',
     answer: 'SWE 是技术移民的 Skilled Work Experience 路线。通常须有认证雇主提供的 ANZSCO 技能等级 1–3 职位或 Job Offer，现时薪资至少达到适用中位数工资的 1.1 倍；还须有至少 3 年直接相关工作经验，另加 2 年达到1.1被中位数工资的新西兰工作经验。琥珀名单职业要求更高：当前职位薪资至少达到适用中位数工资的 1.2 倍；前 3 年直接相关经验必须在新西兰取得，另有 2 年新西兰技能工作经验须达到适用中位数工资的 1.2 倍，合计至少 5 年。比如主厨持 AEWV 来新西兰从事符合 ANZSCO 技能等级 1–3 的相关工作 3 年，之后时薪提高到适用中位数工资的 1.2 倍并保持该薪资继续工作 2 年；若两段经验、当前岗位和其他条件均符合，便可能满足 SWE 琥珀名单路线的工作与薪资要求。主申请人还须满足英语要求，雅思总分至少 6.5。另须符合年龄（申请时不超过 55 岁）、健康和品行要求。自雇经验不能计入相关工作经验，红名单职业不能走 SWE。职业归类、经验计算及适用的中位数工资标准以移民局现行规定和个人情况为准。',
   },
   {

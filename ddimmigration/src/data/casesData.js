@@ -1,6 +1,129 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 223,
+    title: '工程监理海外配额获批',
+    summary:
+      '雇主的 Site Supervisor 岗位 Job Check 获批，取得 2 个海外招聘配额；这属于岗位审核批准，并非个人工签获批。',
+    date: '2026年9月29日',
+    image: '/pic/case/093001.jpg',
+    images: ['/pic/case/093001.jpg'],
+    fullContent: `工程监理海外配额获批 ✅
+
+雇主的 Site Supervisor（工程监理）岗位 Job Check 获批，可招聘 2 名符合条件的海外员工，后续工签仍需由申请人另行申请。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Site Supervisor
+✅ 职业分类：312112 - Building Associate（Skill Level 2）
+✅ 工作地点：Auckland
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 9 月 29 日
+✅ Job Check 有效期至：2027 年 3 月 29 日`,
+  },
+  {
+    id: 222,
+    title: '新西兰旅游签获批',
+    summary:
+      '客户获批新西兰普通访问签证，可多次入境；每次入境最多停留 3 个月，具体以批签函为准。',
+    date: '2026年9月28日',
+    image: '/pic/case/092901.jpg',
+    images: ['/pic/case/092901.jpg'],
+    fullContent: `新西兰旅游签获批 ✅
+
+客户获批 New Zealand Visitor Visa - General（普通访问签证），签证允许多次入境，每次入境最多停留 3 个月。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Visitor visa application approved
+✅ 签证生效：2026 年 9 月 28 日
+✅ 最后入境日期：2031 年 9 月 28 日
+✅ 入境次数：多次
+✅ 每次入境停留：最多 3 个月`,
+  },
+  {
+    id: 221,
+    title: '餐厅经理海外配额获批',
+    summary:
+      '雇主的 Restaurant Manager 岗位 Job Check 获批，取得 2 个海外招聘配额，可支持后续符合条件的 AEWV 申请。',
+    date: '2026年9月25日',
+    image: '/pic/case/092502.jpg',
+    images: ['/pic/case/092502.jpg'],
+    fullContent: `餐厅经理海外配额获批 ✅
+
+雇主的 Restaurant Manager（餐厅经理）岗位 Job Check 获批，取得 2 个海外招聘配额。岗位审核获批不等同于个人工签获批。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Restaurant Manager
+✅ 职业分类：141111 - Cafe or Restaurant Manager（Skill Level 2）
+✅ 工作地点：Auckland
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 9 月 25 日`,
+  },
+  {
+    id: 220,
+    title: '叉车工换雇主 VOC 获批',
+    summary:
+      '客户的工签条件变更申请（VOC）获批，获准按新签证条件在奥克兰从事 Forklift Driver 工作。',
+    date: '2026年9月25日',
+    image: '/pic/case/0925901.jpg',
+    images: ['/pic/case/0925901.jpg'],
+    fullContent: `叉车工换雇主 VOC 获批 ✅
+
+客户的 Variation of Conditions（VOC，签证条件变更）申请获批，新条件注明可在奥克兰从事 Forklift Driver（叉车工）工作。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Variation of conditions application approved
+✅ 岗位：Forklift Driver
+✅ 工作地点：Auckland
+✅ 新条件生效：2026 年 9 月 25 日
+✅ 签证有效期至：2031 年 7 月 25 日
+
+实际可工作的雇主、岗位及其他限制，以最新批签函列明的条件为准。`,
+  },
+  {
+    id: 219,
+    title: 'AEWV 配偶开放工签获批',
+    summary:
+      '客户获批 Partner of a worker 类别工签，批签函允许在新西兰从事任何职业的工作；具体限制以签证条件为准。',
+    date: '2026年9月24日',
+    image: '/pic/case/092501.jpg',
+    images: ['/pic/case/092501.jpg', '/pic/case/092503.jpg'],
+    fullContent: `AEWV 配偶开放工签获批 ✅
+
+客户获批 New Zealand Work Visa - Partner of a worker（配偶工签）。批签函注明，持有人可在新西兰任何地点从事任何职业的工作；两张图片展示同一获批案例。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Partner of a worker
+✅ 签证生效：2026 年 9 月 24 日
+✅ 签证有效期至：2029 年 8 月 31 日
+✅ 工作条件：可在新西兰任何地点从事任何职业的工作
+
+批签函同时列有不得通过本人经营的企业直接或间接雇用他人的限制，具体以批签函为准。`,
+  },
+  {
+    id: 218,
+    title: '工签子女学生签证获批',
+    summary:
+      '客户子女获批 Child of a worker 类别学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
+    date: '2026年9月24日',
+    image: '/pic/case/092504.jpg',
+    images: ['/pic/case/092504.jpg'],
+    fullContent: `工签子女学生签证获批 ✅
+
+客户子女获批 New Zealand Student Visa - Child of a worker（工签持有人子女学生签证）。批签函注明，可作为本地学生在新西兰的小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 签证生效：2026 年 9 月 24 日
+✅ 签证有效期至：2029 年 8 月 31 日
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
     id: 217,
     title: 'Remuera Intermediate 两份录取通知获批',
     summary:

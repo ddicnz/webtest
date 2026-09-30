@@ -89,6 +89,13 @@ function FaqPage({ language = 'zh' }) {
                 ) : (
                   item.answer
                 )}
+                {item.sourceUrl && (
+                  <p className="faq-answer-source">
+                    <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
+                      {isEnglish ? 'Click to check the Amber and Red Lists (Immigration New Zealand)' : '点击查询琥珀名单、红名单（新西兰移民局）'}
+                    </a>
+                  </p>
+                )}
               </div>
             </div>
           </div>

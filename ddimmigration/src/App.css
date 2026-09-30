@@ -2303,6 +2303,21 @@ html[lang="en-NZ"] .home-business-card-label {
   border-top: 1px solid #eaecef;
 }
 
+.faq-answer-source {
+  margin: 12px 0 0;
+}
+
+.faq-answer-source a {
+  color: #247ca9;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.faq-answer-source a:hover,
+.faq-answer-source a:focus-visible {
+  color: #145a80;
+}
+
 .faq-answer-title {
   margin: 0 0 12px;
   font-size: 15px;
