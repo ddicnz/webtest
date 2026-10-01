@@ -1,6 +1,28 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 224,
+    title: '水工海外申请获批5年工签',
+    summary:
+      '客户以 Plumber（水工）职位获批新西兰认证雇主工签（AEWV），签证期限为首次入境后 60 个月（以批签函为准）。',
+    date: '2026年10月1日',
+    image: '/pic/case/100101.jpg',
+    images: ['/pic/case/100101.jpg'],
+    fullContent: `水工海外申请获批5年工签 ✅
+
+恭喜客户以 Plumber（水工）职位获批新西兰认证雇主工签（AEWV）。签证于 2026 年 10 月 1 日生效，须在 2027 年 3 月 1 日前首次入境；批签函注明签证期限为首次入境后 60 个月。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Accredited Employer Work Visa
+✅ 岗位：Plumber
+✅ 签证生效：2026 年 10 月 1 日
+✅ 最晚首次入境：2027 年 3 月 1 日
+✅ 签证期限：首次入境后 60 个月
+
+具体工作地点、雇主及其他工作限制以批签函所列条件为准。`,
+  },
+  {
     id: 223,
     title: '工程监理海外配额获批',
     summary:
