@@ -211,6 +211,21 @@ function App() {
       tourist: isEnglish
         ? 'Learn about New Zealand visitor visa support for family visits, tourism and short business trips, including document checklists, travel plans and financial evidence. Check current requirements with Immigration New Zealand.'
         : '了解新西兰旅游签申请服务，涵盖探亲、旅游和短期商务等情形，以及材料清单、行程和资金证明准备。具体要求以新西兰移民局最新规定为准。',
+      work: isEnglish
+        ? 'Explore New Zealand work visa support, including AEWV pathway checks, employer and role documents, application preparation and eligible family visa planning. Requirements depend on current Immigration New Zealand policy.'
+        : '了解新西兰工作签证申请服务，包括 AEWV 路径评估、雇主与岗位材料核对、申请准备及符合条件的家属签证规划。具体要求以新西兰移民局最新规定为准。',
+      residence: isEnglish
+        ? 'Explore support for New Zealand residence applications, including skilled, Green List and family pathways, eligibility assessment, document preparation and lodgement. Requirements depend on current policy.'
+        : '了解新西兰居民签证申请支持，涵盖技术移民、绿名单和家庭团聚等路径的条件评估、材料准备与递交协助。具体要求以新西兰移民局最新规定为准。',
+      invest: isEnglish
+        ? 'Learn about New Zealand investor and business migration support, including initial pathway assessment, source-of-funds planning and application preparation. Check current eligibility and investment rules before making decisions.'
+        : '了解新西兰投资及商业移民咨询服务，包括路径初步评估、资金来源材料规划和申请准备。投资类别与资格以新西兰移民局最新规定为准。',
+      skilled: isEnglish
+        ? 'Explore New Zealand skilled residence support, with assessment of qualifications, occupational registration, income and skilled work experience, plus application preparation. Check current Immigration New Zealand requirements.'
+        : '了解新西兰技术移民申请服务，围绕学历、职业注册、收入和技能工作经验评估可能路径，并协助准备材料。具体要求以新西兰移民局最新规定为准。',
+      study: isEnglish
+        ? 'Explore study planning and application support for New Zealand schools, universities and programmes, including course selection, admission applications and student visa preparation. Confirm entry and visa requirements with providers and Immigration New Zealand.'
+        : '了解新西兰留学规划与申请服务，涵盖中小学、大学和课程选择、入学申请及学生签证材料准备。课程要求以校方信息为准，签证要求以新西兰移民局最新规定为准。',
     }
     const detailDescription = serviceDetailDescriptions[serviceType]
     const matchingDescription = detailDescription || routeDescriptions.find(([path]) =>
