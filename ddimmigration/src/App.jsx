@@ -206,7 +206,14 @@ function App() {
           ['/promoter', '了解如何成为嘀嘀移民业务推广合作伙伴。'],
           ['/assessment', '提交新西兰签证或移民情况评估意向，了解后续咨询方式。'],
         ]
-    const matchingDescription = routeDescriptions.find(([path]) =>
+    const serviceType = location.pathname.match(/^\/(?:en\/)?services\/([^/]+)$/)?.[1]
+    const serviceDetailDescriptions = {
+      tourist: isEnglish
+        ? 'Learn about New Zealand visitor visa support for family visits, tourism and short business trips, including document checklists, travel plans and financial evidence. Check current requirements with Immigration New Zealand.'
+        : '了解新西兰旅游签申请服务，涵盖探亲、旅游和短期商务等情形，以及材料清单、行程和资金证明准备。具体要求以新西兰移民局最新规定为准。',
+    }
+    const detailDescription = serviceDetailDescriptions[serviceType]
+    const matchingDescription = detailDescription || routeDescriptions.find(([path]) =>
       path === '/' ? location.pathname === '/' : location.pathname === path || location.pathname.startsWith(`${path}/`),
     )?.[1] || (isEnglish
       ? 'DD Immigration Consulting provides New Zealand immigration, visa and education information and support.'
