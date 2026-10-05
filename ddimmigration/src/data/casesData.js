@@ -1,6 +1,50 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 226,
+    title: '主厨海外申请获批5年工签',
+    summary:
+      '客户以 Chef（主厨）职位获批新西兰认证雇主工签（AEWV），签证期限为首次入境后 60 个月（以批签函为准）。',
+    date: '2026年10月2日',
+    image: '/pic/case/100501.jpg',
+    images: ['/pic/case/100501.jpg'],
+    fullContent: `主厨海外申请获批5年工签 ✅
+
+客户以 Chef（主厨）职位获批新西兰认证雇主工签（AEWV）。签证于 2026 年 10 月 2 日生效，须在 2027 年 3 月 2 日前首次入境；批签函注明签证期限为首次入境后 60 个月。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Accredited Employer Work Visa
+✅ 岗位：Chef
+✅ 工作地点：Auckland
+✅ 签证生效：2026 年 10 月 2 日
+✅ 最晚首次入境：2027 年 3 月 2 日
+✅ 签证期限：首次入境后 60 个月
+
+具体雇主及其他工作限制以批签函所列条件为准。`,
+  },
+  {
+    id: 225,
+    title: '中式主厨海外配额获批',
+    summary:
+      '雇主的 Chinese Cuisine Chef 岗位 Job Check 获批，取得 2 个海外招聘配额；这是岗位审核批准，并非个人工签获批。',
+    date: '2026年10月2日',
+    image: '/pic/case/100502.jpg',
+    images: ['/pic/case/100502.jpg'],
+    fullContent: `中式主厨海外配额获批 ✅
+
+雇主的 Chinese Cuisine Chef（中式主厨）岗位 Job Check 获批，取得 2 个海外招聘配额。岗位审核获批不等同于个人工签获批，申请人后续仍须按适用要求递交工签申请。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Chinese Cuisine Chef
+✅ 职业分类：351311 - Chef（Skill Level 2）
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 10 月 2 日
+
+具体招聘及个人工签条件以移民局当次要求为准。`,
+  },
+  {
     id: 224,
     title: '水工海外申请获批5年工签',
     summary:
