@@ -177,6 +177,64 @@ function App() {
     document.title = matchingTitle || (isEnglish
       ? 'DD Immigration Consulting | New Zealand Immigration & Education'
       : '新西兰嘀嘀移民公司| 移民 | 签证 |留学')
+
+    const routeDescriptions = isEnglish
+      ? [
+          ['/en', 'DD Immigration Consulting provides New Zealand immigration, visa and education services. Explore our services, study options and contact our Auckland team.'],
+          ['/en/about', 'Learn about DD Immigration Consulting and our New Zealand immigration and education services.'],
+          ['/en/services', 'Explore New Zealand visa, immigration and education application support from DD Immigration Consulting.'],
+          ['/en/cases', 'Read New Zealand visa and immigration client stories shared by DD Immigration Consulting.'],
+          ['/en/jobs', 'Browse job opportunities in New Zealand listed by DD Immigration Consulting.'],
+          ['/en/album', 'View the DD Immigration Consulting office, team and client gallery.'],
+          ['/en/news', 'Read New Zealand immigration and visa updates from DD Immigration Consulting. Check official sources for current requirements.'],
+          ['/en/study', 'Explore New Zealand universities, schools and study programmes with DD Immigration Consulting.'],
+          ['/en/contactus', 'Contact DD Immigration Consulting in Auckland about New Zealand immigration, visas or study options.'],
+          ['/en/faq', 'Find answers to common questions about New Zealand immigration, visas and study.'],
+          ['/en/promoter', 'Learn about referring clients to DD Immigration Consulting as a business partner.'],
+        ]
+      : [
+          ['/', '嘀嘀移民提供新西兰签证、移民及留学咨询服务，位于奥克兰。了解服务内容、成功案例与新西兰留学项目。'],
+          ['/about', '了解新西兰嘀嘀移民的团队、服务范围及联系方式。'],
+          ['/services', '查看新西兰旅游签、工作签、居民签及留学申请等咨询服务。具体资格以新西兰移民局及院校要求为准。'],
+          ['/cases', '查看嘀嘀移民分享的新西兰签证与移民服务案例。个案结果不代表其他申请结果。'],
+          ['/jobs', '查看新西兰招聘信息及相关岗位介绍。'],
+          ['/album', '浏览嘀嘀移民办公室、团队与活动相册。'],
+          ['/news', '阅读新西兰签证与移民资讯。政策可能变化，请以新西兰移民局官方信息为准。'],
+          ['/study', '了解新西兰大学、中小学、预科及职业课程，获取留学申请与择校信息。'],
+          ['/contactus', '联系奥克兰嘀嘀移民，咨询新西兰签证、移民或留学服务。'],
+          ['/faq', '查看有关新西兰签证、移民和留学申请的常见问题。'],
+          ['/promoter', '了解如何成为嘀嘀移民业务推广合作伙伴。'],
+          ['/assessment', '提交新西兰签证或移民情况评估意向，了解后续咨询方式。'],
+        ]
+    const matchingDescription = routeDescriptions.find(([path]) =>
+      path === '/' ? location.pathname === '/' : location.pathname === path || location.pathname.startsWith(`${path}/`),
+    )?.[1] || (isEnglish
+      ? 'DD Immigration Consulting provides New Zealand immigration, visa and education information and support.'
+      : '嘀嘀移民提供新西兰签证、移民及留学信息与咨询服务。')
+    const isPrivateRoute = ['/visa-portal', '/admin'].some((path) =>
+      location.pathname === path || location.pathname.startsWith(`${path}/`),
+    ) || location.pathname === '/promoter-register'
+    const setMeta = (selector, attributes, content) => {
+      let element = document.head.querySelector(selector)
+      if (!element) {
+        element = document.createElement('meta')
+        Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value))
+        document.head.appendChild(element)
+      }
+      element.setAttribute('content', content)
+    }
+    setMeta('meta[name="description"]', { name: 'description' }, matchingDescription)
+    setMeta('meta[name="robots"]', { name: 'robots' }, isPrivateRoute ? 'noindex, nofollow' : 'index, follow')
+    setMeta('meta[property="og:title"]', { property: 'og:title' }, document.title)
+    setMeta('meta[property="og:description"]', { property: 'og:description' }, matchingDescription)
+    setMeta('meta[property="og:url"]', { property: 'og:url' }, `${window.location.origin}${location.pathname}`)
+    let canonical = document.head.querySelector('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.setAttribute('rel', 'canonical')
+      document.head.appendChild(canonical)
+    }
+    canonical.setAttribute('href', `${window.location.origin}${location.pathname}`)
   }, [isEnglish, location.pathname])
 
   useEffect(() => {
