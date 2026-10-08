@@ -1,6 +1,173 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 234,
+    title: '工签子女学生签证获批（9月24日）',
+    summary:
+      '客户子女获批 Child of a worker 学生签证，签证于 2026 年 9 月 25 日生效，可按批签条件以本地学生身份就读新西兰中小学。',
+    date: '2026年9月24日',
+    image: '/pic/case/100603.jpg',
+    images: ['/pic/case/100603.jpg'],
+    fullContent: `工签子女学生签证获批 ✅
+
+客户子女获批 New Zealand Student Visa - Child of a worker。批签函注明，持有人可作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 批准函日期：2026 年 9 月 24 日
+✅ 签证生效：2026 年 9 月 25 日
+✅ 签证有效期至：2029 年 8 月 31 日
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
+    id: 233,
+    title: '主厨奥克兰海外配额获批',
+    summary:
+      '雇主的 Asian Cuisine Chef 岗位 Job Check 获批，取得 2 个奥克兰海外招聘配额；岗位批准不等于个人工签获批。',
+    date: '2026年10月7日',
+    image: '/pic/case/100705.jpg',
+    images: ['/pic/case/100705.jpg'],
+    fullContent: `主厨奥克兰海外配额获批 ✅
+
+雇主的 Asian Cuisine Chef（亚洲菜主厨）岗位 Job Check 获批，取得 2 个海外招聘配额。申请人仍须另行满足个人工签申请条件。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Asian Cuisine Chef
+✅ 职业分类：351311 - Chef（Skill Level 2）
+✅ 工作地点：Auckland
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 10 月 7 日`,
+  },
+  {
+    id: 232,
+    title: '瓷砖工海外配额获批',
+    summary:
+      '雇主的 Tiler 岗位 Job Check 获批，取得 3 个奥克兰海外招聘配额；后续个人工签需另行申请。',
+    date: '2026年10月7日',
+    image: '/pic/case/100704.jpg',
+    images: ['/pic/case/100704.jpg'],
+    fullContent: `瓷砖工海外配额获批 ✅
+
+雇主的 Tiler（瓷砖工）岗位 Job Check 获批，取得 3 个海外招聘配额。岗位审核获批不等同于个人工签获批。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Tiler
+✅ 职业分类：333411 - Wall and Floor Tiler（Skill Level 3）
+✅ 工作地点：Auckland
+✅ 获批配额：3 个
+✅ 批准日期：2026 年 10 月 7 日`,
+  },
+  {
+    id: 231,
+    title: '主厨怀卡托海外配额获批',
+    summary:
+      '雇主的 Asian Cuisine Chef 岗位 Job Check 获批，取得 2 个怀卡托海外招聘配额；岗位批准不等于个人工签获批。',
+    date: '2026年10月7日',
+    image: '/pic/case/100703.jpg',
+    images: ['/pic/case/100703.jpg'],
+    fullContent: `主厨怀卡托海外配额获批 ✅
+
+雇主的 Asian Cuisine Chef（亚洲菜主厨）岗位 Job Check 获批，取得 2 个海外招聘配额。申请人仍须另行满足个人工签申请条件。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Asian Cuisine Chef
+✅ 职业分类：351311 - Chef（Skill Level 2）
+✅ 工作地点：Waikato
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 10 月 7 日`,
+  },
+  {
+    id: 230,
+    title: 'AEWV 子女学生签证获批（案例二）',
+    summary:
+      '工签持有人子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
+    date: '2026年10月7日',
+    image: '/pic/case/100702.jpg',
+    images: ['/pic/case/100702.jpg'],
+    fullContent: `AEWV 子女学生签证获批 ✅
+
+客户子女获批 New Zealand Student Visa - Child of a worker。批签函注明，持有人可作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 签证生效：2026 年 10 月 7 日
+✅ 签证有效期至：2028 年 9 月 20 日
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
+    id: 229,
+    title: 'AEWV 子女学生签证获批（案例一）',
+    summary:
+      '另一名工签持有人子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
+    date: '2026年10月7日',
+    image: '/pic/case/100701.jpg',
+    images: ['/pic/case/100701.jpg'],
+    fullContent: `AEWV 子女学生签证获批 ✅
+
+另一名客户子女获批 New Zealand Student Visa - Child of a worker。批签函注明，持有人可作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 签证生效：2026 年 10 月 7 日
+✅ 签证有效期至：2028 年 9 月 20 日
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
+    id: 228,
+    title: '工签子女学生签证获批（10月5日）',
+    summary:
+      '工签持有人子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
+    date: '2026年10月5日',
+    image: '/pic/case/100602.jpg',
+    images: ['/pic/case/100602.jpg'],
+    fullContent: `工签子女学生签证获批 ✅
+
+客户子女获批 New Zealand Student Visa - Child of a worker。批签函注明，持有人可作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 签证生效：2026 年 10 月 5 日
+✅ 签证有效期至：2029 年 8 月 31 日
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
+    id: 227,
+    title: '成人语言班学生签证获批',
+    summary:
+      '客户获批新西兰付费学生签证，赴奥克兰英语学院学习语言课程；批签函允许每周工作最多 25 小时。',
+    date: '2026年10月5日',
+    image: '/pic/case/100601.jpg',
+    images: ['/pic/case/100601.jpg'],
+    fullContent: `成人语言班学生签证获批 ✅
+
+客户获批 New Zealand Student Visa - Fee Paying（付费学生签证），前往 Auckland English Academy 学习英语课程。批签函列有保险要求，并允许持有人每周工作最多 25 小时。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 学习机构：Auckland English Academy
+✅ 签证生效：2026 年 10 月 5 日
+✅ 签证有效期至：2027 年 2 月 8 日
+✅ 工作条件：每周最多 25 小时
+✅ 保险要求：须在就读期间持有保险，直至签证到期
+
+学习、工作及保险条件以批签函为准。`,
+  },
+  {
     id: 226,
     title: '主厨海外申请获批5年工签',
     summary:
