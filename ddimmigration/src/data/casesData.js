@@ -1,8 +1,154 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 241,
+    title: '亚洲菜厨师怀卡托海外配额获批',
+    summary:
+      '雇主的 Asian Cuisine Cook 岗位 Job Check 获批，取得 2 个怀卡托海外招聘配额；岗位批准不等于个人工签获批。',
+    date: '2026年10月13日',
+    image: '/pic/case/101301.jpg',
+    images: ['/pic/case/101301.jpg'],
+    fullContent: `亚洲菜厨师怀卡托海外配额获批 ✅
+
+雇主的 Asian Cuisine Cook（亚洲菜厨师）岗位 Job Check 获批，取得 2 个海外招聘配额。岗位审核获批不等同于个人工签获批，申请人仍须另行满足个人签证条件。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Asian Cuisine Cook
+✅ 职业分类：351411 - Cook（Skill Level 3）
+✅ 工作地点：Waikato
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 10 月 13 日
+✅ Job Check 有效期至：2027 年 4 月 13 日`,
+  },
+  {
+    id: 240,
+    title: '工签子女学生签证获批',
+    summary:
+      '客户子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
+    date: '2026年10月12日',
+    image: '/pic/case/101201.jpg',
+    images: ['/pic/case/101201.jpg'],
+    fullContent: `工签子女学生签证获批 ✅
+
+客户子女获批 New Zealand Student Visa - Child of a worker。批签函注明，持有人可作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 签证生效：2026 年 10 月 12 日
+✅ 首次入境期限：2027 年 2 月 11 日之前
+✅ 签证有效期：首次入境新西兰后 22 个月
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
+    id: 239,
+    title: '中式主厨获批AEWV工签',
+    summary:
+      '客户获批认证雇主工签，获准在坎特伯雷从事中式主厨工作；批签函显示签证有效期至 2031 年 6 月 22 日。',
+    date: '2026年10月9日',
+    image: '/pic/case/100905.jpg',
+    images: ['/pic/case/100905.jpg'],
+    fullContent: `中式主厨获批AEWV工签 ✅
+
+客户的 Accredited Employer Work Visa 获批。批签函列明可在坎特伯雷从事 Chinese Cuisine Chef 工作，并要求每周至少工作 30 小时。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Accredited Employer Work Visa
+✅ 签证生效：2026 年 10 月 9 日
+✅ 签证有效期至：2031 年 6 月 22 日
+✅ 获准职位及地点：Chinese Cuisine Chef，Canterbury
+✅ 工作时间：每周至少 30 小时
+
+具体工作及薪资条件，以个人批签函为准。`,
+  },
+  {
+    id: 238,
+    title: '工签子女学生签证获批',
+    summary:
+      '客户子女获批 Child of a worker 学生签证，批签函允许其以本地学生身份就读新西兰中小学。',
+    date: '2026年10月9日',
+    image: '/pic/case/100904.jpg',
+    images: ['/pic/case/100904.jpg'],
+    fullContent: `工签子女学生签证获批 ✅
+
+客户子女获批 New Zealand Student Visa - Child of a worker。批签函注明，持有人可作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Student visa application approved
+✅ 签证类别：Child of a worker
+✅ 签证生效：2026 年 10 月 9 日
+✅ 签证有效期至：2031 年 2 月 27 日
+✅ 就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取及费用安排，以学校和签证条件为准。`,
+  },
+  {
+    id: 237,
+    title: 'AEWV 配偶开放工签获批',
+    summary:
+      '客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区、任何职业工作。',
+    date: '2026年10月9日',
+    image: '/pic/case/100903.jpg',
+    images: ['/pic/case/100903.jpg'],
+    fullContent: `AEWV 配偶开放工签获批 ✅
+
+客户获批 New Zealand Work Visa - Partner of an AEWV worker。批签函注明，持有人可在新西兰任何地区从事任何职业的工作。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Partner of an AEWV worker
+✅ 签证生效：2026 年 10 月 9 日
+✅ 工作条件：可在新西兰任何地区从事任何职业的工作
+
+批签函同时列有不得通过本人经营的企业雇佣他人的限制；具体条件以个人批签函为准。`,
+  },
+  {
+    id: 236,
+    title: 'AEWV 配偶开放工签获批',
+    summary:
+      '另一位客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区、任何职业工作。',
+    date: '2026年10月8日',
+    image: '/pic/case/100902.jpg',
+    images: ['/pic/case/100902.jpg'],
+    fullContent: `AEWV 配偶开放工签获批 ✅
+
+另一位客户获批 New Zealand Work Visa - Partner of an AEWV worker。批签函注明，持有人可在新西兰任何地区从事任何职业的工作。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Partner of an AEWV worker
+✅ 签证生效：2026 年 10 月 8 日
+✅ 工作条件：可在新西兰任何地区从事任何职业的工作
+
+批签函同时列有不得通过本人经营的企业雇佣他人的限制；具体条件以个人批签函为准。`,
+  },
+  {
+    id: 235,
+    title: 'AEWV 配偶开放工签获批',
+    summary:
+      '客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区、任何职业工作。',
+    date: '2026年10月8日',
+    image: '/pic/case/100901.jpg',
+    images: ['/pic/case/100901.jpg'],
+    fullContent: `AEWV 配偶开放工签获批 ✅
+
+客户获批 New Zealand Work Visa - Partner of an AEWV worker。批签函注明，持有人可在新西兰任何地区从事任何职业的工作。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Partner of an AEWV worker
+✅ 签证生效：2026 年 10 月 8 日
+✅ 工作条件：可在新西兰任何地区从事任何职业的工作
+
+批签函同时列有不得通过本人经营的企业雇佣他人的限制；具体条件以个人批签函为准。`,
+  },
+  {
     id: 234,
-    title: '工签子女学生签证获批（9月24日）',
+    title: '工签子女学生签证获批',
     summary:
       '客户子女获批 Child of a worker 学生签证，签证于 2026 年 9 月 25 日生效，可按批签条件以本地学生身份就读新西兰中小学。',
     date: '2026年9月24日',
@@ -84,7 +230,7 @@ export const casesList = [
   },
   {
     id: 230,
-    title: 'AEWV 子女学生签证获批（案例二）',
+    title: 'AEWV 子女学生签证获批',
     summary:
       '工签持有人子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
     date: '2026年10月7日',
@@ -105,7 +251,7 @@ export const casesList = [
   },
   {
     id: 229,
-    title: 'AEWV 子女学生签证获批（案例一）',
+    title: 'AEWV 子女学生签证获批',
     summary:
       '另一名工签持有人子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
     date: '2026年10月7日',
@@ -126,7 +272,7 @@ export const casesList = [
   },
   {
     id: 228,
-    title: '工签子女学生签证获批（10月5日）',
+    title: '工签子女学生签证获批',
     summary:
       '工签持有人子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学。',
     date: '2026年10月5日',
