@@ -206,6 +206,27 @@ export const studySections = [
     ],
     programs: [
       {
+        id: 'nzios-nzcel',
+        type: '语言班',
+        titleZh: 'NZIOS NZCEL 英语语言证书（Level 3 / 4 / 5）',
+        titleEn: 'NZIOS New Zealand Certificate in English Language (Levels 3, 4 and 5)',
+        image: '/pic/study/nzios-2027-intakes-fees.png',
+        detailImages: ['/pic/study/nzios-2027-intakes-fees.png'],
+        highlight: 'Level 3、4、5 每个开课日期均有线上和线下课程；境外可先线上就读，获签后衔接线下学习',
+        cost: '2027 年首次报名：16 周学费 NZ$7,300；报名费 NZ$350；教材资源费 NZ$400；合计 NZ$8,050\n续读：学费 NZ$380/周，16 周 NZ$6,080；加报名费及教材资源费后合计 NZ$6,830',
+        costNote: '费用及班位以 NZIOS 当期确认为准。',
+        detail: 'New Zealand Institute of Studies（NZIOS）的 NZCEL 课程涵盖 Level 3 Applied、Level 4 Academic 和 Level 5 Academic。表单所列每个开课日期，三个等级都同时开设线上和奥克兰线下课程。海外学生可先线上学习，签证获批后与学校确认转入线下同级课程，衔接继续上课；转班及入境安排以校方和签证条件为准。',
+        schedule: '每期 16 周，每周 20 小时教学；线上、线下同步开班。境外可先线上就读，获签后衔接线下课程。',
+        languageReq: '由校方按现有英语水平评估适合的 Level 3、4 或 5，具体入学标准以校方为准',
+        academicReq: '适合计划提升英语能力或衔接后续课程的学生，录取以校方审核为准',
+        intakes: '2027 年：1 月 4 日、2 月 1 日、3 月 1 日、3 月 29 日、4 月 26 日、5 月 24 日、6 月 21 日、7 月 19 日、8 月 16 日、9 月 13 日、10 月 11 日、11 月 8 日；2028 年：1 月 10 日。以上日期均适用于 Level 3、4、5 及线上、线下课程，实际班位以校方确认为准。',
+        prospects: [
+          '按英语水平选择 NZCEL Level 3、4 或 5',
+          '海外可先线上就读，获签后衔接线下课程',
+          '每期 16 周、每周 20 小时教学',
+        ],
+      },
+      {
         id: 'pte29-sprint',
         type: '语言班',
         titleZh: '冲刺 PTE 29 分（工签英语要求）',
