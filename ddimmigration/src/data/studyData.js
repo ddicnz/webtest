@@ -63,6 +63,18 @@ export const STUDY_WESTLAKE_BOYS_GALLERY = [
   STUDY_WESTLAKE_BOYS_POSTER,
   ...STUDY_WESTLAKE_BOYS_PHOTOS.map((id) => `/pic/study/westlakeboys/${id}.jpg`),
 ]
+export const STUDY_WESTLAKE_GIRLS_PHOTOS = [
+  '/pic/study/westlakegirls/campus.jpg',
+  '/pic/study/westlakegirls/classroom.jpg',
+  '/pic/study/westlakegirls/sport.jpg',
+  '/pic/study/westlakegirls/robotics.jpg',
+]
+export const STUDY_RANGITOTO_PHOTOS = [
+  '/pic/study/rangitoto/classroom.jpg',
+  '/pic/study/rangitoto/students.jpg',
+  '/pic/study/rangitoto/campus-life.jpg',
+  '/pic/study/rangitoto/community.jpg',
+]
 
 /** 小学留学 · Willowbank School 宣传海报 */
 export const STUDY_WILLOWBANK_POSTER = `/pic/study/${encodeURIComponent('willow bank.png')}`
@@ -384,6 +396,32 @@ export const studySections = [
     ],
     programs: [
       {
+        id: 'rangitoto-college',
+        type: '高中留学',
+        titleZh: 'Rangitoto College',
+        titleEn: 'Rangitoto College',
+        image: STUDY_RANGITOTO_PHOTOS[0],
+        coverImage: STUDY_RANGITOTO_PHOTOS[0],
+        galleryImages: STUDY_RANGITOTO_PHOTOS,
+        galleryLayout: 'carousel',
+        galleryCoverIndex: 0,
+        detailImages: STUDY_RANGITOTO_PHOTOS,
+        highlight: '奥克兰北岸公立男女混校 · Year 9–13 · NCEA 与 IB 课程路径',
+        cost: '2027 年 NCEA 国际学生学费 NZ$20,500/年\nIB 学费 NZ$22,250/年\nHomestay NZ$420/周（13 岁学生 NZ$440/周）',
+        detailCost: '2027 年国际学生年度学费：NCEA NZ$20,500；IB NZ$22,250。另有年度管理费 NZ$2,750。\nHomestay NZ$420/周（13 岁学生 NZ$440/周），寄宿家庭安排费 NZ$550；保险费用 NZ$750 起。\n费用依据学校公布的 2027–2028 年费用表，可能调整；实际费用及付款安排以校方通知为准。',
+        detail:
+          'Rangitoto College 位于奥克兰北岸 Mairangi Bay，是一所招收 Year 9–13 学生的公立男女混校。学校在 Year 11 提供 Rangitoto Diploma，高年级可选择 NCEA 或 IB Diploma 路径，并有体育、表演艺术及学生社团活动。国际学生可申请校方安排的寄宿家庭，并获得学习与生活方面的支持。',
+        languageReq: '适合年龄：13–17 岁；英语水平及年级安排以学校评估为准',
+        academicReq: '申请需提供护照、近期学校成绩报告及英文认证翻译等材料，具体以学校审核为准',
+        intakes: '国际学生至少入读半学年（两个学期），不接受只读一个学期的短期申请；具体入学时间及名额以学校安排为准',
+        prospects: [
+          '奥克兰北岸公立男女混校，提供 Year 9–13 课程',
+          'Year 11 Rangitoto Diploma；高年级可选择 NCEA 或 IB Diploma',
+          '体育、表演艺术及学生社团活动丰富',
+          '国际学生团队提供学习与寄宿家庭支持',
+        ],
+      },
+      {
         id: 'one-tree-hill-college',
         type: '高中留学',
         titleZh: 'One Tree Hill College',
@@ -495,6 +533,32 @@ export const studySections = [
           '奥克兰北岸优越地理位置',
           '学术、体育、艺术与领导力并重',
           '升学路径广泛，面向新西兰及海外大学',
+        ],
+      },
+      {
+        id: 'westlake-girls-high-school',
+        type: '高中留学',
+        titleZh: 'Westlake Girls High School 西湖女子高中',
+        titleEn: 'Westlake Girls High School',
+        image: STUDY_WESTLAKE_GIRLS_PHOTOS[0],
+        coverImage: STUDY_WESTLAKE_GIRLS_PHOTOS[0],
+        galleryImages: STUDY_WESTLAKE_GIRLS_PHOTOS,
+        galleryLayout: 'carousel',
+        galleryCoverIndex: 0,
+        detailImages: STUDY_WESTLAKE_GIRLS_PHOTOS,
+        highlight: '奥克兰北岸公立女校 · 学术与领导力并重 · 国际学生支持',
+        cost: '2027 年国际学生年度学费 NZ$25,000/年\nHomestay 费用 NZ$20,250/年（45 周）\n（管理费等另计，具体以学校当年公布为准）',
+        detailCost: '2027 年国际学生年度学费 NZ$25,000；管理费 NZ$2,500。\nHomestay 费用 NZ$20,250/年（45 周，每周 NZ$450）；寄宿家庭安排费 NZ$450。\n校方安排的医疗保险 NZ$699/年，校服约 NZ$800；另有备用金等费用。2027 年最短入读两个学期。\n以上为校方公布的 2027 年费用，可能调整，最终以学校录取及缴费通知为准。',
+        detail:
+          'Westlake Girls High School（西湖女子高中）位于奥克兰北岸 Takapuna，是一所公立女子高中，提供 Year 9–13 课程。学校重视学术发展，也提供音乐、艺术、机器人、体育及学生领导力活动。国际学生部门提供入学适应、学业与寄宿家庭支持，适合希望在女子学校环境中学习并规划大学升学的学生。',
+        languageReq: '适合年级：Year 9–13；英语水平及具体录取要求以学校评估为准',
+        academicReq: '需提供在读证明、近期成绩单等申请材料，具体以学校评估为准',
+        intakes: '按学校学期及国际学生申请安排入学；2027 年最短入读两个学期，建议提前申请',
+        prospects: [
+          '奥克兰北岸公立女子高中',
+          '学术、音乐、艺术、体育与领导力活动丰富',
+          '国际学生部门提供学业及寄宿家庭支持',
+          '完成高中课程后可规划新西兰及海外大学申请',
         ],
       },
       {

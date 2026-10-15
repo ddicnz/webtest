@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { NavLink, useLocation, useNavigate, useParams, Navigate } from 'react-router-dom'
 import { studyIntro, studySections, iclPrograms } from '../data/studyData.js'
+import WestlakeGirlsPoster from '../components/WestlakeGirlsPoster.jsx'
+import RangitotoPoster from '../components/RangitotoPoster.jsx'
 import { makeStudyProgramSlug } from '../utils/studySlug.js'
 import { studyListPathForSectionId, studyPathSegmentToSectionId } from '../utils/studySectionPath.js'
 import { englishStudyIntro, englishStudySectionLabels, getEnglishStudyProgram, getEnglishStudySection } from '../i18n/englishStudyContent.js'
@@ -252,7 +254,11 @@ function StudySectionContent({ section, isEnglish }) {
             {sec.programs.map((prog) => (
               <article key={prog.id} className="case-card case-card--study">
                 <div className="case-card-image-wrap">
-                  <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />
+                  {prog.id === 'westlake-girls-high-school'
+                    ? <WestlakeGirlsPoster />
+                    : prog.id === 'rangitoto-college'
+                      ? <RangitotoPoster />
+                    : <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />}
                 </div>
                 <div className="case-card-body">
                   <h3 className="case-card-title">{prog.titleZh}</h3>

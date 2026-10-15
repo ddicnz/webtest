@@ -1,6 +1,67 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 244,
+    title: '建筑工地主管海外配额获批',
+    summary:
+      '雇主的 Construction Site Supervisor 岗位 Job Check 获批，可招聘 2 名海外员工；岗位获批不等于个人工签获批。',
+    date: '2026年10月13日',
+    image: '/pic/case/101401.jpg',
+    images: ['/pic/case/101401.jpg'],
+    fullContent: `建筑工地主管海外配额获批 ✅
+
+雇主的 Construction Site Supervisor 岗位 Job Check 获批，取得 2 个海外招聘配额。岗位审核批准后，符合条件的申请人仍须另行递交工签申请。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Job check application approved
+✅ 岗位：Construction Site Supervisor
+✅ 职业分类：312112 - Building Associate（Skill Level 2）
+✅ 工作地点：Auckland
+✅ 获批配额：2 个
+✅ 批准日期：2026 年 10 月 13 日
+
+Job Check 获批不等同于个人工签获批，实际招聘和签证申请须符合相关条件。`,
+  },
+  {
+    id: 243,
+    title: '雇主认证获批',
+    summary:
+      '雇主的 Employer Accreditation 申请获批，可凭有效认证支持后续 Job Check 和工签申请。',
+    date: '2026年10月13日',
+    image: '/pic/case/101303.jpg',
+    images: ['/pic/case/101303.jpg'],
+    fullContent: `雇主认证获批 ✅
+
+雇主的 Employer Accreditation 申请获移民局批准。批准函说明，雇主可使用该认证支持后续 Job Check 和工作签证申请。
+
+【案例要点（以移民局批准函为准）】
+✅ 申请类型：Employer Accreditation
+✅ 批准日期：2026 年 10 月 13 日
+✅ 后续用途：支持 Job Check 和工签申请
+
+认证仍受相应条件及有效期约束，后续岗位和个人签证申请须分别满足各自要求。`,
+  },
+  {
+    id: 242,
+    title: 'AEWV 配偶开放工签获批',
+    summary:
+      '客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区、任何职业工作。',
+    date: '2026年10月13日',
+    image: '/pic/case/101302.jpg',
+    images: ['/pic/case/101302.jpg'],
+    fullContent: `AEWV 配偶开放工签获批 ✅
+
+客户获批 New Zealand Work Visa - Partner of an AEWV worker。批签函允许持有人在新西兰任何地区从事任何职业的工作。
+
+【案例要点（以移民局批签函为准）】
+✅ 申请类型：Work visa application approved
+✅ 签证类别：Partner of an AEWV worker
+✅ 签证生效：2026 年 10 月 13 日
+✅ 工作条件：可在新西兰任何地区从事任何职业的工作
+
+批签函同时列有不得通过本人经营的企业雇佣他人的限制；具体条件以个人批签函为准。`,
+  },
+  {
     id: 241,
     title: '亚洲菜厨师怀卡托海外配额获批',
     summary:

@@ -1325,6 +1325,190 @@ img[src*="album/office"][src*="IMG_2486"] {
   align-self: stretch;
 }
 
+.westlake-girls-poster {
+  display: grid;
+  grid-template-rows: 42% 11% 18% 20% 9%;
+  width: 100%;
+  min-height: 480px;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  color: #fff;
+  background: #092e35;
+}
+
+.westlake-girls-poster-hero {
+  position: relative;
+  min-height: 0;
+}
+
+.westlake-girls-poster-hero > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.westlake-girls-poster-brand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 14px;
+  background: #082e35;
+}
+
+.westlake-girls-poster-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.westlake-girls-poster-heading {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  gap: 3px;
+  padding: 11px 16px;
+  background: rgba(8, 39, 46, 0.9);
+}
+
+.westlake-girls-poster-heading strong {
+  color: #f0c971;
+  font-size: 25px;
+  line-height: 1.15;
+}
+
+.westlake-girls-poster-heading span {
+  font-size: 12px;
+}
+
+.westlake-girls-poster-points {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 0 8px;
+  padding: 4px 16px;
+  color: #18343a;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.westlake-girls-poster-points span {
+  padding-left: 9px;
+  border-left: 3px solid #a31d35;
+}
+
+.westlake-girls-poster-fee {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  background: #7d142c;
+  text-align: center;
+}
+
+.westlake-girls-poster-fee > span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.westlake-girls-poster-fee strong {
+  color: #f4d483;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.westlake-girls-poster-fee strong small {
+  color: #fff;
+  font-size: 14px;
+}
+
+.westlake-girls-poster-fee > small {
+  font-size: 10px;
+}
+
+.westlake-girls-poster-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  min-height: 0;
+  background: #fff;
+}
+
+.westlake-girls-poster-photos img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.westlake-girls-poster-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  color: #f4d483;
+  background: #092e35;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.rangitoto-poster,
+.rangitoto-poster .westlake-girls-poster-brand,
+.rangitoto-poster .westlake-girls-poster-footer {
+  background: #10233b;
+}
+
+.rangitoto-poster .westlake-girls-poster-brand {
+  top: 9px;
+  left: 9px;
+  right: auto;
+  padding: 6px 8px;
+  background: rgba(16, 35, 59, 0.94);
+}
+
+.rangitoto-poster .westlake-girls-poster-brand img {
+  width: 140px;
+  max-width: 100%;
+}
+
+.rangitoto-poster .westlake-girls-poster-hero > img {
+  object-position: center 25%;
+}
+
+.rangitoto-poster .westlake-girls-poster-heading {
+  background: rgba(16, 35, 59, 0.94);
+}
+
+.rangitoto-poster .westlake-girls-poster-heading strong {
+  color: #fff;
+  font-size: 22px;
+}
+
+.rangitoto-poster .westlake-girls-poster-points {
+  color: #10233b;
+}
+
+.rangitoto-poster .westlake-girls-poster-points span {
+  border-color: #b72b35;
+}
+
+.rangitoto-poster .westlake-girls-poster-fee {
+  background: #a7212e;
+}
+
+.rangitoto-poster .westlake-girls-poster-fee strong,
+.rangitoto-poster .westlake-girls-poster-footer {
+  color: #fff;
+}
+
 .case-card-image {
   width: 100%;
   height: 100%;
