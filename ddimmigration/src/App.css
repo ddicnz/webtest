@@ -1509,6 +1509,160 @@ img[src*="album/office"][src*="IMG_2486"] {
   color: #fff;
 }
 
+.auckland-schools-poster {
+  background: var(--poster-deep);
+}
+
+.auckland-schools-poster .westlake-girls-poster-hero > img {
+  object-position: center var(--poster-photo-position, 25%);
+}
+
+.auckland-schools-poster-brand {
+  top: 9px;
+  left: 9px;
+  right: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 215px;
+  min-height: 52px;
+  padding: 6px 9px;
+  color: var(--poster-brand-ink);
+  background: var(--poster-brand);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.auckland-schools-poster-brand img {
+  width: auto;
+  max-width: 48px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.auckland-schools-poster-monogram {
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid currentColor;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.auckland-schools-poster .westlake-girls-poster-heading {
+  border-top: 3px solid var(--poster-accent);
+  background: var(--poster-heading);
+}
+
+.auckland-schools-poster .westlake-girls-poster-heading strong {
+  color: var(--poster-title);
+  font-size: 22px;
+}
+
+.auckland-schools-poster .westlake-girls-poster-points {
+  color: var(--poster-points-ink);
+  background: var(--poster-points);
+}
+
+.auckland-schools-poster .westlake-girls-poster-points span {
+  border-color: var(--poster-accent);
+}
+
+.auckland-schools-poster .westlake-girls-poster-fee {
+  color: var(--poster-fee-ink);
+  background: var(--poster-fee);
+}
+
+.auckland-schools-poster .westlake-girls-poster-fee strong,
+.auckland-schools-poster .westlake-girls-poster-fee strong small {
+  color: var(--poster-price);
+}
+
+.auckland-schools-poster .westlake-girls-poster-footer {
+  color: var(--poster-footer-ink);
+  background: var(--poster-deep);
+}
+
+.auckland-schools-poster--auckland-grammar-school {
+  --poster-deep: #101f3b;
+  --poster-brand: #e9d6a0;
+  --poster-brand-ink: #101f3b;
+  --poster-heading: rgba(16, 31, 59, 0.95);
+  --poster-title: #f0cf79;
+  --poster-points: #fffdf5;
+  --poster-points-ink: #172947;
+  --poster-accent: #c6a454;
+  --poster-fee: #cfb061;
+  --poster-fee-ink: #17243c;
+  --poster-price: #101f3b;
+  --poster-footer-ink: #f0cf79;
+  --poster-photo-position: 20%;
+}
+
+.auckland-schools-poster--auckland-grammar-school .westlake-girls-poster-heading strong {
+  font-family: Georgia, serif;
+}
+
+.auckland-schools-poster--macleans-college {
+  --poster-deep: #003d76;
+  --poster-brand: #d9e2f2;
+  --poster-brand-ink: #004b8d;
+  --poster-heading: rgba(0, 56, 105, 0.94);
+  --poster-title: #fff;
+  --poster-points: #f0f4fa;
+  --poster-points-ink: #003d76;
+  --poster-accent: #d5224c;
+  --poster-fee: #075596;
+  --poster-fee-ink: #fff;
+  --poster-price: #fff;
+  --poster-footer-ink: #fff;
+  --poster-photo-position: 30%;
+}
+
+.auckland-schools-poster--macleans-college .auckland-schools-poster-monogram {
+  color: #d5224c;
+}
+
+.auckland-schools-poster--epsom-girls-grammar-school {
+  --poster-deep: #1b2244;
+  --poster-brand: #f7f0da;
+  --poster-brand-ink: #1b2244;
+  --poster-heading: rgba(27, 34, 68, 0.95);
+  --poster-title: #f2af36;
+  --poster-points: #fff9eb;
+  --poster-points-ink: #1b2244;
+  --poster-accent: #f2af36;
+  --poster-fee: #bf333a;
+  --poster-fee-ink: #fff;
+  --poster-price: #fff;
+  --poster-footer-ink: #f2af36;
+  --poster-photo-position: 30%;
+}
+
+.auckland-schools-poster--epsom-girls-grammar-school .westlake-girls-poster-heading strong {
+  font-size: 20px;
+}
+
+.auckland-schools-poster--takapuna-grammar-school {
+  --poster-deep: #123f59;
+  --poster-brand: #123f59;
+  --poster-brand-ink: #f3db8b;
+  --poster-heading: rgba(18, 63, 89, 0.93);
+  --poster-title: #fff;
+  --poster-points: #eaf3f5;
+  --poster-points-ink: #123f59;
+  --poster-accent: #e1c66b;
+  --poster-fee: #e1c66b;
+  --poster-fee-ink: #123f59;
+  --poster-price: #123f59;
+  --poster-footer-ink: #f3db8b;
+  --poster-photo-position: 35%;
+}
+
 .case-card-image {
   width: 100%;
   height: 100%;

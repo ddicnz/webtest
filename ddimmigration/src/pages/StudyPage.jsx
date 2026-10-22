@@ -3,12 +3,19 @@ import { NavLink, useLocation, useNavigate, useParams, Navigate } from 'react-ro
 import { studyIntro, studySections, iclPrograms } from '../data/studyData.js'
 import WestlakeGirlsPoster from '../components/WestlakeGirlsPoster.jsx'
 import RangitotoPoster from '../components/RangitotoPoster.jsx'
+import AucklandSchoolsPoster from '../components/AucklandSchoolsPoster.jsx'
 import { makeStudyProgramSlug } from '../utils/studySlug.js'
 import { studyListPathForSectionId, studyPathSegmentToSectionId } from '../utils/studySectionPath.js'
 import { englishStudyIntro, englishStudySectionLabels, getEnglishStudyProgram, getEnglishStudySection } from '../i18n/englishStudyContent.js'
 
 // 大学留学用 ICL 课程（排除语言班，语言班单独成类）
 const iclProgramsNonLanguage = iclPrograms.filter((p) => p.type !== '语言班')
+const aucklandSchoolsPosterIds = new Set([
+  'auckland-grammar-school',
+  'macleans-college',
+  'epsom-girls-grammar-school',
+  'takapuna-grammar-school',
+])
 
 const studyCategories = studySections.map((s) => ({ id: s.id, label: s.title, labelEn: englishStudySectionLabels[s.id] }))
 const studySlogan = '新西兰嘀嘀移民是持牌校代免费申请！！！'
@@ -258,6 +265,8 @@ function StudySectionContent({ section, isEnglish }) {
                     ? <WestlakeGirlsPoster />
                     : prog.id === 'rangitoto-college'
                       ? <RangitotoPoster />
+                    : aucklandSchoolsPosterIds.has(prog.id)
+                      ? <AucklandSchoolsPoster schoolId={prog.id} />
                     : <img src={prog.coverImage || prog.image} alt={prog.titleZh} className="case-card-image" loading="lazy" />}
                 </div>
                 <div className="case-card-body">
