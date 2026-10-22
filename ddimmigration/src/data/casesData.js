@@ -1,6 +1,167 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 252,
+    title: '餐厅经理获批AEWV工签',
+    summary:
+      '客户获批餐厅经理认证雇主工签，批签函显示可在奥克兰从事 Restaurant Manager 工作，签证有效期至 2031 年 10 月 21 日。',
+    date: '2026年10月21日',
+    image: '/pic/case/102102.jpg',
+    images: ['/pic/case/102102.jpg'],
+    fullContent: `餐厅经理获批AEWV工签
+
+客户的 Accredited Employer Work Visa 获批。批签函列明职位为 Restaurant Manager，工作地点为 Auckland。
+
+【案例要点（以个人批签函为准）】
+申请类型：Work visa application approved
+签证生效：2026 年 10 月 21 日
+签证有效期至：2031 年 10 月 21 日
+获准职位及地点：Restaurant Manager，Auckland
+工作时间：每周至少 30 小时
+
+具体工作和薪资条件以个人批签函为准。`,
+  },
+  {
+    id: 251,
+    title: '雇主认证获批',
+    summary:
+      '雇主的 Employer Accreditation 申请获批，可在认证有效期内支持后续岗位审核和工签申请。',
+    date: '2026年10月21日',
+    image: '/pic/case/102101.jpg',
+    images: ['/pic/case/102101.jpg'],
+    fullContent: `雇主认证获批
+
+雇主的 Employer Accreditation 申请获得批准。批准函说明，雇主可使用该认证支持后续 Job Check 和工作签证申请。
+
+【案例要点（以批准函为准）】
+申请类型：Employer Accreditation
+批准日期：2026 年 10 月 21 日
+后续用途：支持 Job Check 和工签申请
+
+雇主认证不等于岗位审核或个人工签获批，后续申请仍须分别满足相应要求。`,
+  },
+  {
+    id: 250,
+    title: '奥克兰公立初中留学录取获批',
+    summary:
+      '学生获得 Auckland Normal Intermediate School 的 Offer of Place，拟于 2027 年 2 月入读；这是学校录取，不是学生签证批签。',
+    date: '2026年10月20日',
+    image: '/pic/case/102002.jpg',
+    images: ['/pic/case/102002.jpg'],
+    fullContent: `奥克兰公立初中留学录取获批
+
+学生获得 Auckland Normal Intermediate School 发出的 Offer of Place，学校同意提供 Intermediate studies 学位。
+
+【案例要点（以学校录取函为准）】
+文件类型：Offer of Place
+学校：Auckland Normal Intermediate School
+录取函日期：2026 年 10 月 20 日
+计划开学：2027 年 2 月 1 日
+
+Offer of Place 是学校录取文件，不等于学生签证获批；后续入学及签证安排以学校和移民局要求为准。`,
+  },
+  {
+    id: 249,
+    title: '工签子女学生签证获批',
+    summary:
+      '客户子女获批 Child of a worker 学生签证，按批签条件可作为本地学生就读新西兰中小学。',
+    date: '2026年10月19日',
+    image: '/pic/case/101901.jpg',
+    images: ['/pic/case/101901.jpg'],
+    fullContent: `工签子女学生签证获批
+
+客户子女获批 New Zealand Student Visa - Child of a worker。批签函允许持有人作为本地学生在新西兰小学、初中或高中就读。
+
+【案例要点（以个人批签函为准）】
+申请类型：Student visa application approved
+签证生效：2026 年 10 月 19 日
+可停留至：2027 年 12 月 17 日
+就读条件：可作为本地学生就读新西兰中小学
+
+具体学校录取与就读安排以学校和个人签证条件为准。`,
+  },
+  {
+    id: 248,
+    title: 'AEWV 配偶开放工签获批',
+    summary:
+      '客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区从事任何职业的工作。',
+    date: '2026年10月16日',
+    image: '/pic/case/101902.jpg',
+    images: ['/pic/case/101902.jpg'],
+    fullContent: `AEWV 配偶开放工签获批
+
+客户获批 New Zealand Work Visa - Partner of an AEWV worker。批签函列明，持有人可在新西兰任何地区从事任何职业的工作。
+
+【案例要点（以个人批签函为准）】
+申请类型：Work visa application approved
+签证类别：Partner of an AEWV worker
+签证生效：2026 年 10 月 16 日
+工作条件：可在新西兰任何地区从事任何职业的工作
+
+批签函另有不得通过本人经营的企业雇佣他人的限制，具体条件以个人批签函为准。`,
+  },
+  {
+    id: 247,
+    title: '亚洲菜主厨获批AEWV工签',
+    summary:
+      '客户获批 Asian Cuisine Chef 认证雇主工签；批签函列明签证从首次入境起有效 60 个月。',
+    date: '2026年10月15日',
+    image: '/pic/case/101501.jpg',
+    images: ['/pic/case/101501.jpg'],
+    fullContent: `亚洲菜主厨获批AEWV工签
+
+客户的 Accredited Employer Work Visa 获批，批签函列明职位为 Asian Cuisine Chef。
+
+【案例要点（以个人批签函为准）】
+申请类型：Work visa application approved
+签证生效：2026 年 10 月 15 日
+签证有效期：首次入境新西兰后 60 个月
+获准职位：Asian Cuisine Chef
+工作时间：每周至少 30 小时
+
+首次入境期限及具体工作条件以个人批签函为准。`,
+  },
+  {
+    id: 246,
+    title: '焊工工签成功转入新护照',
+    summary:
+      '客户原有焊工工作签证的护照资料更新完成，移民局出具转签函；这不是一份新工签的首次批准。',
+    date: '2026年10月1日',
+    image: '/pic/case/102001.jpg',
+    images: ['/pic/case/102001.jpg'],
+    fullContent: `焊工工签成功转入新护照
+
+客户原有工作签证更新至新护照，移民局出具 Visa transferred to new passport 确认函。函件列明获准在奥克兰从事 Welder 工作，原签证条件继续适用。
+
+【案例要点（以转签函为准）】
+文件类型：Visa transferred to new passport
+函件日期：2026 年 10 月 1 日
+获准职位及地点：Welder，Auckland
+签证条件所载有效期：首次入境后 60 个月
+
+本案例展示的是护照资料更新，不代表新工签再次获批。`,
+  },
+  {
+    id: 245,
+    title: '奥克兰公立初中学生签证原则批准',
+    summary:
+      '学生签证申请已获原则批准，移民局要求补交学费支付证明；这尚不是最终学生签证批签。',
+    date: '2026年10月2日（申请日期）',
+    image: '/pic/case/102103.jpg',
+    images: ['/pic/case/102103.jpg'],
+    fullContent: `奥克兰公立初中学生签证原则批准
+
+学生签证申请收到 Student visa approved in principle 函件。移民局说明，在申请人提交并满足函件所列要求后，才会正式签发学生签证。
+
+【案例要点（以原则批准函为准）】
+申请类型：Student visa approved in principle
+申请日期：2026 年 10 月 2 日
+待补材料：覆盖一年或整个课程（以较短者为准）的学费支付证明
+函件所列提交期限：2026 年 11 月 3 日
+
+图片未显示原则批准函的具体签发日期；此处展示的日期是申请日期。原则批准不等于最终签证获批。`,
+  },
+  {
     id: 244,
     title: '建筑工地主管海外配额获批',
     summary:
