@@ -1,6 +1,184 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 261,
+    title: '工签子女学生签证获批',
+    summary: '客户子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学，签证有效期至 2028 年 12 月 12 日。',
+    date: '2026年10月28日',
+    image: '/pic/case/102805.jpg',
+    images: ['/pic/case/102805.jpg'],
+    fullContent: `工签子女学生签证获批
+
+客户子女获批 New Zealand Student Visa - Child of a worker。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 10 月 28 日
+可停留至：2028 年 12 月 12 日
+就读条件：可作为本地学生就读新西兰小学、初中或高中
+工作条件：不得在新西兰工作
+
+具体就读安排及签证条件以学校和个人批签函为准。`,
+  },
+  {
+    id: 260,
+    title: '全家旅游签证获批',
+    summary: '一家三人的 General Visitor Visa 均获批准，本案例集中展示三份批签函，获准停留至 2026 年 12 月 28 日。',
+    date: '2026年10月28日',
+    image: '/pic/case/102802.jpg',
+    images: ['/pic/case/102802.jpg', '/pic/case/102803.jpg', '/pic/case/102804.jpg'],
+    fullContent: `全家旅游签证获批
+
+一家三人的 New Zealand Visitor Visa - General 均获批准，三份批签函作为同一个家庭案例展示。
+
+【案例要点（以各自批签函为准）】
+批准及生效日期：2026 年 10 月 28 日
+可停留至：2026 年 12 月 28 日
+旅行条件：此签证不能用于再次入境新西兰
+工作条件：不得在新西兰就业；函件允许为海外雇主或客户远程工作
+学习条件：每 12 个月内在新西兰学习不得超过 3 个月
+
+每位家庭成员须分别遵守其个人批签函所列条件。`,
+  },
+  {
+    id: 259,
+    title: '工签子女学生签证获批',
+    summary: '客户子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学，签证有效期至 2031 年 3 月 8 日。',
+    date: '2026年10月28日',
+    image: '/pic/case/102801.jpg',
+    images: ['/pic/case/102801.jpg'],
+    fullContent: `工签子女学生签证获批
+
+客户子女获批 New Zealand Student Visa - Child of a worker。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 10 月 28 日
+可停留至：2031 年 3 月 8 日
+就读条件：可作为本地学生就读新西兰小学、初中或高中
+工作条件：不得在新西兰工作
+
+具体就读安排及签证条件以学校和个人批签函为准。`,
+  },
+  {
+    id: 258,
+    title: '工程监理海外申请获批5年工签',
+    summary: '客户海外申请 Site Supervisor 认证雇主工签获批，获准在奥克兰工作，签证从首次入境起有效 60 个月。',
+    date: '2026年10月27日',
+    image: '/pic/case/102701.jpg',
+    images: ['/pic/case/102701.jpg'],
+    fullContent: `工程监理海外申请获批5年工签
+
+客户的 Accredited Employer Work Visa 获批，批签函列明职位为 Site Supervisor，工作地点为 Auckland。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 10 月 27 日
+首次入境期限：2027 年 3 月 27 日前
+签证有效期：首次入境新西兰后 60 个月
+获准职位及地点：Site Supervisor，Auckland
+工作时间：每周至少 30 小时
+
+雇主、薪资及其他工作条件以个人批签函为准。`,
+  },
+  {
+    id: 257,
+    title: 'Remuera公立初中学生签证获批',
+    summary: '学生获批付费学生签证，获准在奥克兰 Remuera Intermediate 就读初中课程，签证于 2026 年 12 月 2 日生效。',
+    date: '2026年10月23日',
+    image: '/pic/case/102702.jpg',
+    images: ['/pic/case/102702.jpg'],
+    fullContent: `Remuera公立初中学生签证获批
+
+学生获批 New Zealand Student Visa - Fee Paying，就读学校为 Remuera Intermediate，课程为 Intermediate Studies。
+
+【案例要点（以个人批签函为准）】
+批准日期：2026 年 10 月 23 日
+签证生效：2026 年 12 月 2 日
+可停留至：2028 年 3 月 31 日
+学校及地点：Remuera Intermediate，Auckland
+其他条件：就读期间至签证到期须持有保险；不得在新西兰工作
+
+具体入学及签证条件以学校和个人批签函为准。`,
+  },
+  {
+    id: 256,
+    title: '瓷砖工更换雇主VOC获批',
+    summary: '客户工作签证的条件变更申请获批，获准为批签函指定雇主在奥克兰从事 Tiler 工作，签证有效期至 2031 年 8 月 15 日。',
+    date: '2026年10月23日',
+    image: '/pic/case/102304.jpg',
+    images: ['/pic/case/102304.jpg'],
+    fullContent: `瓷砖工更换雇主VOC获批
+
+客户工作签证的 Variation of Conditions 申请获批，完成更换雇主所需的签证条件变更。
+
+【案例要点（以个人批签函为准）】
+申请类型：Variation of conditions application approved
+批准及生效日期：2026 年 10 月 23 日
+获准职位及地点：Tiler，Auckland
+签证有效期至：2031 年 8 月 15 日
+工作时间：每周至少 30 小时
+
+本案例为现有工作签证条件变更，具体雇主、薪资及其他条件以个人批签函为准。`,
+  },
+  {
+    id: 255,
+    title: 'Remuera公立初中留学录取获批',
+    summary: '学生获得 Remuera Intermediate School 的正式录取确认，计划于 2027 年 2 月 2 日入读初中课程。',
+    date: '2026年10月23日',
+    image: '/pic/case/102303.jpg',
+    images: ['/pic/case/102303.jpg'],
+    fullContent: `Remuera公立初中留学录取获批
+
+学生获得 Remuera Intermediate School 发出的 Confirmed Offer of Place。
+
+【案例要点（以学校录取函为准）】
+文件类型：Confirmed Offer of Place
+录取函日期：2026 年 10 月 23 日
+计划开学：2027 年 2 月 2 日
+课程结束：2027 年 12 月 15 日
+课程：Intermediate studies
+
+学校录取与学生签证为不同申请，具体入学安排以学校录取函为准。`,
+  },
+  {
+    id: 254,
+    title: 'Remuera公立初中留学录取获批',
+    summary: '学生获得 Remuera Intermediate School 的正式录取确认，计划于 2027 年 2 月 2 日入读初中课程。',
+    date: '2026年10月23日',
+    image: '/pic/case/102302.jpg',
+    images: ['/pic/case/102302.jpg'],
+    fullContent: `Remuera公立初中留学录取获批
+
+学生获得 Remuera Intermediate School 发出的 Confirmed Offer of Place。
+
+【案例要点（以学校录取函为准）】
+文件类型：Confirmed Offer of Place
+录取函日期：2026 年 10 月 23 日
+计划开学：2027 年 2 月 2 日
+课程结束：2027 年 12 月 15 日
+课程：Intermediate studies
+
+学校录取与学生签证为不同申请，具体入学安排以学校录取函为准。`,
+  },
+  {
+    id: 253,
+    title: '瓷砖工更换雇主VOC获批',
+    summary: '客户工作签证的条件变更申请获批，获准为批签函指定雇主在奥克兰从事 Tiler 工作，签证有效期至 2028 年 6 月 21 日。',
+    date: '2026年10月22日',
+    image: '/pic/case/102301.jpg',
+    images: ['/pic/case/102301.jpg'],
+    fullContent: `瓷砖工更换雇主VOC获批
+
+客户工作签证的 Variation of Conditions 申请获批，完成更换雇主所需的签证条件变更。
+
+【案例要点（以个人批签函为准）】
+申请类型：Variation of conditions application approved
+批准及生效日期：2026 年 10 月 22 日
+获准职位及地点：Tiler，Auckland
+签证有效期至：2028 年 6 月 21 日
+工作时间：每周至少 30 小时
+
+本案例为现有工作签证条件变更，具体雇主、薪资及其他条件以个人批签函为准。`,
+  },
+  {
     id: 252,
     title: '餐厅经理获批AEWV工签',
     summary:
