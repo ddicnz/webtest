@@ -1,6 +1,68 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 264,
+    title: '中式主厨海外配额获批',
+    summary: '雇主的 Chinese Cuisine Chef 岗位 Job Check 获批，取得惠灵顿地区 3 个招聘名额。',
+    date: '2026年10月27日',
+    image: '/pic/case/103001.jpg',
+    images: ['/pic/case/103001.jpg'],
+    fullContent: `中式主厨海外配额获批
+
+雇主的 Chinese Cuisine Chef 岗位审核申请获批，批准函列明可招聘 3 名员工。
+
+【案例要点（以岗位审核批准函为准）】
+申请类型：Job check application approved
+批准日期：2026 年 10 月 27 日
+岗位：Chinese Cuisine Chef
+职业分类：351311 - Chef（Skill Level 2）
+工作地点：Wellington
+获批名额：3 个
+相关签证类别：Accredited Employer Work Visa
+
+本案例为雇主岗位审核获批，个人工签须另行申请及审批。`,
+  },
+  {
+    id: 263,
+    title: '主厨更换雇主VOC获批',
+    summary: '客户工作签证的条件变更申请获批，获准为指定雇主在 Waikato 从事 Asian Cuisine Chef 工作，签证有效期至 2028 年 11 月 20 日。',
+    date: '2026年10月29日',
+    image: '/pic/case/102902.jpg',
+    images: ['/pic/case/102902.jpg'],
+    fullContent: `主厨更换雇主VOC获批
+
+客户的 Variation of Conditions 申请获批，完成更换雇主所需的工作签证条件变更。
+
+【案例要点（以个人批签函为准）】
+申请类型：Variation of conditions application approved
+批准及生效日期：2026 年 10 月 29 日
+获准职位及地点：Asian Cuisine Chef，Waikato
+签证有效期至：2028 年 11 月 20 日
+工作时间：每周至少 30 小时
+
+本案例为现有工作签证条件变更，具体雇主、薪资及其他条件以个人批签函为准。`,
+  },
+  {
+    id: 262,
+    title: 'Remuera公立初中学生签证获批',
+    summary: '学生获批付费学生签证，获准在奥克兰 Remuera Intermediate 就读初中课程，签证于 2026 年 12 月 2 日生效。',
+    date: '2026年10月28日',
+    image: '/pic/case/102901.jpg',
+    images: ['/pic/case/102901.jpg'],
+    fullContent: `Remuera公立初中学生签证获批
+
+学生获批 New Zealand Student Visa - Fee Paying，就读学校为 Remuera Intermediate，课程为 Intermediate Studies。
+
+【案例要点（以个人批签函为准）】
+批准日期：2026 年 10 月 28 日
+签证生效：2026 年 12 月 2 日
+可停留至：2028 年 3 月 31 日
+学校及地点：Remuera Intermediate，Auckland
+其他条件：就读期间至签证到期须持有保险；不得在新西兰工作
+
+具体入学及签证条件以学校和个人批签函为准。`,
+  },
+  {
     id: 261,
     title: '工签子女学生签证获批',
     summary: '客户子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学，签证有效期至 2028 年 12 月 12 日。',
