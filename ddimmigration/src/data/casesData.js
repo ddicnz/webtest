@@ -1,6 +1,45 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 266,
+    title: '汽车喷漆工更换雇主VOC获批',
+    summary: '客户工作签证的条件变更申请获批，获准为指定雇主在 Canterbury 从事 Vehicle Painter 工作，签证有效期至 2030 年 6 月 13 日。',
+    date: '2026年11月11日',
+    image: '/pic/case/111101.JPG',
+    images: ['/pic/case/111101.JPG'],
+    fullContent: `汽车喷漆工更换雇主VOC获批
+
+客户的 Variation of Conditions 申请获批，完成更换雇主所需的工作签证条件变更。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 11 月 11 日
+获准职位：Vehicle Painter（汽车喷漆工）
+工作地点：Canterbury
+签证有效期至：2030 年 6 月 13 日
+工作时间：每周至少 30 小时
+
+具体雇主、薪资及其他工作条件以个人批签函为准。`,
+  },
+  {
+    id: 265,
+    title: '工签子女学生签证获批',
+    summary: '客户子女获批 Child of a worker 学生签证，可按批签条件以本地学生身份就读新西兰中小学，签证有效期至 2030 年 3 月 2 日。',
+    date: '2026年11月10日',
+    image: '/pic/case/110102.JPG',
+    images: ['/pic/case/110102.JPG'],
+    fullContent: `工签子女学生签证获批
+
+客户子女获批 New Zealand Student Visa - Child of a worker。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 11 月 10 日
+可停留至：2030 年 3 月 2 日
+就读条件：可作为本地学生就读新西兰小学、初中或高中
+工作条件：不得在新西兰工作
+
+具体入学安排及签证条件以学校和个人批签函为准。`,
+  },
+  {
     id: 264,
     title: '中式主厨海外配额获批',
     summary: '雇主的 Chinese Cuisine Chef 岗位 Job Check 获批，取得惠灵顿地区 3 个招聘名额。',
