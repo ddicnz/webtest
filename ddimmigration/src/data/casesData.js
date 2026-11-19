@@ -1,6 +1,83 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 270,
+    title: 'AEWV配偶开放工签获批',
+    summary: '客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区从事任何职业的工作。',
+    date: '2026年11月19日',
+    image: '/pic/case/111901.JPG',
+    images: ['/pic/case/111901.JPG'],
+    fullContent: `AEWV配偶开放工签获批
+
+客户获批 New Zealand Work Visa - Partner of an AEWV worker。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 11 月 19 日
+工作条件：可在新西兰任何地区从事任何职业的工作
+旅行条件：允许多次入境
+
+批签函另列不得通过本人经营的企业雇佣他人的限制，具体有效期及其他条件以个人批签函为准。`,
+  },
+  {
+    id: 269,
+    title: '西湖男子高中留学录取获批',
+    summary: '学生获得 Westlake Boys High School 的 Offer of Place，录取课程为 Secondary school programme，入读年级为 Year 10。',
+    date: '2026年11月18日',
+    image: '/pic/case/111902.JPG',
+    images: ['/pic/case/111902.JPG'],
+    fullContent: `西湖男子高中留学录取获批
+
+学生获得 Westlake Boys High School（西湖男子高中）发出的 Offer of Place。
+
+【案例要点（以学校录取函为准）】
+录取函签发日期：2026 年 11 月 18 日
+学校：Westlake Boys High School
+课程：Secondary school programme
+入读年级：Year 10
+
+本案例为高中学校录取，具体开学、缴费及入学安排以学校录取函为准。`,
+  },
+  {
+    id: 268,
+    title: '工签配偶访问签证获批',
+    summary: '客户获批 Partner of a worker 访问签证，允许多次入境，获准停留至 2030 年 7 月 22 日。',
+    date: '2026年11月18日',
+    image: '/pic/case/111903.JPG',
+    images: ['/pic/case/111903.JPG'],
+    fullContent: `工签配偶访问签证获批
+
+客户获批 New Zealand Visitor Visa - Partner of a worker。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 11 月 18 日
+可停留至：2030 年 7 月 22 日
+旅行条件：允许多次入境
+工作条件：不得在新西兰就业；函件允许为海外雇主或客户远程工作
+学习条件：每 12 个月内在新西兰学习不得超过 3 个月
+
+具体旅行、停留及其他条件以个人批签函为准。`,
+  },
+  {
+    id: 267,
+    title: '工签配偶访问签证获批',
+    summary: '客户获批 Partner of a worker 访问签证，允许多次入境，获准停留至 2029 年 9 月 3 日。',
+    date: '2026年11月11日',
+    image: '/pic/case/111904.JPG',
+    images: ['/pic/case/111904.JPG'],
+    fullContent: `工签配偶访问签证获批
+
+客户获批 New Zealand Visitor Visa - Partner of a worker。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 11 月 11 日
+可停留至：2029 年 9 月 3 日
+旅行条件：允许多次入境
+工作条件：不得在新西兰就业；函件允许为海外雇主或客户远程工作
+学习条件：每 12 个月内在新西兰学习不得超过 3 个月
+
+具体旅行、停留及其他条件以个人批签函为准。`,
+  },
+  {
     id: 266,
     title: '汽车喷漆工更换雇主VOC获批',
     summary: '客户工作签证的条件变更申请获批，获准为指定雇主在 Canterbury 从事 Vehicle Painter 工作，签证有效期至 2030 年 6 月 13 日。',
