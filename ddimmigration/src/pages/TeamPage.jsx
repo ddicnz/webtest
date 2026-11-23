@@ -1,4 +1,5 @@
 const teamMembers = [
+  /* Eric temporarily hidden; retain profile for restoration.
   {
     id: 1,
     name: 'Eric',
@@ -8,6 +9,7 @@ const teamMembers = [
     licenceNo: '201800151',
     intro: 'Eric为新西兰持牌移民顾问，多年从事移民与留学咨询，熟悉技术移民、投资移民、家庭团聚及各类签证申请，擅长为申请人量身定制方案并全程跟进，确保流程合规、沟通顺畅。',
   },
+  */
   {
     id: 2,
     name: 'Tsui',

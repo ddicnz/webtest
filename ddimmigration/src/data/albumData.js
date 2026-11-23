@@ -140,9 +140,10 @@ export const albumSections = [
   {
     id: 'license',
     title: '持牌顾问',
-    cover: '/pic/album/license/eric_licience.jpg',
+    cover: '/pic/album/license/dashu_licience.jpg',
     items: [
-      { src: '/pic/album/license/eric_licience.jpg', caption: 'Eric Jia\nIAA 牌照编号：201800151' },
+      // Eric temporarily hidden; retain licence for restoration.
+      // { src: '/pic/album/license/eric_licience.jpg', caption: 'Eric Jia\nIAA 牌照编号：201800151' },
       { src: '/pic/album/license/dashu_licience.jpg', caption: 'Tat Ming Tsui\nIAA 牌照编号：201400700' },
     ],
   },

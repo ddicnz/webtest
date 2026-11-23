@@ -103,7 +103,7 @@ function JobsPage({ language = 'zh' }) {
   const isEnglish = language === 'en'
 
   const categories = [
-    { id: 'urgent', label: '紧急招聘', labelEn: 'Urgent Roles' },
+    { id: 'urgent', label: '热门工签职位', labelEn: 'Popular Work Visa Roles' },
     { id: 'auto', label: '汽车类', labelEn: 'Automotive' },
     { id: 'construction', label: '建筑类', labelEn: 'Construction' },
     { id: 'catering', label: '餐饮类', labelEn: 'Hospitality' },
@@ -114,17 +114,17 @@ function JobsPage({ language = 'zh' }) {
   const jobsByCategory = {
     urgent: [
       {
-        id: 1001,
-        title: '样板房安装工',
+        id: 1004,
+        title: '汽修钣金喷漆',
         requirements: [
-          '有建筑背景，年轻学习能力强，可培训',
-          '样板房安装、现场施工配合',
-          '每周 40 小时以上',
+          '能独立完成腻子、喷漆',
+          '熟练凹陷修复、无损修复，铝合金钣金、切割经验',
+          '有 4S 店工作经验最佳',
         ],
-        salary: '27 纽币/小时税前起',
+        salary: '税前28 纽币/小时起',
         visa: 'AEWV 5年工签',
         living: '食宿自理',
-        leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
+        leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
       {
         id: 1002,
@@ -149,19 +149,6 @@ function JobsPage({ language = 'zh' }) {
         visa: 'AEWV 5年工签',
         living: '工作餐、住自理',
         leave: '做满 1 年有 4 周带薪年假，10天带薪病假',
-      },
-      {
-        id: 1004,
-        title: '汽修钣金喷漆',
-        requirements: [
-          '能独立完成腻子、喷漆',
-          '熟练凹陷修复、无损修复，铝合金钣金、切割经验',
-          '有 4S 店工作经验最佳',
-        ],
-        salary: '税前28 纽币/小时起',
-        visa: 'AEWV 5年工签',
-        living: '食宿自理',
-        leave: '做满一年 4 周带薪年假，10天带薪病假',
       },
       {
         id: 1005,
@@ -864,7 +851,12 @@ function JobsPage({ language = 'zh' }) {
 
   return (
     <main className="main-content jobs-page">
-      <h1 className="jobs-title">{isEnglish ? 'Job Opportunities' : '招聘信息'}</h1>
+      <h1 className="jobs-title">{isEnglish ? 'Common Work Visa Roles' : '常见工签职位'}</h1>
+      <p className="jobs-intro">
+        {isEnglish
+          ? 'This page presents common occupations associated with work visa applications and general job information for applicants to reference. The content is not a recruitment advertisement or a promise of employment. As an immigration consultancy, we provide visa consultation and application services only. Visa eligibility depends on the applicant’s circumstances, employer and role, and the applicable immigration requirements.'
+          : '本栏目介绍工作签证申请中常见的职位及相关岗位信息，供申请人了解和参考，不代表招聘信息或工作机会承诺。我们作为移民公司，仅提供签证咨询及申请服务。具体签证申请条件需结合申请人的个人背景、雇主及岗位情况和相关移民要求评估。'}
+      </p>
 
       <nav className="jobs-category-nav" aria-label={isEnglish ? 'Job categories' : '招聘分类'}>
         {categories.map((cat) => (
@@ -902,7 +894,7 @@ function JobsPage({ language = 'zh' }) {
                   <p><strong>{isEnglish ? 'Family visas: ' : '福利：'}</strong>{isEnglish ? 'Options for partners and children depend on the role, pay and current immigration settings.' : '可以担保配偶 open 工签、18 周岁以下孩子公立学校免费学签'}</p>
                 </div>
                 <p className="job-contact">
-                  <strong>{isEnglish ? 'Enquiries / applications: ' : '咨询/投递：'}</strong>
+                  <strong>{isEnglish ? 'Enquiries / visa document assessment: ' : '咨询/签证材料评估：'}</strong>
                   {isEnglish ? 'WeChat ddtrip700 or email dd.icnz@gmail.com' : '微信 ddtrip700 或邮箱 dd.icnz@gmail.com'}
                 </p>
               </div>

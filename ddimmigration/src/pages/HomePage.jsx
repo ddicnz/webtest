@@ -84,6 +84,7 @@ function HomePage({ language = 'zh' }) {
         <section className="advisors" aria-label={copy.advisorsTitle}>
           <h3 className="advisors-title">{copy.advisorsTitle}</h3>
           <div className="advisors-grid">
+            {/* Eric temporarily hidden; retain card for restoration.
             <div className="advisor-card">
               <img
                 className="advisor-avatar"
@@ -94,6 +95,7 @@ function HomePage({ language = 'zh' }) {
               <div className="advisor-role">{copy.advisorRole}</div>
               <div className="advisor-name">Eric</div>
             </div>
+            */}
 
             <div className="advisor-card">
               <img

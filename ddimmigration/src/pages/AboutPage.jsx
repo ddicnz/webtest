@@ -1,4 +1,5 @@
 const teamMembers = [
+  /* Eric temporarily hidden; retain profile for restoration.
   {
     id: 1,
     name: 'Eric Jia',
@@ -9,6 +10,7 @@ const teamMembers = [
     intro: 'Eric 从业多年，累计成功获批案例超过1000份。专注留学、技术移民、商业移民及各类工作签证申请，实操经验丰富。擅长处理复杂及高难度案件，包括身份转换、历史签证瑕疵、拒签翻案等问题，成功协助大量客户顺利获批。',
     introEn: 'Eric has extensive experience across study, skilled residence, business migration and work visa applications. He regularly assists with complex immigration histories, changes of status and applications requiring careful evidence and explanation.',
   },
+  */
   {
     id: 2,
     name: 'Tat Ming Tsui',

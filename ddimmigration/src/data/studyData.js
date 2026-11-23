@@ -105,7 +105,7 @@ export const studySections = [
     paragraphs: [
       '新西兰共有八所国立大学及多所理工学院、私立院校，本科学制多为 3 年，硕士 1–2 年，博士 3–4 年。英语要求通常为雅思 6.0–6.5（本科）或 6.5–7.0（硕士），部分专业更高。',
       '国际生学费因专业与学校不同，本科约 2.5 万–4 万纽币/年，硕士约 2.8 万–4.5 万纽币/年；生活费约 1.5 万–2.5 万纽币/年。毕业生可申请 Post-study work visa 便于留新就业或衔接移民。',
-      '我们可协助您根据学历背景、语言与预算，筛选合适院校与专业，并协助准备申请材料与学签办理。下方为 ICL 教育集团（含 Bridge International College 等）部分课程介绍，以及新西兰八所国立大学简介，供您参考。',
+      '我们可协助您根据学历背景、语言与预算，筛选合适院校与专业，并协助准备申请材料与学签办理。下方为部分课程介绍，以及新西兰八所国立大学简介，供您参考。',
     ],
     universities: [
       { name: '奥克兰大学', en: 'University of Auckland', qs: '2026 QS：65', brief: '新西兰综合排名长期靠前的研究型大学，位于奥克兰，商科、工程、法律、医学等学科突出。', points: ['预科 / 本科：高三或高考完成，成绩约 67%–80%，雅思 6.0（5.5）左右。', '硕士：本科加权平均约 75%+，雅思 6.5（6.0），一般需相关专业背景。', '学费：整体约 15–25 万人民币/年（不同专业略有差异）。'] },
@@ -1083,7 +1083,13 @@ export const iclPrograms = [
 ]
 
 
-/** 汇总所有可跳转详情的留学项目（ICL 非语言班 + 技术学校 + 语言班），含 sectionId 便于返回时恢复分类 */
+// Temporarily hide ICL programmes from lists and detail routes; retain source data for restoration.
+iclPrograms.splice(0, iclPrograms.length, ...iclPrograms.filter((p) => !p.id.startsWith('icl-')))
+studySections.forEach((section) => {
+  if (section.programs) section.programs = section.programs.filter((p) => !p.id.startsWith('icl-'))
+})
+
+/** 汇总所有可跳转详情的留学项目，含 sectionId 便于返回时恢复分类 */
 export function getAllStudyPrograms() {
   const list = []
   iclPrograms.filter((p) => p.type !== '语言班').forEach((p) => list.push({ ...p, sectionId: 'tertiary' }))
