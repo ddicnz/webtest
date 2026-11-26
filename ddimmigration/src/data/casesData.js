@@ -1,6 +1,66 @@
 /** 成功案例数据源；列表页按 date 降序展示请使用 casesListByDateDesc */
 export const casesList = [
   {
+    id: 273,
+    title: '雇主认证获批',
+    summary: '雇主的 Employer Accreditation 申请获批，可使用该认证支持后续岗位审核及工作签证申请。',
+    date: '2026年11月26日',
+    image: '/pic/case/112601.jpg',
+    images: ['/pic/case/112601.jpg'],
+    fullContent: `雇主认证获批
+
+雇主的 Employer Accreditation 申请获得批准。批准函说明，雇主可使用该认证支持后续 Job Check 和工作签证申请。
+
+【案例要点（以批准函为准）】
+申请类型：Employer Accreditation
+批准日期：2026 年 11 月 26 日
+后续用途：支持 Job Check 和工签申请
+
+雇主认证、岗位审核与个人工作签证须分别申请及审批。`,
+  },
+  {
+    id: 272,
+    title: '中国特色厨师工签获批',
+    summary: '客户的 China Special Work 工作签证获批，获准在奥克兰从事 Chinese Cuisine Chef 工作，签证从首次入境起有效 36 个月。',
+    date: '2026年11月25日',
+    image: '/pic/case/112501.jpg',
+    images: ['/pic/case/112501.jpg'],
+    fullContent: `中国特色厨师工签获批
+
+客户的 China Special Work 工作签证申请获批，批签函列明获准职位为 Chinese Cuisine Chef，工作地点为 Auckland。
+
+【案例要点（以个人批签函为准）】
+批准及生效日期：2026 年 11 月 25 日
+签证类别：China Special Work
+获准职位及地点：Chinese Cuisine Chef，Auckland
+首次入境期限：2027 年 5 月 25 日前
+签证有效期：首次入境新西兰后 36 个月
+旅行条件：允许多次入境
+
+具体雇主及其他工作条件以个人批签函为准。`,
+  },
+  {
+    id: 271,
+    title: 'Howick小学微留学录取获批',
+    summary: 'Howick Primary School 微留学录取获批，课程为 Year 6、为期 4 周；两张录取函归入同一个案例展示。',
+    date: '2026年11月24日',
+    image: '/pic/case/112401.jpg',
+    images: ['/pic/case/112401.jpg', '/pic/case/112402.jpg'],
+    fullContent: `Howick小学微留学录取获批
+
+学生获得 Howick Primary School 发出的 Offer of Place。本案例合并展示两张学校录取函。
+
+【案例要点（以学校录取函为准）】
+录取函日期：2026 年 11 月 24 日
+学校：Howick Primary School，Auckland
+就读年级：Year 6
+课程时间：2027 年 2 月 3 日至 2 月 27 日，录取函列明为 4 周
+每份录取函所列费用：学费 NZ$2,400，管理费 NZ$500，合计 NZ$2,900
+住宿安排：在新西兰期间与母亲同住
+
+本案例为学校录取，具体入学、费用及签证安排以学校录取函和个人情况为准。`,
+  },
+  {
     id: 270,
     title: 'AEWV配偶开放工签获批',
     summary: '客户获批 Partner of an AEWV worker 工作签证，批签函允许其在新西兰任何地区从事任何职业的工作。',
